@@ -1,0 +1,39 @@
+//
+//  PrefixHeader.pch
+//  baseProject
+//
+//  Created by FL S on 2019/10/23.
+//  Copyright © 2019 FL S. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#ifdef __OBJC__
+//#import <UIKit/UIKit.h>
+//#import <Foundation/Foundation.h>
+#import "httprequest.h"
+#import "baseProject.h"
+#import "UIColor+SS.h"
+#import "UIFont+SS.h"
+#import "NSArray+SS.h"
+#import "NSDictionary+SS.h"
+#import "NSString+SS.h"
+#import "NSData+SS.h"
+#import "UIButton+SS.h"
+#import "UIImage+SS.h"
+#import "UIView+SS.h"
+#import <UIView+MJExtension.h>
+#import "UIScrollView+SScategory.h"
+#import "NSObject+HUD.h"
+
+#import "SShelper.h"
+#import "SShttprequest.h"
+
+#endif
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
