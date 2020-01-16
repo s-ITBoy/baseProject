@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SStabbarController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property(nonatomic,strong) SStabbarController* tabbarController;
+///第三方登录回调使用
+@property(nonatomic,weak) id loginDelegate;
+
+- (void)showRootVC;
 
 @end
 

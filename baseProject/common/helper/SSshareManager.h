@@ -12,7 +12,7 @@
 
 ///分享模型
 @interface SSshareModel : NSObject
-//<WXApiDelegate>
+///<WXApiDelegate>
 
 ///标题
 @property(nonatomic,strong) NSString* _Nullable title;
@@ -35,7 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 ///分享f管理类
 @interface SSshareManager : NSObject
-//<WXApiDelegate>
+///<WXApiDelegate>
 
 + (instancetype)sharemanager;
 

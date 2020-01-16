@@ -27,6 +27,9 @@
 		2CC5B624236005E700998FDF /* UIView+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5B623236005E700998FDF /* UIView+SS.m */; };
 		2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5B6292360085F00998FDF /* UIImage+SS.m */; };
 		2CC5B62D23600A7900998FDF /* UINavigationController+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5B62C23600A7900998FDF /* UINavigationController+SS.m */; };
+		47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5923D044C100C5114D /* SSfirstVC.m */; };
+		47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5C23D044D400C5114D /* SSsecondVC.m */; };
+		47204E6123D044E000C5114D /* SSthirdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E6023D044E000C5114D /* SSthirdVC.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
 		47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */; };
@@ -113,6 +116,12 @@
 		2CC5B62B23600A7900998FDF /* UINavigationController+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SS.h"; sourceTree = "<group>"; };
 		2CC5B62C23600A7900998FDF /* UINavigationController+SS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SS.m"; sourceTree = "<group>"; };
 		40A0BB9154E2F9693DAF4D60 /* Pods_baseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47204E5923D044C100C5114D /* SSfirstVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfirstVC.m; sourceTree = "<group>"; };
+		47204E5A23D044C100C5114D /* SSfirstVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSfirstVC.h; sourceTree = "<group>"; };
+		47204E5C23D044D400C5114D /* SSsecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSsecondVC.m; sourceTree = "<group>"; };
+		47204E5D23D044D400C5114D /* SSsecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSsecondVC.h; sourceTree = "<group>"; };
+		47204E5F23D044E000C5114D /* SSthirdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSthirdVC.h; sourceTree = "<group>"; };
+		47204E6023D044E000C5114D /* SSthirdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSthirdVC.m; sourceTree = "<group>"; };
 		4768EAFC23A081ED006440D5 /* SSbaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSbaseVC.h; sourceTree = "<group>"; };
 		4768EAFD23A081ED006440D5 /* SSbaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSbaseVC.m; sourceTree = "<group>"; };
 		47FB139C23CD698D00072C1D /* SSTimingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTimingHelper.m; sourceTree = "<group>"; };
@@ -347,6 +356,8 @@
 		47204E2723D0164B00C5114D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				47204E5F23D044E000C5114D /* SSthirdVC.h */,
+				47204E6023D044E000C5114D /* SSthirdVC.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -370,6 +381,8 @@
 		47204E2A23D0164B00C5114D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				47204E5A23D044C100C5114D /* SSfirstVC.h */,
+				47204E5923D044C100C5114D /* SSfirstVC.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -423,6 +436,8 @@
 		47204E3123D0164B00C5114D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				47204E5D23D044D400C5114D /* SSsecondVC.h */,
+				47204E5C23D044D400C5114D /* SSsecondVC.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -719,6 +734,7 @@
 				47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */,
 				47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */,
 				47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */,
+				47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */,
 				2CC5B624236005E700998FDF /* UIView+SS.m in Sources */,
 				47FB140423CD722C00072C1D /* SScustomTextView.m in Sources */,
 				47FB141323CD724700072C1D /* SStextLayer.m in Sources */,
@@ -727,10 +743,12 @@
 				2C27141B22F08FA700ECDADA /* NewViewController.m in Sources */,
 				47FB141423CD724700072C1D /* SSbaseNavigationC.m in Sources */,
 				47FB13AD23CD6AB400072C1D /* UIScrollView+SScategory.m in Sources */,
+				47204E6123D044E000C5114D /* SSthirdVC.m in Sources */,
 				47FB141723CD724700072C1D /* SSwebBaseVC.m in Sources */,
 				2CC5B62D23600A7900998FDF /* UINavigationController+SS.m in Sources */,
 				47FB140323CD722C00072C1D /* SSwindowView.m in Sources */,
 				2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */,
+				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,

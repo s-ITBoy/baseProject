@@ -17,12 +17,43 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[ViewController alloc] init];
-    [self.window makeKeyAndVisible];
+    
+    [self showRoot];
+    [self globalApperance];
     
     return YES;
+}
+
+- (void)showRoot {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self showRootVC];
+    [self.window makeKeyAndVisible];
+}
+
+- (void)showRootVC {
+    self.tabbarController = nil;
+    self.window.rootViewController = self.tabbarController;
+}
+
+- (SStabbarController *)tabbarController {
+    if (!_tabbarController) {
+        _tabbarController = [SStabbarController new];
+    }
+    return _tabbarController;
+}
+
+/// 全局修改导航栏样式 UITableView分割线样式 导航栏按钮样式
+- (void)globalApperance{
+    //    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:THEMECOLOR size:CGSizeMake(SCREENWIDTH, 1)]];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor SScolorWithHexString:@"#1A1A1A"]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor SStitleColor51],NSFontAttributeName:[UIFont SSCustomFont16]}];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor SScolorWithR:110 G:110 B:110]} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor SScolorWithHexString:@"#555555"],NSFontAttributeName:[UIFont systemFontOfSize:11]} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor SScolorWithHexString:@"#FF716E"],NSFontAttributeName:[UIFont systemFontOfSize:11]} forState:UIControlStateSelected];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 

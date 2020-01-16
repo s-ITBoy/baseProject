@@ -8,23 +8,9 @@
 
 #import "SStabbarController.h"
 #import "SSbaseNavigationC.h"
-//#import "SShomeVC.h"
-//#import "SSadmitVC.h"
-//#import "SSactivityVC.h"
-//#import "SSmineVC.h"
-//#import "SSLoginVC.h"
-//#import "SSuserModel.h"
-//#import "SSguideView.h"
-//
-//#import <UMAnalytics/MobClick.h>
-
-//#import "SShomeFirstVC.h"
-//#import "SSlistVC.h"
-//#import "SSacitivityVC.h"
-//#import "SSshopCardVC.h"
-//#import "SSmineVC.h"
-//#import "SSloginVC.h"
-//#import "SSusermodel.h"
+#import "SSfirstVC.h"
+#import "SSsecondVC.h"
+#import "SSthirdVC.h"
 
 @interface SStabbarController ()<UITabBarControllerDelegate>
 //@property(nonatomic,strong) SSshopCardVC* shopCar;
@@ -60,35 +46,36 @@
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, TabBarHeight)];
+    ///当ios>=13时且未使用SceneDelegate 则iPhoneX的TabBarHeight的高度为49
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, IS_IOS_VERSION >=13 ? 83.0 : TabBarHeight)];
     bgView.backgroundColor = [UIColor whiteColor];
     [self.tabBar insertSubview:bgView atIndex:0];
     self.tabBar.opaque = YES;
     self.tabBar.backgroundColor = [UIColor whiteColor];
     
-//    SShomeVC* home = [SShomeVC new];
-//    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"转发赚钱" image:[self imageRenderOriginalWithName:@"home"] selectedImage:[self imageRenderOriginalWithName:@"home_selected"]];
-//    home.tabBarItem = item1;
+    SSfirstVC* home = [[SSfirstVC alloc] init];
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"首页" image:[self imageRenderOriginalWithName:@"home"] selectedImage:[self imageRenderOriginalWithName:@"home_selected"]];
+    home.tabBarItem = item1;
 //    //
-//    SSadmitVC* admit = [SSadmitVC new];
-//    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"收徒赚钱" image:[self imageRenderOriginalWithName:@"admit"] selectedImage:[self imageRenderOriginalWithName:@"admit_selected"]];
-//    admit.tabBarItem = item2;
-//    //
-//    SSactivityVC* acitivity = [SSactivityVC new];
-//    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"财富秘籍" image:[self imageRenderOriginalWithName:@"activity"] selectedImage:[self imageRenderOriginalWithName:@"activity_selected"]];
-//    acitivity.tabBarItem = item3;
+    SSsecondVC* admit = [[SSsecondVC alloc] init];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"赚钱" image:[self imageRenderOriginalWithName:@"admit"] selectedImage:[self imageRenderOriginalWithName:@"admit_selected"]];
+    admit.tabBarItem = item2;
+    //
+    SSthirdVC* acitivity = [[SSthirdVC alloc] init];
+    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"个人" image:[self imageRenderOriginalWithName:@"activity"] selectedImage:[self imageRenderOriginalWithName:@"activity_selected"]];
+    acitivity.tabBarItem = item3;
 //
 //    SSmineVC* mine = [SSmineVC new];
 //    UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"我的" image:[self imageRenderOriginalWithName:@"mine"] selectedImage:[self imageRenderOriginalWithName:@"mine_selected"]];
 //    mine.tabBarItem = item5;
     
-//    SSbaseNavigationC* navi1 = [self getNaviWithVC:home andTag:0 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
-//    SSbaseNavigationC* navi2 = [self getNaviWithVC:admit andTag:1 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
-//    SSbaseNavigationC* navi3 = [self getNaviWithVC:acitivity andTag:2 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    SSbaseNavigationC* navi1 = [self getNaviWithVC:home andTag:0 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    SSbaseNavigationC* navi2 = [self getNaviWithVC:admit andTag:1 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    SSbaseNavigationC* navi3 = [self getNaviWithVC:acitivity andTag:2 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
 //    SSbaseNavigationC* navi4 = [self getNaviWithVC:mine andTag:3 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
-//    self.delegate = self;
-//    self.viewControllers = @[navi1,navi2,navi3,navi4];
-//    self.selectedIndex = 0;
+    self.delegate = self;
+    self.viewControllers = @[navi1,navi2,navi3];
+    self.selectedIndex = 0;
     
 //    [self.tabBar setShadowImage:[self imageWithColor:[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:0.2] size:CGSizeMake(ScreenWidth, 1)]];
 //    [self.tabBar setBackgroundImage:[self imageWithColor:[UIColor whiteColor] size:CGSizeMake(ScreenWidth, TabBarHeight)]];
@@ -104,13 +91,13 @@
     
 }
 
-//- (SSbaseNavigationC*)getNaviWithVC:(SSbaseVC*)VC andTag:(NSInteger)tag andImageInset:(UIEdgeInsets)imageInset andTitlePositionAdjustment:(UIOffset)offset {
-//    SSbaseNavigationC* navi = [[SSbaseNavigationC alloc] initWithRootViewController:VC];
-//    navi.view.tag = tag;
-//    navi.tabBarItem.imageInsets = imageInset;
-//    [navi.tabBarItem setTitlePositionAdjustment:offset];
-//    return navi;
-//}
+- (SSbaseNavigationC*)getNaviWithVC:(SSbaseVC*)VC andTag:(NSInteger)tag andImageInset:(UIEdgeInsets)imageInset andTitlePositionAdjustment:(UIOffset)offset {
+    SSbaseNavigationC* navi = [[SSbaseNavigationC alloc] initWithRootViewController:VC];
+    navi.view.tag = tag;
+    navi.tabBarItem.imageInsets = imageInset;
+    [navi.tabBarItem setTitlePositionAdjustment:offset];
+    return navi;
+}
 
 
 #pragma mark ----------- UITabBarControllerDelegate -----------------
@@ -139,13 +126,6 @@
 
 -(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     SSbaseNavigationC* navi = (SSbaseNavigationC*)viewController;
-    //    if(viewController.view.tag == 1){
-    //        if (tabBarController.selectedIndex == 0) {
-    //            YQhomePageVC *vc = navi.viewControllers[0];
-    //            [vc refreshUI];
-    //        }
-    //        return YES;;
-    //    }
     
 //        if (navi.view.tag == 1 || navi.view.tag == 3) {
 //            if ([SShelper isObjNil:[[NSUserDefaults standardUserDefaults] stringForKey:token]]) {
