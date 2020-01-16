@@ -214,9 +214,14 @@
 		2CC2ED2D22E5E92100A6431A /* baseProject */ = {
 			isa = PBXGroup;
 			children = (
+				47204E2C23D0164B00C5114D /* Libs */,
+				2CC5B5CA235FE7E300998FDF /* common */,
+				47204E2923D0164B00C5114D /* first */,
+				47204E3023D0164B00C5114D /* second */,
+				47204E2623D0164B00C5114D /* third */,
+				47204E2D23D0164B00C5114D /* forth */,
 				2CC2ED2E22E5E92100A6431A /* AppDelegate.h */,
 				2CC2ED2F22E5E92200A6431A /* AppDelegate.m */,
-				2CC5B5CA235FE7E300998FDF /* common */,
 				2CC2ED3122E5E92200A6431A /* ViewController.h */,
 				2CC2ED3222E5E92200A6431A /* ViewController.m */,
 				2C27141922F08FA700ECDADA /* NewViewController.h */,
@@ -328,6 +333,105 @@
 				8DECF1335CFCBECA269EA4B5 /* Pods-baseProjectUITests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		47204E2623D0164B00C5114D /* third */ = {
+			isa = PBXGroup;
+			children = (
+				47204E2723D0164B00C5114D /* controller */,
+				47204E2823D0164B00C5114D /* view */,
+			);
+			path = third;
+			sourceTree = "<group>";
+		};
+		47204E2723D0164B00C5114D /* controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		47204E2823D0164B00C5114D /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		47204E2923D0164B00C5114D /* first */ = {
+			isa = PBXGroup;
+			children = (
+				47204E2A23D0164B00C5114D /* controller */,
+				47204E2B23D0164B00C5114D /* view */,
+			);
+			path = first;
+			sourceTree = "<group>";
+		};
+		47204E2A23D0164B00C5114D /* controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		47204E2B23D0164B00C5114D /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		47204E2C23D0164B00C5114D /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		47204E2D23D0164B00C5114D /* forth */ = {
+			isa = PBXGroup;
+			children = (
+				47204E2E23D0164B00C5114D /* controller */,
+				47204E2F23D0164B00C5114D /* view */,
+			);
+			path = forth;
+			sourceTree = "<group>";
+		};
+		47204E2E23D0164B00C5114D /* controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		47204E2F23D0164B00C5114D /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		47204E3023D0164B00C5114D /* second */ = {
+			isa = PBXGroup;
+			children = (
+				47204E3123D0164B00C5114D /* controller */,
+				47204E3223D0164B00C5114D /* view */,
+			);
+			path = second;
+			sourceTree = "<group>";
+		};
+		47204E3123D0164B00C5114D /* controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		47204E3223D0164B00C5114D /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		4768EAFB23A081A4006440D5 /* base */ = {
