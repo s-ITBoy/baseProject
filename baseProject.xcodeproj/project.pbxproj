@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C27141B22F08FA700ECDADA /* NewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C27141A22F08FA700ECDADA /* NewViewController.m */; };
 		2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C48A111239E2AF2001C92F1 /* SShelper.m */; };
 		2CC2ED3022E5E92200A6431A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2ED2F22E5E92200A6431A /* AppDelegate.m */; };
 		2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2ED3222E5E92200A6431A /* ViewController.m */; };
@@ -73,8 +72,6 @@
 
 /* Begin PBXFileReference section */
 		06175919FD4DCC8D039BBEE5 /* Pods_baseProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C27141922F08FA700ECDADA /* NewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewViewController.h; sourceTree = "<group>"; };
-		2C27141A22F08FA700ECDADA /* NewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewViewController.m; sourceTree = "<group>"; };
 		2C48A110239E2AF2001C92F1 /* SShelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SShelper.h; sourceTree = "<group>"; };
 		2C48A111239E2AF2001C92F1 /* SShelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SShelper.m; sourceTree = "<group>"; };
 		2CC2ED2B22E5E92100A6431A /* baseProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,8 +230,6 @@
 				2CC2ED2F22E5E92200A6431A /* AppDelegate.m */,
 				2CC2ED3122E5E92200A6431A /* ViewController.h */,
 				2CC2ED3222E5E92200A6431A /* ViewController.m */,
-				2C27141922F08FA700ECDADA /* NewViewController.h */,
-				2C27141A22F08FA700ECDADA /* NewViewController.m */,
 				2CC2ED3422E5E92200A6431A /* Main.storyboard */,
 				2CC2ED3722E5E92200A6431A /* Assets.xcassets */,
 				2CC2ED3922E5E92200A6431A /* LaunchScreen.storyboard */,
@@ -740,7 +735,6 @@
 				47FB141323CD724700072C1D /* SStextLayer.m in Sources */,
 				47FB140223CD722C00072C1D /* SSBtnsListView.m in Sources */,
 				2CC2ED3022E5E92200A6431A /* AppDelegate.m in Sources */,
-				2C27141B22F08FA700ECDADA /* NewViewController.m in Sources */,
 				47FB141423CD724700072C1D /* SSbaseNavigationC.m in Sources */,
 				47FB13AD23CD6AB400072C1D /* UIScrollView+SScategory.m in Sources */,
 				47204E6123D044E000C5114D /* SSthirdVC.m in Sources */,

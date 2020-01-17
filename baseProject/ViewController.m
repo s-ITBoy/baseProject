@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "NewViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView* tableView;
@@ -43,8 +42,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NewViewController* newVC = [NewViewController new];
-    [self presentViewController:newVC animated:YES completion:nil];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
