@@ -58,6 +58,9 @@
     return [UIColor SScolorWithR:237 G:237 B:237];
 }
 
++ (UIColor*)SScolorInteger:(NSInteger)integer {
+    return [UIColor SScolorWithR:integer G:integer B:integer];
+}
 
 +(UIColor*)SScolorWithR:(NSInteger)interR G:(NSInteger)interG B:(NSInteger)interB{
     return [UIColor colorWithRed:interR/255.0 green:interG/255.0 blue:interB/255.0 alpha:1];

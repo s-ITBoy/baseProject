@@ -10,7 +10,7 @@
 
 @interface UIColor (SS)
 + (UIColor*)SScolorWithR:(NSInteger)interR G:(NSInteger)interG B:(NSInteger)interB;
-
++ (UIColor*)SScolorInteger:(NSInteger)integer;
 ///标题颜色
 + (UIColor*)SStitleColor51;
 ///子标题颜色
