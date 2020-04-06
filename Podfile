@@ -14,6 +14,14 @@ pod 'AFNetworking', '~> 3.0'
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'Masonry', '~> 1.0.2'
 
+#bannerView
+pod 'SDCycleScrollView','~> 1.64'
+#多控制器滚动
+pod "VTMagic"
+#图片浏览
+pod 'GKPhotoBrowser', '~> 1.2.2'
+
+
   target 'baseProjectTests' do
     inherit! :search_paths
     # Pods for testing
