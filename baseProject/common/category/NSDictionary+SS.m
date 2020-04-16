@@ -70,6 +70,9 @@
     if ([obj isKindOfClass:[NSNull class]]) {
         return @"";
     }
+    if ([obj isKindOfClass:[NSNumber class]]) {
+        return [obj stringValue];
+    }
     return obj;
 }
 

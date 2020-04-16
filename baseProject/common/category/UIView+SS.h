@@ -65,5 +65,16 @@
 ///设置边缘阴影
 - (void)SSsetLayshadowwithRadiu:(CGFloat)radiu andShadowOffset:(CGSize)size andShadowCorlor:(UIColor*)shadowColor;
 
+#pragma mark ------------ 动画效果 ------------
+///缩放动画
+- (void)SSaddZoomAnimationFrom:(CGFloat)min To:(CGFloat)max;
+
+///移除动画
+- (void)SSremoveAllAnimation;
+
+
+///移除所有子视图
+- (void)SSremoveAllSubViews;
+
 @end
 

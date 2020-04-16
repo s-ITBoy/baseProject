@@ -125,7 +125,7 @@
 }
 
 -(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    SSbaseNavigationC* navi = (SSbaseNavigationC*)viewController;
+//    SSbaseNavigationC* navi = (SSbaseNavigationC*)viewController;
     
 //        if (navi.view.tag == 1 || navi.view.tag == 3) {
 //            if ([SShelper isObjNil:[[NSUserDefaults standardUserDefaults] stringForKey:token]]) {

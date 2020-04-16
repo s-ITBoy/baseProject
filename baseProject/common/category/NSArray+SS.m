@@ -11,30 +11,45 @@
 @implementation NSArray (SS)
 
 - (id)SSarrayAtIndex:(NSInteger)index {
-    if (!self.count) {
-        return @"";
+    if (self.count <= 0) {
+        return @[];
     }
     if (index >= self.count) {
-        return @"";
+        return @[];
+    }
+    id object = [self objectAtIndex:index];
+    if (![object isKindOfClass:[NSArray class]]) {
+        return @[];
     }
     return [self objectAtIndex:index];
 }
 
 - (id)SSdicAtIndex:(NSInteger)index {
-    if (!self.count) {
+    if (self.count <= 0) {
         return @{};
     }
     if (index >= self.count) {
+        return @{};
+    }
+    id object = [self objectAtIndex:index];
+    if (![object isKindOfClass:[NSDictionary class]]) {
         return @{};
     }
     return [self objectAtIndex:index];
 }
 
 - (id)SSstringAtIndex:(NSInteger)index {
-    if (!self.count) {
+    if (self.count <= 0) {
         return @"";
     }
     if (index >= self.count) {
+        return @"";
+    }
+    id object = [self objectAtIndex:index];
+    if ([object isKindOfClass:[NSNumber class]]) {
+        return [object stringValue];
+    }
+    if (![object isKindOfClass:[NSString class]]) {
         return @"";
     }
     return [self objectAtIndex:index];
