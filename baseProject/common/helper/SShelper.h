@@ -93,6 +93,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)SScopyStr:(NSString*)str;
 ///打电话
 + (void)callPhone:(NSString*_Nullable)phoneNum;
+///打开/跳转URL
++ (void)openURL:(NSString*)urlStr;
+///状态栏字体颜色(0:白色: 非0:黑色)
++ (void)statusBarTextColor:(int)intValue;
 /**
  图文混排
  @param str 文字
