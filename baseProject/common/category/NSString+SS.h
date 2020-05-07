@@ -17,6 +17,8 @@
 - (CGSize)ss_boundingRectwithSize:(CGSize)size withFont:(UIFont *)font;
 ///设置不同的字号及颜色带有字号及颜色
 - (NSMutableAttributedString*)ss_strAttriWithRange:(NSRange)range andFont:(CGFloat)font1 withColor:(UIColor*)color1 andRange:(NSRange)secondRange and:(CGFloat)font2 with:(UIColor*)color2;
+///字符串转数组
+- (NSArray*)ss_arrayByseparateStr:(NSString*)str;
 
 ///MD5加密
 - (NSString *)ss_MD5String;

@@ -35,6 +35,11 @@
     
     return attriStri;
 }
+///字符串转数组
+- (NSArray*)ss_arrayByseparateStr:(NSString*)str {
+    NSArray* array = [self componentsSeparatedByString:str];
+    return array;
+}
 
 ///MD5加密
 - (NSString *)ss_MD5String {
