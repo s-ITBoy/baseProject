@@ -20,6 +20,9 @@
     if (!key) {
         return @[];
     }
+    if (![self isKindOfClass:[NSDictionary class]]) {
+        return @[];
+    }
     NSArray *keys = [self allKeys];
     if (![keys containsObject:key]) {
         return @[];
@@ -41,12 +44,18 @@
     if (!key) {
         return @{};
     }
+    if (![self isKindOfClass:[NSDictionary class]]) {
+        return @{};
+    }
     NSArray *keys = [self allKeys];
     if (![keys containsObject:key]) {
         return @{};
     }
     id obj  = [self objectForKey:key];
     if ([obj isKindOfClass:[NSNull class]]) {
+        return @{};
+    }
+    if (![obj isKindOfClass:[NSDictionary class]]) {
         return @{};
     }
     return obj;
@@ -60,6 +69,9 @@
         return @"";
     }
     if (!key) {
+        return @"";
+    }
+    if (![self isKindOfClass:[NSDictionary class]]) {
         return @"";
     }
     NSArray *keys = [self allKeys];
@@ -84,6 +96,9 @@
         return NO;
     }
     if (!key) {
+        return NO;
+    }
+    if (![self isKindOfClass:[NSDictionary class]]) {
         return NO;
     }
     NSArray *keys = [self allKeys];

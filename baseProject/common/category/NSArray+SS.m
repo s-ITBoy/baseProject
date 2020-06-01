@@ -11,6 +11,9 @@
 @implementation NSArray (SS)
 
 - (id)SSarrayAtIndex:(NSInteger)index {
+    if (![self isKindOfClass:[NSArray class]]) {
+        return @[];
+    }
     if (self.count <= 0) {
         return @[];
     }
@@ -25,6 +28,9 @@
 }
 
 - (id)SSdicAtIndex:(NSInteger)index {
+    if (![self isKindOfClass:[NSArray class]]) {
+        return @{};
+    }
     if (self.count <= 0) {
         return @{};
     }
@@ -39,6 +45,9 @@
 }
 
 - (id)SSstringAtIndex:(NSInteger)index {
+    if (![self isKindOfClass:[NSArray class]]) {
+        return @"";
+    }
     if (self.count <= 0) {
         return @"";
     }
@@ -56,7 +65,7 @@
 }
 
 - (id)SSobjectAtArrayIndex:(NSUInteger)index {
-    if (!self.count) {
+    if (self.count <= 0) {
         return @"";
     }
     if (index >= self.count) {
@@ -78,6 +87,13 @@
         return nil;
     }
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+///子视图数组中的所有子视图移除动画效果
+- (void)SSremoveAllAnimation {
+    for (UIView* view in self) {
+        [view.layer removeAllAnimations];
+    }
 }
 
 @end
