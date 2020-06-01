@@ -29,6 +29,7 @@
 		47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5923D044C100C5114D /* SSfirstVC.m */; };
 		47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5C23D044D400C5114D /* SSsecondVC.m */; };
 		47204E6123D044E000C5114D /* SSthirdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E6023D044E000C5114D /* SSthirdVC.m */; };
+		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
@@ -120,6 +121,8 @@
 		47204E5D23D044D400C5114D /* SSsecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSsecondVC.h; sourceTree = "<group>"; };
 		47204E5F23D044E000C5114D /* SSthirdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSthirdVC.h; sourceTree = "<group>"; };
 		47204E6023D044E000C5114D /* SSthirdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSthirdVC.m; sourceTree = "<group>"; };
+		4743415D24850F37008F7FBE /* SSfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSfileManager.h; sourceTree = "<group>"; };
+		4743415E24850F37008F7FBE /* SSfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfileManager.m; sourceTree = "<group>"; };
 		4768EAFC23A081ED006440D5 /* SSbaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSbaseVC.h; sourceTree = "<group>"; };
 		4768EAFD23A081ED006440D5 /* SSbaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSbaseVC.m; sourceTree = "<group>"; };
 		4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSgoldAnimationImgV.h; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 				47FB13A223CD69CF00072C1D /* SShttprequest.m */,
 				47FB13A523CD69CF00072C1D /* SSshareManager.h */,
 				47FB13A323CD69CF00072C1D /* SSshareManager.m */,
+				4743415D24850F37008F7FBE /* SSfileManager.h */,
+				4743415E24850F37008F7FBE /* SSfileManager.m */,
 				47FB139D23CD698D00072C1D /* SSTimingHelper.h */,
 				47FB139C23CD698D00072C1D /* SSTimingHelper.m */,
 				47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */,
@@ -743,6 +748,7 @@
 				47FB141423CD724700072C1D /* SSbaseNavigationC.m in Sources */,
 				47FB13AD23CD6AB400072C1D /* UIScrollView+SScategory.m in Sources */,
 				47204E6123D044E000C5114D /* SSthirdVC.m in Sources */,
+				4743415F24850F37008F7FBE /* SSfileManager.m in Sources */,
 				47FB141723CD724700072C1D /* SSwebBaseVC.m in Sources */,
 				2CC5B62D23600A7900998FDF /* UINavigationController+SS.m in Sources */,
 				47FB140323CD722C00072C1D /* SSwindowView.m in Sources */,
