@@ -7,7 +7,6 @@
 //
 
 #import "SSBtnsListView.h"
-#import <Masonry.h>
 
 @interface SSBtnsListView ()
 @property(nonatomic,strong) UIButton* selectedBtn;
@@ -45,11 +44,9 @@
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
+- (void)setSubV {
     for (int i=0; i<self.titleArray.count; i++) {
         UIButton* button = [UIButton buttonWithType:0];
-//        [button setBackgroundColor:[UIColor greenColor]];
         button.tag = i;
         if (i==self.selectedINdex) {
             button.selected = YES;
@@ -61,34 +58,42 @@
         [button setTitleColor:self.titleColor?self.titleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [button setTitleColor:self.titleSelectedColor?self.titleSelectedColor:[UIColor blackColor] forState:UIControlStateSelected];
         button.titleLabel.font = self.titleFont ? self.titleFont : [UIFont systemFontOfSize:14];
+        button.frame = CGRectMake(i*self.frame.size.width/self.titleArray.count, 0, self.frame.size.width/self.titleArray.count, self.frame.size.height);
         [self addSubview:button];
-        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.mas_centerY).mas_equalTo(0);
-            make.top.mas_equalTo(0);
-            make.left.mas_equalTo(i*self.frame.size.width/self.titleArray.count);
-            make.width.mas_equalTo(self.frame.size.width/self.titleArray.count);
-        }];
+//        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.mas_equalTo(self.mas_centerY).mas_equalTo(0);
+//            make.top.mas_equalTo(0);
+//            make.left.mas_equalTo(i*self.frame.size.width/self.titleArray.count);
+//            make.width.mas_equalTo(self.frame.size.width/self.titleArray.count);
+//        }];
         [button addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     self.sliderLabel = [UILabel new];
     self.sliderLabel.backgroundColor = self.sliderColor ? self.sliderColor : [UIColor blackColor];
+    self.sliderLabel.frame = CGRectMake(self.selectedBtn.x+(self.frame.size.width/self.titleArray.count)/2-self.widthForSlider/2, self.frame.size.height-self.heigthForSlider+self.sliderToBottom, self.widthForSlider, self.heigthForSlider);
     [self addSubview:self.sliderLabel];
-    [self.sliderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.sliderBottom);
-        make.height.mas_equalTo(self.heigthForSlider);
-        make.centerX.mas_equalTo(self.selectedBtn.mas_centerX);
-        //        make.width.mas_equalTo(self.selectedBtn.mas_width).mas_equalTo(-15);
-        make.width.mas_equalTo(self.widthForSlider);
-    }];
+//    [self.sliderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(self.sliderBottom);
+//        make.height.mas_equalTo(self.heigthForSlider);
+//        make.centerX.mas_equalTo(self.selectedBtn.mas_centerX);
+//        //        make.width.mas_equalTo(self.selectedBtn.mas_width).mas_equalTo(-15);
+//        make.width.mas_equalTo(self.widthForSlider);
+//    }];
     
     UILabel* line = [UILabel new];
     line.backgroundColor = self.separatoeColor ? self.separatoeColor : [UIColor clearColor];
+    line.frame = CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width, 0.5);
     [self addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(0.5);
-    }];
+//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.left.right.mas_equalTo(0);
+//        make.height.mas_equalTo(0.5);
+//    }];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self setSubV];
 }
 
 - (void)clickBtn:(UIButton*)button {

@@ -7,16 +7,25 @@
 //
 
 #import "SSfirstVC.h"
+#import "SSBtnsListView.h"
 
 @interface SSfirstVC ()
-
+@property(nonatomic,strong) SSBtnsListView* btnsListV;
 @end
 
 @implementation SSfirstVC
-
+- (SSBtnsListView *)btnsListV {
+    if (!_btnsListV) {
+        _btnsListV = [[SSBtnsListView alloc] initWithFrame:CGRectMake(0, NAVIHEIGHT, ScreenWidth, ssscale(44))];
+        _btnsListV.titleArray = @[@"123",@"234",@"345",@"456"];
+        _btnsListV.sliderWidth = ssscale(30);
+    }
+    return _btnsListV;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
+    [self.view addSubview:self.btnsListV];
 }
 
 /*
