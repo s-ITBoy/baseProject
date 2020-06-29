@@ -92,7 +92,7 @@
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 //    });
-    [self.httpSessionManager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.httpSessionManager POST:urlString parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissAllTips];
         });
@@ -149,7 +149,7 @@
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 //    });
-    [self.httpSessionManager GET:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.httpSessionManager GET:urlString parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissAllTips];
         });
@@ -213,7 +213,7 @@
 //        [self.httpSessionManager.requestSerializer setValue:tokenStr forHTTPHeaderField:token];
 //    }
     
-    [self.httpSessionManager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [self.httpSessionManager POST:urlString parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
 //        for (NSData* picData in pictureDatas) {
             NSString* fileName = [NSString stringWithFormat:@"%ld.png",time(NULL)];
             [formData appendPartWithFileData:pictureData name:name fileName:fileName mimeType:@"image/jpeg"];
@@ -310,7 +310,7 @@
 
 ///第三方微信登录所需要调用的接口(获取微信的openid和access_token等信息)
 - (void)getwxLoginWithUrl:(NSString*)url result:(void(^)(BOOL isSucc, id responseOnject))handler {
-    [self.httpSessionManager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.httpSessionManager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         handler(YES, responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         handler(NO, error.description);
@@ -319,7 +319,7 @@
 
 ///检查App Store中的版本
 - (void)appstoreVersionCheck:(void (^)(id))handler{
-    [self.httpSessionManager GET:@"https://itunes.apple.com/lookup?id=1479145772" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.httpSessionManager GET:@"https://itunes.apple.com/lookup?id=1479145772" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         handler(responseObject);
     } failure:nil];
 }
