@@ -14,12 +14,12 @@ pod 'AFNetworking', '~> 4.0'
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'Masonry', '~> 1.0.2'
 
-#bannerView
+#Banner无限循环图片、文字轮播器
 pod 'SDCycleScrollView','~> 1.64'
 #多控制器滚动
 pod "VTMagic"
 #图片浏览
-pod 'GKPhotoBrowser'
+#pod 'GKPhotoBrowser'
 
 
   target 'baseProjectTests' do

@@ -18,9 +18,14 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.2.1)
   - MJRefresh (3.2.0)
+  - SDCycleScrollView (1.75):
+    - SDWebImage (>= 4.0.0)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - VTMagic (1.2.4):
+    - VTMagic/Core (= 1.2.4)
+  - VTMagic/Core (1.2.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0)
@@ -28,7 +33,9 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
   - MJExtension
   - MJRefresh
+  - SDCycleScrollView (~> 1.64)
   - SDWebImage (~> 4.3.3)
+  - VTMagic
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -37,7 +44,9 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - SDCycleScrollView
     - SDWebImage
+    - VTMagic
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
@@ -45,8 +54,10 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
 
-PODFILE CHECKSUM: d09db852b79bc9224a5bd8776954cb49206f0b09
+PODFILE CHECKSUM: f8e4788d4b86d12d12e6eb3c5caa9a899799c20c
 
 COCOAPODS: 1.8.4
