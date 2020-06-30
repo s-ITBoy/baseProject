@@ -20,135 +20,69 @@
 @implementation UIView (SS)
 
 #pragma mark ----------- frame -----------------------
--(void)setX:(CGFloat)x{
+- (void)setXX:(CGFloat)XX {
     CGRect rect = self.frame;
-    rect.origin.x = x;
+    rect.origin.x = XX;
     self.frame = rect;
 }
--(CGFloat)x{
+- (CGFloat)XX {
     return self.frame.origin.x;
 }
-
--(void)setY:(CGFloat)y{
+- (void)setYY:(CGFloat)YY {
     CGRect rect = self.frame;
-    rect.origin.y = y;
+    rect.origin.y = YY;
     self.frame = rect;
 }
--(CGFloat)y{
+- (CGFloat)YY {
     return self.frame.origin.y;
 }
-
--(void)setWidth:(CGFloat)width{
+- (void)setWidth:(CGFloat)width {
     CGRect rect = self.frame;
     rect.size.width = width;
     self.frame = rect;
 }
-- (CGFloat)width{
+- (CGFloat)width {
     return self.frame.size.width;
 }
-
-- (void)setHeight:(CGFloat)height{
+- (void)setHeight:(CGFloat)height {
     CGRect rect = self.frame;
     rect.size.height = height;
     self.frame = rect;
 }
--(CGFloat)height{
+- (CGFloat)height {
     return self.frame.size.height;
 }
-
-- (void)setCenterx:(CGFloat)centerx{
+- (void)setCenterX:(CGFloat)centerX {
     CGPoint center = self.center;
-    center.x = centerx;
+    center.x = centerX;
     self.center = center;
 }
-- (CGFloat)centerx{
+- (CGFloat)centerX {
     return self.center.x;
 }
-
-- (void)setCentery:(CGFloat)centery{
+- (void)setCenterY:(CGFloat)centerY {
     CGPoint center = self.center;
-    center.y = centery;
+    center.y = centerY;
     self.center = center;
 }
-- (CGFloat)centery{
+- (CGFloat)centerY {
     return self.center.y;
 }
-
-
-
-- (CGFloat) top
-{
-    return self.frame.origin.y;
-}
-
-- (void) setTop: (CGFloat) newtop
-{
+- (void)setSize:(CGSize)Size {
     CGRect newframe = self.frame;
-    newframe.origin.y = newtop;
+    newframe.size = Size;
     self.frame = newframe;
 }
-
-- (CGFloat) left
-{
-    return self.frame.origin.x;
-}
-
-- (void) setLeft: (CGFloat) newleft
-{
-    CGRect newframe = self.frame;
-    newframe.origin.x = newleft;
-    self.frame = newframe;
-}
-
-- (CGFloat) bottom
-{
-    return self.frame.origin.y + self.frame.size.height;
-}
-
-- (void) setBottom: (CGFloat) newbottom
-{
-    CGRect newframe = self.frame;
-    newframe.origin.y = newbottom - self.frame.size.height;
-    self.frame = newframe;
-}
-
-- (CGFloat) right
-{
-    return self.frame.origin.x + self.frame.size.width;
-}
-
-- (void) setRight: (CGFloat) newright
-{
-    CGFloat delta = newright - (self.frame.origin.x + self.frame.size.width);
-    CGRect newframe = self.frame;
-    newframe.origin.x += delta ;
-    self.frame = newframe;
-}
-
-- (CGPoint) origin
-{
-    return self.frame.origin;
-}
-
-- (void) setOrigin: (CGPoint) aPoint
-{
-    CGRect newframe = self.frame;
-    newframe.origin = aPoint;
-    self.frame = newframe;
-}
-
-
-// Retrieve and set the size
-- (CGSize) size
-{
+- (CGSize)Size {
     return self.frame.size;
 }
-
-- (void) setSize: (CGSize) aSize
-{
+- (void)setOringin:(CGPoint)Oringin {
     CGRect newframe = self.frame;
-    newframe.size = aSize;
+    newframe.origin = Oringin;
     self.frame = newframe;
+}
+- (CGPoint)Oringin {
+    return self.frame.origin;
 }
 
 //设置唯一标识 类似tag  jjl

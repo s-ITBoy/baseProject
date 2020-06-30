@@ -71,7 +71,7 @@
     }
     self.sliderLabel = [UILabel new];
     self.sliderLabel.backgroundColor = self.sliderColor ? self.sliderColor : [UIColor blackColor];
-    self.sliderLabel.frame = CGRectMake(self.selectedBtn.x+(self.frame.size.width/self.titleArray.count)/2-self.widthForSlider/2, self.frame.size.height-self.heigthForSlider+self.sliderToBottom, self.widthForSlider, self.heigthForSlider);
+    self.sliderLabel.frame = CGRectMake(self.selectedBtn.XX+(self.frame.size.width/self.titleArray.count)/2-self.widthForSlider/2, self.frame.size.height-self.heigthForSlider+self.sliderToBottom, self.widthForSlider, self.heigthForSlider);
     [self addSubview:self.sliderLabel];
 //    [self.sliderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.bottom.mas_equalTo(self.sliderBottom);
@@ -105,7 +105,7 @@
         self.selectedBtn = button;
     }
     [UIView animateWithDuration:0.2 animations:^{
-        self.sliderLabel.centerx = self.selectedBtn.centerx;
+        self.sliderLabel.centerX = self.selectedBtn.centerX;
     }];
     self.selectedINdex = button.tag;
     if (self.selectedBlock) {

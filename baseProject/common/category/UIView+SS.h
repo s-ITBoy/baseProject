@@ -12,27 +12,21 @@
 
 #pragma mark ----------- frame -----------------------
 ///直接获得,或者设置, View 的 x 坐标
-@property(nonatomic,assign) CGFloat x;
+@property(nonatomic,assign) CGFloat XX;
 ///直接获得,或者设置, View 的 y 坐标
-@property(nonatomic,assign) CGFloat y;
+@property(nonatomic,assign) CGFloat YY;
 ///直接获得一个View的宽度
 @property(nonatomic,assign) CGFloat width;
 ///直接获得一个 View 的高度
 @property(nonatomic,assign) CGFloat height;
 ///
-@property(nonatomic,assign) CGFloat centerx;
+@property(nonatomic,assign) CGFloat centerX;
 ///
-@property(nonatomic,assign) CGFloat centery;
-
-@property(nonatomic,assign) CGFloat top;
-@property(nonatomic,assign) CGFloat left;
-
-@property(nonatomic,assign) CGFloat bottom;
-@property(nonatomic,assign) CGFloat right;
-
-
-@property(nonatomic,assign) CGPoint origin;
-@property(nonatomic,assign) CGSize size;
+@property(nonatomic,assign) CGFloat centerY;
+///
+@property(nonatomic,assign) CGPoint Oringin;
+///
+@property(nonatomic,assign) CGSize Size;
 
 @property (nonatomic, readwrite,strong) NSString *identifier;
 
