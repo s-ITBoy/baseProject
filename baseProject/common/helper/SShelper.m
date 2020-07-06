@@ -389,6 +389,16 @@
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
 }
+///颜色渐变
++ (void)SScolorsWith:(UIView*)view and:(UIColor*)color1 and:(UIColor*)color2 {
+    CAGradientLayer *gl = [[CAGradientLayer alloc] init];
+    gl.frame = CGRectMake(0,0,view.frame.size.width,view.frame.size.height);
+    gl.startPoint = CGPointMake(0.5, 0);
+    gl.endPoint = CGPointMake(0.5, 1);
+    gl.colors = @[(__bridge id)color1.CGColor, (__bridge id)color2.CGColor];
+    gl.locations = @[@(0), @(1.0f)];
+    [view.layer addSublayer:gl];
+}
 ///数字从0开始跳动
 + (void)changNumDuration:(int)duration start:(CGFloat)startNum end:(CGFloat)endNum and:(CATextLayer*)textLayer {
     

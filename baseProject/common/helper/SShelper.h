@@ -109,6 +109,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSMutableAttributedString*)attri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect;
 ///生成二维码
 + (UIImage*)getQRcodeWithStr:(NSString*)str size:(CGFloat)size;
+///颜色渐变
++ (void)SScolorsWith:(UIView*)view and:(UIColor*)color1 and:(UIColor*)color2;
 
 #pragma mark ----------  弹框或跳转界面 ------------
 ///AlertActionSheet
