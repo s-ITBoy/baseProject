@@ -4,7 +4,17 @@
 //
 //  Created by F S on 2019/12/17.
 //  Copyright © 2019 F S. All rights reserved.
-//
+//手动接入WechatSDK1.8.2(包含微信支付) 需要手动导入系统的一些相关库
+/*
+ Security.framework
+ CoreGraphics.framework
+ CoreTelephony.framework
+ WebKit.framework
+ SystemConfiguration.framework
+ libz.tbd
+ libsqlite3.0.tbd
+ libc++.tbd
+ */
 
 #import <Foundation/Foundation.h>
 ///导入微信SDK即可使用
