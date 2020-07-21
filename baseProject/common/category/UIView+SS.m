@@ -191,13 +191,31 @@
     self.layer.shadowRadius = radiu;
 }
 
+///颜色渐变
+- (void)SSsetColor:(UIColor*)color1 and:(UIColor*)color2 and:(CGPoint)start and:(CGPoint)end {
+    CAGradientLayer *gl = [[CAGradientLayer alloc] init];
+    gl.frame = CGRectMake(0,0,self.frame.size.width,self.frame.size.height);
+    gl.startPoint = CGPointMake(0.5, 0);
+    gl.endPoint = CGPointMake(0.5, 1);
+    gl.colors = @[(__bridge id)color1.CGColor, (__bridge id)color2.CGColor];
+    gl.locations = @[@(0), @(1.0f)];
+    [self.layer addSublayer:gl];
+}
+
+
+- (void)SSremoveAllSubViews {
+    for (UIView* view in self.subviews) {
+        [view removeFromSuperview];
+    }
+}
+
 #pragma mark ------------ 动画效果 ------------
 ///缩放动画
 - (void)SSaddZoomAnimationFrom:(CGFloat)min To:(CGFloat)max {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     animation.duration = 0.5;
     animation.repeatCount = HUGE_VALF;
-    animation.autoreverses = YES;
+    animation.autoreverses = YES;///是否运行逆向变化动画
     animation.timeOffset = 1;
     animation.fromValue = [NSNumber numberWithFloat:min];
     animation.toValue = [NSNumber numberWithFloat:max];
@@ -205,17 +223,16 @@
     [self.layer addAnimation:animation forKey:@"scale-layer"];
 }
 
+///适用于点击选中放大/缩小的动画
+- (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval {
+    [UIView animateWithDuration:interval animations:^{
+        self.transform = CGAffineTransformMakeScale(scaleX, scaleY);
+    }];
+}
+
 ///移除动画
 - (void)SSremoveAllAnimation {
     [self.layer removeAllAnimations];
-}
-
-
-///移除所有子视图
-- (void)SSremoveAllSubViews {
-    for (UIView* view in self.subviews) {
-        [view removeFromSuperview];
-    }
 }
 
 @end
