@@ -20,69 +20,135 @@
 @implementation UIView (SS)
 
 #pragma mark ----------- frame -----------------------
-- (void)setXX:(CGFloat)XX {
+-(void)setX:(CGFloat)x{
     CGRect rect = self.frame;
-    rect.origin.x = XX;
+    rect.origin.x = x;
     self.frame = rect;
 }
-- (CGFloat)XX {
+-(CGFloat)x{
     return self.frame.origin.x;
 }
-- (void)setYY:(CGFloat)YY {
+
+-(void)setY:(CGFloat)y{
     CGRect rect = self.frame;
-    rect.origin.y = YY;
+    rect.origin.y = y;
     self.frame = rect;
 }
-- (CGFloat)YY {
+-(CGFloat)y{
     return self.frame.origin.y;
 }
-- (void)setWidth:(CGFloat)width {
+
+-(void)setWidth:(CGFloat)width{
     CGRect rect = self.frame;
     rect.size.width = width;
     self.frame = rect;
 }
-- (CGFloat)width {
+- (CGFloat)width{
     return self.frame.size.width;
 }
-- (void)setHeight:(CGFloat)height {
+
+- (void)setHeight:(CGFloat)height{
     CGRect rect = self.frame;
     rect.size.height = height;
     self.frame = rect;
 }
-- (CGFloat)height {
+-(CGFloat)height{
     return self.frame.size.height;
 }
-- (void)setCenterX:(CGFloat)centerX {
+
+- (void)setCenterx:(CGFloat)centerx{
     CGPoint center = self.center;
-    center.x = centerX;
+    center.x = centerx;
     self.center = center;
 }
-- (CGFloat)centerX {
+- (CGFloat)centerx{
     return self.center.x;
 }
-- (void)setCenterY:(CGFloat)centerY {
+
+- (void)setCentery:(CGFloat)centery{
     CGPoint center = self.center;
-    center.y = centerY;
+    center.y = centery;
     self.center = center;
 }
-- (CGFloat)centerY {
+- (CGFloat)centery{
     return self.center.y;
 }
-- (void)setSize:(CGSize)Size {
+
+
+
+- (CGFloat) top
+{
+    return self.frame.origin.y;
+}
+
+- (void) setTop: (CGFloat) newtop
+{
     CGRect newframe = self.frame;
-    newframe.size = Size;
+    newframe.origin.y = newtop;
     self.frame = newframe;
 }
-- (CGSize)Size {
+
+- (CGFloat) left
+{
+    return self.frame.origin.x;
+}
+
+- (void) setLeft: (CGFloat) newleft
+{
+    CGRect newframe = self.frame;
+    newframe.origin.x = newleft;
+    self.frame = newframe;
+}
+
+- (CGFloat) bottom
+{
+    return self.frame.origin.y + self.frame.size.height;
+}
+
+- (void) setBottom: (CGFloat) newbottom
+{
+    CGRect newframe = self.frame;
+    newframe.origin.y = newbottom - self.frame.size.height;
+    self.frame = newframe;
+}
+
+- (CGFloat) right
+{
+    return self.frame.origin.x + self.frame.size.width;
+}
+
+- (void) setRight: (CGFloat) newright
+{
+    CGFloat delta = newright - (self.frame.origin.x + self.frame.size.width);
+    CGRect newframe = self.frame;
+    newframe.origin.x += delta ;
+    self.frame = newframe;
+}
+
+- (CGPoint) origin
+{
+    return self.frame.origin;
+}
+
+- (void) setOrigin: (CGPoint) aPoint
+{
+    CGRect newframe = self.frame;
+    newframe.origin = aPoint;
+    self.frame = newframe;
+}
+
+
+// Retrieve and set the size
+- (CGSize) size
+{
     return self.frame.size;
 }
-- (void)setOringin:(CGPoint)Oringin {
+
+- (void) setSize: (CGSize) aSize
+{
     CGRect newframe = self.frame;
-    newframe.origin = Oringin;
+    newframe.size = aSize;
     self.frame = newframe;
-}
-- (CGPoint)Oringin {
-    return self.frame.origin;
 }
 
 //设置唯一标识 类似tag  jjl
@@ -123,50 +189,53 @@
 #pragma mark ------------ 设置上，下，左，右 的边缘线条 ---------------
 ///设置顶部边缘线条。bottom：表示线条的高度
 - (void)SSaddTopInsetLine:(UIEdgeInsets)topInset andlineColor:(UIColor*)color {
-    UILabel* line = (UILabel*)[self viewWithTag:10010];
+    UIView* line = [self viewWithTag:10010];
     if (!line) {
-        line = [[UILabel alloc] init];
-        line.backgroundColor = color ? color : [UIColor SSseparatorColor];
-        line.frame = CGRectMake(topInset.left, topInset.top, self.frame.size.width- topInset.left- topInset.right, topInset.bottom);
+        line = [[UIView alloc] init];
+        line.tag = 10010;
         [self addSubview:line];
     }
-    
+    line.backgroundColor = color ? color : [UIColor SScolorWithHexString:@"#6D6D6F"];
+    line.frame = CGRectMake(topInset.left, topInset.top, self.frame.size.width- topInset.left- topInset.right, topInset.bottom);
     line.hidden = topInset.bottom == 0;
 }
 ///设置左侧边缘线条。right：表示线条的宽度
 - (void)SSaddLeftInsetLine:(UIEdgeInsets)leftInset andlineColor:(UIColor*)color {
-    UILabel* line = (UILabel*)[self viewWithTag:10020];
+    UIView* line = [self viewWithTag:10020];
     if (!line) {
-        line = [[UILabel alloc] init];
-        line.backgroundColor = color ? color : [UIColor SSseparatorColor];
-        line.frame = CGRectMake(leftInset.left, leftInset.top, leftInset.right, self.frame.size.height- leftInset.top - leftInset.bottom);
+        line = [[UIView alloc] init];
+        line.tag = 10020;
         [self addSubview:line];
     }
-    
+    line.frame = CGRectMake(leftInset.left, leftInset.top, leftInset.right, self.frame.size.height- leftInset.top - leftInset.bottom);
+    line.backgroundColor = color ? color : [UIColor SScolorWithHexString:@"#6D6D6F"];
+    [self bringSubviewToFront:line];
     line.hidden = leftInset.right == 0;
 }
 ///设置底部边缘线条。top：表示线条的高度
 - (void)SSaddBottomInsetLine:(UIEdgeInsets)bottomInset andlineColor:(UIColor*)color {
-    UILabel* line = (UILabel*)[self viewWithTag:10030];
+    UIView* line = [self viewWithTag:10030];
     if (!line) {
-        line = [UILabel new];
-        line.backgroundColor = color ? color : [UIColor SSseparatorColor];
-        line.frame = CGRectMake(bottomInset.left, self.frame.size.height- bottomInset.top- bottomInset.bottom, self.frame.size.width- bottomInset.left- bottomInset.right, bottomInset.top);
+        line = [[UIView alloc] init];
+        line.tag = 10030;
         [self addSubview:line];
     }
+    line.backgroundColor = color ? color : [UIColor SScolorWithHexString:@"#6D6D6F"];
+    line.frame = CGRectMake(bottomInset.left, self.frame.size.height- bottomInset.top- bottomInset.bottom, self.frame.size.width- bottomInset.left- bottomInset.right, bottomInset.top);
     
     line.hidden = bottomInset.top == 0;
 }
 ///设置右侧边缘线条。left：表示线条的宽度
 - (void)SSaddRightInsetLine:(UIEdgeInsets)rightInset andlineColor:(UIColor*)color {
-    UILabel* line = (UILabel*)[self viewWithTag:10040];
+    UIView* line = [self viewWithTag:10040];
     if (!line) {
-        line = [[UILabel alloc] init];
-        line.backgroundColor = color ? color : [UIColor SSseparatorColor];
-        line.frame = CGRectMake(self.frame.size.width- rightInset.left- rightInset.right, rightInset.top, rightInset.left, self.frame.size.height- rightInset.top- rightInset.bottom);
+        line = [[UIView alloc] init];
+        line.tag = 10040;
         [self addSubview:line];
         [self bringSubviewToFront:line];
     }
+    line.backgroundColor = color ? color : [UIColor SScolorWithHexString:@"#6D6D6F"];
+    line.frame = CGRectMake(self.frame.size.width- rightInset.left- rightInset.right, rightInset.top, rightInset.left, self.frame.size.height- rightInset.top- rightInset.bottom);
     
     line.hidden = rightInset.left == 0;
 }
@@ -208,8 +277,38 @@
         [view removeFromSuperview];
     }
 }
-
 #pragma mark ------------ 动画效果 ------------
+/*
+ 在 iOS 动画开发中经常使用到的 animationWithKeyPath:字符串,以下为部分内容:
+ // 旋转
+ transform.rotation.x 围绕x轴翻转 参数：角度 angle2Radian(4)
+ transform.rotation.y 围绕y轴翻转 参数：同上
+ transform.rotation.z 围绕z轴翻转 参数：同上
+ transform.rotation 默认围绕z轴
+ // 缩放
+ transform.scale.x x方向缩放 参数：缩放比例 1.5
+ transform.scale.y y方向缩放 参数：同上
+ transform.scale.z z方向缩放 参数：同上
+ transform.scale 所有方向缩放 参数：同上
+ // 平移
+ transform.translation.x x方向移动 参数：x轴上的坐标 100
+ transform.translation.y x方向移动 参数：y轴上的坐标
+ transform.translation.z x方向移动 参数：z轴上的坐标
+ transform.translation 移动 参数：移动到的点 （100，100）
+ // 其他属性
+ opacity 透明度 参数：透明度 0.5
+ backgroundColor 背景颜色 参数：颜色 (id)[[UIColor redColor] CGColor]
+ cornerRadius 圆角 参数：圆角半径 5
+ borderWidth 边框宽度 参数：边框宽度 5
+ bounds 大小 参数：CGRect
+ contents 内容 参数：CGImage
+ contentsRect 可视内容 参数：CGRect 值是0～1之间的小数
+ position 锚点位置
+ shadowColor 阴影颜色
+ shadowOffset 阴影的偏移量
+ shadowOpacity 阴影的透明度
+ shadowRadius 阴影的圆角
+ */
 ///缩放动画
 - (void)SSaddZoomAnimationFrom:(CGFloat)min To:(CGFloat)max {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
@@ -228,6 +327,70 @@
     [UIView animateWithDuration:interval animations:^{
         self.transform = CGAffineTransformMakeScale(scaleX, scaleY);
     }];
+}
+
+///呼吸动画
+- (void)SSbreatheAnimate {
+    CABasicAnimation* baseAni = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    baseAni.fromValue = [NSNumber numberWithFloat:1.0f];
+    baseAni.toValue = [NSNumber numberWithFloat:0.2f];
+    baseAni.autoreverses = YES;
+    baseAni.duration = 1;
+    baseAni.repeatCount = MAXFLOAT;
+    baseAni.removedOnCompletion = NO;
+    baseAni.fillMode =  kCAFillModeForwards;//removedOnCompletion,fillMode配合使用保持动画完成效果
+    baseAni.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    [self.layer addAnimation:baseAni forKey:@"breathe"];
+}
+
+// CATransition转场动画
+/*
+ type    动画过渡类型
+ subtype    动画过渡方向
+ 
+ 常用动画类型:
+ type的值                  解读        对应常量
+ fade                     淡入淡出     kCATransitionFade
+ push                     推挤        kCATransitionPush
+ reveal                   揭开        kCATransitionReveal
+ moveIn                   覆盖        kCATransitionMoveIn
+ cube                     立方体      私有API
+ suckEffect               吮吸        私有API
+ oglFlip                  翻转        私有API
+ rippleEffect             波纹        私有API
+ pageCurl                 反翻页      私有API
+ cameraIrisHollowOpen     开镜头      私有API
+ cameraIrisHollowClose    关镜头      私有API
+
+ 过渡方向参数:
+ subtype的值    解读
+ kCATransitionFromRight    从右转场
+ kCATransitionFromLeft     从左转场
+ kCATransitionFromBottom   从下转场
+ kCATransitionFromTop      从上转场
+
+ */
+
+///翻页动画
+- (void)SSopenPageAnimate {
+    [self.layer removeAllAnimations];
+    CATransition* transition = [CATransition animation];
+    transition.repeatCount = 5;
+    transition.type = @"pageCurl";
+    transition.subtype = kCATransitionFromLeft;
+    transition.duration = 1;
+    [self.layer addAnimation:transition forKey:nil];
+}
+///立方体转动动画
+- (void)SScubeAnimate {
+    [self.layer removeAllAnimations];
+    CATransition* transition = [CATransition animation];
+    transition.repeatCount = 100;
+    transition.type = @"cube";
+    transition.subtype = kCATransitionFromLeft;
+    transition.duration = 1;
+    
+    [self.layer addAnimation:transition forKey:nil];
 }
 
 ///移除动画

@@ -12,21 +12,27 @@
 
 #pragma mark ----------- frame -----------------------
 ///直接获得,或者设置, View 的 x 坐标
-@property(nonatomic,assign) CGFloat XX;
+@property(nonatomic,assign) CGFloat x;
 ///直接获得,或者设置, View 的 y 坐标
-@property(nonatomic,assign) CGFloat YY;
+@property(nonatomic,assign) CGFloat y;
 ///直接获得一个View的宽度
 @property(nonatomic,assign) CGFloat width;
 ///直接获得一个 View 的高度
 @property(nonatomic,assign) CGFloat height;
 ///
-@property(nonatomic,assign) CGFloat centerX;
+@property(nonatomic,assign) CGFloat centerx;
 ///
-@property(nonatomic,assign) CGFloat centerY;
-///
-@property(nonatomic,assign) CGPoint Oringin;
-///
-@property(nonatomic,assign) CGSize Size;
+@property(nonatomic,assign) CGFloat centery;
+
+@property(nonatomic,assign) CGFloat top;
+@property(nonatomic,assign) CGFloat left;
+
+@property(nonatomic,assign) CGFloat bottom;
+@property(nonatomic,assign) CGFloat right;
+
+
+@property(nonatomic,assign) CGPoint origin;
+@property(nonatomic,assign) CGSize size;
 
 @property (nonatomic, readwrite,strong) NSString *identifier;
 
@@ -67,6 +73,14 @@
 - (void)SSaddZoomAnimationFrom:(CGFloat)min To:(CGFloat)max;
 ///适用于点击选中放大/缩小的动画
 - (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval;
+///呼吸动画
+- (void)SSbreatheAnimate;
+
+// CATransition转场动画
+///翻页动画
+- (void)SSopenPageAnimate;
+///立方体转动动画
+- (void)SScubeAnimate;
 
 ///移除动画
 - (void)SSremoveAllAnimation;
