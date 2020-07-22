@@ -250,7 +250,7 @@
     if (lineColor) {
         self.layer.borderColor = lineColor.CGColor;
     }
-    self.layer.masksToBounds = YES;
+//    self.layer.masksToBounds = YES;
 }
 ///设置边缘阴影
 - (void)SSsetLayshadowwithRadiu:(CGFloat)radiu andShadowOffset:(CGSize)size andShadowCorlor:(UIColor*)shadowColor {
