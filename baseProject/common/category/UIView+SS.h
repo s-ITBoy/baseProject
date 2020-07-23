@@ -75,6 +75,10 @@
 - (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval;
 ///呼吸动画
 - (void)SSbreatheAnimate;
+///边框线向外扩散动画
+- (void)SSborderlineAnimate:(CGFloat)min and:(CGFloat)max;
+///背景颜色向外扩散动画
+- (void)backgroundColorAnimate:(CGFloat)min and:(CGFloat)max;
 
 // CATransition转场动画
 ///翻页动画

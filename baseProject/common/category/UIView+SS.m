@@ -343,6 +343,47 @@
     [self.layer addAnimation:baseAni forKey:@"breathe"];
 }
 
+///边框线向外扩散动画
+- (void)SSborderlineAnimate:(CGFloat)min and:(CGFloat)max {
+    CABasicAnimation* baseAni = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    baseAni.fromValue = @(min);
+    baseAni.toValue = @(max);
+    baseAni.duration = 2;
+    baseAni.repeatCount = HUGE;
+    
+    CALayer* layer = [CALayer layer];
+    layer.borderColor = [UIColor blackColor].CGColor;
+    layer.borderWidth = 0.5;
+    layer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    layer.cornerRadius = self.bounds.size.height/2;
+    [layer addAnimation:baseAni forKey:@"borderline"];
+    [self.layer addSublayer:layer];
+}
+
+///背景颜色向外扩散动画
+- (void)backgroundColorAnimate:(CGFloat)min and:(CGFloat)max {
+    CABasicAnimation* baseAni = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    baseAni.fromValue = @(min);
+    baseAni.toValue = @(max);
+    
+    CAKeyframeAnimation *backgroundColorAnimation = [CAKeyframeAnimation animation];
+    backgroundColorAnimation.keyPath = @"backgroundColor";
+    backgroundColorAnimation.values = @[(__bridge id)RGBA(255, 216, 87, 0.5).CGColor,
+                                        (__bridge id)RGBA(255, 231, 152, 0.5).CGColor,
+                                        (__bridge id)RGBA(255, 241, 197, 0.5).CGColor,
+                                        (__bridge id)RGBA(255, 241, 197, 0).CGColor];
+    backgroundColorAnimation.keyTimes = @[@0.3,@0.6,@0.9,@1];
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.beginTime = CACurrentMediaTime();
+    animationGroup.duration = 2;
+    animationGroup.repeatCount = HUGE;
+    animationGroup.animations = @[baseAni,backgroundColorAnimation];
+    animationGroup.removedOnCompletion = NO;
+    
+    [self.layer addAnimation:animationGroup forKey:@"backgroundColor"];
+}
+
 // CATransition转场动画
 /*
  type    动画过渡类型
@@ -385,7 +426,7 @@
 - (void)SScubeAnimate {
     [self.layer removeAllAnimations];
     CATransition* transition = [CATransition animation];
-    transition.repeatCount = 100;
+    transition.repeatCount = 5;
     transition.type = @"cube";
     transition.subtype = kCATransitionFromLeft;
     transition.duration = 1;
