@@ -77,8 +77,10 @@
 - (void)SSbreatheAnimate;
 ///边框线向外扩散动画
 - (void)SSborderlineAnimate:(CGFloat)min and:(CGFloat)max;
+///边框线向外扩散动画(去锯齿)
+- (void)SSborderAnimate:(CGFloat)min and:(CGFloat)max;
 ///背景颜色向外扩散动画
-- (void)backgroundColorAnimate:(CGFloat)min and:(CGFloat)max;
+- (void)SSbackgroundColorAnimate:(CGFloat)min and:(CGFloat)max;
 
 // CATransition转场动画
 ///翻页动画

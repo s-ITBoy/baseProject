@@ -360,8 +360,33 @@
     [self.layer addSublayer:layer];
 }
 
+///边框线向外扩散动画(去锯齿)
+- (void)SSborderAnimate:(CGFloat)min and:(CGFloat)max {
+    CABasicAnimation* baseAni = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    baseAni.fromValue = @(min);
+    baseAni.toValue = @(max);
+    
+    CAKeyframeAnimation *borderColorAnimation = [CAKeyframeAnimation animation];
+    borderColorAnimation.keyPath = @"borderColor";
+    borderColorAnimation.values = @[(__bridge id)[UIColor blackColor].CGColor,
+                                    (__bridge id)[UIColor blackColor].CGColor,
+                                    (__bridge id)[UIColor blackColor].CGColor,
+                                    (__bridge id)[UIColor blackColor].CGColor];
+    borderColorAnimation.keyTimes = @[@0.3,@0.6,@0.9,@1];
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.beginTime = CACurrentMediaTime();
+    animationGroup.duration = 2;
+    animationGroup.repeatCount = HUGE;
+    animationGroup.animations = @[baseAni,borderColorAnimation];
+    animationGroup.removedOnCompletion = NO;
+    
+    self.layer.borderWidth = 0.5;
+    [self.layer addAnimation:animationGroup forKey:@"border"];
+}
+
 ///背景颜色向外扩散动画
-- (void)backgroundColorAnimate:(CGFloat)min and:(CGFloat)max {
+- (void)SSbackgroundColorAnimate:(CGFloat)min and:(CGFloat)max {
     CABasicAnimation* baseAni = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     baseAni.fromValue = @(min);
     baseAni.toValue = @(max);
