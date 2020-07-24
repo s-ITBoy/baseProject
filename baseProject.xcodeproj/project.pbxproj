@@ -30,6 +30,10 @@
 		47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5C23D044D400C5114D /* SSsecondVC.m */; };
 		47204E6123D044E000C5114D /* SSthirdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E6023D044E000C5114D /* SSthirdVC.m */; };
 		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
+		475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B624CAD3AD008FD18B /* SSautoTableV.m */; };
+		475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B824CAD3E5008FD18B /* SSboxCodeView.m */; };
+		475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BB24CAD3EF008FD18B /* SSuislider.m */; };
+		475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
@@ -123,6 +127,14 @@
 		47204E6023D044E000C5114D /* SSthirdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSthirdVC.m; sourceTree = "<group>"; };
 		4743415D24850F37008F7FBE /* SSfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSfileManager.h; sourceTree = "<group>"; };
 		4743415E24850F37008F7FBE /* SSfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfileManager.m; sourceTree = "<group>"; };
+		475299B524CAD3AD008FD18B /* SSautoTableV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSautoTableV.h; sourceTree = "<group>"; };
+		475299B624CAD3AD008FD18B /* SSautoTableV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSautoTableV.m; sourceTree = "<group>"; };
+		475299B824CAD3E5008FD18B /* SSboxCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSboxCodeView.m; sourceTree = "<group>"; };
+		475299B924CAD3E5008FD18B /* SSboxCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSboxCodeView.h; sourceTree = "<group>"; };
+		475299BB24CAD3EF008FD18B /* SSuislider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSuislider.m; sourceTree = "<group>"; };
+		475299BC24CAD3EF008FD18B /* SSuislider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSuislider.h; sourceTree = "<group>"; };
+		475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSwaterWaveView.m; sourceTree = "<group>"; };
+		475299BF24CAD3F6008FD18B /* SSwaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSwaterWaveView.h; sourceTree = "<group>"; };
 		4768EAFC23A081ED006440D5 /* SSbaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSbaseVC.h; sourceTree = "<group>"; };
 		4768EAFD23A081ED006440D5 /* SSbaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSbaseVC.m; sourceTree = "<group>"; };
 		4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSgoldAnimationImgV.h; sourceTree = "<group>"; };
@@ -477,6 +489,8 @@
 		47FB13F323CD722C00072C1D /* view */ = {
 			isa = PBXGroup;
 			children = (
+				475299B524CAD3AD008FD18B /* SSautoTableV.h */,
+				475299B624CAD3AD008FD18B /* SSautoTableV.m */,
 				47FB13FB23CD722C00072C1D /* SSshowContentView.h */,
 				47FB13F423CD722C00072C1D /* SSshowContentView.m */,
 				47FB13FD23CD722C00072C1D /* SSwindowView.h */,
@@ -491,6 +505,12 @@
 				47FB13F923CD722C00072C1D /* SScustomTextView.m */,
 				4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */,
 				4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */,
+				475299B924CAD3E5008FD18B /* SSboxCodeView.h */,
+				475299B824CAD3E5008FD18B /* SSboxCodeView.m */,
+				475299BC24CAD3EF008FD18B /* SSuislider.h */,
+				475299BB24CAD3EF008FD18B /* SSuislider.m */,
+				475299BF24CAD3F6008FD18B /* SSwaterWaveView.h */,
+				475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -732,6 +752,7 @@
 				47FB140523CD722C00072C1D /* SSnaviAndStatusBarV.m in Sources */,
 				2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */,
 				47FB140123CD722C00072C1D /* SSbadgeBtnV.m in Sources */,
+				475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */,
 				47FB13A723CD69CF00072C1D /* SSshareManager.m in Sources */,
 				2CC2ED3E22E5E92200A6431A /* main.m in Sources */,
 				47FB140023CD722C00072C1D /* SSshowContentView.m in Sources */,
@@ -755,12 +776,15 @@
 				4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */,
 				2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */,
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
+				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,
+				475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */,
 				2CC5B60F235FF3A100998FDF /* UIFont+SS.m in Sources */,
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,
 				2CC5B61B235FFC1900998FDF /* NSData+SS.m in Sources */,
+				475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */,
 				2CC5B60C235FF2B900998FDF /* UIColor+SS.m in Sources */,
 				4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */,
 			);
