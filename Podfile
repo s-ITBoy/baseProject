@@ -21,6 +21,7 @@ pod "VTMagic"
 #图片浏览
 #pod 'GKPhotoBrowser'
 
+pod 'ReactiveCocoa','~>2.5' #等用于pod 'ReactiveObjC', '~> 3.1.1' ReactiveCocoa往后的版本更为了swift版本
 
   target 'baseProjectTests' do
     inherit! :search_paths
