@@ -20,21 +20,20 @@
 @implementation UIView (SS)
 
 #pragma mark ----------- frame -----------------------
--(void)setX:(CGFloat)x{
+- (void)setXX:(CGFloat)XX {
     CGRect rect = self.frame;
-    rect.origin.x = x;
+    rect.origin.x = XX;
     self.frame = rect;
 }
--(CGFloat)x{
+-(CGFloat)XX {
     return self.frame.origin.x;
 }
-
--(void)setY:(CGFloat)y{
+- (void)setYY:(CGFloat)YY {
     CGRect rect = self.frame;
-    rect.origin.y = y;
+    rect.origin.y = YY;
     self.frame = rect;
 }
--(CGFloat)y{
+-(CGFloat)YY {
     return self.frame.origin.y;
 }
 
@@ -56,21 +55,21 @@
     return self.frame.size.height;
 }
 
-- (void)setCenterx:(CGFloat)centerx{
+- (void)setCenterX:(CGFloat)centerX {
     CGPoint center = self.center;
-    center.x = centerx;
+    center.x = centerX;
     self.center = center;
 }
-- (CGFloat)centerx{
+- (CGFloat)centerX{
     return self.center.x;
 }
 
-- (void)setCentery:(CGFloat)centery{
+- (void)setCenterY:(CGFloat)centerY {
     CGPoint center = self.center;
-    center.y = centery;
+    center.y = centerY;
     self.center = center;
 }
-- (CGFloat)centery{
+- (CGFloat)centerY{
     return self.center.y;
 }
 
