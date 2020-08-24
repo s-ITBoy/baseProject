@@ -2,8 +2,8 @@
 //  SSgoldAnimationImgV.m
 //  baseProject
 //
-//  Created by F S on 2020/4/16.
-//  Copyright © 2020 FL S. All rights reserved.
+//  Created by F S on 2017/4/16.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import "SSgoldAnimationImgV.h"

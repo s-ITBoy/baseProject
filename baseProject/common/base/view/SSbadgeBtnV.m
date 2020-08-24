@@ -2,8 +2,8 @@
 //  SSbadgeBtnV.m
 //  leeMail
 //
-//  Created by F S on 2019/7/9.
-//  Copyright © 2019 F S. All rights reserved.
+//  Created by F S on 2017/7/9.
+//  Copyright © 2017 F S. All rights reserved.
 //
 
 #import "SSbadgeBtnV.h"

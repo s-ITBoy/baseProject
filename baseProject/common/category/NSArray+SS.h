@@ -2,8 +2,8 @@
 //  NSArray+SS.h
 //  baseProject
 //
-//  Created by FL S on 2019/10/23.
-//  Copyright © 2019 FL S. All rights reserved.
+//  Created by FL S on 2017/10/23.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,6 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSData *)SStransferToData;
 ///数组转JSON字符串
 - (NSString*)SSarrayToJSONString;
+
+///冒泡排序
+- (NSArray*)SSbubbleSortArr;
+///选择排序
+- (NSArray*)SSselectSortArr;
+///快速排序
+- (NSArray*)SSquickSortArr;
+
 
 @end
 

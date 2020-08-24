@@ -2,8 +2,8 @@
 //  SSwaterWaveView.m
 //  baseProject
 //
-//  Created by F S on 2020/7/24.
-//  Copyright © 2020 FL S. All rights reserved.
+//  Created by F S on 2017/7/24.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import "SSwaterWaveView.h"

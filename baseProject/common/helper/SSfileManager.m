@@ -2,8 +2,8 @@
 //  SSfileManager.m
 //  baseProject
 //
-//  Created by F S on 2020/5/15.
-//  Copyright © 2020 FL S. All rights reserved.
+//  Created by F S on 2017/5/15.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import "SSfileManager.h"

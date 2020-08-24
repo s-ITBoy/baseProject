@@ -2,8 +2,8 @@
 //  UIScrollView+SScategory.m
 //  leeMail
 //
-//  Created by F S on 2019/7/10.
-//  Copyright © 2019 F S. All rights reserved.
+//  Created by F S on 2017/7/10.
+//  Copyright © 2017 F S. All rights reserved.
 //
 
 #import "UIScrollView+SScategory.h"

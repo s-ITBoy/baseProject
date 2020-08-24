@@ -2,8 +2,8 @@
 //  SSbaseVC.h
 //  baseProject
 //
-//  Created by F S on 2019/12/11.
-//  Copyright © 2019 FL S. All rights reserved.
+//  Created by F S on 2017/12/11.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

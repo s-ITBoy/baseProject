@@ -2,8 +2,8 @@
 //  SStimingHelperForBtn.m
 //  ddz
 //
-//  Created by F S on 2020/1/7.
-//  Copyright © 2020 F S. All rights reserved.
+//  Created by F S on 2017/1/7.
+//  Copyright © 2017 F S. All rights reserved.
 //
 
 #import "SStimingHelperForBtn.h"

@@ -2,8 +2,8 @@
 //  SSshareManager.m
 //  ddz
 //
-//  Created by F S on 2019/12/17.
-//  Copyright © 2019 F S. All rights reserved.
+//  Created by F S on 2017/12/17.
+//  Copyright © 2017 F S. All rights reserved.
 //
 
 #import "SSshareManager.h"

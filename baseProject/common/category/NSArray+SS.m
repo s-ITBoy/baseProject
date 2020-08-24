@@ -2,8 +2,8 @@
 //  NSArray+SS.m
 //  baseProject
 //
-//  Created by FL S on 2019/10/23.
-//  Copyright © 2019 FL S. All rights reserved.
+//  Created by FL S on 2017/10/23.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import "NSArray+SS.h"
@@ -94,6 +94,39 @@
     for (UIView* view in self) {
         [view.layer removeAllAnimations];
     }
+}
+
+///冒泡排序
+- (NSArray*)SSbubbleSortArr {
+    NSMutableArray* arr = [self mutableCopy];
+//    id tmp;
+    for (int i=0; i<arr.count; i++) {
+        for (int j=0; j<arr.count-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+//                tmp = arr[j];
+//                arr[j] = arr[j+1];
+//                arr[j+1] = tmp;
+                [arr exchangeObjectAtIndex:j withObjectAtIndex:j+1];
+            }
+        }
+    }
+    return arr;
+}
+///选择排序
+- (NSArray*)SSselectSortArr {
+    NSMutableArray* arr = [self mutableCopy];
+    for (int i = 0; i < arr.count-1;i++) {
+        int pos = i;
+        for(int j = i +1; j < arr.count;j++){
+            if(arr[pos] > arr[j]){
+                pos = j;
+            }
+        }
+        id tmp = arr[i];
+        arr[i] = arr[pos];
+        arr[pos] = tmp;
+    }
+    return arr;
 }
 
 @end

@@ -2,8 +2,8 @@
 //  SSwindowView.m
 //  leeMail
 //
-//  Created by F S on 2019/8/2.
-//  Copyright © 2019 F S. All rights reserved.
+//  Created by F S on 2017/8/2.
+//  Copyright © 2017 F S. All rights reserved.
 //
 
 #define is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)

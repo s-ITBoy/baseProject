@@ -2,8 +2,8 @@
 //  SSBtnsListView.h
 //  ddz
 //
-//  Created by FL S on 2019/12/15.
-//  Copyright © 2019 F S. All rights reserved.
+//  Created by FL S on 2017/12/15.
+//  Copyright © 2017 F S. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
