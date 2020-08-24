@@ -37,6 +37,9 @@ typedef NS_ENUM(NSUInteger, HttpRequestMethod) {
 ///检查App Store中的版本
 - (void)appstoreVersionCheck:(void(^)(id responseOnject))handler;
 
+///跳转到App Store中指定的app
+- (void)goToAppstore;
+
 @end
 
 NS_ASSUME_NONNULL_END

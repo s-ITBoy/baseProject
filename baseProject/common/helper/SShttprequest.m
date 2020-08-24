@@ -324,4 +324,10 @@
     } failure:nil];
 }
 
+///跳转到App Store中指定的app
+- (void)goToAppstore {
+    //id后面为APPID
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1479145772"] options:@{} completionHandler:nil];
+}
+
 @end
