@@ -37,10 +37,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (IS_IOS_VERSION > 7.0) {
-        ///解决被导航栏遮盖的问题,需要添加下面这行代码
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
+//    if (IS_IOS_VERSION > 7.0) {
+//        ///解决被导航栏遮盖的问题,需要添加下面这行代码
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//    }
     if (self.urlString && [self.urlString hasPrefix:@"http"]) {
         NSURL* url = [NSURL URLWithString:self.urlString];
         NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];

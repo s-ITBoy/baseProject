@@ -87,7 +87,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"self Class = %@",[self class]);
-    // Do any additional setup after loading the view.
+    if (IS_IOS_VERSION > 7.0) {
+        ///解决被导航栏遮盖的问题,需要添加下面这行代码
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
     self.view.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
     
     self.page = 1;
