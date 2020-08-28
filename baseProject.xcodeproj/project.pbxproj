@@ -36,6 +36,7 @@
 		475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
+		47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
 		47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */; };
 		47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13A223CD69CF00072C1D /* SShttprequest.m */; };
@@ -53,7 +54,6 @@
 		47FB141423CD724700072C1D /* SSbaseNavigationC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140923CD724700072C1D /* SSbaseNavigationC.m */; };
 		47FB141523CD724700072C1D /* SSJSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140A23CD724700072C1D /* SSJSObject.m */; };
 		47FB141623CD724700072C1D /* SSbezierCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140B23CD724700072C1D /* SSbezierCurve.m */; };
-		47FB141723CD724700072C1D /* SSwebBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140F23CD724700072C1D /* SSwebBaseVC.m */; };
 		9AAAEF947B3B9089E2C97AF6 /* Pods_baseProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06175919FD4DCC8D039BBEE5 /* Pods_baseProjectTests.framework */; };
 		A44248E90D0D2A95AB50C475 /* Pods_baseProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A0BB9154E2F9693DAF4D60 /* Pods_baseProject.framework */; };
 		DDD8361B8C6EF6D0963DC1D6 /* Pods_baseProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFF0E88BAF9A26B6DABF349 /* Pods_baseProjectUITests.framework */; };
@@ -139,6 +139,8 @@
 		4768EAFD23A081ED006440D5 /* SSbaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSbaseVC.m; sourceTree = "<group>"; };
 		4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSgoldAnimationImgV.h; sourceTree = "<group>"; };
 		4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSgoldAnimationImgV.m; sourceTree = "<group>"; };
+		47AA79A224F7B73700E6CB23 /* SSwebBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSwebBaseVC.h; sourceTree = "<group>"; };
+		47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSwebBaseVC.m; sourceTree = "<group>"; };
 		47FB139C23CD698D00072C1D /* SSTimingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTimingHelper.m; sourceTree = "<group>"; };
 		47FB139D23CD698D00072C1D /* SSTimingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTimingHelper.h; sourceTree = "<group>"; };
 		47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStimingHelperForBtn.h; sourceTree = "<group>"; };
@@ -173,9 +175,7 @@
 		47FB140C23CD724700072C1D /* SStextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStextLayer.h; sourceTree = "<group>"; };
 		47FB140D23CD724700072C1D /* SSbezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSbezierCurve.h; sourceTree = "<group>"; };
 		47FB140E23CD724700072C1D /* SSbaseNavigationC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSbaseNavigationC.h; sourceTree = "<group>"; };
-		47FB140F23CD724700072C1D /* SSwebBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSwebBaseVC.m; sourceTree = "<group>"; };
 		47FB141023CD724700072C1D /* SStabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStabbarController.h; sourceTree = "<group>"; };
-		47FB141123CD724700072C1D /* SSwebBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSwebBaseVC.h; sourceTree = "<group>"; };
 		8DECF1335CFCBECA269EA4B5 /* Pods-baseProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-baseProjectUITests/Pods-baseProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A8726209B31B1113089E208E /* Pods-baseProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseProject.debug.xcconfig"; path = "Target Support Files/Pods-baseProject/Pods-baseProject.debug.xcconfig"; sourceTree = "<group>"; };
 		CBC7A5BBC6E075ECE42849D4 /* Pods-baseProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseProjectTests.release.xcconfig"; path = "Target Support Files/Pods-baseProjectTests/Pods-baseProjectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -480,8 +480,8 @@
 				47FB140623CD724700072C1D /* SStabbarController.m */,
 				47FB140C23CD724700072C1D /* SStextLayer.h */,
 				47FB140823CD724700072C1D /* SStextLayer.m */,
-				47FB141123CD724700072C1D /* SSwebBaseVC.h */,
-				47FB140F23CD724700072C1D /* SSwebBaseVC.m */,
+				47AA79A224F7B73700E6CB23 /* SSwebBaseVC.h */,
+				47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -770,10 +770,10 @@
 				47FB13AD23CD6AB400072C1D /* UIScrollView+SScategory.m in Sources */,
 				47204E6123D044E000C5114D /* SSthirdVC.m in Sources */,
 				4743415F24850F37008F7FBE /* SSfileManager.m in Sources */,
-				47FB141723CD724700072C1D /* SSwebBaseVC.m in Sources */,
 				2CC5B62D23600A7900998FDF /* UINavigationController+SS.m in Sources */,
 				47FB140323CD722C00072C1D /* SSwindowView.m in Sources */,
 				4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */,
+				47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */,
 				2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */,
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
@@ -959,6 +959,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5CU832F597;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = baseProject/common/configure/PrefixHeader.pch;
 				INFOPLIST_FILE = baseProject/Info.plist;
@@ -979,6 +980,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5CU832F597;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = baseProject/common/configure/PrefixHeader.pch;
 				INFOPLIST_FILE = baseProject/Info.plist;

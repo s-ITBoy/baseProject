@@ -8,6 +8,7 @@
 
 #import "SSfirstVC.h"
 #import "SSBtnsListView.h"
+#import "SSwebBaseVC.h"
 
 @interface SSfirstVC ()
 @property(nonatomic,strong) SSBtnsListView* btnsListV;
@@ -22,10 +23,28 @@
     }
     return _btnsListV;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.navigationController.navigationBar.hidden == NO) {
+        self.navigationController.navigationBar.hidden = YES;
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
     [self.view addSubview:self.btnsListV];
+    weakly(self);
+    self.btnsListV.selectedBlock = ^(NSInteger index) {
+        [weakSelf webVC];
+    };
+}
+
+- (void)webVC {
+    SSwebBaseVC* web = [[SSwebBaseVC alloc]init];
+    web.urlString = @"https://www.baidu.com";
+    web.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 /*

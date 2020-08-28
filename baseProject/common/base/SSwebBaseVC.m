@@ -1,190 +1,143 @@
 //
 //  SSwebBaseVC.m
-//  leeMail
+//  baseProject
 //
-//  Created by F S on 2017/7/16.
-//  Copyright © 2017 F S. All rights reserved.
+//  Created by F S on 2020/8/27.
+//  Copyright © 2020 FL S. All rights reserved.
 //
 
 #import "SSwebBaseVC.h"
 #import <WebKit/WebKit.h>
 
-@implementation SSjsObject
-- (void)toCopy:(NSString *)message {
-    [self.delegate toCopy:message];
-}
-
-@end
-@interface SSwebBaseVC ()<UIWebViewDelegate,SSjsObjectDelegate>
-//@property(nonatomic,strong) WKWebView* wkWebView;
-@property(nonatomic,strong) UIWebView* webView;
-
-@property(nonatomic,strong) JSContext* context;
-@property(nonatomic,strong) SSjsObject* jsObject;
-
+@interface SSwebBaseVC ()<UIGestureRecognizerDelegate,WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler>
+@property(nonatomic,strong) WKWebView* wkWebView;
 @end
 
 @implementation SSwebBaseVC
-- (UIWebView *)webView {
-    if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, statusBarHeight+NaviBarHeight, ScreenWidth, ScreenHeight-NAVIHEIGHT)];
-        _webView.delegate = self;
-        _webView.scalesPageToFit = YES;
-    }
-    return _webView;
-}
+//- (WKWebView *)wkWebView {
+//    if (!_wkWebView) {
+//        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+//        config.preferences.javaScriptEnabled =YES;
+//        config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+//
+//        _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIHEIGHT, ScreenWidth, ScreenHeight-NAVIHEIGHT) configuration:config];
+//        _wkWebView.allowsBackForwardNavigationGestures = YES;
+//        _wkWebView.UIDelegate = self;
+//        _wkWebView.navigationDelegate = self;
+//
+//    }
+//    return _wkWebView;
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.navigationController.navigationBar.hidden == YES) {
         self.navigationController.navigationBar.hidden = NO;
     }
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.webView];
-    if (self.urlString && [self.urlString hasPrefix:@"http"]) {
-        NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]];
-        [self.webView loadRequest:request];
+    if (IS_IOS_VERSION > 7.0) {
+        ///解决被导航栏遮盖的问题,需要添加下面这行代码
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
+    if (self.urlString && [self.urlString hasPrefix:@"http"]) {
+        NSURL* url = [NSURL URLWithString:self.urlString];
+        NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+        [self.wkWebView loadRequest:request];
+    }
+    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)loadView {
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    _wkWebView = [[WKWebView alloc] initWithFrame: [UIScreen mainScreen].bounds configuration:config];
+//    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIHEIGHT, ScreenWidth, ScreenHeight-NAVIHEIGHT) configuration:config];
+    _wkWebView.allowsBackForwardNavigationGestures = YES;
+    _wkWebView.UIDelegate = self;
+    _wkWebView.navigationDelegate = self;
+//        [self addJS];
+    self.view = _wkWebView;
+}
+
+- (void)back {
+    if (self.wkWebView.canGoBack) {
+        [self.wkWebView goBack];
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)backBtn {
-    if (self.webView.canGoBack) {
-        [self.webView goBack];
+    if (self.wkWebView.canGoBack) {
+        [self.wkWebView goBack];
         return;
     }
     [super backBtn];
 }
 
-#pragma mark ----- UIWebViewDelegate ------
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    [self presentLoadinghud];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self dismissAllTips];
-    SSLog(@"---- nsthread  = %@",[NSThread currentThread]);
-    NSString *navigationTitle =[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.navigationItem.title = navigationTitle;
-    weakly(self);
-    self.context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-//    self.jsObject = [[SSjsObject alloc] init];
-//    self.jsObject.delegate = self;
-    self.context[@"toGOMoney"] = ^() {
-//           SSLog(@"-----   成功111111  -----");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.tabBarController.selectedIndex = 1;
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        });
-       };
-    
-    //              window.webkit.messageHandlers.showInfoFromJs.postMessage(name);
-    self.context[@"showInfoFromJs"] = ^() {
-        NSArray *args = [JSContext currentArguments];
-        for (JSValue* value in args) {
-//            SSLog(@"-----  value = %@",[value toString]);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf copYStr:[value toString]];
-            });
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    //网页title
+    if ([keyPath isEqualToString:@"title"]) {
+        if (object == self.wkWebView) {
+            self.navigationItem.title = self.wkWebView.title;
+        } else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
-    };
-//    self.context[@"toCopy"] = ^() {
-//        SSLog(@"--- arr = ");
-//    };
-    
+     } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+     }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self dismissTips];
+#pragma mark --------- WKWebView --------------
+#pragma mark WKNavigationDelegate
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    SSLog(@"----------- start ---------");
+    SSLog(@"----------- URL = %@ ",webView.URL);
+    SSLog(@"----------- start ---------");
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    SSLog(@"---- webUrl = \n%@",request.URL);
-    NSString* url = [request.URL absoluteString];
-    SSLog(@"--- url = \n%@",url);
-    NSDictionary* dic = [self getParamsWithUrlString:url];
-    SSLog(@"----- dic = %@",[dic SSdictionryToJSONString]);
-//    if ([dic.allKeys containsObject:@"goodsId"]) {
-//        SSDetailVC* detail = [[SSDetailVC alloc] init];
-//        detail.goodId = [NSString stringWithFormat:@"%@",dic[@"goodsId"]];
-//        detail.isHide = @"0";
-//        [self.navigationController pushViewController:detail animated:YES];
-//        return NO;
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    //加载完成后隐藏progressView
+    //JS注入
+    SSLog(@"----------- finish ---------");
+}
+
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    //加载失败同样需要隐藏progressView
+    SSLog(@"----------- fail ---------");
+    SSLog(@"----------- fail url = %@",webView.URL);
+    SSLog(@"----------- fail ---------");
+//    [webView stopLoading];
+    if ([error code] == NSURLErrorCancelled) {
+       return;
+    }
+    if ([error code] == NSURLErrorSecureConnectionFailed) {
+        return;
+    }
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void(^)(WKNavigationActionPolicy))decisionHandler {
+//    NSString* url = [navigationAction.request.URL absoluteString];
+//    NSLog(@"-------- 跳转URL= %@",url);
+
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+#pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+//    SSLog(@"-----------message.name = %@",message.name);
+//    if ([message.name isEqualToString:@"lingqu"]) {
+//        id object = message.body;
+//        SSLog(@"-------- message.body = %@",object);
+//        if ([object isKindOfClass:[NSString class]]) {
+//            NSDictionary* dic = [object ss_dicFromStr];
+//            SSLog(@"------- dic = \n%@",dic);
+//            [self loadNativeAd:dic];
+//            dic = nil;
+//        }
 //    }
-    return YES;
-}
-
-- (void)toCopy:(NSString *)message {
-    [self presentMessageTips:@"000000"];
-    SSLog(@"------   成功   --------");
-}
-
-- (void)copYStr:(NSString*)str {
-    [SShelper SScopyStr:str];
-}
-
-/**
- 获取url中的参数并返回
- @param urlString 带参数的url
- @return @[NSString:无参数url, NSDictionary:参数字典]
- */
-
-- (NSDictionary*)getParamsWithUrlString:(NSString*)urlString {
-    if(urlString.length==0) {
-//        SSLog(@"链接为空！");
-        return @{};
-    }
-    //先截取问号
-    NSArray*allElements = [urlString componentsSeparatedByString:@"?"];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];//待set的参数字典
-    if(allElements.count==2) {
-        //有参数或者?后面为空
-//        NSString*myUrlString = allElements[0];
-        NSString*paramsString = allElements[1];
-        //获取参数对
-        NSArray*paramsArray = [paramsString componentsSeparatedByString:@"&"];
-        if(paramsArray.count>=2) {
-            for(NSInteger i =0; i < paramsArray.count; i++) {
-                NSString*singleParamString = paramsArray[i];
-                NSArray*singleParamSet = [singleParamString componentsSeparatedByString:@"="];
-                if(singleParamSet.count==2) {
-                    NSString*key = singleParamSet[0];
-                    
-                    NSString*value = singleParamSet[1];
-                    if(key.length>0|| value.length>0) {
-                        [params setObject:value.length>0?value:@""forKey:key.length>0?key:@""];
-                    }
-                }
-            }
-        }else if(paramsArray.count==1) {
-            //无 &。url只有?后一个参数
-            NSString*singleParamString = paramsArray[0];
-            NSArray*singleParamSet = [singleParamString componentsSeparatedByString:@"="];
-            if(singleParamSet.count==2) {
-                NSString*key = singleParamSet[0];
-                NSString*value = singleParamSet[1];
-                if(key.length>0|| value.length>0) {
-                    [params setObject:value.length>0?value:@""forKey:key.length>0?key:@""];
-                }
-            }else{
-                //问号后面啥也没有 xxxx?  无需处理
-            }
-        }
-        return params;
-    }else if(allElements.count>2) {
-//        SSLog(@"链接不合法！链接包含多个\"?\"");
-        return @{};
-    }else{
-//        SSLog(@"链接不包含参数！");
-        return @{};
-    }
-}
-
-- (void)dealloc {
-    self.webView.delegate = nil;
 }
 
 /*
