@@ -4,7 +4,7 @@
 //
 //  Created by F S on 2017/12/17.
 //  Copyright © 2017 F S. All rights reserved.
-//手动接入WechatSDK1.8.2(包含微信支付) 需要手动导入系统的一些相关库
+//手动接入WechatSDK1.8.7.1(包含微信支付) 需要手动导入系统的一些相关库
 /*
  Security.framework
  CoreGraphics.framework

@@ -2,8 +2,8 @@
 //  SSwebBaseVC.m
 //  baseProject
 //
-//  Created by F S on 2020/8/27.
-//  Copyright © 2020 FL S. All rights reserved.
+//  Created by F S on 2017/8/27.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import "SSwebBaseVC.h"

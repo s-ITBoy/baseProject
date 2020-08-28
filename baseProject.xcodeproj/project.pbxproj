@@ -37,6 +37,7 @@
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
 		47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */; };
+		47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
 		47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */; };
 		47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13A223CD69CF00072C1D /* SShttprequest.m */; };
@@ -141,6 +142,8 @@
 		4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSgoldAnimationImgV.m; sourceTree = "<group>"; };
 		47AA79A224F7B73700E6CB23 /* SSwebBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSwebBaseVC.h; sourceTree = "<group>"; };
 		47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSwebBaseVC.m; sourceTree = "<group>"; };
+		47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSpayManager.h; sourceTree = "<group>"; };
+		47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSpayManager.m; sourceTree = "<group>"; };
 		47FB139C23CD698D00072C1D /* SSTimingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTimingHelper.m; sourceTree = "<group>"; };
 		47FB139D23CD698D00072C1D /* SSTimingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTimingHelper.h; sourceTree = "<group>"; };
 		47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStimingHelperForBtn.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 				47FB13A223CD69CF00072C1D /* SShttprequest.m */,
 				47FB13A523CD69CF00072C1D /* SSshareManager.h */,
 				47FB13A323CD69CF00072C1D /* SSshareManager.m */,
+				47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */,
+				47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */,
 				4743415D24850F37008F7FBE /* SSfileManager.h */,
 				4743415E24850F37008F7FBE /* SSfileManager.m */,
 				47FB139D23CD698D00072C1D /* SSTimingHelper.h */,
@@ -771,6 +776,7 @@
 				47204E6123D044E000C5114D /* SSthirdVC.m in Sources */,
 				4743415F24850F37008F7FBE /* SSfileManager.m in Sources */,
 				2CC5B62D23600A7900998FDF /* UINavigationController+SS.m in Sources */,
+				47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */,
 				47FB140323CD722C00072C1D /* SSwindowView.m in Sources */,
 				4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */,
 				47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */,
