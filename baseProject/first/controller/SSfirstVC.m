@@ -17,7 +17,7 @@
 @implementation SSfirstVC
 - (SSBtnsListView *)btnsListV {
     if (!_btnsListV) {
-        _btnsListV = [[SSBtnsListView alloc] initWithFrame:CGRectMake(0, NAVIHEIGHT, ScreenWidth, ssscale(44))];
+        _btnsListV = [[SSBtnsListView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ssscale(44))];
         _btnsListV.titleArray = @[@"123",@"234",@"345",@"456"];
         _btnsListV.sliderWidth = ssscale(30);
     }
@@ -26,9 +26,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.navigationController.navigationBar.hidden == NO) {
-        self.navigationController.navigationBar.hidden = YES;
-    }
+//    if (self.navigationController.navigationBar.hidden == NO) {
+//        self.navigationController.navigationBar.hidden = YES;
+//    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
