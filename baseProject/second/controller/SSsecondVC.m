@@ -26,19 +26,19 @@
     [self.view addSubview:self.testLab];
     
     
-    [self.inputTF.rac_textSignal subscribeNext:^(id x) {
-        if (![SShelper isObjNil:x]) {
-            NSLog(@"-------- 信号x = %@",x);
-        }
-    }];
-    
-    [[[self.inputTF.rac_textSignal filter:^BOOL(NSString* value) {
-        return value.length>3 ? YES : NO;
-    }]map:^id(NSString* value) {
-        return value.length > 4?[UIColor redColor]:[UIColor whiteColor];
-    }]subscribeNext:^(UIColor* x) {
-        self.inputTF.backgroundColor = x;
-    }];
+//    [self.inputTF.rac_textSignal subscribeNext:^(id x) {
+//        if (![SShelper isObjNil:x]) {
+//            NSLog(@"-------- 信号x = %@",x);
+//        }
+//    }];
+//
+//    [[[self.inputTF.rac_textSignal filter:^BOOL(NSString* value) {
+//        return value.length>3 ? YES : NO;
+//    }]map:^id(NSString* value) {
+//        return value.length > 4?[UIColor redColor]:[UIColor whiteColor];
+//    }]subscribeNext:^(UIColor* x) {
+//        self.inputTF.backgroundColor = x;
+//    }];
     
     RACSignal *validUserNameSignal = [self.inputTF.rac_textSignal map:^id(id value) {
         if ([value length] > 4) {
@@ -49,6 +49,7 @@
     }];
 
     RAC(self.testLab, backgroundColor) = [validUserNameSignal map:^id _Nullable(id  _Nullable value) {
+        self.inputTF.backgroundColor = [value boolValue] ? [UIColor whiteColor] : [UIColor redColor];
         return [value boolValue] ? [UIColor clearColor] : [UIColor groupTableViewBackgroundColor];
     }];
     

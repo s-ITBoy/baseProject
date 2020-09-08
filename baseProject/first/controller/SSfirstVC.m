@@ -38,6 +38,8 @@
     self.btnsListV.selectedBlock = ^(NSInteger index) {
         [weakSelf webVC];
     };
+    NSDictionary* dic = @{@"age":@(20),@"name":@"zangsan",@"sex":@(1)};
+    [SShelper SSautoPropertyWith:dic];
 }
 
 - (void)webVC {

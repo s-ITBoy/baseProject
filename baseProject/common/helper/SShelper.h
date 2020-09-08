@@ -88,6 +88,9 @@ NS_ASSUME_NONNULL_BEGIN
 //获取当前屏幕显示的viewcontroller
 + (UIViewController *_Nullable)getCurrentVC;
 
+///根据dic自动生成model属性
++ (void)SSautoPropertyWith:(NSDictionary*)dic;
+
 #pragma mark ------ 小功能 -------
 ///复制
 + (void)SScopyStr:(NSString*)str;
