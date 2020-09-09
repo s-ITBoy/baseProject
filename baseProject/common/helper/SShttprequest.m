@@ -68,7 +68,6 @@
         SSLog(@"------ token = \n%@",tokenStr);
     }
     if (tokenStr.length) {
-//        [self.httpSessionManager.requestSerializer setValue:tokenStr forHTTPHeaderField:token];
         [self.httpSessionManager.requestSerializer setValue:tokenStr forHTTPHeaderField:@"authorization"];
     }
     
