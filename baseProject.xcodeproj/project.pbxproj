@@ -246,7 +246,6 @@
 				47204E2923D0164B00C5114D /* first */,
 				47204E3023D0164B00C5114D /* second */,
 				47204E2623D0164B00C5114D /* third */,
-				47204E2D23D0164B00C5114D /* forth */,
 				2CC2ED2E22E5E92100A6431A /* AppDelegate.h */,
 				2CC2ED2F22E5E92200A6431A /* AppDelegate.m */,
 				2CC2ED3122E5E92200A6431A /* ViewController.h */,
@@ -419,29 +418,6 @@
 			children = (
 			);
 			path = Libs;
-			sourceTree = "<group>";
-		};
-		47204E2D23D0164B00C5114D /* forth */ = {
-			isa = PBXGroup;
-			children = (
-				47204E2E23D0164B00C5114D /* controller */,
-				47204E2F23D0164B00C5114D /* view */,
-			);
-			path = forth;
-			sourceTree = "<group>";
-		};
-		47204E2E23D0164B00C5114D /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		47204E2F23D0164B00C5114D /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		47204E3023D0164B00C5114D /* second */ = {
