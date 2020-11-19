@@ -7,16 +7,43 @@
 //
 
 #import "ViewController.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView* tableView;
+
+@property(nonatomic,strong) UITextField* textFD;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.textFD = [[UITextField alloc] initWithFrame:CGRectMake(30, 88, 100, 40)];
+    self.textFD.placeholder = @"请输入";
+    [self.view addSubview:self.textFD];
+    
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitle:@"确认传值" forState:UIControlStateNormal];
+    btn.frame = CGRectMake(30, CGRectGetMaxY(self.textFD.frame)+15, ScreenWidth-2*30, 40);
+    [self.view addSubview:btn];
+    [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)clickBtn {
+    if (self.textFD.text.length<=0) {
+        return;
+    }
+    if ([self.delegate respondsToSelector:@selector(getValueStr:)]) {
+        [self.delegate getValueStr:self.textFD.text];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)setsubv {
     self.view.backgroundColor = [UIColor whiteColor];
     ///
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, self.view.frame.size.width, 800) style:UITableViewStylePlain];
@@ -60,6 +87,10 @@
 ///蛋疼：ios11后更改section颜色必须加上这个方法
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return nil;
+}
+
+- (void)dealloc {
+    NSLog(@"---------销毁------- %s",__func__);
 }
 
 

@@ -274,20 +274,54 @@
     }
 
     __block NSURLSessionDataTask *dataTask = nil;
-    dataTask = [self dataTaskWithRequest:request
-                          uploadProgress:uploadProgress
-                        downloadProgress:downloadProgress
-                       completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
-        if (error) {
-            if (failure) {
-                failure(dataTask, error);
+    ///修改请求协议:当为post请求时,请求参数放在body中
+    if ([method isEqualToString:@"POST"]) {
+        NSMutableURLRequest* req = [self.requestSerializer requestWithMethod:@"POST" URLString:URLString parameters:nil error:nil];
+        [req setHTTPBody:[parameters[@"data"] dataUsingEncoding:NSUTF8StringEncoding]];
+        dataTask = [self dataTaskWithRequest:req
+           uploadProgress:uploadProgress
+         downloadProgress:downloadProgress
+        completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+            if (error) {
+                if (failure) {
+                    failure(dataTask, error);
+                }
+            } else {
+                if (success) {
+                    success(dataTask, responseObject);
+                }
             }
-        } else {
-            if (success) {
-                success(dataTask, responseObject);
+        }];
+    }else {
+        dataTask = [self dataTaskWithRequest:request
+                              uploadProgress:uploadProgress
+                            downloadProgress:downloadProgress
+                           completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+            if (error) {
+                if (failure) {
+                    failure(dataTask, error);
+                }
+            } else {
+                if (success) {
+                    success(dataTask, responseObject);
+                }
             }
-        }
-    }];
+        }];
+    }
+//    dataTask = [self dataTaskWithRequest:request
+//                          uploadProgress:uploadProgress
+//                        downloadProgress:downloadProgress
+//                       completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+//        if (error) {
+//            if (failure) {
+//                failure(dataTask, error);
+//            }
+//        } else {
+//            if (success) {
+//                success(dataTask, responseObject);
+//            }
+//        }
+//    }];
 
     return dataTask;
 }

@@ -7,11 +7,14 @@
 //
 
 #import "SSfirstVC.h"
+#import "ViewController.h"
 #import "SSBtnsListView.h"
 #import "SSwebBaseVC.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface SSfirstVC ()
+@interface SSfirstVC ()<SSViewControllerDelegate>
 @property(nonatomic,strong) SSBtnsListView* btnsListV;
+@property(nonatomic,strong) UILabel* valueLab;
 @end
 
 @implementation SSfirstVC
@@ -40,13 +43,28 @@
     };
     NSDictionary* dic = @{@"age":@(20),@"name":@"zangsan",@"sex":@(1)};
     [SShelper SSautoPropertyWith:dic];
+    
+    self.valueLab = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.btnsListV.frame), ScreenWidth, 40)];
+    self.valueLab.backgroundColor = [UIColor lightGrayColor];
+    self.valueLab.textAlignment = NSTextAlignmentCenter;
+    self.valueLab.textColor = [UIColor redColor];
+    self.valueLab.font = [UIFont SSCustomFont:18];
+    [self.view addSubview:self.valueLab];
 }
 
 - (void)webVC {
-    SSwebBaseVC* web = [[SSwebBaseVC alloc]init];
-    web.urlString = @"https://www.baidu.com";
-    web.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:web animated:YES];
+//    SSwebBaseVC* web = [[SSwebBaseVC alloc]init];
+//    web.urlString = @"https://www.baidu.com";
+//    web.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:web animated:YES];
+    
+    ViewController* vc = [[ViewController alloc] init];
+//    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)getValueStr:(NSString *)str {
+    self.valueLab.text = str;
 }
 
 /*

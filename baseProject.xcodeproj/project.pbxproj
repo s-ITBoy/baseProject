@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C48A111239E2AF2001C92F1 /* SShelper.m */; };
+		2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */; };
 		2CC2ED3022E5E92200A6431A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2ED2F22E5E92200A6431A /* AppDelegate.m */; };
 		2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2ED3222E5E92200A6431A /* ViewController.m */; };
 		2CC2ED3622E5E92200A6431A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC2ED3422E5E92200A6431A /* Main.storyboard */; };
@@ -81,6 +82,8 @@
 		06175919FD4DCC8D039BBEE5 /* Pods_baseProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C48A110239E2AF2001C92F1 /* SShelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SShelper.h; sourceTree = "<group>"; };
 		2C48A111239E2AF2001C92F1 /* SShelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SShelper.m; sourceTree = "<group>"; };
+		2C6B4BC3255C1D310084A44C /* SScaculatorMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SScaculatorMaker.h; sourceTree = "<group>"; };
+		2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SScaculatorMaker.m; sourceTree = "<group>"; };
 		2CC2ED2B22E5E92100A6431A /* baseProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CC2ED2E22E5E92100A6431A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2CC2ED2F22E5E92200A6431A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -216,6 +219,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C6B4BC2255C1CFD0084A44C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				2C6B4BC3255C1D310084A44C /* SScaculatorMaker.h */,
+				2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		2CC2ED2222E5E92100A6431A = {
 			isa = PBXGroup;
 			children = (
@@ -423,8 +435,9 @@
 		47204E3023D0164B00C5114D /* second */ = {
 			isa = PBXGroup;
 			children = (
-				47204E3123D0164B00C5114D /* controller */,
+				2C6B4BC2255C1CFD0084A44C /* model */,
 				47204E3223D0164B00C5114D /* view */,
+				47204E3123D0164B00C5114D /* controller */,
 			);
 			path = second;
 			sourceTree = "<group>";
@@ -759,6 +772,7 @@
 				2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */,
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
+				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,

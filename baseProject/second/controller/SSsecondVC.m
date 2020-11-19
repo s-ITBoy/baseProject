@@ -8,6 +8,7 @@
 
 #import "SSsecondVC.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "SScaculatorMaker.h"
 
 @interface SSsecondVC ()
 @property(nonatomic,strong) UITextField* nameTF;
@@ -37,6 +38,13 @@
 //    [self.loginBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
 //    [self.loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
     
+//    int result = [NSObject makeCaculators:^(SScaculatorMaker * _Nonnull maker) {
+//        maker.add(1).add(2).add(3).add(4).add(5);
+////        [maker add];
+////        maker.add;
+//    }];
+//    NSLog(@"------ result = %d",result);
+        
     [self rac_test4];
     
     
@@ -44,6 +52,7 @@
 
 - (void)clickBtn {
     NSLog(@"---------点击了按钮 ");
+    
 }
 
 - (void)httpRequestData {

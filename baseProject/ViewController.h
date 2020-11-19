@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@protocol SSViewControllerDelegate <NSObject>
 
+- (void)getValueStr:(NSString*)str;
+
+@end
+
+@interface ViewController : UIViewController
+@property(nonatomic,weak)id<SSViewControllerDelegate>delegate;
 
 @end
 
