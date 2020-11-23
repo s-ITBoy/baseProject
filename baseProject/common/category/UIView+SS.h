@@ -15,6 +15,10 @@
 @property(nonatomic,assign) CGFloat XX;
 ///直接获得,或者设置, View 的 y 坐标
 @property(nonatomic,assign) CGFloat YY;
+///cggetMaxX
+@property(nonatomic,assign) CGFloat maxXX;
+///cggetMaxY
+@property(nonatomic,assign) CGFloat maxYY;
 ///直接获得一个View的宽度
 @property(nonatomic,assign) CGFloat width;
 ///直接获得一个 View 的高度

@@ -36,6 +36,12 @@
 -(CGFloat)YY {
     return self.frame.origin.y;
 }
+- (CGFloat)maxXX {
+    return self.frame.origin.x + self.frame.size.width;
+}
+- (CGFloat)maxYY {
+    return self.frame.origin.y + self.frame.size.height;
+}
 
 -(void)setWidth:(CGFloat)width{
     CGRect rect = self.frame;
@@ -242,6 +248,7 @@
 #pragma mark -------------  设置视图的layer层的圆角，线宽及颜色等 -----------
 ///设置圆角半径lineWidth==0时，表示不设置线宽
 - (void)SSsetlayerOfViewRadius:(CGFloat)cornerRadius andLineWidth:(CGFloat)lineWidth andLineCorlor:(UIColor*)lineColor {
+    ///当UILabel需要同时设置backgroundColor和cornerRadius时此方法无效，则需要通过layer.conerRadis和layer.backgroundColor来设置
     self.layer.cornerRadius = cornerRadius;
     if (lineWidth != 0) {
         self.layer.borderWidth = lineWidth;

@@ -11,6 +11,7 @@
 #import "SSfirstVC.h"
 #import "SSsecondVC.h"
 #import "SSthirdVC.h"
+#import "SSforthVC.h"
 
 @interface SStabbarController ()<UITabBarControllerDelegate>
 //@property(nonatomic,strong) SSshopCardVC* shopCar;
@@ -57,24 +58,24 @@
     UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"首页" image:[self imageRenderOriginalWithName:@"home"] selectedImage:[self imageRenderOriginalWithName:@"home_selected"]];
     home.tabBarItem = item1;
 //    //
-    SSsecondVC* admit = [[SSsecondVC alloc] init];
+    SSsecondVC* second = [[SSsecondVC alloc] init];
     UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"赚钱" image:[self imageRenderOriginalWithName:@"admit"] selectedImage:[self imageRenderOriginalWithName:@"admit_selected"]];
-    admit.tabBarItem = item2;
+    second.tabBarItem = item2;
     //
-    SSthirdVC* acitivity = [[SSthirdVC alloc] init];
+    SSthirdVC* third = [[SSthirdVC alloc] init];
     UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"个人" image:[self imageRenderOriginalWithName:@"activity"] selectedImage:[self imageRenderOriginalWithName:@"activity_selected"]];
-    acitivity.tabBarItem = item3;
-//
-//    SSmineVC* mine = [SSmineVC new];
-//    UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"我的" image:[self imageRenderOriginalWithName:@"mine"] selectedImage:[self imageRenderOriginalWithName:@"mine_selected"]];
-//    mine.tabBarItem = item5;
+    third.tabBarItem = item3;
+
+    SSforthVC* mine = [SSforthVC new];
+    UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"我的" image:[self imageRenderOriginalWithName:@"mine"] selectedImage:[self imageRenderOriginalWithName:@"mine_selected"]];
+    mine.tabBarItem = item5;
     
     SSbaseNavigationC* navi1 = [self getNaviWithVC:home andTag:0 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
-    SSbaseNavigationC* navi2 = [self getNaviWithVC:admit andTag:1 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
-    SSbaseNavigationC* navi3 = [self getNaviWithVC:acitivity andTag:2 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
-//    SSbaseNavigationC* navi4 = [self getNaviWithVC:mine andTag:3 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    SSbaseNavigationC* navi2 = [self getNaviWithVC:second andTag:1 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    SSbaseNavigationC* navi3 = [self getNaviWithVC:third andTag:2 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    SSbaseNavigationC* navi4 = [self getNaviWithVC:mine andTag:3 andImageInset:UIEdgeInsetsMake(-2, 0, 2, 0) andTitlePositionAdjustment:UIOffsetMake(0, -3)];
     self.delegate = self;
-    self.viewControllers = @[navi1,navi2,navi3];
+    self.viewControllers = @[navi1,navi2,navi3,navi4];
     self.selectedIndex = 0;
     
 //    [self.tabBar setShadowImage:[self imageWithColor:[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:0.2] size:CGSizeMake(ScreenWidth, 1)]];
