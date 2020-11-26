@@ -137,38 +137,6 @@
     //    return a;
 }
 
-/**
- 判断对象是否为空，包括nil 空字符串、空字典、空数组等
- @param obj 对象
- @return 是否为空标识
- */
-+(BOOL)isObjNil:(id _Nullable )obj{
-    if (!obj) {
-        return YES;
-    }
-    if ([obj isKindOfClass:[NSNull class]]) {
-        return YES;
-    }
-    
-    if ([obj isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dictionary = (NSDictionary *)obj;
-        if (dictionary.allKeys.count == 0) {
-            return YES;
-        }
-    }
-    if ([obj isKindOfClass:[NSArray class]]) {
-        NSArray *array = (NSArray *)obj;
-        if (array.count == 0) {
-            return YES;
-        }
-    }
-    if ([obj isKindOfClass:[NSString class]]) {
-        if (![obj length] || obj == nil || obj == NULL || [obj isKindOfClass:[NSNull class]] || [[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 || [obj isEqualToString:@"(null)"] || [obj isEqualToString:@"    "]) {
-            return YES;
-        }
-    }
-    return NO;
-}
 
 #pragma mark ----------- Create View ----------------
 ///Label
@@ -273,12 +241,160 @@
     return imgView;
 }
 
-//获取当前屏幕显示的viewcontroller
+///生成二维码
++ (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size {
+    //创建过滤器
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    //过滤器恢复默认
+    [filter setDefaults];
+    //给过滤器添加数据<字符串长度893>
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    [filter setValue:data forKey:@"inputMessage"];
+    //获取二维码过滤器生成二维码
+    CIImage *image = [filter outputImage];
+    UIImage *img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
+    return img;
+}
++ (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size {
+    CGRect extent = CGRectIntegral(image.extent);
+    CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
+    
+    //创建bitmap
+    size_t width = CGRectGetWidth(extent)*scale;
+    size_t height = CGRectGetHeight(extent)*scale;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
+    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    
+    //保存图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    CGContextRelease(bitmapRef);
+    CGImageRelease(bitmapImage);
+    return [UIImage imageWithCGImage:scaledImage];
+}
+
+///截取指定视图的指定区域，传入需要截取的view
++ (UIImage*)SSscreenShot:(UIView *)view{
+    UIImage *imageRet = [[UIImage alloc]init];
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    imageRet = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRef sourceImageRef = [imageRet CGImage];
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, CGRectMake(0, imageRet.size.height - statusBarHeight - 44, imageRet.size.width, statusBarHeight+44));
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    return newImage;
+    //    return imageRet;
+}
+
+
+#pragma mark ------ 小功能 -------
+/**
+ 判断对象是否为空，包括nil 空字符串、空字典、空数组等
+ @param obj 对象
+ @return 是否为空标识
+ */
++(BOOL)isObjNil:(id _Nullable )obj{
+    if (!obj) {
+        return YES;
+    }
+    if ([obj isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    
+    if ([obj isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dictionary = (NSDictionary *)obj;
+        if (dictionary.allKeys.count == 0) {
+            return YES;
+        }
+    }
+    if ([obj isKindOfClass:[NSArray class]]) {
+        NSArray *array = (NSArray *)obj;
+        if (array.count == 0) {
+            return YES;
+        }
+    }
+    if ([obj isKindOfClass:[NSString class]]) {
+        if (![obj length] || obj == nil || obj == NULL || [obj isKindOfClass:[NSNull class]] || [[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 || [obj isEqualToString:@"(null)"] || [obj isEqualToString:@"    "]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+///复制
++ (void)SScopyStr:(NSString*)str {
+    if ([self isObjNil:str]) {
+        return;
+    }
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = str;
+//    [self presentMessageTips:@"复制成功！"];
+}
+///打电话
++ (void)SScallPhone:(NSString*)phoneNum {
+    if (@available(iOS 10.0, *)) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneNum]] options:@{} completionHandler:nil];
+    } else {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneNum]]];
+    }
+}
+///打开/跳转URL
++ (void)SSopenURL:(NSString*)urlStr {
+    NSURL *url = [NSURL URLWithString:urlStr];
+    if([[UIApplication sharedApplication] canOpenURL:url]){
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    }
+}
+///状态栏字体颜色(0:白色: 非0:黑色)
++ (void)SSstatusBarTextColor:(int)intValue {
+    if (intValue == 0) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    }else {
+        if (@available(iOS 13.0, *)) {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+        } else {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        }
+    }
+}
+/**
+ 图文混排
+ @param str 文字
+ @param color 文字颜色
+ @param font 文字字号
+ @param imageName 图片名
+ @param isfront 图片是否在前面
+ @param rect 图片的
+ */
++ (NSMutableAttributedString*)SSattri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect {
+    NSMutableAttributedString *attri =  [[NSMutableAttributedString alloc] initWithString:str];
+    [attri addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, attri.length)];
+    [attri addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attri.length)];
+    
+    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+    attch.image = [UIImage imageNamed:imageName];
+//    attch.bounds = CGRectMake(0, -10, ssscale(36), ssscale(29));
+    attch.bounds = rect;
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+    [attri insertAttributedString:string atIndex:isfront ? 0 : attri.length];
+    return attri;
+}
+
+///数字从0开始跳动
++ (void)SSchangeNumDuration:(int)duration start:(CGFloat)startNum end:(CGFloat)endNum and:(CATextLayer*)textLayer {
+    
+}
+
+///获取当前屏幕显示的viewcontroller
 + (UIViewController *)getCurrentVC{
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     return currentVC;
-    
 }
 
 + (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC{
@@ -328,118 +444,9 @@
     NSLog(@"%@",proprety);
 }
 
-#pragma mark ------ 小功能 -------
-///复制
-+ (void)SScopyStr:(NSString*)str {
-    if ([self isObjNil:str]) {
-        return;
-    }
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = str;
-//    [self presentMessageTips:@"复制成功！"];
-}
-///打电话
-+ (void)callPhone:(NSString*)phoneNum {
-    if (@available(iOS 10.0, *)) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneNum]] options:@{} completionHandler:nil];
-    } else {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneNum]]];
-    }
-}
-///打开/跳转URL
-+ (void)openURL:(NSString*)urlStr {
-    NSURL *url = [NSURL URLWithString:urlStr];
-    if([[UIApplication sharedApplication] canOpenURL:url]){
-        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-    }
-}
-///状态栏字体颜色(0:白色: 非0:黑色)
-+ (void)statusBarTextColor:(int)intValue {
-    if (intValue == 0) {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    }else {
-        if (@available(iOS 13.0, *)) {
-            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
-        } else {
-            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-        }
-    }
-}
-/**
- 图文混排
- @param str 文字
- @param color 文字颜色
- @param font 文字字号
- @param imageName 图片名
- @param isfront 图片是否在前面
- @param rect 图片的
- */
-+ (NSMutableAttributedString*)attri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect {
-    NSMutableAttributedString *attri =  [[NSMutableAttributedString alloc] initWithString:str];
-    [attri addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, attri.length)];
-    [attri addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attri.length)];
-    
-    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-    attch.image = [UIImage imageNamed:imageName];
-//    attch.bounds = CGRectMake(0, -10, ssscale(36), ssscale(29));
-    attch.bounds = rect;
-    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-    [attri insertAttributedString:string atIndex:isfront ? 0 : attri.length];
-    return attri;
-}
-///生成二维码
-+ (UIImage*)getQRcodeWithStr:(NSString*)str size:(CGFloat)size {
-    //创建过滤器
-    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
-    //过滤器恢复默认
-    [filter setDefaults];
-    //给过滤器添加数据<字符串长度893>
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    [filter setValue:data forKey:@"inputMessage"];
-    //获取二维码过滤器生成二维码
-    CIImage *image = [filter outputImage];
-    UIImage *img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
-    return img;
-}
-+ (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size {
-    CGRect extent = CGRectIntegral(image.extent);
-    CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
-    
-    //创建bitmap
-    size_t width = CGRectGetWidth(extent)*scale;
-    size_t height = CGRectGetHeight(extent)*scale;
-    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
-    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
-    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
-    CGContextScaleCTM(bitmapRef, scale, scale);
-    CGContextDrawImage(bitmapRef, extent, bitmapImage);
-    
-    //保存图片
-    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
-    CGContextRelease(bitmapRef);
-    CGImageRelease(bitmapImage);
-    return [UIImage imageWithCGImage:scaledImage];
-}
-///颜色渐变
-+ (void)SScolorsWith:(UIView*)view and:(UIColor*)color1 and:(UIColor*)color2 {
-    CAGradientLayer *gl = [[CAGradientLayer alloc] init];
-    gl.frame = CGRectMake(0,0,view.frame.size.width,view.frame.size.height);
-    gl.startPoint = CGPointMake(0.5, 0);
-    gl.endPoint = CGPointMake(0.5, 1);
-    gl.colors = @[(__bridge id)color1.CGColor, (__bridge id)color2.CGColor];
-    gl.locations = @[@(0), @(1.0f)];
-    [view.layer addSublayer:gl];
-}
-///数字从0开始跳动
-+ (void)changNumDuration:(int)duration start:(CGFloat)startNum end:(CGFloat)endNum and:(CATextLayer*)textLayer {
-    
-}
-
 #pragma mark ----------  弹框或跳转界面 ------------
 ///AlertActionSheet
-+ (void)showActionSheetActions:(NSArray<UIAlertAction *> *)actions tips:(NSString *)tips message:(NSString *)message target:(UIViewController *)target {
++ (void)SSshowActionSheet:(NSArray<UIAlertAction *> *)actions tips:(NSString *)tips message:(NSString *)message target:(UIViewController *)target {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:tips message:message preferredStyle:UIAlertControllerStyleActionSheet];
     for (UIAlertAction *action in actions) {
         [alertController addAction:action];
@@ -451,7 +458,7 @@
 }
 
 ///跳转到对应H5界面
-+ (void)viewController:(UIViewController*)viewController showWebViewControllerWithUrlString:(NSString*)urlString{
++ (void)SSintoH5:(UIViewController*)viewController urlStr:(NSString*)urlStr {
     //    SSbaseWebVC* webVC = [[SSbaseWebVC alloc] init];
     //    webVC.isShowRightNavi = YES;
     //    webVC.urlString = urlString;
@@ -460,14 +467,14 @@
 }
 
 ///进入搜索界面
-+ (void)viewControllerIntoSearchVC:(UIViewController*)viewController{
++ (void)SSintoSearchVC:(UIViewController*)viewController{
     //    SSsearchBaseVC* search = [[SSsearchBaseVC alloc] init];
     //    search.hidesBottomBarWhenPushed = YES;
     //    [viewController.navigationController pushViewController:search animated:NO];
 }
 
 ///全屏展示图片
-+ (void)showImages:(NSArray*)images index:(NSInteger)index currentVC:(UIViewController*)currentVC{
++ (void)SSshowImages:(NSArray*)images index:(NSInteger)index currentVC:(UIViewController*)currentVC{
     if(images.count < 1){
         return;
     }
@@ -786,7 +793,7 @@
     return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }
 ///获取设备唯一广告标识符
-+ (NSString*)getDeviceADstr {
++ (NSString*)SSgetDeviceADstr {
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
@@ -796,7 +803,7 @@
 
 
 
-NSString* formatDate(NSInteger timespace){
+NSString* SSformatDate(NSInteger timespace){
     timespace = timespace /1000.0f;
     NSInteger current = [[NSDate date] timeIntervalSince1970];
     NSInteger gap = current - timespace;
@@ -820,26 +827,11 @@ NSString* formatDate(NSInteger timespace){
     }
 }
 ///金额格式
-NSString* formatMoney(id money){
+NSString* SSformatMoney(id money){
     double price = [money doubleValue];
     return [NSString stringWithFormat:@"%.2f",price];
 }
 
 
-
-//截取指定视图的指定区域，传入需要截取的view
-+ (UIImage*)screenShotView:(UIView *)view{
-    UIImage *imageRet = [[UIImage alloc]init];
-    UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    imageRet = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    CGImageRef sourceImageRef = [imageRet CGImage];
-    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, CGRectMake(0, imageRet.size.height - statusBarHeight - 44, imageRet.size.width, statusBarHeight+44));
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
-    return newImage;
-    //    return imageRet;
-}
 
 @end

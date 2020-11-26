@@ -62,8 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///获取当前时间的时间戳字符串
 + (NSString*_Nullable)getCurrentTimeIntervalStr;
 
-/// 判断对象是否为空，包括nil 空字符串、空字典、空数组等; YES:空；NO：非空
-+(BOOL)isObjNil:(id _Nullable )obj;
 
 #pragma mark ----------- Create View ----------------
 ///创建Label
@@ -87,22 +85,23 @@ NS_ASSUME_NONNULL_BEGIN
 ///创建imageView
 + (UIImageView *)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName;
 
+///生成二维码
++ (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size;
 
-//获取当前屏幕显示的viewcontroller
-+ (UIViewController *_Nullable)getCurrentVC;
-
-///根据dic自动生成model属性
-+ (void)SSautoPropertyWith:(NSDictionary*)dic;
+///截取指定视图的指定区域，传入需要截取的view和
++ (UIImage*_Nullable)SSscreenShot:(UIView *_Nullable)view;
 
 #pragma mark ------ 小功能 -------
+/// 判断对象是否为空，包括nil 空字符串、空字典、空数组等; YES:空；NO：非空
++(BOOL)isObjNil:(id _Nullable )obj;
 ///复制
 + (void)SScopyStr:(NSString*)str;
 ///打电话
-+ (void)callPhone:(NSString*_Nullable)phoneNum;
++ (void)SScallPhone:(NSString*_Nullable)phoneNum;
 ///打开/跳转URL
-+ (void)openURL:(NSString*)urlStr;
++ (void)SSopenURL:(NSString*)urlStr;
 ///状态栏字体颜色(0:白色: 非0:黑色)
-+ (void)statusBarTextColor:(int)intValue;
++ (void)SSstatusBarTextColor:(int)intValue;
 /**
  图文混排
  @param str 文字
@@ -112,24 +111,24 @@ NS_ASSUME_NONNULL_BEGIN
  @param isfront 图片是否在前面
  @param rect 图片的
  */
-+ (NSMutableAttributedString*)attri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect;
-///生成二维码
-+ (UIImage*)getQRcodeWithStr:(NSString*)str size:(CGFloat)size;
-///颜色渐变
-+ (void)SScolorsWith:(UIView*)view and:(UIColor*)color1 and:(UIColor*)color2;
++ (NSMutableAttributedString*)SSattri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect;
+///获取当前屏幕显示的viewcontroller
++ (UIViewController *_Nullable)getCurrentVC;
+///根据dic自动生成model属性
++ (void)SSautoPropertyWith:(NSDictionary*)dic;
 
 #pragma mark ----------  弹框或跳转界面 ------------
 ///AlertActionSheet
-+ (void)showActionSheetActions:(NSArray<UIAlertAction *> *_Nullable)actions tips:(NSString *_Nullable)tips message:(NSString *_Nullable)message target:(UIViewController *_Nullable)target;
++ (void)SSshowActionSheet:(NSArray<UIAlertAction *> *_Nullable)actions tips:(NSString *_Nullable)tips message:(NSString *_Nullable)message target:(UIViewController *_Nullable)target;
 
 ///跳转到对应H5界面
-+ (void)viewController:(UIViewController*_Nullable)viewController showWebViewControllerWithUrlString:(NSString*_Nullable)urlString;
++ (void)SSintoH5:(UIViewController*_Nullable)viewController urlStr:(NSString*_Nullable)urlString;
 
 ///进入搜索界面
-+ (void)viewControllerIntoSearchVC:(UIViewController*_Nullable)viewController;
++ (void)SSintoSearchVC:(UIViewController*_Nullable)viewController;
 
 ///全屏展示图片
-+ (void)showImages:(NSArray*_Nullable)images index:(NSInteger)index currentVC:(UIViewController*_Nullable)currentVC;
++ (void)SSshowImages:(NSArray*_Nullable)images index:(NSInteger)index currentVC:(UIViewController*_Nullable)currentVC;
 ///融云刷新用户数据
 //+ (void)refreshRongCloud:(NSString*_Nullable)uid and:(NSString*_Nullable)name and:(NSString*_Nullable)imageUrl;
 
@@ -160,16 +159,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///获取设备号(udid)
 + (NSString*)getDeviceNum;
 ///获取设备唯一广告标识符
-+ (NSString*)getDeviceADstr;
++ (NSString*)SSgetDeviceADstr;
 
 
-NSString* _Nullable formatDate(NSInteger timespace);
+NSString* _Nullable SSformatDate(NSInteger timespace);
 ///金额格式
-NSString* _Nullable formatMoney(id _Nullable money);
+NSString* _Nullable SSformatMoney(id _Nullable money);
 
-
-//截取指定视图的指定区域，传入需要截取的view和
-+ (UIImage*_Nullable)screenShotView:(UIView *_Nullable)view;
 
 @end
 
