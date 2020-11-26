@@ -38,31 +38,31 @@
 }
 
 - (void)setSubView {
-    self.redFirstLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.redFirstLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.redFirstLab.frame = CGRectMake(0, 0, ssscale(24), ssscale(24));
     [self addSubview:self.redFirstLab];
     
-    self.redSecondLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.redSecondLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.redSecondLab.frame = CGRectMake(self.redFirstLab.maxXX+1, 0, self.redFirstLab.width, self.redFirstLab.height);
     [self addSubview:self.redSecondLab];
     
-    self.redThirdLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.redThirdLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.redThirdLab.frame = CGRectMake(self.redSecondLab.maxXX+1, self.redFirstLab.YY, self.redFirstLab.width, self.redFirstLab.height);
     [self addSubview:self.redThirdLab];
     
-    self.redForthLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.redForthLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.redForthLab.frame = CGRectMake(self.redThirdLab.maxXX+1, self.redFirstLab.YY, self.redFirstLab.width, self.redFirstLab.height);
     [self addSubview:self.redForthLab];
     
-    self.redFifthLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.redFifthLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.redFifthLab.frame = CGRectMake(self.redForthLab.maxXX+1, self.redFirstLab.YY, self.redFirstLab.width, self.redFirstLab.height);
     [self addSubview:self.redFifthLab];
     
-    self.redSixthLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.redSixthLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.redSixthLab.frame = CGRectMake(self.redFifthLab.maxXX+1, self.redFirstLab.YY, self.redFirstLab.width, self.redFirstLab.height);
     [self addSubview:self.redSixthLab];
     
-    self.blueLab = [SShelper createLabelWithFont:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.blueLab = [SShelper SSlabel:[UIFont SSfont18] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
     self.blueLab.frame = CGRectMake(self.redSixthLab.maxXX+1, self.redFirstLab.YY, self.redFirstLab.width, self.redFirstLab.height);
     [self addSubview:self.blueLab];
     
@@ -120,7 +120,7 @@
 
 ///子视图
 - (void)setSub {
-    self.weekLab = [SShelper createLabelWithFont:[UIFont SSfont16] textAlignment:NSTextAlignmentCenter textColor:[UIColor SScolorWithHex333333] backgroundColor:nil];
+    self.weekLab = [SShelper SSlabel:[UIFont SSfont16] textAlignment:NSTextAlignmentCenter textColor:[UIColor SScolorWithHex333333] backgroundColor:nil];
     self.weekLab.frame = CGRectMake(0, 0, 100, ssscale(24));
     [self addSubview:self.weekLab];
     

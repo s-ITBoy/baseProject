@@ -65,24 +65,27 @@ NS_ASSUME_NONNULL_BEGIN
 /// 判断对象是否为空，包括nil 空字符串、空字典、空数组等; YES:空；NO：非空
 +(BOOL)isObjNil:(id _Nullable )obj;
 
+#pragma mark ----------- Create View ----------------
 ///创建Label
-+(UILabel*_Nonnull)createLabelWithFont:(UIFont*_Nullable)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*_Nullable)textColor backgroundColor:(UIColor*_Nullable)bgcolor;
++(UILabel*_Nonnull)SSlabel:(UIFont*_Nullable)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*_Nullable)textColor backgroundColor:(UIColor*_Nullable)bgcolor;
+
 ///创建线条
-+(UILabel*_Nullable)createlineLabelWithColor:(UIColor*_Nullable)bgColor;
++(UIView*_Nullable)SSline:(UIColor*_Nullable)bgColor;
+
+///创建按钮（简单属性）
++(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font;
+///创建按钮（简单属性带有背景色）
++(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor;
+///创建按钮（简单属性带有背景图）
++(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgImgStr:(NSString* _Nullable)imgStr;
+///创建按钮（带有全面属性）
++ (UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor selectedTitle:(NSString* _Nullable)selectTitle selectedColor:(UIColor* _Nullable)selectColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor bgImg:(NSString* _Nullable)bgimgStr;
+
 ///创建uitextfield
-+(UITextField*_Nullable)createUitextfieldWithFont:(UIFont*_Nullable)font textColor:(UIColor* _Nullable)textColor;
-///创建按钮(带有全面的属性值)
-+(UIButton*_Nullable)createButtonWithType:(UIButtonType)type andTitle:(NSString*_Nullable)title andTitleColor:(UIColor*_Nonnull)titleColor andSelectedtitle:(NSString*_Nullable)selectedTitle andSelectedColor:(UIColor*_Nullable)selectedColor andFont:(UIFont*_Nullable)font andBgColor:(UIColor*_Nullable)bgColor;
-///创建按钮
-+(UIButton*_Nullable)createButtonWithTitle:(NSString*_Nullable)title textAlignment:(NSTextAlignment)alignment font:(UIFont*_Nullable)font titleColor:(UIColor*_Nullable)titleColor backgroundColor:(UIColor*_Nullable)bgcolor;
-///创建按钮
-+(UIButton*_Nullable)createButtonWithType:(UIButtonType)type Image:(NSString*_Nullable)imageName SelectedImage:(NSString*_Nullable)selectedImageName;
-///创建按钮(带有全面的属性值)
-+(UIButton*_Nullable)buttonWithType:(UIButtonType)type andTitle:(NSString*_Nullable)title andTitleColor:(UIColor*_Nonnull)titleColor andSelectedColor:(UIColor*_Nullable)selectedColor andFont:(UIFont*_Nullable)font andBgImgr:(NSString*_Nullable)bgImg andSelectedBgimg:(NSString*_Nullable)selectedBgImg;
-///创建UITextField
-+(UITextField*_Nullable)creatTextFieldWithPlaceHolder:(NSString*_Nullable)placeHolder andTextColor:(UIColor*_Nullable)textColor andFont:(UIFont*_Nullable)font;
++(UITextField*_Nullable)SStextField:(UIFont*_Nullable)font textColor:(UIColor* _Nullable)textColor placeHolder:(NSString*_Nullable)placeHolder;
+
 ///创建imageView
-+ (UIImageView *_Nullable)createImageView:(CGRect)frame image:(UIImage *_Nullable)image;
++ (UIImageView *)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName;
 
 
 //获取当前屏幕显示的viewcontroller

@@ -374,12 +374,12 @@
 				4768EAFB23A081A4006440D5 /* base */,
 				2CC5B5FA235FED8100998FDF /* category */,
 				2CC5B5F0235FE83100998FDF /* configure */,
-				2CC5B5CB235FE7F000998FDF /* helper */,
+				2CC5B5CB235FE7F000998FDF /* manager */,
 			);
 			path = common;
 			sourceTree = "<group>";
 		};
-		2CC5B5CB235FE7F000998FDF /* helper */ = {
+		2CC5B5CB235FE7F000998FDF /* manager */ = {
 			isa = PBXGroup;
 			children = (
 				2C48A110239E2AF2001C92F1 /* SShelper.h */,
@@ -397,7 +397,7 @@
 				47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */,
 				47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */,
 			);
-			path = helper;
+			path = manager;
 			sourceTree = "<group>";
 		};
 		2CC5B5F0235FE83100998FDF /* configure */ = {

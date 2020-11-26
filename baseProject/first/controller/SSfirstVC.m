@@ -50,6 +50,10 @@
     self.valueLab.textColor = [UIColor redColor];
     self.valueLab.font = [UIFont SSCustomFont:18];
     [self.view addSubview:self.valueLab];
+    
+    UIButton* btn = [SShelper SSbutton:UIButtonTypeCustom title:@"1234" titleColor:[UIColor SSmoneyColor] font:[UIFont SSCustomFont16] bgImgStr:nil];
+    btn.frame = CGRectMake(0, 200, 80, 40);
+    [self.view addSubview:btn];
 }
 
 - (void)webVC {

@@ -170,7 +170,9 @@
     return NO;
 }
 
-+(UILabel*)createLabelWithFont:(UIFont*)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*)textColor backgroundColor:(UIColor*)bgcolor{
+#pragma mark ----------- Create View ----------------
+///Label
++(UILabel*)SSlabel:(UIFont*)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*)textColor backgroundColor:(UIColor*)bgcolor{
     UILabel* label = [UILabel new];
     label.backgroundColor = bgcolor ? bgcolor : [UIColor clearColor];
     label.textAlignment = alignment;
@@ -178,14 +180,80 @@
     label.textColor = textColor ? textColor : [UIColor lightGrayColor];
     return label;
 }
+
 ///创建线条
-+(UILabel*)createlineLabelWithColor:(UIColor*)bgColor{
-    UILabel* line = [UILabel new];
++(UIView*)SSline:(UIColor* _Nullable)bgColor{
+    UIView* line = [UIView new];
     line.backgroundColor = bgColor ? bgColor : [UIColor clearColor];
     return line;
 }
+
+///创建按钮（简单属性）
++(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font {
+    UIButton* button = [UIButton buttonWithType:type];
+    [button setTitle:title forState:UIControlStateNormal];
+    if (titleColor) {
+        [button setTitleColor:titleColor forState:UIControlStateNormal];
+    }
+    if (font) {
+        button.titleLabel.font = font;
+    }
+    return button;
+}
+
+///创建按钮（简单属性带有背景色）
++(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor {
+    UIButton* button = [UIButton buttonWithType:type];
+    [button setTitle:title forState:UIControlStateNormal];
+    if (titleColor) {
+        [button setTitleColor:titleColor forState:UIControlStateNormal];
+    }
+    if (font) {
+        button.titleLabel.font = font;
+    }
+    if (bgColor) {
+        [button setBackgroundColor:bgColor];
+    }
+    return button;
+}
+
+///创建按钮（简单属性带有背景图）
++(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgImgStr:(NSString* _Nullable)imgStr {
+    UIButton* button = [UIButton buttonWithType:type];
+    [button setTitle:title forState:UIControlStateNormal];
+    if (titleColor) {
+        [button setTitleColor:titleColor forState:UIControlStateNormal];
+    }
+    if (font) {
+        button.titleLabel.font = font;
+    }
+    if (imgStr) {
+        [button setBackgroundImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
+    }
+    return button;
+}
+
+///创建按钮（带有全面属性）
++ (UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor selectedTitle:(NSString* _Nullable)selectTitle selectedColor:(UIColor* _Nullable)selectColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor bgImg:(NSString* _Nullable)bgimgStr {
+    UIButton* button = [UIButton buttonWithType:type];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:titleColor forState:UIControlStateNormal];
+    if (selectColor) {
+        [button setTitleColor:selectColor forState:UIControlStateSelected];
+    }
+    button.titleLabel.font = font;
+    if (bgColor) {
+        [button setBackgroundColor:bgColor];
+    }
+    if (bgimgStr) {
+        [button setBackgroundImage:[UIImage imageNamed:bgimgStr] forState:UIControlStateNormal];
+    }
+    
+    return button;
+}
+
 ///创建uitextfield
-+(UITextField*)createUitextfieldWithFont:(UIFont*)font textColor:(UIColor* _Nullable)textColor; {
++(UITextField*)SStextField:(UIFont*)font textColor:(UIColor* _Nullable)textColor placeHolder:(NSString*_Nullable)placeHolder {
     UITextField* textF = [[UITextField alloc] init];
     textF.font = font;
     if (textColor) {
@@ -194,75 +262,12 @@
     return textF;
 }
 
-///创建按钮(带有全面的属性值)
-+(UIButton*_Nullable)buttonWithType:(UIButtonType)type andTitle:(NSString*_Nullable)title andTitleColor:(UIColor*_Nonnull)titleColor andSelectedColor:(UIColor*_Nullable)selectedColor andFont:(UIFont*_Nullable)font andBgImgr:(NSString*_Nullable)bgImg andSelectedBgimg:(NSString*_Nullable)selectedBgImg {
-    UIButton* button = [UIButton buttonWithType:type];
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:titleColor forState:UIControlStateNormal];
-    if (selectedColor) {
-        [button setTitleColor:selectedColor forState:UIControlStateSelected];
-    }
-    button.titleLabel.font = font;
-    if (bgImg) {
-            [button setBackgroundImage:[UIImage imageNamed:bgImg] forState:UIControlStateNormal];
-    }
-    if (selectedBgImg) {
-            [button setBackgroundImage:[UIImage imageNamed:selectedBgImg] forState:UIControlStateSelected];
-    }
-    
-    return button;
-}
-
-+(UIButton*)createButtonWithType:(UIButtonType)type andTitle:(NSString*)title andTitleColor:(UIColor*)titleColor andSelectedtitle:(NSString*)selectedTitle andSelectedColor:(UIColor*)selectedColor andFont:(UIFont*)font andBgColor:(UIColor*)bgColor{
-    UIButton* button = [UIButton buttonWithType:type];
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:titleColor forState:UIControlStateNormal];
-    if (selectedTitle) {
-        [button setTitle:selectedTitle forState:UIControlStateSelected];
-    }
-    if (selectedColor) {
-        [button setTitleColor:selectedColor forState:UIControlStateSelected];
-    }
-    button.titleLabel.font = font;
-    if (bgColor) {
-        [button setBackgroundColor:bgColor];
-    }
-    return button;
-}
-
-+(UIButton*)createButtonWithTitle:(NSString*)title textAlignment:(NSTextAlignment)alignment font:(UIFont*)font titleColor:(UIColor*)titleColor backgroundColor:(UIColor*)bgcolor{
-    
-    UIButton* button = [UIButton buttonWithType:0];
-    button.titleLabel.textAlignment = alignment ? alignment : NSTextAlignmentCenter;
-    [button setTitle:title forState:UIControlStateNormal];
-    button.titleLabel.font = font ? font : [UIFont systemFontOfSize:15];
-    [button setTitleColor:titleColor ? titleColor : [UIColor lightGrayColor] forState:UIControlStateNormal];
-    [button setBackgroundColor:bgcolor ? bgcolor : [UIColor clearColor]];
-    return button;
-}
-
-+(UIButton*)createButtonWithType:(UIButtonType)type Image:(NSString*)imageName SelectedImage:(NSString*)selectedImageName{
-    UIButton* button = [UIButton buttonWithType:type];
-    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    if (selectedImageName.length) {
-        [button setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
-    }
-    return button;
-}
-
-///创建UITextField
-+(UITextField*)creatTextFieldWithPlaceHolder:(NSString*)placeHolder andTextColor:(UIColor*)textColor andFont:(UIFont*)font{
-    UITextField* textF = [[UITextField alloc] init];
-    textF.placeholder = placeHolder;
-    textF.textColor = textColor;
-    textF.font = font;
-    return textF;
-}
-
 ///创建imageView
-+ (UIImageView *)createImageView:(CGRect)frame image:(UIImage *)image{
++ (UIImageView *)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName {
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:frame];
-    imgView.image = image;
+    if (![SShelper isObjNil:imgName]) {
+        imgView.image = [UIImage imageNamed:imgName];
+    }
     imgView.backgroundColor = [UIColor clearColor];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     return imgView;
