@@ -147,11 +147,10 @@ static char OperationKey;
 -(void)presentLoadinghud{
     UIView * superview = [self SuperView];
     if(!superview) return ;
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:superview animated:false];
+    [MBProgressHUD showHUDAddedTo:superview animated:false];
     
-//    hud.mode = MBProgressHUDModeCustomView;
+//    hud.mode = MBProgressHUDModeIndeterminate;
 //    hud.backgroundView.backgroundColor = UIColor.whiteColor;
-////    hud.backgroundView.backgroundColor = UIColor.clearColor;
 //    hud.top = NAVIHEIGHT;
 //    hud.height = ScreenHeight-NAVIHEIGHT;
 //

@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharemanager;
 
-- (void)sharecontent:(SSshareModel*)model and:(void(^) (BOOL isSuccess, NSString* msg))callBackBlock;
+- (void)SSsharecontent:(SSshareModel*)model and:(void(^) (BOOL isSuccess, NSString* msg))callBackBlock;
 
 @end
 

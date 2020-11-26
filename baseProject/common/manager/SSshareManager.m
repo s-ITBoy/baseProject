@@ -29,7 +29,7 @@ static SSshareManager* manager = nil;
     return manager;
 }
 
-- (void)sharecontent:(SSshareModel*)model and:(void(^) (BOOL isSuccess, NSString* msg))callBackBlock{
+- (void)SSsharecontent:(SSshareModel*)model and:(void(^) (BOOL isSuccess, NSString* msg))callBackBlock{
     self.CallBackBlock = callBackBlock;
 //    [self shareToWhere:model.shareToWhere and:model];
 }
