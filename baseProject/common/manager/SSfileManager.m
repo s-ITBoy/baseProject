@@ -43,7 +43,7 @@ static SSfileManager* fileManager = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:token];
 }
 
-///删除本地数据
+///清空documents文件夹下的文件及文件夹
 - (void)SSclearDocuments {
     NSArray* filePaths = [[NSFileManager defaultManager] subpathsAtPath:[self SSdocumentsPath]];
     for (NSString* fileP in filePaths) {
@@ -54,7 +54,7 @@ static SSfileManager* fileManager = nil;
     }
 }
 
-///清空缓存
+///清空cache文件夹下的文件及文件夹
 - (void)SSclearCache {
     for (NSString* fileP in [[NSFileManager defaultManager] subpathsAtPath:[self SScachesPath]]) {
         NSError* error;
@@ -84,6 +84,19 @@ static SSfileManager* fileManager = nil;
         size += [[[NSFileManager defaultManager] attributesOfItemAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP] error:nil] fileSize];
     }
     return size;
+}
+
+///将计算好的大小以 KB/MB/GB 形式展示
+- (NSString*)SSsizeStr:(unsigned long long)size {
+    if (size < 1024) {
+        return [NSString stringWithFormat:@"%lluB",size];
+    }else if (size < 1024*1024) {
+        return [NSString stringWithFormat:@"%.2lluKB",size/1024];
+    }else if (size < 1024*1024*1024) {
+        return [NSString stringWithFormat:@"%.2lluMB",size/(1024*1024)];
+    }else {
+        return [NSString stringWithFormat:@"%.2lluMB",size/(1024*1024*1024)];
+    }
 }
 
 

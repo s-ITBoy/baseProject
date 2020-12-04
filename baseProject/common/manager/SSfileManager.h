@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///cacahes路径下内容的大小
 - (unsigned long long)SSfileSizeForCaches;
 
+///将计算好的大小以 KB/MB/GB 形式展示
+- (NSString*)SSsizeStr:(unsigned long long)size;
+
 @end
 
 NS_ASSUME_NONNULL_END
