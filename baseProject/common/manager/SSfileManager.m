@@ -91,11 +91,11 @@ static SSfileManager* fileManager = nil;
     if (size < 1024) {
         return [NSString stringWithFormat:@"%lluB",size];
     }else if (size < 1024*1024) {
-        return [NSString stringWithFormat:@"%.2lluKB",size/1024];
+        return [NSString stringWithFormat:@"%.2fKB",(float)size/1024];
     }else if (size < 1024*1024*1024) {
-        return [NSString stringWithFormat:@"%.2lluMB",size/(1024*1024)];
+        return [NSString stringWithFormat:@"%.2fMB", (float)size/(1024*1024)];
     }else {
-        return [NSString stringWithFormat:@"%.2lluMB",size/(1024*1024*1024)];
+        return [NSString stringWithFormat:@"%.2fMB",(float)size/(1024*1024*1024)];
     }
 }
 
