@@ -220,13 +220,12 @@
     return button;
 }
 
-///创建uitextfield
-+(UITextField*)SStextField:(UIFont*)font textColor:(UIColor* _Nullable)textColor placeHolder:(NSString*_Nullable)placeHolder {
+///创建UITextField
++(UITextField*)SStextField:(NSString*)placeHolder andTextColor:(UIColor*)textColor andFont:(UIFont*)font{
     UITextField* textF = [[UITextField alloc] init];
+    textF.placeholder = placeHolder;
+    textF.textColor = textColor;
     textF.font = font;
-    if (textColor) {
-        textF.textColor = textColor;
-    }
     return textF;
 }
 

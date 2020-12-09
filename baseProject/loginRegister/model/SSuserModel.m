@@ -64,6 +64,11 @@
     return user;
 }
 
+- (void)setUserModelWithDic:(NSDictionary*)dic {
+    [self mj_setKeyValues:dic];
+    [self saveInfo];
+}
+
 - (void)saveInfo {
     do {
         [NSKeyedArchiver archiveRootObject:self toFile:UserInfoFile];

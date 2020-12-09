@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSString* relation_id;
 
 + (id)shareModel;
+- (void)setUserModelWithDic:(NSDictionary*)dic;
 - (void)saveInfo;
 - (void)deleteInfo;
 

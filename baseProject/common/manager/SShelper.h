@@ -79,8 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///创建按钮（带有全面属性）
 + (UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor selectedTitle:(NSString* _Nullable)selectTitle selectedColor:(UIColor* _Nullable)selectColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor bgImg:(NSString* _Nullable)bgimgStr;
 
-///创建uitextfield
-+(UITextField*_Nullable)SStextField:(UIFont*_Nullable)font textColor:(UIColor* _Nullable)textColor placeHolder:(NSString*_Nullable)placeHolder;
+///创建UITextField
++(UITextField*_Nullable)SStextField:(NSString*_Nullable)placeHolder andTextColor:(UIColor*_Nullable)textColor andFont:(UIFont*_Nullable)font;
 
 ///创建imageView
 + (UIImageView *)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName;

@@ -15,13 +15,21 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shareManager;
 
 ///删除登录用户信息
-- (void)deleteUserInfo;
+- (void)SSclearNSuserDefault;
 
-///删除本地数据
-- (void)deleteInfo;
+///清空documents路径下的文件及文件夹
+- (void)SSclearDocuments;
 
-///清空缓存
-- (void)deleteAllCache;
+///清空cache文件夹下的文件及文件夹
+- (void)SSclearCache;
+
+///documents路径下内容的大小
+- (unsigned long long)SSfileSizeForDocument;
+///cacahes路径下内容的大小
+- (unsigned long long)SSfileSizeForCaches;
+
+///将计算好的大小以 KB/MB/GB 形式展示
+- (NSString*)SSsizeStr:(unsigned long long)size;
 
 @end
 

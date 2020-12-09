@@ -34,3 +34,8 @@ pod 'ReactiveCocoa','~>2.5' #等用于pod 'ReactiveObjC', '~> 3.1.1' ReactiveCoc
   end
 
 end
+
+
+#pod install --verbose --no-repo-update #该命令 只安装新添加的库 / 只删除相关库
+#pod update --verbose --no-repo-update #会在安装相关库时 更新其他库版本
+#pod update 库名-- verbose --no-repo-update #该命令只更新指定的库，其它库忽略

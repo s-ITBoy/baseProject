@@ -40,6 +40,9 @@
 		475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
+		4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 4799C5E42580D1FA0094CA0B /* SSbadgeBtn.m */; };
+		4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4799C5E52580D1FA0094CA0B /* SSnaviAndStatusBarV.m */; };
+		4799C5F22580D27E0094CA0B /* SSleftTextInputV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4799C5F12580D27E0094CA0B /* SSleftTextInputV.m */; };
 		47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */; };
 		47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
@@ -49,11 +52,9 @@
 		47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13A823CD6AB400072C1D /* NSObject+HUD.m */; };
 		47FB13AD23CD6AB400072C1D /* UIScrollView+SScategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13AB23CD6AB400072C1D /* UIScrollView+SScategory.m */; };
 		47FB140023CD722C00072C1D /* SSshowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13F423CD722C00072C1D /* SSshowContentView.m */; };
-		47FB140123CD722C00072C1D /* SSbadgeBtnV.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13F523CD722C00072C1D /* SSbadgeBtnV.m */; };
 		47FB140223CD722C00072C1D /* SSBtnsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13F723CD722C00072C1D /* SSBtnsListView.m */; };
 		47FB140323CD722C00072C1D /* SSwindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13F823CD722C00072C1D /* SSwindowView.m */; };
 		47FB140423CD722C00072C1D /* SScustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13F923CD722C00072C1D /* SScustomTextView.m */; };
-		47FB140523CD722C00072C1D /* SSnaviAndStatusBarV.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13FF23CD722C00072C1D /* SSnaviAndStatusBarV.m */; };
 		47FB141223CD724700072C1D /* SStabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140623CD724700072C1D /* SStabbarController.m */; };
 		47FB141323CD724700072C1D /* SStextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140823CD724700072C1D /* SStextLayer.m */; };
 		47FB141423CD724700072C1D /* SSbaseNavigationC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB140923CD724700072C1D /* SSbaseNavigationC.m */; };
@@ -152,6 +153,12 @@
 		4768EAFD23A081ED006440D5 /* SSbaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSbaseVC.m; sourceTree = "<group>"; };
 		4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSgoldAnimationImgV.h; sourceTree = "<group>"; };
 		4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSgoldAnimationImgV.m; sourceTree = "<group>"; };
+		4799C5E42580D1FA0094CA0B /* SSbadgeBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSbadgeBtn.m; sourceTree = "<group>"; };
+		4799C5E52580D1FA0094CA0B /* SSnaviAndStatusBarV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSnaviAndStatusBarV.m; sourceTree = "<group>"; };
+		4799C5E62580D1FA0094CA0B /* SSbadgeBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSbadgeBtn.h; sourceTree = "<group>"; };
+		4799C5E72580D1FA0094CA0B /* SSnaviAndStatusBarV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSnaviAndStatusBarV.h; sourceTree = "<group>"; };
+		4799C5F02580D27D0094CA0B /* SSleftTextInputV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSleftTextInputV.h; sourceTree = "<group>"; };
+		4799C5F12580D27E0094CA0B /* SSleftTextInputV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSleftTextInputV.m; sourceTree = "<group>"; };
 		47AA79A224F7B73700E6CB23 /* SSwebBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSwebBaseVC.h; sourceTree = "<group>"; };
 		47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSwebBaseVC.m; sourceTree = "<group>"; };
 		47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSpayManager.h; sourceTree = "<group>"; };
@@ -170,17 +177,13 @@
 		47FB13AB23CD6AB400072C1D /* UIScrollView+SScategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SScategory.m"; sourceTree = "<group>"; };
 		47FB13F223CD717E00072C1D /* baseProject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = baseProject.h; sourceTree = "<group>"; };
 		47FB13F423CD722C00072C1D /* SSshowContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSshowContentView.m; sourceTree = "<group>"; };
-		47FB13F523CD722C00072C1D /* SSbadgeBtnV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSbadgeBtnV.m; sourceTree = "<group>"; };
-		47FB13F623CD722C00072C1D /* SSnaviAndStatusBarV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSnaviAndStatusBarV.h; sourceTree = "<group>"; };
 		47FB13F723CD722C00072C1D /* SSBtnsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBtnsListView.m; sourceTree = "<group>"; };
 		47FB13F823CD722C00072C1D /* SSwindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSwindowView.m; sourceTree = "<group>"; };
 		47FB13F923CD722C00072C1D /* SScustomTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SScustomTextView.m; sourceTree = "<group>"; };
-		47FB13FA23CD722C00072C1D /* SSbadgeBtnV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSbadgeBtnV.h; sourceTree = "<group>"; };
 		47FB13FB23CD722C00072C1D /* SSshowContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSshowContentView.h; sourceTree = "<group>"; };
 		47FB13FC23CD722C00072C1D /* SScustomTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SScustomTextView.h; sourceTree = "<group>"; };
 		47FB13FD23CD722C00072C1D /* SSwindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSwindowView.h; sourceTree = "<group>"; };
 		47FB13FE23CD722C00072C1D /* SSBtnsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBtnsListView.h; sourceTree = "<group>"; };
-		47FB13FF23CD722C00072C1D /* SSnaviAndStatusBarV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSnaviAndStatusBarV.m; sourceTree = "<group>"; };
 		47FB140623CD724700072C1D /* SStabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SStabbarController.m; sourceTree = "<group>"; };
 		47FB140723CD724700072C1D /* SSJSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSJSObject.h; sourceTree = "<group>"; };
 		47FB140823CD724700072C1D /* SStextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SStextLayer.m; sourceTree = "<group>"; };
@@ -371,6 +374,7 @@
 		2CC5B5CA235FE7E300998FDF /* common */ = {
 			isa = PBXGroup;
 			children = (
+				47FB13F323CD722C00072C1D /* view */,
 				4768EAFB23A081A4006440D5 /* base */,
 				2CC5B5FA235FED8100998FDF /* category */,
 				2CC5B5F0235FE83100998FDF /* configure */,
@@ -540,7 +544,6 @@
 		4768EAFB23A081A4006440D5 /* base */ = {
 			isa = PBXGroup;
 			children = (
-				47FB13F323CD722C00072C1D /* view */,
 				4768EAFC23A081ED006440D5 /* SSbaseVC.h */,
 				4768EAFD23A081ED006440D5 /* SSbaseVC.m */,
 				47FB140E23CD724700072C1D /* SSbaseNavigationC.h */,
@@ -568,14 +571,16 @@
 				47FB13F423CD722C00072C1D /* SSshowContentView.m */,
 				47FB13FD23CD722C00072C1D /* SSwindowView.h */,
 				47FB13F823CD722C00072C1D /* SSwindowView.m */,
-				47FB13FA23CD722C00072C1D /* SSbadgeBtnV.h */,
-				47FB13F523CD722C00072C1D /* SSbadgeBtnV.m */,
-				47FB13F623CD722C00072C1D /* SSnaviAndStatusBarV.h */,
-				47FB13FF23CD722C00072C1D /* SSnaviAndStatusBarV.m */,
+				4799C5E62580D1FA0094CA0B /* SSbadgeBtn.h */,
+				4799C5E42580D1FA0094CA0B /* SSbadgeBtn.m */,
+				4799C5E72580D1FA0094CA0B /* SSnaviAndStatusBarV.h */,
+				4799C5E52580D1FA0094CA0B /* SSnaviAndStatusBarV.m */,
 				47FB13FE23CD722C00072C1D /* SSBtnsListView.h */,
 				47FB13F723CD722C00072C1D /* SSBtnsListView.m */,
 				47FB13FC23CD722C00072C1D /* SScustomTextView.h */,
 				47FB13F923CD722C00072C1D /* SScustomTextView.m */,
+				4799C5F02580D27D0094CA0B /* SSleftTextInputV.h */,
+				4799C5F12580D27E0094CA0B /* SSleftTextInputV.m */,
 				4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */,
 				4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */,
 				475299B924CAD3E5008FD18B /* SSboxCodeView.h */,
@@ -822,9 +827,7 @@
 				47FB141523CD724700072C1D /* SSJSObject.m in Sources */,
 				2CC5B615235FF68300998FDF /* NSArray+SS.m in Sources */,
 				47FB141223CD724700072C1D /* SStabbarController.m in Sources */,
-				47FB140523CD722C00072C1D /* SSnaviAndStatusBarV.m in Sources */,
 				2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */,
-				47FB140123CD722C00072C1D /* SSbadgeBtnV.m in Sources */,
 				475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */,
 				47FB13A723CD69CF00072C1D /* SSshareManager.m in Sources */,
 				2CC2ED3E22E5E92200A6431A /* main.m in Sources */,
@@ -845,6 +848,7 @@
 				47FB13AD23CD6AB400072C1D /* UIScrollView+SScategory.m in Sources */,
 				47204E6123D044E000C5114D /* SSthirdVC.m in Sources */,
 				4743415F24850F37008F7FBE /* SSfileManager.m in Sources */,
+				4799C5F22580D27E0094CA0B /* SSleftTextInputV.m in Sources */,
 				2CC5B62D23600A7900998FDF /* UINavigationController+SS.m in Sources */,
 				47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */,
 				47FB140323CD722C00072C1D /* SSwindowView.m in Sources */,
@@ -855,9 +859,11 @@
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
 				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,
+				4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,
+				4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */,
 				475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */,
 				2CC5B60F235FF3A100998FDF /* UIFont+SS.m in Sources */,
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,
