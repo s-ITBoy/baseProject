@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-///提示文字view
+///提示消息文字view
 @interface SSshowContentView : UIView
 
 /*
  * Tip：tip的text
  */
-@property (nonatomic,retain,readwrite)NSString* tip;
+@property (nonatomic,retain,readwrite)NSString* msg;
 /*
  * Tip：view的背景色
  */
@@ -23,11 +23,15 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  * Tip：tip的字体颜色
  */
-@property (nonatomic,retain,readwrite)UIColor* tipColor;
+@property (nonatomic,retain,readwrite)UIColor* msgColor;
 /*
- * Tip：tip的字体
+ * 渐变时间
  */
 @property (nonatomic,retain,readwrite)UIFont* font;
+/*
+ * Tip：显示多长时间后隐藏
+ */
+@property (nonatomic,assign,readwrite)CGFloat duration;
 /*
  * Tip：显示多长时间后隐藏
  */
@@ -42,6 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Tip：显示view
  */
 - (void)show;
+
+- (void)SSshowMsg:(NSString*_Nullable)msg;
+
 
 @end
 
