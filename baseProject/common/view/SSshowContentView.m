@@ -29,7 +29,7 @@
 - (void)show {
     
     //if (_parent && _tip && ![_tip isKindOfClass:[NSNull class]]) {
-    if (_tip && ![_tip isKindOfClass:[NSNull class]]) {
+    if (_msg && ![_msg isKindOfClass:[NSNull class]]) {
         self.backgroundColor = _backGroundColor ? _backGroundColor :[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         CGFloat alpha = self.alpha;
         self.alpha = 0;
