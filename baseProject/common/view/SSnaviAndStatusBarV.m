@@ -10,9 +10,14 @@
 #import "SSbadgeBtn.h"
 
 @interface SSnaviAndStatusBarV ()
-@property(nonatomic,strong) SSbadgeBtn* leftBtn;
-@property(nonatomic,strong) UIButton* rightBtn;
+///导航标题
 @property(nonatomic,strong) UILabel* titleLab;
+///导航搜索框
+@property(nonatomic,strong) UITextField* searchTFD;
+
+@property(nonatomic,strong) SSbadgeBtn* leftBtn;
+@property(nonatomic,strong) SSbadgeBtn* rightBtn;
+
 @end
 @implementation SSnaviAndStatusBarV
 
@@ -42,24 +47,52 @@
     self.titleLab.frame = CGRectMake(90*Scale, statusBarHeight, ScreenWidth-2*90*Scale, self.frame.size.height-statusBarHeight);
     [self addSubview:self.titleLab];
     
-    _rightBtn = [UIButton buttonWithType:0];
+    _rightBtn = [[SSbadgeBtn alloc] initWithFrame:CGRectMake(self.frame.size.width-28-12, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-28/2, 28, 28)];
     _rightBtn.tag = 1;
-//    [_rightBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    _rightBtn.frame = CGRectMake(self.frame.size.width-20-15, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-20/2, 20, 20);
+//    _rightBtn.frame = CGRectMake(self.frame.size.width-20-15, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-20/2, 20, 20);
     [self addSubview:_rightBtn];
     _rightBtn.hidden = YES;
     [_rightBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-}
-
-- (void)setBadgeNum:(NSString *)badgeNum {
-    _badgeNum = badgeNum;
-    self.leftBtn.badgeNum = badgeNum;
+    self.searchTFD = [SShelper SStextField:nil andTextColor:[UIColor SScolorWithHex333333] andFont:[UIFont SSCustomFont14]];
+    self.searchTFD.frame = CGRectMake(_leftBtn.maxXX+ssscale(5), statusBarHeight+7, self.frame.size.width-_leftBtn.maxXX-ssscale(5)-12-28-5, 30);
+    [self.searchTFD SSsetlayerOfViewRadius:self.searchTFD.height/2 andLineWidth:1 andLineCorlor:[UIColor clearColor]];
+    self.searchTFD.hidden = YES;
+    [self addSubview:self.searchTFD];
 }
 
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr =titleStr;
     self.titleLab.text = titleStr;
+}
+
+- (void)setIsHiddenSearchTFD:(BOOL)isHiddenSearchTFD {
+    _isHiddenSearchTFD = isHiddenSearchTFD;
+    self.searchTFD.hidden = isHiddenSearchTFD;
+    if (!isHiddenSearchTFD) {
+        [self.searchTFD becomeFirstResponder];
+    }
+}
+
+- (void)setSearchPlaceHolder:(NSString *)searchPlaceHolder {
+    _searchPlaceHolder = searchPlaceHolder;
+    self.searchTFD.placeholder = searchPlaceHolder;
+}
+
+- (void)setSearchLeftViewImgStr:(NSString *)searchLeftViewImgStr {
+    _searchLeftViewImgStr = searchLeftViewImgStr;
+    UIImageView* imgV = [SShelper SSimgeView:CGRectMake(0, 0, 38, self.searchTFD.height) imgName:searchLeftViewImgStr];
+    self.searchTFD.leftView = imgV;
+}
+
+- (void)setSearchBorderColor:(UIColor *)searchBorderColor {
+    _searchBorderColor = searchBorderColor;
+    self.searchTFD.layer.borderColor = searchBorderColor.CGColor;
+}
+
+- (void)setBadgeNum:(NSString *)badgeNum {
+    _badgeNum = badgeNum;
+    self.leftBtn.badgeNum = badgeNum;
 }
 
 - (void)setLeftbtnImgStr:(NSString *)leftbtnImgStr {

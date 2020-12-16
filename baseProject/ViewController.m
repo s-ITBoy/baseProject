@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "SSshowContentView.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView* tableView;
@@ -33,6 +34,12 @@
 }
 
 - (void)clickBtn {
+    [self presentMessageTips:@"qwer1234"];
+    SSshowContentView* showMsg = [[SSshowContentView alloc] init];
+    [showMsg SSshowMsg:@"qwer1234" FinishBlock:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
     if (self.textFD.text.length<=0) {
         return;
     }

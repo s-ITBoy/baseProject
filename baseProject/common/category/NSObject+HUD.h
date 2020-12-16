@@ -13,18 +13,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (HUD)<MBProgressHUDDelegate>
 
--(void)presentMessageTips_:(NSString *)message;
+#pragma mark --------- 自定义 SSshowContentView -------------
+- (void)SSshowCustomWithMsg:(NSString*)msg;
 
-- (void)presentMessageTips_:(NSString *)message dismisblock:(void(^)(void))dismissblock;
+- (void)SSshowCustomWithMsg:(NSString*)msg dismissBlock:(void (^)(void))disBlock;
 
+
+#pragma mark --------- HUD ------------- 
 -(void)presentMessageTips:(NSString *)message;
+
 - (void)presentMessageTips:(NSString *)message dismisblock:(void(^)(void))dismissblock;
+
 - (void)presentMessageTips_:(NSString *)message duration:(CGFloat)duration dismisblock:(void(^)(void))dismissblock;
+
 -(MBProgressHUD *)presentLoadingTips:(NSString *)message;
--(void)dismissTips;
--(void)presentFailureTips:(NSString *)message;
+
 -(void)presentLoadinghud;
+
 -(void)dismissAllTips;
+
+-(void)dismissTips;
 
 @end
 

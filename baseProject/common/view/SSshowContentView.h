@@ -12,42 +12,25 @@ NS_ASSUME_NONNULL_BEGIN
 ///提示消息文字view
 @interface SSshowContentView : UIView
 
-/*
- * Tip：tip的text
- */
-@property (nonatomic,retain,readwrite)NSString* msg;
-/*
- * Tip：view的背景色
- */
+/////tip的text
+//@property (nonatomic,retain,readwrite)NSString* msg;
+///self(view)的背景色
 @property (nonatomic,retain,readwrite)UIColor* backGroundColor;
-/*
- * Tip：tip的字体颜色
- */
+///tip的字体颜色
 @property (nonatomic,retain,readwrite)UIColor* msgColor;
-/*
- * 渐变时间
- */
+///渐变时间
 @property (nonatomic,retain,readwrite)UIFont* font;
-/*
- * Tip：显示多长时间后隐藏
- */
+///显示多长时间后隐藏
 @property (nonatomic,assign,readwrite)CGFloat duration;
-/*
- * Tip：显示多长时间后隐藏
- */
+///显示多长时间后隐藏
 @property (nonatomic,assign,readwrite)CGFloat delay;
-
-/*
- * 视图显示的y坐标
- */
+///视图显示的y坐标
 @property (nonatomic,assign,readwrite)CGFloat y;
 
-/*
- * Tip：显示view
- */
-- (void)show;
 
 - (void)SSshowMsg:(NSString*_Nullable)msg;
+
+- (void)SSshowMsg:(NSString*_Nullable)msg FinishBlock:(void (^)(void))block;
 
 
 @end
