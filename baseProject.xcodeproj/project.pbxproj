@@ -45,6 +45,7 @@
 		4799C5F22580D27E0094CA0B /* SSleftTextInputV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4799C5F12580D27E0094CA0B /* SSleftTextInputV.m */; };
 		47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */; };
 		47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */; };
+		47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F75A01258AF53800756E1C /* SSsearchBaseVC.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
 		47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */; };
 		47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13A223CD69CF00072C1D /* SShttprequest.m */; };
@@ -163,6 +164,8 @@
 		47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSwebBaseVC.m; sourceTree = "<group>"; };
 		47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSpayManager.h; sourceTree = "<group>"; };
 		47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSpayManager.m; sourceTree = "<group>"; };
+		47F75A00258AF53800756E1C /* SSsearchBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSsearchBaseVC.h; sourceTree = "<group>"; };
+		47F75A01258AF53800756E1C /* SSsearchBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSsearchBaseVC.m; sourceTree = "<group>"; };
 		47FB139C23CD698D00072C1D /* SSTimingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTimingHelper.m; sourceTree = "<group>"; };
 		47FB139D23CD698D00072C1D /* SSTimingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTimingHelper.h; sourceTree = "<group>"; };
 		47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStimingHelperForBtn.h; sourceTree = "<group>"; };
@@ -556,6 +559,8 @@
 				47FB140623CD724700072C1D /* SStabbarController.m */,
 				47FB140C23CD724700072C1D /* SStextLayer.h */,
 				47FB140823CD724700072C1D /* SStextLayer.m */,
+				47F75A00258AF53800756E1C /* SSsearchBaseVC.h */,
+				47F75A01258AF53800756E1C /* SSsearchBaseVC.m */,
 				47AA79A224F7B73700E6CB23 /* SSwebBaseVC.h */,
 				47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */,
 			);
@@ -864,6 +869,7 @@
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,
 				4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */,
+				47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */,
 				475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */,
 				2CC5B60F235FF3A100998FDF /* UIFont+SS.m in Sources */,
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,

@@ -9,11 +9,9 @@
 #import "SSnaviAndStatusBarV.h"
 #import "SSbadgeBtn.h"
 
-@interface SSnaviAndStatusBarV ()
+@interface SSnaviAndStatusBarV ()<UITextFieldDelegate>
 ///导航标题
 @property(nonatomic,strong) UILabel* titleLab;
-///导航搜索框
-@property(nonatomic,strong) UITextField* searchTFD;
 
 @property(nonatomic,strong) SSbadgeBtn* leftBtn;
 @property(nonatomic,strong) SSbadgeBtn* rightBtn;
@@ -49,16 +47,20 @@
     
     _rightBtn = [[SSbadgeBtn alloc] initWithFrame:CGRectMake(self.frame.size.width-28-12, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-28/2, 28, 28)];
     _rightBtn.tag = 1;
-//    _rightBtn.frame = CGRectMake(self.frame.size.width-20-15, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-20/2, 20, 20);
     [self addSubview:_rightBtn];
     _rightBtn.hidden = YES;
     [_rightBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.searchTFD = [SShelper SStextField:nil andTextColor:[UIColor SScolorWithHex333333] andFont:[UIFont SSCustomFont14]];
-    self.searchTFD.frame = CGRectMake(_leftBtn.maxXX+ssscale(5), statusBarHeight+7, self.frame.size.width-_leftBtn.maxXX-ssscale(5)-12-28-5, 30);
-    [self.searchTFD SSsetlayerOfViewRadius:self.searchTFD.height/2 andLineWidth:1 andLineCorlor:[UIColor clearColor]];
-    self.searchTFD.hidden = YES;
-    [self addSubview:self.searchTFD];
+    _searchTFD = [SShelper SStextField:nil andTextColor:[UIColor SScolorWithHex666666] andFont:[UIFont SSCustomFont14]];
+    _searchTFD.frame = CGRectMake(_leftBtn.maxXX-ssscale(15), statusBarHeight+7, self.frame.size.width-_leftBtn.maxXX-ssscale(5)-12-28-5, 30);
+    [_searchTFD SSsetlayerOfViewRadius:self.searchTFD.height/2 andLineWidth:1 andLineCorlor:[UIColor clearColor]];
+    _searchTFD.returnKeyType = UIReturnKeySearch;
+    _searchTFD.delegate = self;
+    [_searchTFD addTarget:self action:@selector(searchTFD:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    _searchTFD.hidden = YES;
+    [self addSubview:_searchTFD];
+    
+    [self bringSubviewToFront:self.leftBtn];
 }
 
 - (void)setTitleStr:(NSString *)titleStr {
@@ -69,9 +71,6 @@
 - (void)setIsHiddenSearchTFD:(BOOL)isHiddenSearchTFD {
     _isHiddenSearchTFD = isHiddenSearchTFD;
     self.searchTFD.hidden = isHiddenSearchTFD;
-    if (!isHiddenSearchTFD) {
-        [self.searchTFD becomeFirstResponder];
-    }
 }
 
 - (void)setSearchPlaceHolder:(NSString *)searchPlaceHolder {
@@ -81,8 +80,9 @@
 
 - (void)setSearchLeftViewImgStr:(NSString *)searchLeftViewImgStr {
     _searchLeftViewImgStr = searchLeftViewImgStr;
-    UIImageView* imgV = [SShelper SSimgeView:CGRectMake(0, 0, 38, self.searchTFD.height) imgName:searchLeftViewImgStr];
+    UIImageView* imgV = [SShelper SSimgeView:CGRectMake(0, 0, 38, 18) imgName:searchLeftViewImgStr];
     self.searchTFD.leftView = imgV;
+    self.searchTFD.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)setSearchBorderColor:(UIColor *)searchBorderColor {
@@ -97,7 +97,7 @@
 
 - (void)setLeftbtnImgStr:(NSString *)leftbtnImgStr {
     _leftbtnImgStr = leftbtnImgStr;
-    self.leftBtn.imgNameStr = @"navi_btn_left";
+    self.leftBtn.imgNameStr = leftbtnImgStr;
 }
 
 - (void)setLeftHIdden:(BOOL)leftHIdden {
@@ -107,7 +107,8 @@
 
 - (void)setRightBtnImgStr:(NSString *)rightBtnImgStr {
     _rightBtnImgStr = rightBtnImgStr;
-    [self.rightBtn setImage:[UIImage imageNamed:rightBtnImgStr] forState:UIControlStateNormal];
+    self.rightBtn.imgNameStr = rightBtnImgStr;
+//    [self.rightBtn setImage:[UIImage imageNamed:rightBtnImgStr] forState:UIControlStateNormal];
 }
 
 - (void)setIsHiddenrightBtn:(BOOL)isHiddenrightBtn {
@@ -119,6 +120,19 @@
     if (self.naviBlock) {
         self.naviBlock(button.tag);
     }
+}
+
+- (void)searchTFD:(UITextField*)textFD {
+    if ([SShelper isObjNil:textFD.text]) {
+        return;
+    }
+    if (self.SSnaviSearchBlock) {
+        self.SSnaviSearchBlock(textFD.text);
+    }
+}
+
+- (void)dealloc {
+    _searchTFD.delegate = nil;
 }
 
 /*

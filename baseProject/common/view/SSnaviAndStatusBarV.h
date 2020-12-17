@@ -14,6 +14,9 @@ typedef void(^SSNaviBtnsBLock)(NSInteger index);
 @interface SSnaviAndStatusBarV : UIView
 ///导航栏标题
 @property(nonatomic,strong) NSString* titleStr;
+
+///导航搜索框
+@property(nonatomic,strong,readonly) UITextField* searchTFD;
 ///是否隐藏导航栏中间的搜索框，默认隐藏 YES：隐藏；NO：不隐藏
 @property(nonatomic,assign) BOOL isHiddenSearchTFD;
 ///搜索框占位字符
@@ -35,6 +38,8 @@ typedef void(^SSNaviBtnsBLock)(NSInteger index);
 
 ///0：左侧按钮；1：右侧按钮
 @property(nonatomic,copy) SSNaviBtnsBLock naviBlock;
+///搜索Block
+@property(nonatomic,copy) void (^SSnaviSearchBlock) (NSString* text);
 @end
 
 NS_ASSUME_NONNULL_END

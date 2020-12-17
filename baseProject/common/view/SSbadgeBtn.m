@@ -1,11 +1,12 @@
 //
+//  SSnaviAndStatusBarV.h
+//  ddz
 //
 //  Created by F S on 2017/12/13.
 //  Copyright © 2017 F S. All rights reserved.
 //
 
 #import "SSbadgeBtn.h"
-#import <Masonry.h>
 
 @interface SSbadgeBtn ()
 @property(nonatomic,strong) UILabel* badgeLabel;
@@ -32,12 +33,12 @@
     self.badgeLabel.backgroundColor = [UIColor redColor];
     self.badgeLabel.font = [UIFont systemFontOfSize:10];
     self.badgeLabel.textColor = [UIColor whiteColor];
+    self.badgeLabel.textAlignment = NSTextAlignmentCenter;
     self.badgeLabel.hidden = YES;
     [self addSubview:self.badgeLabel];
-    [self.badgeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.mas_equalTo(0);
-        make.height.mas_equalTo(12);
-    }];
+    self.badgeLabel.layer.cornerRadius = 6;
+    self.badgeLabel.layer.masksToBounds = YES;
+    
 }
 
 - (CGRect)contentRectForBounds:(CGRect)bounds {
@@ -63,14 +64,16 @@
         return;
     }
     _badgeNum = badgeNum;
+    
+    CGFloat width = [badgeNum ss_sizewithFont:[UIFont systemFontOfSize:10]].width + 6;
     if (badgeNum.length == 1) {
         self.badgeLabel.text = [NSString stringWithFormat:@" %@ ",badgeNum];
+        self.badgeLabel.frame = CGRectMake(self.width-ssscale(14)/2, ssscale(-5), ssscale(14), ssscale(14));
     }else {
         self.badgeLabel.text = badgeNum;
+        self.badgeLabel.frame = CGRectMake(self.width-width/2, ssscale(-5), width, ssscale(14));
     }
     self.badgeLabel.hidden = NO;
-    [self.badgeLabel sizeToFit];
-    [self.badgeLabel SSaddCornerRadius:6];
 }
 
 
