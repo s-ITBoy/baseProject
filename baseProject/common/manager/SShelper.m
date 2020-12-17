@@ -549,6 +549,24 @@
 //}
 
 #pragma mark ------------- 正则表达式判断 ---------------
+///英文字母
++ (BOOL)isEnglishAlphabet:(NSString*_Nullable)Str {
+    if ([SShelper isObjNil:Str]) {
+        return NO;
+    }
+    NSString* numStr = @"^[A-Za-z]+$";
+    NSPredicate* numPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",numStr];
+    return [numPredicate evaluateWithObject:Str];
+}
+///数字
++ (BOOL)isNum:(NSString*_Nullable)Str {
+    if ([SShelper isObjNil:Str]) {
+        return NO;
+    }
+    NSString* numStr = @"^[0-9]*$";
+    NSPredicate* numPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",numStr];
+    return [numPredicate evaluateWithObject:Str];
+}
 ///身份证号YES：有效； NO：无效
 + (BOOL)isValidIdenditifyCard:(NSString*)cardStr{
     if ([SShelper isObjNil:cardStr]) {

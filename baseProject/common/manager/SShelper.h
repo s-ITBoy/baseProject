@@ -135,6 +135,10 @@ NS_ASSUME_NONNULL_BEGIN
 //+ (void)toSchemeUrl:(NSURL *_Nullable)url;
 
 #pragma mark ------------- 正则表达式判断 ---------------
+///英文字母
++ (BOOL)isEnglishAlphabet:(NSString*_Nullable)Str;
+///数字
++ (BOOL)isNum:(NSString*_Nullable)Str;
 ///身份证号YES：有效； NO：无效
 + (BOOL)isValidIdenditifyCard:(NSString*_Nullable)cardStr;
 //邮箱YES：有效； NO：无效

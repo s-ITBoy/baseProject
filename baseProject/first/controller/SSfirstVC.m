@@ -55,6 +55,7 @@
     btn.frame = CGRectMake(0, 200, 80, 40);
     [self.view addSubview:btn];
 //    [self presentLoadinghud];
+    NSLog(@"---------- %d",[SShelper isNum:@"1234q56"]);
     
 }
 
