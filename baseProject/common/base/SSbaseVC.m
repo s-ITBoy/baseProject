@@ -27,6 +27,7 @@
         }else {
             self.automaticallyAdjustsScrollViewInsets = NO;
         }
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
         _tableView.tableFooterView = [UIView new];
         [self.view addSubview:_tableView];

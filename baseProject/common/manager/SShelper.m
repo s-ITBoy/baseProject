@@ -549,7 +549,16 @@
 //}
 
 #pragma mark ------------- 正则表达式判断 ---------------
-///英文字母
+///数字或26个英文字母组成的字符串
++ (BOOL)isNUmAndEnglishAlphahet:(NSString*_Nullable)str {
+    if ([SShelper isObjNil:str]) {
+        return NO;
+    }
+    NSString* numStr = @"^[A-Za-z0-9]+$";
+    NSPredicate* numPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",numStr];
+    return [numPredicate evaluateWithObject:str];
+}
+///纯英文字母
 + (BOOL)isEnglishAlphabet:(NSString*_Nullable)Str {
     if ([SShelper isObjNil:Str]) {
         return NO;
@@ -558,7 +567,7 @@
     NSPredicate* numPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",numStr];
     return [numPredicate evaluateWithObject:Str];
 }
-///数字
+///纯数字
 + (BOOL)isNum:(NSString*_Nullable)Str {
     if ([SShelper isObjNil:Str]) {
         return NO;

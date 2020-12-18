@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSData *)SStransferToData;
 ///数组转JSON字符串
 - (NSString*)SSarrayToJSONString;
+///数组转字符串; seperatorStr:表示分割符
+- (NSString*)SSarraytoStr:separatorStr;
 
 ///冒泡排序
 - (NSArray*)SSbubbleSortArr;

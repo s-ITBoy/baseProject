@@ -89,6 +89,11 @@
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
+///数组转字符串
+- (NSString*)SSarraytoStr:separatorStr {
+    return [self componentsJoinedByString:separatorStr];
+}
+
 ///子视图数组中的所有子视图移除动画效果
 - (void)SSremoveAllAnimation {
     for (UIView* view in self) {
@@ -127,6 +132,13 @@
         arr[pos] = tmp;
     }
     return arr;
+}
+
+///快速排序
+- (NSArray*)SSquickSortArr {
+    
+    
+    return @[];
 }
 
 @end
