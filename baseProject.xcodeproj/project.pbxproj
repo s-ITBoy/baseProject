@@ -46,6 +46,7 @@
 		47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A324F7B73800E6CB23 /* SSwebBaseVC.m */; };
 		47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */; };
 		47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F75A01258AF53800756E1C /* SSsearchBaseVC.m */; };
+		47F75A0E258C58F100756E1C /* SSimgTextBadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F75A0D258C58F100756E1C /* SSimgTextBadgeBtn.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
 		47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */; };
 		47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13A223CD69CF00072C1D /* SShttprequest.m */; };
@@ -166,6 +167,8 @@
 		47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSpayManager.m; sourceTree = "<group>"; };
 		47F75A00258AF53800756E1C /* SSsearchBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSsearchBaseVC.h; sourceTree = "<group>"; };
 		47F75A01258AF53800756E1C /* SSsearchBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSsearchBaseVC.m; sourceTree = "<group>"; };
+		47F75A0C258C58F100756E1C /* SSimgTextBadgeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSimgTextBadgeBtn.h; sourceTree = "<group>"; };
+		47F75A0D258C58F100756E1C /* SSimgTextBadgeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSimgTextBadgeBtn.m; sourceTree = "<group>"; };
 		47FB139C23CD698D00072C1D /* SSTimingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTimingHelper.m; sourceTree = "<group>"; };
 		47FB139D23CD698D00072C1D /* SSTimingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTimingHelper.h; sourceTree = "<group>"; };
 		47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStimingHelperForBtn.h; sourceTree = "<group>"; };
@@ -578,6 +581,8 @@
 				47FB13F823CD722C00072C1D /* SSwindowView.m */,
 				4799C5E62580D1FA0094CA0B /* SSbadgeBtn.h */,
 				4799C5E42580D1FA0094CA0B /* SSbadgeBtn.m */,
+				47F75A0C258C58F100756E1C /* SSimgTextBadgeBtn.h */,
+				47F75A0D258C58F100756E1C /* SSimgTextBadgeBtn.m */,
 				4799C5E72580D1FA0094CA0B /* SSnaviAndStatusBarV.h */,
 				4799C5E52580D1FA0094CA0B /* SSnaviAndStatusBarV.m */,
 				47FB13FE23CD722C00072C1D /* SSBtnsListView.h */,
@@ -867,6 +872,7 @@
 				4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
+				47F75A0E258C58F100756E1C /* SSimgTextBadgeBtn.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,
 				4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */,
 				47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */,

@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SSbadgeBtn : UIButton
 @property(nonatomic,strong) NSString* imgNameStr;
 @property(nonatomic,strong) NSString* badgeNum;
-
+///是否让图片在文字右侧 YES:是；NO:不是 （默认在左侧 即NO）
+@property(nonatomic,assign) BOOL isSetImgOnRight;
 @end
 
 NS_ASSUME_NONNULL_END

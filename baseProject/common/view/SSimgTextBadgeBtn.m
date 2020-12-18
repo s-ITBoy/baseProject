@@ -1,17 +1,17 @@
 //
-//  SSnaviAndStatusBarV.h
-//  ddz
+//  SSimgTextBadgeBtn.m
+//  baseProject
 //
-//  Created by F S on 2017/12/13.
-//  Copyright © 2017 F S. All rights reserved.
+//  Created by F S on 2020/12/18.
+//  Copyright © 2020 FL S. All rights reserved.
 //
 
-#import "SSbadgeBtn.h"
+#import "SSimgTextBadgeBtn.h"
 
-@interface SSbadgeBtn ()
+@interface SSimgTextBadgeBtn ()
 @property(nonatomic,strong) UILabel* badgeLabel;
 @end
-@implementation SSbadgeBtn
+@implementation SSimgTextBadgeBtn
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -39,18 +39,19 @@
     self.badgeLabel.layer.cornerRadius = 6;
     self.badgeLabel.layer.masksToBounds = YES;
     
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
-- (void)setIsSetImgOnRight:(BOOL)isSetImgOnRight {
-    _isSetImgOnRight = isSetImgOnRight;
-    if (isSetImgOnRight) {
-        self.imageEdgeInsets = UIEdgeInsetsMake(0,self.titleLabel.bounds.size.width, 0, -self.titleLabel.bounds.size.width);
-        self.titleEdgeInsets = UIEdgeInsetsMake(0, -self.imageView.bounds.size.width, 0, self.imageView.bounds.size.width);
-    }
-}
+//- (CGRect)contentRectForBounds:(CGRect)bounds {
+//    return bounds;
+//}
 
-- (CGRect)contentRectForBounds:(CGRect)bounds {
-    return bounds;
+- (CGRect)titleRectForContentRect:(CGRect)contentRect {
+    return CGRectMake(0, contentRect.size.height*3/5, contentRect.size.width, contentRect.size.height*2/5);
+}
+- (CGRect)imageRectForContentRect:(CGRect)contentRect {
+    return CGRectMake(0, ssscale(6), contentRect.size.width, contentRect.size.height*3/5 - ssscale(6));
 }
 
 
@@ -72,18 +73,16 @@
         return;
     }
     _badgeNum = badgeNum;
+    self.badgeLabel.text = badgeNum;
     
     CGFloat width = [badgeNum ss_sizewithFont:[UIFont systemFontOfSize:10]].width + 6;
     if (badgeNum.length == 1) {
-        self.badgeLabel.text = [NSString stringWithFormat:@" %@ ",badgeNum];
-        self.badgeLabel.frame = CGRectMake(self.width-ssscale(14)/2, ssscale(-5), ssscale(14), ssscale(14));
+        self.badgeLabel.frame = CGRectMake(self.width/2 + self.height*3/5/2 - ssscale(14)/2, ssscale(3), ssscale(14), ssscale(14));
     }else {
-        self.badgeLabel.text = badgeNum;
-        self.badgeLabel.frame = CGRectMake(self.width-width/2, ssscale(-5), width, ssscale(14));
+        self.badgeLabel.frame = CGRectMake(self.width/2 + self.height*3/5/2 - width/2, ssscale(3), width, ssscale(14));
     }
     self.badgeLabel.hidden = NO;
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.
