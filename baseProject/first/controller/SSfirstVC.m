@@ -11,7 +11,6 @@
 #import "SSBtnsListView.h"
 #import "SSwebBaseVC.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "SSimgTextBadgeBtn.h"
 
 @interface SSfirstVC ()<SSViewControllerDelegate>
 @property(nonatomic,strong) SSBtnsListView* btnsListV;
@@ -53,13 +52,6 @@
     [self.view addSubview:self.valueLab];
     
     
-    SSimgTextBadgeBtn* btn = [[SSimgTextBadgeBtn alloc] initWithFrame:CGRectMake(10, 100, 85, 70)];
-    btn.imgNameStr = @"activity_selected";
-    [btn setTitle:@"qwer" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.badgeNum = @"9";
-    
-    [self.view addSubview:btn];
     
 }
 

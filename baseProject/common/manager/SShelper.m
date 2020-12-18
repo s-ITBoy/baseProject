@@ -9,6 +9,8 @@
 #import "SShelper.h"
 #import <sys/utsname.h>
 #import <AdSupport/AdSupport.h>
+#import "SSwebBaseVC.h"
+#import "SSsearchBaseVC.h"
 
 @implementation SShelper {
     NSMutableDictionary *_fmtters;
@@ -458,18 +460,17 @@
 
 ///跳转到对应H5界面
 + (void)SSintoH5:(UIViewController*)viewController urlStr:(NSString*)urlStr {
-    //    SSbaseWebVC* webVC = [[SSbaseWebVC alloc] init];
-    //    webVC.isShowRightNavi = YES;
-    //    webVC.urlString = urlString;
-    //    webVC.hidesBottomBarWhenPushed = YES;
-    //    [viewController.navigationController pushViewController:webVC animated:YES];
+    SSwebBaseVC* webVC = [[SSwebBaseVC alloc] init];
+    webVC.urlString = urlStr;
+    webVC.hidesBottomBarWhenPushed = YES;
+    [viewController.navigationController pushViewController:webVC animated:YES];
 }
 
 ///进入搜索界面
 + (void)SSintoSearchVC:(UIViewController*)viewController{
-    //    SSsearchBaseVC* search = [[SSsearchBaseVC alloc] init];
-    //    search.hidesBottomBarWhenPushed = YES;
-    //    [viewController.navigationController pushViewController:search animated:NO];
+    SSsearchBaseVC* search = [[SSsearchBaseVC alloc] init];
+    search.hidesBottomBarWhenPushed = YES;
+    [viewController.navigationController pushViewController:search animated:NO];
 }
 
 ///全屏展示图片

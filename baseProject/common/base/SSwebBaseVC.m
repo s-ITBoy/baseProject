@@ -34,6 +34,9 @@
     if (self.navigationController.navigationBar.hidden == YES) {
         self.navigationController.navigationBar.hidden = NO;
     }
+    if ([SShelper isObjNil:self.wkWebView.title]) {
+        [self.wkWebView reload];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,10 +46,15 @@
 //    }
     if (self.urlString && [self.urlString hasPrefix:@"http"]) {
         NSURL* url = [NSURL URLWithString:self.urlString];
-        NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+//        NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
+//        [request addValue:@"skey=skeyValue" forHTTPHeaderField:@"Cookie"];
         [self.wkWebView loadRequest:request];
     }
-    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+//    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+    if (IS_IOS_VERSION < 9.0) {
+        [self.wkWebView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
+    }
 }
 
 - (void)loadView {
@@ -76,6 +84,7 @@
     [super backBtn];
 }
 
+///KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     //网页title
     if ([keyPath isEqualToString:@"title"]) {
@@ -84,9 +93,17 @@
         } else {
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
-     } else {
+    }else if ([keyPath isEqualToString:@"URL"]) {
+        if (object == self.wkWebView) {
+            NSURL* newUrl = [change objectForKey:NSKeyValueChangeNewKey];
+            NSURL* oldUrl = [change objectForKey:NSKeyValueChangeOldKey];
+            if ([SShelper isObjNil:newUrl] && ![SShelper isObjNil:oldUrl]) {
+                [self.wkWebView reload];
+            }
+        }
+    }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-     }
+    }
 }
 
 #pragma mark --------- WKWebView --------------
@@ -123,6 +140,10 @@
 //    NSLog(@"-------- 跳转URL= %@",url);
 
     decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macos(10.11), ios(9.0)) {
+    [webView reload];
 }
 
 #pragma mark - WKScriptMessageHandler
