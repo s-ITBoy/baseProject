@@ -22,7 +22,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor whiteColor];
+//        self.backgroundColor = [UIColor clearColor];
         [self setSubView];
     }
     return self;
