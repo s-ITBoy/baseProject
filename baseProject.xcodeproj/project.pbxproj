@@ -34,6 +34,7 @@
 		47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5C23D044D400C5114D /* SSsecondVC.m */; };
 		47204E6123D044E000C5114D /* SSthirdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E6023D044E000C5114D /* SSthirdVC.m */; };
 		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
+		47518D33258DE087008BD917 /* SSRACmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D32258DE087008BD917 /* SSRACmanager.m */; };
 		475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B624CAD3AD008FD18B /* SSautoTableV.m */; };
 		475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B824CAD3E5008FD18B /* SSboxCodeView.m */; };
 		475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BB24CAD3EF008FD18B /* SSuislider.m */; };
@@ -144,6 +145,8 @@
 		47204E6023D044E000C5114D /* SSthirdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSthirdVC.m; sourceTree = "<group>"; };
 		4743415D24850F37008F7FBE /* SSfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSfileManager.h; sourceTree = "<group>"; };
 		4743415E24850F37008F7FBE /* SSfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfileManager.m; sourceTree = "<group>"; };
+		47518D31258DE087008BD917 /* SSRACmanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSRACmanager.h; sourceTree = "<group>"; };
+		47518D32258DE087008BD917 /* SSRACmanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSRACmanager.m; sourceTree = "<group>"; };
 		475299B524CAD3AD008FD18B /* SSautoTableV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSautoTableV.h; sourceTree = "<group>"; };
 		475299B624CAD3AD008FD18B /* SSautoTableV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSautoTableV.m; sourceTree = "<group>"; };
 		475299B824CAD3E5008FD18B /* SSboxCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSboxCodeView.m; sourceTree = "<group>"; };
@@ -399,12 +402,14 @@
 				2C48A111239E2AF2001C92F1 /* SShelper.m */,
 				47FB13A423CD69CF00072C1D /* SShttprequest.h */,
 				47FB13A223CD69CF00072C1D /* SShttprequest.m */,
+				4743415D24850F37008F7FBE /* SSfileManager.h */,
+				4743415E24850F37008F7FBE /* SSfileManager.m */,
 				47FB13A523CD69CF00072C1D /* SSshareManager.h */,
 				47FB13A323CD69CF00072C1D /* SSshareManager.m */,
 				47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */,
 				47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */,
-				4743415D24850F37008F7FBE /* SSfileManager.h */,
-				4743415E24850F37008F7FBE /* SSfileManager.m */,
+				47518D31258DE087008BD917 /* SSRACmanager.h */,
+				47518D32258DE087008BD917 /* SSRACmanager.m */,
 				47FB139D23CD698D00072C1D /* SSTimingHelper.h */,
 				47FB139C23CD698D00072C1D /* SSTimingHelper.m */,
 				47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */,
@@ -842,6 +847,7 @@
 				47FB141523CD724700072C1D /* SSJSObject.m in Sources */,
 				47F75AA5258DA08A00756E1C /* SSsheetActionV.m in Sources */,
 				2CC5B615235FF68300998FDF /* NSArray+SS.m in Sources */,
+				47518D33258DE087008BD917 /* SSRACmanager.m in Sources */,
 				47FB141223CD724700072C1D /* SStabbarController.m in Sources */,
 				2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */,
 				475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */,

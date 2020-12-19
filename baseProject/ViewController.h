@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @protocol SSViewControllerDelegate <NSObject>
 
@@ -17,5 +18,7 @@
 @interface ViewController : UIViewController
 @property(nonatomic,weak)id<SSViewControllerDelegate>delegate;
 
+
+@property (nonatomic, strong) RACSubject *delegateSignal;
 @end
 

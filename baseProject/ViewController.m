@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "SSshowContentView.h"
+#import <ReactiveCocoa/RACDynamicSignal.h>
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView* tableView;
@@ -30,7 +31,40 @@
     [btn setTitle:@"确认传值" forState:UIControlStateNormal];
     btn.frame = CGRectMake(30, CGRectGetMaxY(self.textFD.frame)+15, ScreenWidth-2*30, 40);
     [self.view addSubview:btn];
-    [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
+    btn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:@"qwer1234"];
+            
+            [subscriber sendCompleted];
+            return nil;
+        }];
+        
+        return [RACSignal empty];
+    }];
+//    [btn.rac_command execute:@"1234"];
+    
+    [[btn.rac_command.executing skip:0] subscribeNext:^(id x) {
+        if ([x boolValue] == YES) {
+            // 正在执行
+            NSLog(@"正在执行");
+
+        }else{
+            // 执行完成
+            NSLog(@"执行完成");
+        }
+    }];
+    
+    [btn.rac_command.executionSignals subscribeNext:^(id x) {
+//        RACSignal* signa = (RACSignal*)x;
+//        RACDynamicSignal* signal = (RACDynamicSignal*)x;
+        NSLog(@"------ 信号 = %@",x);
+//        NSLog(@"------ 信号 = %@",signal.name);
+    }];
+    [btn.rac_command.executionSignals.switchToLatest subscribeNext:^(id x) {
+        NSLog(@"------ 信号 = %@",x);
+    }];
 }
 
 - (void)clickBtn {
@@ -45,6 +79,10 @@
     }
     if ([self.delegate respondsToSelector:@selector(getValueStr:)]) {
         [self.delegate getValueStr:self.textFD.text];
+    }
+    
+    if (self.delegateSignal) {
+        [self.delegateSignal sendNext:self.textFD.text];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
