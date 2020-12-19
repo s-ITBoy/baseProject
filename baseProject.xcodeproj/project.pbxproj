@@ -47,6 +47,7 @@
 		47AA79A724F8ABCA00E6CB23 /* SSpayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */; };
 		47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F75A01258AF53800756E1C /* SSsearchBaseVC.m */; };
 		47F75A0E258C58F100756E1C /* SSimgTextBadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F75A0D258C58F100756E1C /* SSimgTextBadgeBtn.m */; };
+		47F75AA5258DA08A00756E1C /* SSsheetActionV.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F75AA4258DA08A00756E1C /* SSsheetActionV.m */; };
 		47FB13A023CD698D00072C1D /* SSTimingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139C23CD698D00072C1D /* SSTimingHelper.m */; };
 		47FB13A123CD698D00072C1D /* SStimingHelperForBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB139F23CD698D00072C1D /* SStimingHelperForBtn.m */; };
 		47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB13A223CD69CF00072C1D /* SShttprequest.m */; };
@@ -169,6 +170,8 @@
 		47F75A01258AF53800756E1C /* SSsearchBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSsearchBaseVC.m; sourceTree = "<group>"; };
 		47F75A0C258C58F100756E1C /* SSimgTextBadgeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSimgTextBadgeBtn.h; sourceTree = "<group>"; };
 		47F75A0D258C58F100756E1C /* SSimgTextBadgeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSimgTextBadgeBtn.m; sourceTree = "<group>"; };
+		47F75AA3258DA08A00756E1C /* SSsheetActionV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSsheetActionV.h; sourceTree = "<group>"; };
+		47F75AA4258DA08A00756E1C /* SSsheetActionV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSsheetActionV.m; sourceTree = "<group>"; };
 		47FB139C23CD698D00072C1D /* SSTimingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTimingHelper.m; sourceTree = "<group>"; };
 		47FB139D23CD698D00072C1D /* SSTimingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTimingHelper.h; sourceTree = "<group>"; };
 		47FB139E23CD698D00072C1D /* SStimingHelperForBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStimingHelperForBtn.h; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 				47FB13F923CD722C00072C1D /* SScustomTextView.m */,
 				4799C5F02580D27D0094CA0B /* SSleftTextInputV.h */,
 				4799C5F12580D27E0094CA0B /* SSleftTextInputV.m */,
+				47F75AA3258DA08A00756E1C /* SSsheetActionV.h */,
+				47F75AA4258DA08A00756E1C /* SSsheetActionV.m */,
 				4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */,
 				4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */,
 				475299B924CAD3E5008FD18B /* SSboxCodeView.h */,
@@ -835,6 +840,7 @@
 			files = (
 				2CC5B618235FF83200998FDF /* NSDictionary+SS.m in Sources */,
 				47FB141523CD724700072C1D /* SSJSObject.m in Sources */,
+				47F75AA5258DA08A00756E1C /* SSsheetActionV.m in Sources */,
 				2CC5B615235FF68300998FDF /* NSArray+SS.m in Sources */,
 				47FB141223CD724700072C1D /* SStabbarController.m in Sources */,
 				2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */,
