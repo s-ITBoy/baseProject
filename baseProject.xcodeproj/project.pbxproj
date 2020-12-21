@@ -36,6 +36,7 @@
 		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
 		47518D33258DE087008BD917 /* SSRACmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D32258DE087008BD917 /* SSRACmanager.m */; };
 		47518D5925906E5B008BD917 /* SSlocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D5825906E5B008BD917 /* SSlocationManager.m */; };
+		47518D6E2590A641008BD917 /* SSpaoMaDengV.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D6C2590A641008BD917 /* SSpaoMaDengV.m */; };
 		475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B624CAD3AD008FD18B /* SSautoTableV.m */; };
 		475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B824CAD3E5008FD18B /* SSboxCodeView.m */; };
 		475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BB24CAD3EF008FD18B /* SSuislider.m */; };
@@ -150,6 +151,8 @@
 		47518D32258DE087008BD917 /* SSRACmanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSRACmanager.m; sourceTree = "<group>"; };
 		47518D5725906E5B008BD917 /* SSlocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSlocationManager.h; sourceTree = "<group>"; };
 		47518D5825906E5B008BD917 /* SSlocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSlocationManager.m; sourceTree = "<group>"; };
+		47518D6C2590A641008BD917 /* SSpaoMaDengV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSpaoMaDengV.m; sourceTree = "<group>"; };
+		47518D6D2590A641008BD917 /* SSpaoMaDengV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSpaoMaDengV.h; sourceTree = "<group>"; };
 		475299B524CAD3AD008FD18B /* SSautoTableV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSautoTableV.h; sourceTree = "<group>"; };
 		475299B624CAD3AD008FD18B /* SSautoTableV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSautoTableV.m; sourceTree = "<group>"; };
 		475299B824CAD3E5008FD18B /* SSboxCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSboxCodeView.m; sourceTree = "<group>"; };
@@ -530,6 +533,7 @@
 		47204E2C23D0164B00C5114D /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				47518D6B2590A641008BD917 /* paoMaDeng */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -558,6 +562,15 @@
 			children = (
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		47518D6B2590A641008BD917 /* paoMaDeng */ = {
+			isa = PBXGroup;
+			children = (
+				47518D6D2590A641008BD917 /* SSpaoMaDengV.h */,
+				47518D6C2590A641008BD917 /* SSpaoMaDengV.m */,
+			);
+			path = paoMaDeng;
 			sourceTree = "<group>";
 		};
 		4768EAFB23A081A4006440D5 /* base */ = {
@@ -899,6 +912,7 @@
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,
 				2CC5B61B235FFC1900998FDF /* NSData+SS.m in Sources */,
 				475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */,
+				47518D6E2590A641008BD917 /* SSpaoMaDengV.m in Sources */,
 				2CC5B60C235FF2B900998FDF /* UIColor+SS.m in Sources */,
 				4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */,
 			);
