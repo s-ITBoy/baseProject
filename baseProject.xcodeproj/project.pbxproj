@@ -35,6 +35,7 @@
 		47204E6123D044E000C5114D /* SSthirdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E6023D044E000C5114D /* SSthirdVC.m */; };
 		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
 		47518D33258DE087008BD917 /* SSRACmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D32258DE087008BD917 /* SSRACmanager.m */; };
+		47518D5925906E5B008BD917 /* SSlocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D5825906E5B008BD917 /* SSlocationManager.m */; };
 		475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B624CAD3AD008FD18B /* SSautoTableV.m */; };
 		475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B824CAD3E5008FD18B /* SSboxCodeView.m */; };
 		475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BB24CAD3EF008FD18B /* SSuislider.m */; };
@@ -147,6 +148,8 @@
 		4743415E24850F37008F7FBE /* SSfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfileManager.m; sourceTree = "<group>"; };
 		47518D31258DE087008BD917 /* SSRACmanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSRACmanager.h; sourceTree = "<group>"; };
 		47518D32258DE087008BD917 /* SSRACmanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSRACmanager.m; sourceTree = "<group>"; };
+		47518D5725906E5B008BD917 /* SSlocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSlocationManager.h; sourceTree = "<group>"; };
+		47518D5825906E5B008BD917 /* SSlocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSlocationManager.m; sourceTree = "<group>"; };
 		475299B524CAD3AD008FD18B /* SSautoTableV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSautoTableV.h; sourceTree = "<group>"; };
 		475299B624CAD3AD008FD18B /* SSautoTableV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSautoTableV.m; sourceTree = "<group>"; };
 		475299B824CAD3E5008FD18B /* SSboxCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSboxCodeView.m; sourceTree = "<group>"; };
@@ -408,6 +411,8 @@
 				47FB13A323CD69CF00072C1D /* SSshareManager.m */,
 				47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */,
 				47AA79A624F8ABCA00E6CB23 /* SSpayManager.m */,
+				47518D5725906E5B008BD917 /* SSlocationManager.h */,
+				47518D5825906E5B008BD917 /* SSlocationManager.m */,
 				47518D31258DE087008BD917 /* SSRACmanager.h */,
 				47518D32258DE087008BD917 /* SSRACmanager.m */,
 				47FB139D23CD698D00072C1D /* SSTimingHelper.h */,
@@ -885,6 +890,7 @@
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47F75A0E258C58F100756E1C /* SSimgTextBadgeBtn.m in Sources */,
+				47518D5925906E5B008BD917 /* SSlocationManager.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,
 				4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */,
 				47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */,
