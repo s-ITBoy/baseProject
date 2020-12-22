@@ -8,7 +8,7 @@
 // l__j    \___/ l_____jl_____j \___jl__j__jl__j  l__j
 //
 //
-//	Powered by Polesapp.com
+//    Powered by Polesapp.com
 //
 //
 //  RBCustomDatePickerView.m
@@ -150,7 +150,7 @@
 - (void)setTimeBroadcastView
 {
     
-    [self setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+    [self setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-TabBarHeight)];
     [self setBackgroundColor:[UIColor clearColor]];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -671,14 +671,15 @@
     [UIView animateWithDuration:0.3f delay:0 usingSpringWithDamping:0.8f initialSpringVelocity:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
         
         [weak setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5f]];
-        [self->timeBroadcastView setFrame:CGRectMake(0, kScreen_Height - kDatePickerHeight, kScreen_Width, kDatePickerHeight)];
+//        [self->timeBroadcastView setFrame:CGRectMake(0, kScreen_Height - kDatePickerHeight, kScreen_Width, kDatePickerHeight)];
+        [self->timeBroadcastView setFrame:CGRectMake(0, self.superview.height - kDatePickerHeight, kScreen_Width, kDatePickerHeight)];
         
     } completion:^(BOOL finished) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:weak action:@selector(dismiss:)];
         tap.delegate = self;
         [weak addGestureRecognizer:tap];
-        
-        [self->timeBroadcastView setFrame:CGRectMake(0, kScreen_Height - kDatePickerHeight, kScreen_Width, kDatePickerHeight)];
+//        [self->timeBroadcastView setFrame:CGRectMake(0, kScreen_Height - kDatePickerHeight, kScreen_Width, kDatePickerHeight)];
+        [self->timeBroadcastView setFrame:CGRectMake(0, self.superview.height - kDatePickerHeight, kScreen_Width, kDatePickerHeight)];
     }];
 }
 

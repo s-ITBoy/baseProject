@@ -62,5 +62,5 @@ typedef void(^ClickedOkBtn)(NSString *dateTimeStr);
 -(instancetype)initWithDefaultDatetime:(NSDate*)dateTime;
 -(instancetype)initWithDatePickerMode:(DatePickerMode)datePickerMode defaultDateTime:(NSDate*)dateTime;
 ///show之前需要把它添加到试图中，否则它将不显示
--(void) showHcdDateTimePicker;
+-(void)showHcdDateTimePicker;
 @end
