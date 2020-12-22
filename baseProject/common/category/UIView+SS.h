@@ -15,10 +15,10 @@
 @property(nonatomic,assign) CGFloat XX;
 ///直接获得,或者设置, View 的 y 坐标
 @property(nonatomic,assign) CGFloat YY;
-///cggetMaxX
-@property(nonatomic,assign) CGFloat maxXX;
-///cggetMaxY
-@property(nonatomic,assign) CGFloat maxYY;
+///cggetmaxX
+@property(nonatomic,assign,readonly) CGFloat maxXX;
+///cggetmaxY
+@property(nonatomic,assign,readonly) CGFloat maxYY;
 ///直接获得一个View的宽度
 @property(nonatomic,assign) CGFloat width;
 ///直接获得一个 View 的高度
@@ -73,10 +73,10 @@
 
 - (void)SSremoveAllSubViews;
 #pragma mark ------------ 动画效果 ------------
-///缩放动画
-- (void)SSaddZoomAnimationFrom:(CGFloat)min To:(CGFloat)max;
 ///适用于点击选中放大/缩小的动画
 - (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval;
+///缩放动画
+- (void)SSaddZoomAnimationFrom:(CGFloat)min To:(CGFloat)max;
 ///呼吸动画
 - (void)SSbreatheAnimate;
 ///边框线向外扩散动画
@@ -87,10 +87,10 @@
 - (void)SSbackgroundColorAnimate:(CGFloat)min and:(CGFloat)max;
 
 // CATransition转场动画
-///翻页动画
-- (void)SSopenPageAnimate;
-///立方体转动动画
-- (void)SScubeAnimate;
+///翻页动画 count:翻页次数 ==0时 表示无限次数循环
+- (void)SSopenPageAnimate:(NSInteger)count;
+///立方体转动动画 count:转动次数 ==0时 表示无限次数循环
+- (void)SScubeAnimate:(NSInteger)count;
 
 ///移除动画
 - (void)SSremoveAllAnimation;

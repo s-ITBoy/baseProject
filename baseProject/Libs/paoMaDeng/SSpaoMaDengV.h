@@ -38,6 +38,7 @@ typedef NS_ENUM(NSUInteger, SSpaoMaDengVDirection) {
 @property (nonatomic, assign) SSpaoMaDengVDirection direction;
 - (instancetype)initWithDirection:(SSpaoMaDengVDirection)direction;
 - (instancetype)initWithFrame:(CGRect)frame direction:(SSpaoMaDengVDirection)direction;
+///拿到数据后需要调用此方法
 - (void)reloadData;
 - (void)start;
 - (void)pause;

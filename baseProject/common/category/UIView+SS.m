@@ -248,7 +248,6 @@
 #pragma mark -------------  设置视图的layer层的圆角，线宽及颜色等 -----------
 ///设置圆角半径lineWidth==0时，表示不设置线宽
 - (void)SSsetlayerOfViewRadius:(CGFloat)cornerRadius andLineWidth:(CGFloat)lineWidth andLineCorlor:(UIColor*)lineColor {
-    ///当UILabel需要同时设置backgroundColor和cornerRadius时此方法无效，则需要通过layer.conerRadis和layer.backgroundColor来设置
     self.layer.cornerRadius = cornerRadius;
     if (lineWidth != 0) {
         self.layer.borderWidth = lineWidth;
@@ -284,6 +283,13 @@
     }
 }
 #pragma mark ------------ 动画效果 ------------
+///适用于点击选中放大/缩小的动画
+- (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval {
+    [UIView animateWithDuration:interval animations:^{
+        self.transform = CGAffineTransformMakeScale(scaleX, scaleY);
+    }];
+}
+
 /*
  在 iOS 动画开发中经常使用到的 animationWithKeyPath:字符串,以下为部分内容:
  // 旋转
@@ -326,13 +332,6 @@
     animation.toValue = [NSNumber numberWithFloat:max];
     animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut];
     [self.layer addAnimation:animation forKey:@"scale-layer"];
-}
-
-///适用于点击选中放大/缩小的动画
-- (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval {
-    [UIView animateWithDuration:interval animations:^{
-        self.transform = CGAffineTransformMakeScale(scaleX, scaleY);
-    }];
 }
 
 ///呼吸动画
@@ -443,21 +442,22 @@
 
  */
 
-///翻页动画
-- (void)SSopenPageAnimate {
+///翻页动画 count:翻页次数 ==0时 表示无限次数循环
+- (void)SSopenPageAnimate:(NSInteger)count {
     [self.layer removeAllAnimations];
     CATransition* transition = [CATransition animation];
-    transition.repeatCount = 5;
+    transition.repeatCount = count == 0 ? HUGE : count;
     transition.type = @"pageCurl";
     transition.subtype = kCATransitionFromLeft;
     transition.duration = 1;
     [self.layer addAnimation:transition forKey:nil];
 }
-///立方体转动动画
-- (void)SScubeAnimate {
+
+///立方体转动动画 count:转动次数 ==0时 表示无限次数循环
+- (void)SScubeAnimate:(NSInteger)count {
     [self.layer removeAllAnimations];
     CATransition* transition = [CATransition animation];
-    transition.repeatCount = 5;
+    transition.repeatCount = count == 0 ? HUGE : count;
     transition.type = @"cube";
     transition.subtype = kCATransitionFromLeft;
     transition.duration = 1;
