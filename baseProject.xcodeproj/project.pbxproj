@@ -41,11 +41,11 @@
 		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
 		47518D33258DE087008BD917 /* SSRACmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D32258DE087008BD917 /* SSRACmanager.m */; };
 		47518D5925906E5B008BD917 /* SSlocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D5825906E5B008BD917 /* SSlocationManager.m */; };
-		47518D6E2590A641008BD917 /* SSpaoMaDengV.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D6C2590A641008BD917 /* SSpaoMaDengV.m */; };
 		475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B624CAD3AD008FD18B /* SSautoTableV.m */; };
 		475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B824CAD3E5008FD18B /* SSboxCodeView.m */; };
 		475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BB24CAD3EF008FD18B /* SSuislider.m */; };
 		475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */; };
+		475C40392595BA9B00364CB1 /* SSmarqueeV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475C40372595BA9B00364CB1 /* SSmarqueeV.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
 		4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 4799C5E42580D1FA0094CA0B /* SSbadgeBtn.m */; };
@@ -164,8 +164,6 @@
 		47518D32258DE087008BD917 /* SSRACmanager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSRACmanager.m; sourceTree = "<group>"; };
 		47518D5725906E5B008BD917 /* SSlocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSlocationManager.h; sourceTree = "<group>"; };
 		47518D5825906E5B008BD917 /* SSlocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSlocationManager.m; sourceTree = "<group>"; };
-		47518D6C2590A641008BD917 /* SSpaoMaDengV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSpaoMaDengV.m; sourceTree = "<group>"; };
-		47518D6D2590A641008BD917 /* SSpaoMaDengV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSpaoMaDengV.h; sourceTree = "<group>"; };
 		475299B524CAD3AD008FD18B /* SSautoTableV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSautoTableV.h; sourceTree = "<group>"; };
 		475299B624CAD3AD008FD18B /* SSautoTableV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSautoTableV.m; sourceTree = "<group>"; };
 		475299B824CAD3E5008FD18B /* SSboxCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSboxCodeView.m; sourceTree = "<group>"; };
@@ -174,6 +172,8 @@
 		475299BC24CAD3EF008FD18B /* SSuislider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSuislider.h; sourceTree = "<group>"; };
 		475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSwaterWaveView.m; sourceTree = "<group>"; };
 		475299BF24CAD3F6008FD18B /* SSwaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSwaterWaveView.h; sourceTree = "<group>"; };
+		475C40372595BA9B00364CB1 /* SSmarqueeV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSmarqueeV.m; sourceTree = "<group>"; };
+		475C40382595BA9B00364CB1 /* SSmarqueeV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSmarqueeV.h; sourceTree = "<group>"; };
 		4768EAFC23A081ED006440D5 /* SSbaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSbaseVC.h; sourceTree = "<group>"; };
 		4768EAFD23A081ED006440D5 /* SSbaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSbaseVC.m; sourceTree = "<group>"; };
 		4794CEEF244801A2002751EA /* SSgoldAnimationImgV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSgoldAnimationImgV.h; sourceTree = "<group>"; };
@@ -598,8 +598,8 @@
 		47518D6B2590A641008BD917 /* paoMaDeng */ = {
 			isa = PBXGroup;
 			children = (
-				47518D6D2590A641008BD917 /* SSpaoMaDengV.h */,
-				47518D6C2590A641008BD917 /* SSpaoMaDengV.m */,
+				475C40382595BA9B00364CB1 /* SSmarqueeV.h */,
+				475C40372595BA9B00364CB1 /* SSmarqueeV.m */,
 			);
 			path = paoMaDeng;
 			sourceTree = "<group>";
@@ -939,6 +939,7 @@
 				473601472591F0310022F4C5 /* HcdDateTimePickerView.m in Sources */,
 				47518D5925906E5B008BD917 /* SSlocationManager.m in Sources */,
 				47FB13AC23CD6AB400072C1D /* NSObject+HUD.m in Sources */,
+				475C40392595BA9B00364CB1 /* SSmarqueeV.m in Sources */,
 				4799C5E82580D1FA0094CA0B /* SSbadgeBtn.m in Sources */,
 				47F75A02258AF53800756E1C /* SSsearchBaseVC.m in Sources */,
 				475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */,
@@ -946,7 +947,6 @@
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,
 				2CC5B61B235FFC1900998FDF /* NSData+SS.m in Sources */,
 				475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */,
-				47518D6E2590A641008BD917 /* SSpaoMaDengV.m in Sources */,
 				2CC5B60C235FF2B900998FDF /* UIColor+SS.m in Sources */,
 				4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */,
 			);

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
+//#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "SSshowContentView.h"
 #import <ReactiveCocoa/RACDynamicSignal.h>
 

@@ -22,11 +22,11 @@ typedef SScaculatorMaker*_Nullable(^qwer)(void);
 @property(nonatomic,assign) BOOL isEqule;
 
 - (SScaculatorMaker*(^)(int))add;
-- (SScaculatorMaker*(^)(void))plus;
+//- (SScaculatorMaker*(^)(void))plus;
 
-- (SScaculatorMaker*)caculator:(int(^)(int result))caculator;
-
-- (SScaculatorMaker*)equle:(BOOL(^)(int result))operation;
+//- (SScaculatorMaker*)caculator:(int(^)(int result))caculator;
+//
+//- (SScaculatorMaker*)equle:(BOOL(^)(int result))operation;
 
 
 @end
