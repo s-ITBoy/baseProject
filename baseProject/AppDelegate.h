@@ -14,6 +14,10 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property(nonatomic,strong) SStabbarController* tabbarController;
+
+///网络状态 -1:未检测；0：无网络；1：手机流量；2：wifi 状态
+@property(nonatomic,assign) NSInteger networkStatus;
+
 ///第三方登录回调使用
 @property(nonatomic,weak) id loginDelegate;
 

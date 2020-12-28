@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import <AFNetworkReachabilityManager.h>
 
 @interface AppDelegate ()
 
@@ -20,6 +21,7 @@
     
     [self showRoot];
     [self globalApperance];
+    [self getNetworkStatus];
     
     return YES;
 }
@@ -81,6 +83,66 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+//- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray<id<UIUserActivityRestoring>> * __nullable restorableObjects))restorationHandler {
+//    ///微信新版sdk,微信授权登录必须在此方法中加入下面一行代码
+//    return [WXApi handleOpenUniversalLink:userActivity delegate:self.loginDelegate];
+//}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    [self handleURL:url];
+    
+    return YES;
+}
+
+- (void) handleURL:(NSURL*)url {
+    SSLog(@"---------handleUrl = %@",url);
+//    if ([url.host isEqualToString:@"safepay"]) {
+//        //跳到支付宝钱包进行支付，处理支付结果
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+////            SSLog(@"------支付宝--result = %@",resultDic);
+//            [[YQpayManager sharePayManager] aliPayResult:resultDic];
+//        }];
+//    }
+    NSRange range = [url.absoluteString rangeOfString:[NSString stringWithFormat:@"%@://pay",Weichat_appid]];
+//    if (range.location != NSNotFound) {
+//        [WXApi handleOpenURL:url delegate:[YQpayManager sharePayManager]];
+//    }
+    range = [url.absoluteString rangeOfString:[NSString stringWithFormat:@"%@://platformId=wechat",Weichat_appid]];
+    if(range.location != NSNotFound){
+//        [WXApi handleOpenURL:url delegate:[SSshareManager sharemanager]];
+    }
+    range = [url.absoluteString rangeOfString:[NSString stringWithFormat:@"%@://oauth",Weichat_appid]];
+    if(range.location != NSNotFound){
+        if (_loginDelegate) {
+//            [WXApi handleOpenURL:url delegate:self.loginDelegate];
+            self.loginDelegate = nil;
+        }
+    }
+    
+//    range = [url.absoluteString rangeOfString:[NSString stringWithFormat:@"%@://",@"QQ060C526E"]];
+//    if (range.location != NSNotFound) {
+//        [QQApiInterface handleOpenURL:url delegate:self];
+//    }
+    
+//    if ([url.absoluteString rangeOfString:yiqiScheme].location != NSNotFound){  //驿起本地操作
+//
+//        [SShelper toSchemeUrl:url];
+//    }
+}
+
+///监听网络状态
+- (void)getNetworkStatus {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        self.networkStatus = status;
+    }];
+}
+
+///关闭网络状态的监听
+- (void)stopNetworkStatus {
+    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
 }
 
 
