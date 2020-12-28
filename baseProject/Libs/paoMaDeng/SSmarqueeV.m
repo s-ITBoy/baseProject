@@ -324,9 +324,6 @@ static const CGFloat SS_itemSpace = 10.0;
             CGFloat itemHeight = self.bounds.size.height / self.showCount;
             
             if (self.direction == SSmarqueeDirectionToLeft) {
-//                CGFloat firstItemWidth = CGRectGetWidth(self.frame);
-//                CGFloat currentItemWidth = CGRectGetWidth(self.frame);
-//                CGFloat lastItemWidth = CGRectGetWidth(self.frame);
                 CGFloat xx = 0.0;
                 for (int i=0; i<self.itemsArr.count; i++) {
                     NSInteger index = (i+self.firstItemIndex) % self.itemsArr.count;
@@ -335,20 +332,15 @@ static const CGFloat SS_itemSpace = 10.0;
                             itemWidth = MAX([self.delegate SSitemWidthAt:self.itemsArr[index].tag forMarquee:self]+SS_itemSpace, self.bounds.size.height);
                         }
                     }
-//                    lastItemWidth = itemWidth;
                     if (i == 0) {
                         xx = -itemWidth;
-//                        firstItemWidth = itemWidth;
                     } else if (i == 1) {
                         xx = 0;
-//                        currentItemWidth = itemWidth;
                     } else {
                         xx += itemWidth;
-//                        lastItemWidth = itemWidth;
                     }
                 }
                 [self.itemsArr[self.firstItemIndex] setFrame:CGRectMake(xx, 0, itemWidth, itemHeight)];
-//                [self.itemsArr[self.firstItemIndex] setFrame:CGRectMake(lastItemWidth, 0, firstItemWidth, itemHeight)];
                 if ([self.delegate respondsToSelector:@selector(SSupdateItemView:index:forMarquee:)]) {
                     [self.delegate SSupdateItemView:self.itemsArr[self.firstItemIndex] index:self.dataIndex forMarquee:self];
                 }
