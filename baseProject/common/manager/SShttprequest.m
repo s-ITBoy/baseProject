@@ -12,12 +12,35 @@
 //#import "SSuserModel.h"
 
 @interface SShttprequest ()
-@property (nonatomic,strong) AFHTTPSessionManager *httpSessionManager;
 
 @end
 
 @implementation SShttprequest
+#pragma mark -------- 懒加载 -----------
+-(AFHTTPSessionManager *)httpSessionManager{
+    if (!_httpSessionManager) {
+        _httpSessionManager = [AFHTTPSessionManager manager];
+        _httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [_httpSessionManager.requestSerializer setValue:@"IOS" forHTTPHeaderField:@"clientType"];
+        
+        [_httpSessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//        [_httpSessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//        [_httpSessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        _httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", @"text/json",@"text/plain",@"text/javascript", nil];
+        
+//        [_httpSessionManager.requestSerializer setValue:@"Bearer" forHTTPHeaderField:@"authorization"];
+        
+        _httpSessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        _httpSessionManager.requestSerializer.timeoutInterval = 20;
+//        _httpSessionManager.securityPolicy.allowInvalidCertificates = true;
+        _httpSessionManager.securityPolicy.validatesDomainName = NO;
+        
+        
+    }
+    return _httpSessionManager;
+}
 
+//FIXME: --------------
 +(SShttprequest*)shareRequest {
     static id shareInstance;
     static dispatch_once_t onceToken;
@@ -27,30 +50,25 @@
     return shareInstance;
 }
 
--(AFHTTPSessionManager *)httpSessionManager{
-    if (!_httpSessionManager) {
-        _httpSessionManager = [AFHTTPSessionManager manager];
-        _httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
-//        _httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [_httpSessionManager.requestSerializer setValue:@"IOS" forHTTPHeaderField:@"clientType"];
-        
+//- (instancetype)init {
+//    if (self = [super init]) {
+//        _httpSessionManager = [AFHTTPSessionManager manager];
+//        _httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+//        [_httpSessionManager.requestSerializer setValue:@"IOS" forHTTPHeaderField:@"clientType"];
 //        [_httpSessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//        [_httpSessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        [_httpSessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        _httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", @"text/json",@"text/plain",@"text/javascript", nil];
-        
-//        [_httpSessionManager.requestSerializer setValue:@"Bearer" forHTTPHeaderField:@"authorization"];
-        
-        _httpSessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-        _httpSessionManager.requestSerializer.timeoutInterval = 20;
-//                _httpSessionManager.securityPolicy.allowInvalidCertificates = true;
-        _httpSessionManager.securityPolicy.validatesDomainName = NO;
-        
-        
-    }
-    return _httpSessionManager;
-}
-
+////        [_httpSessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+////        [_httpSessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//        _httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", @"text/json",@"text/plain",@"text/javascript", nil];
+//
+////        [_httpSessionManager.requestSerializer setValue:@"Bearer" forHTTPHeaderField:@"authorization"];
+//
+//        _httpSessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+//        _httpSessionManager.requestSerializer.timeoutInterval = 20;
+////        _httpSessionManager.securityPolicy.allowInvalidCertificates = true;
+//        _httpSessionManager.securityPolicy.validatesDomainName = NO;
+//    }
+//    return self;
+//}
 
 - (void)httpRequest:(NSDictionary *)parameters urlString:(NSString *)urlString method:(HttpRequestMethod)method  showLoading:(BOOL)showLoading showFailure:(BOOL)show resultHandler:(void(^)(BOOL isOK, id responseOnject))handler {
 //    SSLog(@"------ params = \n%@",[parameters SSdictionryToJSONString]);

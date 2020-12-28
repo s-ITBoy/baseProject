@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, HttpRequestMethod) {
     HttpRequestMethodUPLOAD,
 };
 @interface SShttprequest : NSObject
+@property (nonatomic,strong) AFHTTPSessionManager *httpSessionManager;
 
 + (SShttprequest*)shareRequest;
 
