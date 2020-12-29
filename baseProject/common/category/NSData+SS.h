@@ -10,8 +10,10 @@
 
 @interface NSData (SS)
 #pragma ------------base64--------------
-+ (NSData *)dataWithBase64EncodedString:(NSString *)string;
-- (NSString *)base64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
-- (NSString *)base64EncodedString;
+///字符串转NSdata
++ (NSData *)SSdataWithBase64EncodedStr:(NSString *)str;
+- (NSString *)SSbase64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
+///NSData转字符串
+- (NSString *)SSbase64EncodedStr;
 @end
 

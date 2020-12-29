@@ -38,6 +38,7 @@
 		473601472591F0310022F4C5 /* HcdDateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473601412591F0310022F4C5 /* HcdDateTimePickerView.m */; };
 		473601482591F0310022F4C5 /* MXSCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473601422591F0310022F4C5 /* MXSCycleScrollView.m */; };
 		473601492591F0310022F4C5 /* UIColor+HcdCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 473601432591F0310022F4C5 /* UIColor+HcdCustom.m */; };
+		473AC3C0259B0F5F00F9BD01 /* SSencryptDecrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 473AC3BE259B0F5F00F9BD01 /* SSencryptDecrypt.m */; };
 		4743415F24850F37008F7FBE /* SSfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743415E24850F37008F7FBE /* SSfileManager.m */; };
 		47518D33258DE087008BD917 /* SSRACmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D32258DE087008BD917 /* SSRACmanager.m */; };
 		47518D5925906E5B008BD917 /* SSlocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518D5825906E5B008BD917 /* SSlocationManager.m */; };
@@ -158,6 +159,8 @@
 		473601442591F0310022F4C5 /* HcdDateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HcdDateTimePickerView.h; sourceTree = "<group>"; };
 		473601452591F0310022F4C5 /* UIColor+HcdCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HcdCustom.h"; sourceTree = "<group>"; };
 		473601462591F0310022F4C5 /* MXSCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXSCycleScrollView.h; sourceTree = "<group>"; };
+		473AC3BE259B0F5F00F9BD01 /* SSencryptDecrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSencryptDecrypt.m; sourceTree = "<group>"; };
+		473AC3BF259B0F5F00F9BD01 /* SSencryptDecrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSencryptDecrypt.h; sourceTree = "<group>"; };
 		4743415D24850F37008F7FBE /* SSfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSfileManager.h; sourceTree = "<group>"; };
 		4743415E24850F37008F7FBE /* SSfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfileManager.m; sourceTree = "<group>"; };
 		47518D31258DE087008BD917 /* SSRACmanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSRACmanager.h; sourceTree = "<group>"; };
@@ -417,6 +420,8 @@
 				2C48A111239E2AF2001C92F1 /* SShelper.m */,
 				47FB13A423CD69CF00072C1D /* SShttprequest.h */,
 				47FB13A223CD69CF00072C1D /* SShttprequest.m */,
+				473AC3BF259B0F5F00F9BD01 /* SSencryptDecrypt.h */,
+				473AC3BE259B0F5F00F9BD01 /* SSencryptDecrypt.m */,
 				4743415D24850F37008F7FBE /* SSfileManager.h */,
 				4743415E24850F37008F7FBE /* SSfileManager.m */,
 				47FB13A523CD69CF00072C1D /* SSshareManager.h */,
@@ -911,6 +916,7 @@
 				4736012C2591E9000022F4C5 /* PopoverView.m in Sources */,
 				473601482591F0310022F4C5 /* MXSCycleScrollView.m in Sources */,
 				47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */,
+				473AC3C0259B0F5F00F9BD01 /* SSencryptDecrypt.m in Sources */,
 				2CC5B624236005E700998FDF /* UIView+SS.m in Sources */,
 				47FB140423CD722C00072C1D /* SScustomTextView.m in Sources */,
 				47FB141323CD724700072C1D /* SStextLayer.m in Sources */,
