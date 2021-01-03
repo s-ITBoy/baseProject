@@ -8,3 +8,4 @@ ${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework
 ${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/VTMagic/VTMagic.framework
+${BUILT_PRODUCTS_DIR}/pop/pop.framework

@@ -43,25 +43,38 @@ static SSfileManager* fileManager = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:token];
 }
 
-///清空documents文件夹下的文件及文件夹
+///清空documents路径下的文件及文件夹
 - (void)SSclearDocuments {
+    //一
     NSArray* filePaths = [[NSFileManager defaultManager] subpathsAtPath:[self SSdocumentsPath]];
     for (NSString* fileP in filePaths) {
         NSError* error;
-        do {
-            [[NSFileManager defaultManager] removeItemAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:fileP] error:&error];
-        } while ([[NSFileManager defaultManager] fileExistsAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:fileP]]);
+        [[NSFileManager defaultManager] removeItemAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:fileP] error:&error];
     }
+    //二
+//    NSArray* filePaths = [[NSFileManager defaultManager] subpathsAtPath:[self SSdocumentsPath]];
+//    for (NSString* fileP in filePaths) {
+//        NSError* error;
+//        do {
+//            [[NSFileManager defaultManager] removeItemAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:fileP] error:&error];
+//        } while ([[NSFileManager defaultManager] fileExistsAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:fileP]]);
+//    }
 }
 
 ///清空cache文件夹下的文件及文件夹
 - (void)SSclearCache {
+    //一
     for (NSString* fileP in [[NSFileManager defaultManager] subpathsAtPath:[self SScachesPath]]) {
         NSError* error;
-        do {
-            [[NSFileManager defaultManager] removeItemAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP] error:&error];
-        } while ([[NSFileManager defaultManager] fileExistsAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP]]);
+        [[NSFileManager defaultManager] removeItemAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP] error:&error];
     }
+    //二
+//    for (NSString* fileP in [[NSFileManager defaultManager] subpathsAtPath:[self SScachesPath]]) {
+//        NSError* error;
+//        do {
+//            [[NSFileManager defaultManager] removeItemAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP] error:&error];
+//        } while ([[NSFileManager defaultManager] fileExistsAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP]]);
+//    }
 }
 
 - (unsigned long long)SSfileSizeForDocument {

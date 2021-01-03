@@ -7,18 +7,66 @@
 //
 
 #import "ViewController.h"
+#import <pop/POP.h>
+
+#import "SSfileManager.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView* tableView;
 
 @property(nonatomic,strong) UITextField* textFD;
-
+@property(nonatomic,strong) UIButton* vvvBtn;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIButton* vvvv = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth/2-40/2, 180, 40, 40)];
+    vvvv.layer.cornerRadius = 20;
+    vvvv.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:vvvv];
+    self.vvvBtn = vvvv;
+    
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    anim.toValue             = [NSValue valueWithCGPoint:CGPointMake(3.f, 3.f)];
+    anim.springSpeed         = 0.f;
+    [vvvv.layer pop_addAnimation:anim forKey:@""];
+    
+    [vvvv addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(vvvv.XX, vvvv.maxYY+100, vvvv.width, vvvv.height)];
+    btn.layer.cornerRadius = 20;
+    btn.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:btn];
+    [btn addTarget:self action:@selector(clickbtn) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[SSfileManager shareManager] SSclearCache];
+}
+
+- (void)clickbtn {
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    anim.toValue             = [NSValue valueWithCGPoint:CGPointMake(1, 1)];
+    anim.springSpeed         = 0.f;
+    [self.vvvBtn.layer pop_addAnimation:anim forKey:@""];
+}
+
+- (void)clickBtn:(UIButton*)button {
+//    button.width = 40;
+//    button.height = 40;
+//    button.size = CGSizeMake(40, 40);
+    
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//    anim.repeatForever = YES;
+    anim.toValue             = [NSValue valueWithCGPoint:CGPointMake(3, 3)];
+    anim.springSpeed         = 0;
+    [button.layer pop_addAnimation:anim forKey:@"qwer"];
+//    [UIView animateWithDuration:3 animations:^{
+//
+//    } completion:^(BOOL finished) {
+//        [button pop_removeAllAnimations];
+//    }];
     
 }
 

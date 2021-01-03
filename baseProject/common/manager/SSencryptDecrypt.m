@@ -103,6 +103,7 @@ const Byte iv[] = {1,2,3,4,5,6,7,8};
 }
 
 + (NSData *)AES128_Encrypt:(NSString *)key encryptData:(NSData *)data {
+    ///kCCKeySizeAES128可更换为256位加密 对应的解密也需要换成与之对应
     char keyPtr[kCCKeySizeAES128+1];
     bzero(keyPtr, sizeof(keyPtr));
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
