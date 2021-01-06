@@ -15,5 +15,10 @@
 - (NSString *)SSbase64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
 ///NSData转字符串
 - (NSString *)SSbase64EncodedStr;
+
+///转成16进制字符串
+- (NSString*)SS_hexStr;
+///转成比特数组
+- (NSArray*)SS_toBitArray;
 @end
 

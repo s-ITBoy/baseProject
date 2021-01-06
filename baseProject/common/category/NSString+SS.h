@@ -45,5 +45,12 @@
 ///去除字符串中的html标签
 - (NSString *)ss_stringByTrimmingHTMLCharacters;
 
+/**
+ *  生成助记字符串
+ *  strlength   指定的长度
+ *  language    指定的语言 如：english 文件地址    english.txt 支持：简体中文、繁体中文、英文、法文、意大利文、日文、韩文、西班牙文
+ */
++ (NSString*)SS_getMnemonicStr:(NSNumber*)strLength language:(NSString*)language;
+
 @end
 

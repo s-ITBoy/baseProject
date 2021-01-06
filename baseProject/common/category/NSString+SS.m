@@ -212,4 +212,75 @@
     return NO;
 }
 
+/**
+ *  生成助记字符串
+ *  strlength   指定的长度
+ *  language    指定的语言 如：english 文件地址    english.txt 支持：简体中文、繁体中文、英文、法文、意大利文、日文、韩文、西班牙文
+ */
++ (NSString*)SS_getMnemonicStr:(NSNumber*)strLength language:(NSString*)language {
+    if ([strLength integerValue] % 32 != 0) {
+        [NSException raise:@"Strength must be divisible by 32" format:@"Strength Was: %@",strLength];
+    }
+    NSMutableData* bytes = [NSMutableData dataWithLength:[strLength integerValue] / 8];
+    //生成随机data
+    int status = SecRandomCopyBytes(kSecRandomDefault, bytes.length, bytes.mutableBytes);
+    if (status == 0) {
+        NSString* hexStr = [bytes SS_hexStr];
+        return [self SS_getMnemonicWordFromeHexStr:hexStr language:language];
+    }else {
+        [NSException raise:@"Unable to get random data!" format:@"Unable to get random data!"];
+    }
+    
+    return nil;
+}
+
+/**
+ *  16进制字符串生成助记词
+*/
++ (NSString*)SS_getMnemonicWordFromeHexStr:(NSString*)hexStr language:(NSString*)language {
+    NSData* seedData = [hexStr SS_hexStrToData];
+    //计算 sha256 哈希
+    NSMutableData *hash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(seedData.bytes, (int)seedData.length, hash.mutableBytes);
+    
+    NSMutableArray *checkSumBits = [NSMutableArray arrayWithArray:[[NSData dataWithData:hash] SS_toBitArray]];
+    NSMutableArray *seedBits = [NSMutableArray arrayWithArray:[seedData SS_toBitArray]];
+    
+    for(int i = 0 ; i < (int)seedBits.count / 32 ; i++) {
+        [seedBits addObject:checkSumBits[i]];
+    }
+    
+    NSString *path = [NSString stringWithFormat:@"%@/%@.txt",[[NSBundle mainBundle] bundlePath], language];
+    NSString *fileText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    NSArray *lines = [fileText componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    
+    NSMutableArray *words = [NSMutableArray arrayWithCapacity:(int)seedBits.count / 11];
+    
+    for(int i = 0 ; i < (int)seedBits.count / 11 ; i++) {
+        NSUInteger wordNumber = strtol([[[seedBits subarrayWithRange:NSMakeRange(i * 11, 11)] componentsJoinedByString:@""] UTF8String], NULL, 2);
+        
+        [words addObject:lines[wordNumber]];
+    }
+    
+    return [words componentsJoinedByString:@" "];
+}
+
+- (NSData*)SS_hexStrToData {
+    const char *chars = [self UTF8String];
+    int i = 0, len = (int)self.length;
+    
+    NSMutableData *data = [NSMutableData dataWithCapacity:len/2.0];
+    char byteChars[3] = {'\0','\0','\0'};
+    unsigned long wholeByte;
+    
+    while (i < len) {
+        byteChars[0] = chars[i++];
+        byteChars[1] = chars[i++];
+        wholeByte = strtoul(byteChars, NULL, 16);
+        [data appendBytes:&wholeByte length:1];
+    }
+    
+    return data;
+}
+
 @end

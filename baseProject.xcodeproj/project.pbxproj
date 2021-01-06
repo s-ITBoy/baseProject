@@ -547,7 +547,7 @@
 			children = (
 				473601402591F0310022F4C5 /* HcdDateTimePicker */,
 				473601292591E9000022F4C5 /* PopoverView */,
-				47518D6B2590A641008BD917 /* paoMaDeng */,
+				47518D6B2590A641008BD917 /* SSMarquee */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -600,13 +600,13 @@
 			path = HcdDateTimePicker;
 			sourceTree = "<group>";
 		};
-		47518D6B2590A641008BD917 /* paoMaDeng */ = {
+		47518D6B2590A641008BD917 /* SSMarquee */ = {
 			isa = PBXGroup;
 			children = (
 				475C40382595BA9B00364CB1 /* SSmarqueeV.h */,
 				475C40372595BA9B00364CB1 /* SSmarqueeV.m */,
 			);
-			path = paoMaDeng;
+			path = SSMarquee;
 			sourceTree = "<group>";
 		};
 		4768EAFB23A081A4006440D5 /* base */ = {
