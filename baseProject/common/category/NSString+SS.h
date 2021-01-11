@@ -12,7 +12,8 @@
 @interface NSString (SS)
 ///MD5加密
 - (NSString *)ss_MD5String;
-
+///sha1加密
+- (NSString*)ss_sha1;
 
 ///计算单行文字的size,font:字体
 - (CGSize)ss_sizewithFont:(UIFont *)font;
