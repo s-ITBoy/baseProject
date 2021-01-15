@@ -17,7 +17,7 @@ pod 'Masonry', '~> 1.0.2'
 #Banner无限循环图片、文字轮播器
 pod 'SDCycleScrollView','~> 1.64'
 #多控制器滚动
-pod "VTMagic"
+pod "VTMagic" 
 #图片浏览
 #pod 'GKPhotoBrowser'
 pod 'pop', '~> 1.0' #pop支持4种动画类型：弹簧动画效果、衰减动画效果、基本动画效果和自定义动画效果。
