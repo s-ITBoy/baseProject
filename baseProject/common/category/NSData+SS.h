@@ -20,5 +20,11 @@
 - (NSString*)SS_hexStr;
 ///转成比特数组
 - (NSArray*)SS_toBitArray;
+
+#pragma ------------ SHA --------------
+- (NSData*)SS_sha256hash;
+- (NSData*)SS_sha512hash;
+
+- (NSData*)SS_ripemd160Hash;
 @end
 

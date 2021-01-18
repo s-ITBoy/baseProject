@@ -7,6 +7,9 @@
 //
 
 #import "NSData+SS.h"
+#import "hmac.h"
+#import "ripemd.h"
+#import "sha.h"
 
 @implementation NSData (SS)
 
@@ -145,6 +148,35 @@
             return @"1111";
     }
     return @"-1";
+}
+
+#pragma ------------ SHA --------------
+
+- (NSData*)SS_sha256hash {
+    SHA256_CTX ctx;
+    unsigned char hash[32];
+    SHA256_Init(&ctx);
+    SHA256_Update(&ctx, self.bytes, self.length);
+    SHA256_Final(hash, &ctx);
+    return [NSData dataWithBytes:hash length:32];
+}
+
+- (NSData*)SS_sha512hash {
+    SHA512_CTX ctx;
+    unsigned char hash[64];
+    SHA512_Init(&ctx);
+    SHA512_Update(&ctx, self.bytes, self.length);
+    SHA512_Final(hash, &ctx);
+    return [NSData dataWithBytes:hash length:64];
+}
+
+- (NSData*)SS_ripemd160Hash {
+    RIPEMD160_CTX ctx;
+    unsigned char hash[20];
+    RIPEMD160_Init(&ctx);
+    RIPEMD160_Update(&ctx, self.bytes, self.length);
+    RIPEMD160_Final(hash, &ctx);
+    return [NSData dataWithBytes:hash length:20];
 }
 
 @end

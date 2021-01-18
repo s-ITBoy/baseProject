@@ -282,6 +282,7 @@
     return [words componentsJoinedByString:@" "];
 }
 
+
 - (NSData*)SS_hexStrToData {
     const char *chars = [self UTF8String];
     int i = 0, len = (int)self.length;
@@ -298,6 +299,226 @@
     }
     
     return data;
+}
+
+#pragma mark ----------- base58 ---------------
+
+- (NSString *)base58codeStr {
+    return @"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";;
+}
+
+- (NSMutableDictionary *)base58codeMuDic {
+    NSMutableDictionary* dic = [NSMutableDictionary dictionary];
+        for(int i = 0; i< [self.base58codeStr length]; i++) {
+            NSString *temp = [self.base58codeStr substringWithRange:NSMakeRange(i,1)];
+            [dic addEntriesFromDictionary:@{ temp: @(i) }];
+        }
+    return dic;
+}
+
+// base58加密， 传入加密后的字符串
+- (NSString *)SS_base58Encode {
+    if (self.length == 0) {
+        return @"";
+    }
+    NSArray *byteArr = [self UTF8ArrayWithString:self]; // aa真棒66 ==> [97, 97, 231, 156, 159, 230, 163, 146, 54, 54]
+    if (byteArr.count <= 0) {
+        return @"";
+    }
+    
+    int BASE = 58;
+    NSMutableArray *digits = [@[@(0)] mutableCopy];
+    
+    for (int i = 0; i < byteArr.count; i++) {
+        for (int j = 0; j < digits.count; j++) {
+            // 将数据转为二进制，再位运算右边添8个0，得到的数转二进制
+            // 位运算-->相当于 digits[j].toString(2);parseInt(10011100000000,2)
+            digits[j] = @([digits[j] intValue] << 8);
+        }
+        digits[0] = @([digits[0] intValue] + [byteArr[i] intValue]);
+        
+        int carry = 0;
+        for (int j = 0; j < digits.count; ++j) {
+            digits[j] = @([digits[j] intValue] + carry);
+            carry = ([digits[j] intValue] / BASE) | 0;
+            digits[j] = @([digits[j] intValue] % BASE);
+        }
+        while (carry) {
+            [digits addObject:@(carry % BASE)];
+            carry = (carry / BASE) | 0;
+        }
+        //处理前导为零的
+        for (int i = 0; byteArr[i] == 0 && i < byteArr.count - 1; i++) {
+            [digits addObject:@(0)];
+        }
+    }
+//    NSLog(@"%@", digits); // aa真棒66 ==> [20, 23, 57, 15, 5, 18, 32, 28, 53, 35, 49, 18, 27, 5]
+    // 最后，反序取ALPHABET_MAP，再拼起来
+    NSString *result = @"";
+    for (NSInteger k = digits.count - 1; k >= 0 ; k --) {
+        NSString *value = [self.base58codeStr substringWithRange:NSMakeRange([digits[k] intValue],1)];;
+        result = [result stringByAppendingString:value];
+    }
+//    NSLog(@"加密后 == %@", result); // aa真棒66 ==> 6UKrcvVZK6GzQM
+    return result;
+}
+
+// 将字符串转utf8格式的字节数组（英文和数字直接返回的acsii码，中文转%xx之后打断当成16进制转10进制）
+- (NSArray *)UTF8ArrayWithString:(NSString *)str {
+    
+    // NSString *tempaaa = [str stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
+    // NSLog(@"看看== %@", tempaaa); // aa真棒66 ==> aa%E7%9C%9F%E6%A3%9266
+    NSMutableArray *resultArr = [NSMutableArray array];
+    for (int i = 0; i < [str length]; i++) {
+        NSString *temp = [str substringWithRange:NSMakeRange(i,1)];
+        NSString *charact = [temp stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
+        if (charact.length == 1) {
+            // 未转换的字符，换为ASCII码
+            [resultArr addObject:@([charact characterAtIndex:0])];
+        } else {
+            // 转换成%XX形式的字符, 拿到XX 16进制转为10进制
+            NSArray *bytes = [charact componentsSeparatedByString:@"%"];
+            for (int l = 1; l < bytes.count; l++) {
+                [resultArr addObject:@(strtoul([bytes[l] UTF8String], 0, 16))]; // 16转为10
+            }
+        }
+    }
+//    NSLog(@"加密byte数组 == %@", resultArr); // aa真棒66 ==> [97, 97, 231, 156, 159, 230, 163, 146, 54, 54]
+    return resultArr;
+}
+
+// base58解密， 传入加密后的字符串
+- (NSString *)SS_base58Decode {
+    if (self.length == 0) {
+        return @"";
+    }
+    int BASE = 58;
+    NSMutableArray *bytes = [@[@(0)] mutableCopy];
+    for (int i = 0; i < [self length]; i++) {
+        NSString *ch = [self substringWithRange:NSMakeRange(i,1)];
+        // 判断ch是不是ALPHABET当中的字符
+        if (![self containsString:ch]) {
+            //NSLog(@"异常了 - base58不包含字符: %@", ch);
+            return @"";
+        }
+        for (int j = 0; j < bytes.count; j++) {
+            bytes[j] = @([bytes[j] intValue] * BASE);
+        }
+        bytes[0] = @([bytes[0] intValue] + [[self.base58codeMuDic objectForKey:ch] intValue]);
+        int carry = 0;
+        for (int j = 0; j < bytes.count; j++) {
+            bytes[j] = @([bytes[j] intValue] + carry);
+            carry = [bytes[j] intValue] >> 8;
+            bytes[j] = @([bytes[j] intValue] & 0xff); // 255 == 0xff == 11111111
+        }
+        while (carry) {
+            [bytes addObject:@(carry & 0xff)];
+            carry >>= 8;
+        }
+    }
+    //处理前导为零的
+    for (int i = 0; [[self substringWithRange:NSMakeRange(i, 1)] isEqualToString:@"1"] && i < [self length] - 1; i++) {
+        [bytes addObject:@(0)];
+    }
+    // 数组翻转一下顺序
+    bytes = [[[bytes reverseObjectEnumerator] allObjects] mutableCopy];
+//    NSLog(@"解密byte数组 == %@", bytes); // 6UKrcvVZK6GzQM ==> [97, 97, 231, 156, 159, 230, 163, 146, 54, 54]
+    
+    NSString *result = [self byteToString:bytes]; // 6UKrcvVZK6GzQM ==> aa真棒66
+    return result;
+}
+
+// 将字节数组解密成字符串
+- (NSString *)byteToString:(NSArray *)arr {
+    NSString *str = @"";
+    for (int i = 0; i < arr.count; i++) {
+        // 数组中每个数字转为二进制, 再匹配出开头为1的直到0的字符
+        // eg:123-->"1111011"-->{0:"1111",groups: undefined, index: 0, input: "1111011"}
+        NSString *hex2Str = [self hex10ToHex2: [arr[i] intValue]]; // 转为二进制
+        NSString *v = [self get1To0End:hex2Str]; // 取开头为1的直到0的字符
+        if (v.length > 0 && hex2Str.length == 8) {
+            int bytesLen = (int)v.length;
+            NSString *store = [hex2Str substringFromIndex:(7 - bytesLen)];
+            for (int st = 1; st < bytesLen; st++) {
+                NSString *sto1 = [[self hex10ToHex2: [arr[st+i] intValue]] substringFromIndex:2];
+                store = [store stringByAppendingString:sto1];
+            }
+            // 2进制store 转为10进制ascii，再拼接到字符串
+            int ascii = (int)strtoul([store UTF8String], 0, 2);
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%C", (unichar)ascii]];
+            i += bytesLen - 1;
+            
+        } else {
+            str = [str stringByAppendingString:[NSString stringWithFormat:@"%C", (unichar)[arr[i] intValue]]];
+        }
+    }
+//    NSLog(@"解密后 == %@", str); // aa真棒66
+    return str;
+}
+
+// 取出开头为1的直到0的字符, 1111011 -> 1111
+- (NSString *)get1To0End:(NSString *)string {
+    NSString *str = @"";
+    for (int i = 0; i < string.length; i++) {
+        NSString *ch = [string substringWithRange:NSMakeRange(i, 1)];
+        if ([ch isEqualToString:@"0"]) {
+            break;
+        } else {
+            str = [str stringByAppendingString:@"1"];
+        }
+    }
+    return str;
+}
+
+// 十进制转为二进制
+- (NSString *)hex10ToHex2:(int)hexInt {
+    NSString *string = [NSString string];
+    for (int i = 0; i <= 100; i++) {
+        // 从后面算起。关键在取余
+        int hex = hexInt % 2; // 每次的余数得到最后一位
+        hexInt = hexInt / 2;
+        if (hex > 0 || hexInt > 0) {
+            NSString *str = @(hex).stringValue;
+            string = [NSString stringWithFormat:@"%@%@", str, string]; // 要拼在前面。
+        }
+        if (hexInt <= 0) {
+            break;
+        }
+    }
+    return string;
+}
+
+#pragma mark ----------- SHA ---------------
+- (NSString*)SS_sha256Str {
+    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    
+    uint8_t digest[CC_SHA256_DIGEST_LENGTH];
+    
+    CC_SHA256(data.bytes, (CC_LONG)data.length, digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
+}
+
+- (NSString*)SS_sha512Str {
+    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    
+    uint8_t digest[CC_SHA512_DIGEST_LENGTH];
+    
+    CC_SHA512(data.bytes, (CC_LONG)data.length, digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA512_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
 }
 
 @end

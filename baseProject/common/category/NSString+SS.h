@@ -53,5 +53,21 @@
  */
 + (NSString*)SS_getMnemonicStr:(NSNumber*)strLength language:(NSString*)language;
 
+///十六进制str转data
+- (NSData*)SS_hexStrToData;
+
+#pragma mark ----------- base58 ---------------
+@property(nonatomic,strong) NSString* base58codeStr;
+@property(nonatomic,strong) NSMutableDictionary* base58codeMuDic;
+
+// base58加密， 传入加密前的字符串
+- (NSString *)SS_base58Encode;
+// base58解密， 传入加密后的字符串
+- (NSString *)SS_base58Decode;
+
+#pragma mark ----------- SHA ---------------
+- (NSString*)SS_sha256Str;
+- (NSString*)SS_sha512Str;
+
 @end
 
