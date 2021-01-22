@@ -702,12 +702,12 @@
 				4768EAFD23A081ED006440D5 /* SSbaseVC.m */,
 				47FB140E23CD724700072C1D /* SSbaseNavigationC.h */,
 				47FB140923CD724700072C1D /* SSbaseNavigationC.m */,
-				47FB140D23CD724700072C1D /* SSbezierCurve.h */,
-				47FB140B23CD724700072C1D /* SSbezierCurve.m */,
 				47FB140723CD724700072C1D /* SSJSObject.h */,
 				47FB140A23CD724700072C1D /* SSJSObject.m */,
 				47FB141023CD724700072C1D /* SStabbarController.h */,
 				47FB140623CD724700072C1D /* SStabbarController.m */,
+				47FB140D23CD724700072C1D /* SSbezierCurve.h */,
+				47FB140B23CD724700072C1D /* SSbezierCurve.m */,
 				47FB140C23CD724700072C1D /* SStextLayer.h */,
 				47FB140823CD724700072C1D /* SStextLayer.m */,
 				47F75A00258AF53800756E1C /* SSsearchBaseVC.h */,
@@ -1325,7 +1325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V9D5X7RA46;
+				DEVELOPMENT_TEAM = 2XXM5KPVP2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = baseProject/common/configure/PrefixHeader.pch;
 				INFOPLIST_FILE = baseProject/Info.plist;
@@ -1350,7 +1350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V9D5X7RA46;
+				DEVELOPMENT_TEAM = 2XXM5KPVP2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = baseProject/common/configure/PrefixHeader.pch;
 				INFOPLIST_FILE = baseProject/Info.plist;

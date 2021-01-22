@@ -31,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
  *contentView: 需要展示的内容
  *contentMode:  contentView展示的位置(可取值为：UIViewContentModeCenter | UIViewContentModeTop | UIViewContentModeBottom | UIViewContentModeLeft | UIViewContentModeRight,)
  */
-+(SSwindowView*)showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode;
++ (void)showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode;
 
-+(BOOL) isShowCustomView;
++ (BOOL)isShowCustomView;
 
-+(void) dismissCustomView;
++ (void)dismissCustomView;
 @end
 
 NS_ASSUME_NONNULL_END

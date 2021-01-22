@@ -17,7 +17,7 @@
     CGFloat _yyy;
 }
 
--(instancetype) customViewWithAlpha:(CGFloat) alp{
+-(instancetype)customViewWithAlpha:(CGFloat) alp {
     if([super initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)]){
         _alpha = alp;
         _backgroundView = [[UIView alloc]initWithFrame:self.frame];
@@ -29,12 +29,12 @@
     }
     return self;
 }
--(instancetype) customerView{
+-(instancetype)customerView {
     [self customViewWithAlpha:0.65];
     return self;
 }
 
--(void) setContentMode:(UIViewContentMode)contentMode{
+-(void)setContentMode:(UIViewContentMode)contentMode {
     _contentMode = contentMode;
     CGSize size = _contentView.mj_size;
     CGFloat offset = is_iPhoneX ? 34 : 0;
@@ -48,12 +48,12 @@
             _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , self.height+size.height, size.width, size.height);
             break;
         case UIViewContentModeLeft:
-            _showFrame = CGRectMake(0, 0, size.width, size.height);
-            _beforeFrame = CGRectMake(-size.width, 0, size.width, size.height);
+            _showFrame = CGRectMake(0, (self.height-size.height)/2, size.width, size.height);
+            _beforeFrame = CGRectMake(-size.width, (self.height-size.height)/2, size.width, size.height);
             break;
         case UIViewContentModeRight:
-            _showFrame = CGRectMake(self.width - size.width , 0.0f, size.width, size.height);
-            _beforeFrame = CGRectMake( self.width +size.width , 0.0f, size.width, size.height);
+            _showFrame = CGRectMake(self.width - size.width , (self.height-size.height)/2, size.width, size.height);
+            _beforeFrame = CGRectMake( self.width +size.width , (self.height-size.height)/2, size.width, size.height);
             break;
         case UIViewContentModeCenter:
         default:
@@ -63,7 +63,7 @@
     }
 }
 
--(void) show{
+-(void)show {
     [self addSubview:_contentView];
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     _contentView.frame = _beforeFrame;
@@ -75,7 +75,7 @@
     _isShow = YES;
     
 }
--(void) dismiss{
+-(void)dismiss {
     [UIView animateWithDuration:0.35 animations:^{
         self->_backgroundView.alpha = 0.0f;
         self->_contentView.frame = self->_beforeFrame;
@@ -87,20 +87,22 @@
     _isShow = NO;
 }
 
-+(SSwindowView*) showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode{
++ (void)showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode {
     SSwindowView* view = [[SSwindowView alloc] customerView];
     view.contentView = contentView;
     view.contentMode = contentMode;
 //    view.firstYY = contentView.origin.y;
     [view show];
-    return view;
+//    return view;
     
 }
-+(BOOL) isShowCustomView{
+
++ (BOOL)isShowCustomView {
     SSwindowView* view = [[UIApplication sharedApplication].keyWindow viewWithTag:999];
     return view != nil;
 }
-+(void) dismissCustomView{
+
++ (void)dismissCustomView {
     SSwindowView* view = [[UIApplication sharedApplication].keyWindow viewWithTag:999];
     if(view)
         [view dismiss];

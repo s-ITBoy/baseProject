@@ -7,6 +7,7 @@
 //
 
 #import "SSthirdVC.h"
+#import "SSwindowView.h"
 
 @interface SSthirdVC ()
 
@@ -16,7 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    UILabel* lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 180, 140)];
+    lab.backgroundColor = [UIColor whiteColor];
+    lab.numberOfLines = 0;
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.text = @"十分劳务费射流风机\n射流风机违法是";
+    [SSwindowView showView:lab contentMode:UIViewContentModeRight];
 }
 
 /*
