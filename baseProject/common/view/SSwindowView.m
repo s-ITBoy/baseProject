@@ -18,7 +18,7 @@
 }
 
 -(instancetype)customViewWithAlpha:(CGFloat) alp {
-    if([super initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)]){
+    if([super initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)]){
         _alpha = alp;
         _backgroundView = [[UIView alloc]initWithFrame:self.frame];
         _backgroundView.backgroundColor = [UIColor blackColor];
@@ -36,29 +36,29 @@
 
 -(void)setContentMode:(UIViewContentMode)contentMode {
     _contentMode = contentMode;
-    CGSize size = _contentView.mj_size;
+    CGSize size = _contentView.frame.size;
     CGFloat offset = is_iPhoneX ? 34 : 0;
     switch (_contentMode) {
         case UIViewContentModeTop:
-            _showFrame = CGRectMake( (self.width - size.width)/2.0f , 0.0f, size.width, size.height);
-            _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , -size.height, size.width, size.height);
+            _showFrame = CGRectMake( (self.frame.size.width - size.width)/2.0f , 0.0f, size.width, size.height);
+            _beforeFrame = CGRectMake( (self.frame.size.width - size.width)/2.0f , -size.height, size.width, size.height);
             break;
         case UIViewContentModeBottom:
-            _showFrame = CGRectMake( (self.width - size.width)/2.0f , self.height-size.height - offset, size.width, size.height + offset);
-            _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , self.height+size.height, size.width, size.height);
+            _showFrame = CGRectMake( (self.frame.size.width - size.width)/2.0f , self.frame.size.height-size.height - offset, size.width, size.height + offset);
+            _beforeFrame = CGRectMake( (self.frame.size.width - size.width)/2.0f , self.frame.size.height+size.height, size.width, size.height);
             break;
         case UIViewContentModeLeft:
-            _showFrame = CGRectMake(0, (self.height-size.height)/2, size.width, size.height);
-            _beforeFrame = CGRectMake(-size.width, (self.height-size.height)/2, size.width, size.height);
+            _showFrame = CGRectMake(0, (self.frame.size.height-size.height)/2, size.width, size.height);
+            _beforeFrame = CGRectMake(-size.width, (self.frame.size.height-size.height)/2, size.width, size.height);
             break;
         case UIViewContentModeRight:
-            _showFrame = CGRectMake(self.width - size.width , (self.height-size.height)/2, size.width, size.height);
-            _beforeFrame = CGRectMake( self.width +size.width , (self.height-size.height)/2, size.width, size.height);
+            _showFrame = CGRectMake(self.frame.size.width - size.width , (self.frame.size.height-size.height)/2, size.width, size.height);
+            _beforeFrame = CGRectMake( self.frame.size.width +size.width , (self.frame.size.height-size.height)/2, size.width, size.height);
             break;
         case UIViewContentModeCenter:
         default:
-            _showFrame = CGRectMake( (self.width - size.width)/2.0f , (self.height-size.height)/2.0f, size.width, size.height);
-            _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , -size.height, size.width, size.height);
+            _showFrame = CGRectMake( (self.frame.size.width - size.width)/2.0f , (self.frame.size.height-size.height)/2.0f, size.width, size.height);
+            _beforeFrame = CGRectMake( (self.frame.size.width - size.width)/2.0f , -size.height, size.width, size.height);
             break;
     }
 }

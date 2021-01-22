@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode;
 
 + (BOOL)isShowCustomView;
-
+///弹框关闭
 + (void)dismissCustomView;
 @end
 
