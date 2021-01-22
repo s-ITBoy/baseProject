@@ -10,7 +10,7 @@
 
 @implementation NSArray (SS)
 
-- (id)SSarrayAtIndex:(NSInteger)index {
+- (NSArray*)SSarrayAtIndex:(NSInteger)index {
     if (![self isKindOfClass:[NSArray class]]) {
         return @[];
     }
@@ -27,7 +27,7 @@
     return [self objectAtIndex:index];
 }
 
-- (id)SSdicAtIndex:(NSInteger)index {
+- (NSDictionary*)SSdicAtIndex:(NSInteger)index {
     if (![self isKindOfClass:[NSArray class]]) {
         return @{};
     }
@@ -44,7 +44,7 @@
     return [self objectAtIndex:index];
 }
 
-- (id)SSstringAtIndex:(NSInteger)index {
+- (NSString*)SSstringAtIndex:(NSInteger)index {
     if (![self isKindOfClass:[NSArray class]]) {
         return @"";
     }

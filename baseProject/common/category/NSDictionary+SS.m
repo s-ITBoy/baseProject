@@ -10,7 +10,7 @@
 
 @implementation NSDictionary (SS)
 
-- (id)SSarrayForDicKey:(NSString*)key {
+- (NSArray*)SSarrayForDicKey:(NSString*)key {
     if ([self isKindOfClass:[NSNull class]] || self == nil || self == NULL) {
         return @[];
     }
@@ -34,7 +34,7 @@
     return obj;
 }
 
-- (id)SSdicForDicKey:(NSString*)key {
+- (NSDictionary*)SSdicForDicKey:(NSString*)key {
     if ([self isKindOfClass:[NSNull class]] || self == nil || self == NULL) {
         return @{};
     }
@@ -61,7 +61,7 @@
     return obj;
 }
 
-- (id)SSstringForDicKey:(NSString*)key {
+- (NSString*)SSstringForDicKey:(NSString*)key {
     if ([self isKindOfClass:[NSNull class]] || self == nil || self == NULL) {
         return @"";
     }
@@ -168,12 +168,20 @@
 - (NSDictionary *)SSdeleteEmptyValue{
     NSMutableDictionary *dict = self.mutableCopy;
     NSArray *keys = [dict allKeys];
-    for (NSString *key in keys) {
-        id value = [dict objectForKey:key];
+    ///方式一
+//    for (NSString *key in keys) {
+//        id value = [dict objectForKey:key];
+//        if ([self isObjNil:value]) {
+//            [dict removeObjectForKey:key];
+//        }
+//    }
+    ///方式二
+    [keys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        id value = [dict objectForKey:obj];
         if ([self isObjNil:value]) {
-            [dict removeObjectForKey:key];
+            [dict removeObjectForKey:obj];
         }
-    }
+    }];
     return dict;
 }
 

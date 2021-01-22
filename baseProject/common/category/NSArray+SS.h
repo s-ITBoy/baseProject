@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray (SS)
 
-- (id)SSarrayAtIndex:(NSInteger)index;
+- (NSArray*)SSarrayAtIndex:(NSInteger)index;
 
-- (id)SSdicAtIndex:(NSInteger)index;
+- (NSDictionary*)SSdicAtIndex:(NSInteger)index;
 
-- (id)SSstringAtIndex:(NSInteger)index;
+- (NSString*)SSstringAtIndex:(NSInteger)index;
 
 - (id)SSobjectAtArrayIndex:(NSUInteger)index;
 ///将数组元素序列化成NSData

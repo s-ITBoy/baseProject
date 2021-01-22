@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-///自动以带右上角角标的按钮视图
+///自定义按钮（带右上角角标，支持设置图片在文字右侧）
 @interface SSbadgeBtn : UIButton
 @property(nonatomic,strong) NSString* imgNameStr;
 @property(nonatomic,strong) NSString* badgeNum;

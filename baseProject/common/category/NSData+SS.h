@@ -23,6 +23,7 @@
 
 #pragma ------------ SHA --------------
 - (NSData*)SS_sha256hash;
+
 - (NSData*)SS_sha512hash;
 
 - (NSData*)SS_ripemd160Hash;

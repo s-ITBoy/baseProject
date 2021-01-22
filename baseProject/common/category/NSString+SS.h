@@ -7,13 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
 
 @interface NSString (SS)
-///MD5加密
-- (NSString *)ss_MD5String;
-///sha1加密
-- (NSString*)ss_sha1;
 
 ///计算单行文字的size,font:字体
 - (CGSize)ss_sizewithFont:(UIFont *)font;
@@ -56,16 +52,20 @@
 ///十六进制str转data
 - (NSData*)SS_hexStrToData;
 
-#pragma mark ----------- base58 ---------------
-@property(nonatomic,strong) NSString* base58codeStr;
-@property(nonatomic,strong) NSMutableDictionary* base58codeMuDic;
+#pragma mark ----------- MD5加密 ----------------
 
+///MD5加密
+- (NSString *)ss_MD5String;
+
+#pragma mark ----------- base58加密 ---------------
+///sha1加密
+- (NSString*)ss_sha1;
 // base58加密， 传入加密前的字符串
 - (NSString *)SS_base58Encode;
 // base58解密， 传入加密后的字符串
 - (NSString *)SS_base58Decode;
 
-#pragma mark ----------- SHA ---------------
+#pragma mark ----------- SHA加密 ---------------
 - (NSString*)SS_sha256Str;
 - (NSString*)SS_sha512Str;
 

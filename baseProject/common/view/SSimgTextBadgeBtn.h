@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-///图文试图按钮（上图下文字）
+///自定义按钮（上图下文字， 支持带角标）
 @interface SSimgTextBadgeBtn : UIButton
 @property(nonatomic,strong) NSString* imgNameStr;
 @property(nonatomic,strong) NSString* badgeNum;

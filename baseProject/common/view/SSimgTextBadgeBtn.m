@@ -77,9 +77,9 @@
     
     CGFloat width = [badgeNum ss_sizewithFont:[UIFont systemFontOfSize:10]].width + 6;
     if (badgeNum.length == 1) {
-        self.badgeLabel.frame = CGRectMake(self.width/2 + self.height*3/5/2 - ssscale(14)/2, ssscale(3), ssscale(14), ssscale(14));
+        self.badgeLabel.frame = CGRectMake(self.frame.size.width/2 + self.frame.size.height*3/5/2 - ssscale(14)/2, ssscale(3), ssscale(14), ssscale(14));
     }else {
-        self.badgeLabel.frame = CGRectMake(self.width/2 + self.height*3/5/2 - width/2, ssscale(3), width, ssscale(14));
+        self.badgeLabel.frame = CGRectMake(self.frame.size.width/2 + self.frame.size.height*3/5/2 - width/2, ssscale(3), width, ssscale(14));
     }
     self.badgeLabel.hidden = NO;
 }

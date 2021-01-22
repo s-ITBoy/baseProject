@@ -10,11 +10,11 @@
 
 @interface NSDictionary (SS)
 
-- (id)SSarrayForDicKey:(NSString*)key;
+- (NSArray*)SSarrayForDicKey:(NSString*)key;
 
-- (id)SSdicForDicKey:(NSString*)key;
+- (NSDictionary*)SSdicForDicKey:(NSString*)key;
 
-- (id)SSstringForDicKey:(NSString*)key;
+- (NSString*)SSstringForDicKey:(NSString*)key;
 
 - (BOOL)SSboolForDicKey:(NSString*)key;
 

@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 ///弹框视图基类
 @interface SSwindowView : UIView
+
+#pragma mark -------- 使用方式一 --------------
+
 @property (strong,nonatomic,readonly) UIView* backgroundView;
 @property (weak,nonatomic) UIView* contentView;
 @property (assign,nonatomic) BOOL anim;
@@ -21,9 +24,17 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) show;
 -(void) dismiss;
 
-///contentView:需要展示的弹框图
-+(SSwindowView*) showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode;
+#pragma mark -------- 使用方式二（推荐使用） --------------
+
+/**
+ *弹框展示
+ *contentView: 需要展示的内容
+ *contentMode:  contentView展示的位置(可取值为：UIViewContentModeCenter | UIViewContentModeTop | UIViewContentModeBottom | UIViewContentModeLeft | UIViewContentModeRight,)
+ */
++(SSwindowView*)showView:(UIView*)contentView contentMode:(UIViewContentMode)contentMode;
+
 +(BOOL) isShowCustomView;
+
 +(void) dismissCustomView;
 @end
 

@@ -39,13 +39,17 @@
     CGSize size = _contentView.mj_size;
     CGFloat offset = is_iPhoneX ? 34 : 0;
     switch (_contentMode) {
+        case UIViewContentModeTop:
+            _showFrame = CGRectMake( (self.width - size.width)/2.0f , 0.0f, size.width, size.height);
+            _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , -size.height, size.width, size.height);
+            break;
         case UIViewContentModeBottom:
             _showFrame = CGRectMake( (self.width - size.width)/2.0f , self.height-size.height - offset, size.width, size.height + offset);
             _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , self.height+size.height, size.width, size.height);
             break;
-        case UIViewContentModeTop:
-            _showFrame = CGRectMake( (self.width - size.width)/2.0f , 0.0f, size.width, size.height);
-            _beforeFrame = CGRectMake( (self.width - size.width)/2.0f , -size.height, size.width, size.height);
+        case UIViewContentModeLeft:
+            _showFrame = CGRectMake(0, 0, size.width, size.height);
+            _beforeFrame = CGRectMake(-size.width, 0, size.width, size.height);
             break;
         case UIViewContentModeRight:
             _showFrame = CGRectMake(self.width - size.width , 0.0f, size.width, size.height);

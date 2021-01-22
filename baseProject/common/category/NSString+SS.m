@@ -11,36 +11,6 @@
 #import <sys/utsname.h>
 
 @implementation NSString (SS)
-///MD5加密
-- (NSString *)ss_MD5String {
-    const char *cstr = [self UTF8String];
-    unsigned char result[16];
-    CC_MD5(cstr, (unsigned int)strlen(cstr), result);
-    return [[NSString stringWithFormat:
-             @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-             result[0], result[1], result[2], result[3],
-             result[4], result[5], result[6], result[7],
-             result[8], result[9], result[10], result[11],
-             result[12], result[13], result[14], result[15]
-             ] lowercaseString];
-}
-
-///sha1加密
-- (NSString*)ss_sha1 {
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
-    //使用对应的CC_SHA1,CC_SHA256,CC_SHA384,CC_SHA512的长度分别是20,32,48,64
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    //使用对应的CC_SHA256,CC_SHA384,CC_SHA512
-    CC_SHA1(data.bytes, (unsigned int)data.length, digest);
-    
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    
-    return output;
-}
 
 
 ///计算单行文字的size,font:字体
@@ -301,16 +271,30 @@
     return data;
 }
 
+#pragma mark ----------- MD5加密 ----------------
+
+///MD5加密
+- (NSString *)ss_MD5String {
+    const char *cstr = [self UTF8String];
+    unsigned char result[16];
+    CC_MD5(cstr, (unsigned int)strlen(cstr), result);
+    return [[NSString stringWithFormat:
+             @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+             result[0], result[1], result[2], result[3],
+             result[4], result[5], result[6], result[7],
+             result[8], result[9], result[10], result[11],
+             result[12], result[13], result[14], result[15]
+             ] lowercaseString];
+}
+
 #pragma mark ----------- base58 ---------------
 
-- (NSString *)base58codeStr {
-    return @"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";;
-}
+#define base58codeStr @"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
 - (NSMutableDictionary *)base58codeMuDic {
     NSMutableDictionary* dic = [NSMutableDictionary dictionary];
-        for(int i = 0; i< [self.base58codeStr length]; i++) {
-            NSString *temp = [self.base58codeStr substringWithRange:NSMakeRange(i,1)];
+        for(int i = 0; i< [base58codeStr length]; i++) {
+            NSString *temp = [base58codeStr substringWithRange:NSMakeRange(i,1)];
             [dic addEntriesFromDictionary:@{ temp: @(i) }];
         }
     return dic;
@@ -356,7 +340,7 @@
     // 最后，反序取ALPHABET_MAP，再拼起来
     NSString *result = @"";
     for (NSInteger k = digits.count - 1; k >= 0 ; k --) {
-        NSString *value = [self.base58codeStr substringWithRange:NSMakeRange([digits[k] intValue],1)];;
+        NSString *value = [base58codeStr substringWithRange:NSMakeRange([digits[k] intValue],1)];;
         result = [result stringByAppendingString:value];
     }
 //    NSLog(@"加密后 == %@", result); // aa真棒66 ==> 6UKrcvVZK6GzQM
@@ -489,6 +473,24 @@
 }
 
 #pragma mark ----------- SHA ---------------
+
+///sha1加密
+- (NSString*)ss_sha1 {
+    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
+
+    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    //使用对应的CC_SHA1,CC_SHA256,CC_SHA384,CC_SHA512的长度分别是20,32,48,64
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    //使用对应的CC_SHA256,CC_SHA384,CC_SHA512
+    CC_SHA1(data.bytes, (unsigned int)data.length, digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
+}
+
 - (NSString*)SS_sha256Str {
     const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:cstr length:self.length];
