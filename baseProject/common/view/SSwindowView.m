@@ -91,7 +91,6 @@
     SSwindowView* view = [[SSwindowView alloc] customerView];
     view.contentView = contentView;
     view.contentMode = contentMode;
-//    view.firstYY = contentView.origin.y;
     [view show];
 //    return view;
     
