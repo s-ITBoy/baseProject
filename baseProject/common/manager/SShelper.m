@@ -321,7 +321,7 @@
         }
     }
     if ([obj isKindOfClass:[NSString class]]) {
-        if (![obj length] || obj == nil || obj == NULL || [obj isKindOfClass:[NSNull class]] || [[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 || [obj isEqualToString:@"(null)"] || [obj isEqualToString:@"    "]) {
+        if (![obj length] || obj == nil || obj == NULL || [obj isKindOfClass:[NSNull class]] || [[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 || [obj isEqualToString:@"(null)"] || [obj stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0) {
             return YES;
         }
     }

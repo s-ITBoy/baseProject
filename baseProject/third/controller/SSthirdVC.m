@@ -8,6 +8,7 @@
 
 #import "SSthirdVC.h"
 #import "SSwindowView.h"
+#import "SSshowContentView.h"
 
 @interface SSthirdVC ()
 @property(nonatomic,strong) UILabel* lab;
@@ -30,15 +31,20 @@
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     
+//    SSshowContentView* show = [[SSshowContentView alloc] init];
+//    show.loadingText = @"加载中...";
+//    [show SSshowLoadingSSHUD];
+    
 }
 
 - (void)clickBtn {
-    if ([SSwindowView isShowCustomView]) {
-        [SSwindowView dismissCustomView];
-    }else {
-        [SSwindowView showView:self.lab contentMode:UIViewContentModeRight];
-    }
-    
+//    if ([SSwindowView isShowCustomView]) {
+//        [SSwindowView dismissCustomView];
+//    }else {
+//        [SSwindowView showView:self.lab contentMode:UIViewContentModeRight];
+//    }
+    SSshowContentView* show = [[SSshowContentView alloc] init];
+    [show SSshowMsg:@"qwer"];
 }
 
 /*

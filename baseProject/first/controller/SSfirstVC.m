@@ -9,6 +9,7 @@
 #import "SSfirstVC.h"
 #import "ViewController.h"
 #import "SSBtnsListView.h"
+#import "SSshowContentView.h"
 
 @interface SSfirstVC ()
 @property(nonatomic,strong) SSBtnsListView* btnsListV;
@@ -34,7 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
-    
     
 }
 
