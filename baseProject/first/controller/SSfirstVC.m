@@ -8,23 +8,12 @@
 
 #import "SSfirstVC.h"
 #import "ViewController.h"
-#import "SSBtnsListView.h"
-#import "SSshowContentView.h"
 
 @interface SSfirstVC ()
-@property(nonatomic,strong) SSBtnsListView* btnsListV;
 @property(nonatomic,strong) UILabel* valueLab;
 @end
 
 @implementation SSfirstVC
-- (SSBtnsListView *)btnsListV {
-    if (!_btnsListV) {
-        _btnsListV = [[SSBtnsListView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ssscale(44))];
-        _btnsListV.titleArray = @[@"123",@"234",@"345",@"456"];
-        _btnsListV.sliderWidth = ssscale(30);
-    }
-    return _btnsListV;
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -36,8 +25,17 @@
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
     
+    UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 88, 100, 50)];
+    [btn setTitle:@"按钮" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor greenColor]];
+    [self.view addSubview:btn];
+    [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)clickBtn {
+    
+    
+}
 
 /*
 #pragma mark - Navigation

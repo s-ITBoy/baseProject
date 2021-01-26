@@ -17,7 +17,8 @@
 ///
 @property(nonatomic,strong) UIActivityIndicatorView* indicatorView;
 @property(nonatomic,strong) UILabel* loadingLab;
-
+@property(nonatomic,strong) UIImageView* circleImgV;
+@property(nonatomic,strong) NSTimer* timer;
 @end
 
 @implementation SSshowContentView
@@ -26,7 +27,7 @@
     if (!_bgView) {
         _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ssscale(80), ssscale(80))];
         _bgView.backgroundColor = [UIColor colorWithWhite:0.8f alpha:0.6f];
-        _bgView.layer.cornerRadius = 5;
+        _bgView.layer.cornerRadius = ssscale(5);
         _bgView.clipsToBounds = YES;
     }
     return _bgView;
@@ -50,6 +51,19 @@
         _loadingLab.text = @"加载中";
     }
     return _loadingLab;
+}
+- (UIImageView *)circleImgV {
+    if (!_circleImgV) {
+        _circleImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ssscale(32), ssscale(32))];
+        if (_model == SSloadingModelImgCircle || _model == SSloadingModelImgCircleAndText) {
+            _circleImgV.image = [UIImage imageNamed:@"circle_loading"];
+        }else {
+            _circleImgV.image = [self drawCircleWithRadius:ssscale(32) width:self.circleWidth > 0 ? self.circleWidth : ssscale(4) color:self.circleColor ? self.circleColor : [UIColor blackColor]];
+        }
+        
+        _circleImgV.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _circleImgV;
 }
 
 //FIXME:----------
@@ -76,10 +90,8 @@
 }
 
 - (void)setSubWith:(NSString*)msg canClick:(BOOL)canClick {
-    self.backgroundColor = _backGroundColor;
     self.layer.cornerRadius = 5;
     self.tag = 10010101;
-//    self.alpha = 0;
     
     for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
         if (view.tag == 10010101) {
@@ -99,6 +111,7 @@
     _label = lab;
     
     if (canClick) {
+        self.backgroundColor = _backGroundColor;
         self.alpha = 0;
         CGSize size = [msg boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-20, 200) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_font} context:nil].size;
             if (size.height > 20) {
@@ -116,65 +129,50 @@
         self.backgroundColor = [UIColor clearColor];
         lab.backgroundColor = _backGroundColor;
 
-            CGSize size = [msg boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-20, 200) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_font} context:nil].size;
-            if (size.height > 20) {
-        //        self.frame = CGRectMake(0, 0, ScreenWidth, size.height+10);
-                lab.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-20, size.height);
+        CGSize size = [msg boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-20, 200) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_font} context:nil].size;
+        if (size.height > 20) {
+//            self.frame = CGRectMake(0, 0, ScreenWidth, size.height+10);
+            lab.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-20, size.height);
 
-            }else {
-        //        self.frame = CGRectMake(0, 0, size.width+10, size.height+10);
-                lab.frame = CGRectMake(0, 0, size.width+10, size.height+10);
-            }
-    }
-}
-
-- (void)setSubWith:(NSString*)msg canCli:(BOOL)canClick {
-    self.backgroundColor = _backGroundColor;
-    self.layer.cornerRadius = 5;
-    self.tag = 10010101;
-    
-    for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
-        if (view.tag == 10010101) {
-            [view removeFromSuperview];
+        }else {
+//            self.frame = CGRectMake(0, 0, size.width+10, size.height+10);
+            lab.frame = CGRectMake(0, 0, size.width+10, size.height+10);
         }
+        lab.center = self.center;
     }
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
-    
-    UILabel* lab = [[UILabel alloc] init];
-    lab.textAlignment = NSTextAlignmentCenter;
-    lab.numberOfLines = 2;
-    lab.font = _font;
-    lab.textColor = _msgColor;
-    lab.text = msg;
-    lab.alpha = 0;
-    [self addSubview:lab];
-    _label = lab;
-    
-    self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    self.backgroundColor = [UIColor clearColor];
-    lab.backgroundColor = _backGroundColor;
-
-    CGSize size = [msg boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-20, 200) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_font} context:nil].size;
-    if (size.height > 20) {
-//        self.frame = CGRectMake(0, 0, ScreenWidth, size.height+10);
-        lab.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-20, size.height);
-
-    }else {
-//        self.frame = CGRectMake(0, 0, size.width+10, size.height+10);
-        lab.frame = CGRectMake(0, 0, size.width+10, size.height+10);
-    }
-    lab.center = self.center;
 }
 
 #pragma mark -------- 提示语 界面点击效果不被遮挡 提示语出现时仍可点击-----------
 
+///此方法不遮盖空白地方的手势操作
+- (void)SSmsg:(NSString*_Nullable)msg {
+    if (![self isEmptyStr:msg]) {
+        [self setSubWith:msg canClick:YES];
+        
+        [UIView animateWithDuration:_duration animations:^{
+            self.alpha = 1;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [self performBlock:^{
+                    [UIView animateWithDuration:self->_duration animations:^{
+                        self.alpha = 0;
+                    } completion:^(BOOL finished) {
+                        [self removeFromSuperview];
+                    }];
+                    
+                } AfterDelay:self->_delay];
+            }else {
+                [self removeFromSuperview];
+            }
+        }];
+    }
+}
 
 
 #pragma mark -------- 提示语 界面点击效果被遮挡 提示语出现时不可点击-----------
 
 - (void)SSshowMsg:(NSString*_Nullable)msg {
-    if (![SShelper isObjNil:msg]) {
+    if (![self isEmptyStr:msg]) {
         [self setSubWith:msg canClick:NO];
         
         [UIView animateWithDuration:_duration animations:^{
@@ -199,7 +197,7 @@
 }
 
 - (void)SSshowMsg:(NSString*_Nullable)msg FinishBlock:(void (^)(void))block {
-    if (![SShelper isObjNil:msg]) {
+    if (![self isEmptyStr:msg]) {
         [self setSubWith:msg canClick:NO];
         
         [UIView animateWithDuration:_duration animations:^{
@@ -221,7 +219,7 @@
 }
 
 - (void)SSshowMsg:(NSString*_Nullable)msg delay:(CGFloat)delay FinishBlock:(void (^)(void))block {
-    if (![SShelper isObjNil:msg]) {
+    if (![self isEmptyStr:msg]) {
         [self setSubWith:msg canClick:NO];
         [UIView animateWithDuration:_duration animations:^{
             self.alpha = 1;
@@ -251,6 +249,24 @@
 
 #pragma mark -------- 网络请求时的 加载菊花 -----------
 
+- (void)setBgColor:(UIColor *)bgColor {
+    _bgColor = bgColor;
+    self.bgView.backgroundColor = bgColor;
+}
+
+- (void)setIndicatorColorType:(int)indicatorColorType {
+    _indicatorColorType = indicatorColorType;
+    if (indicatorColorType == 0) {
+        self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    }else {
+        if (@available(iOS 13.0, *)) {
+            self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleMedium;
+        }else {
+            self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        }
+    }
+}
+
 - (void)setLoadingText:(NSString *)loadingText {
     _loadingText = loadingText;
     self.loadingLab.text = loadingText;
@@ -264,6 +280,14 @@
 - (void)setLoadingTextColor:(UIColor *)loadingTextColor {
     _loadingTextColor = loadingTextColor;
     self.loadingLab.textColor = loadingTextColor;
+}
+
+- (void)setCircleColor:(UIColor *)circleColor {
+    _circleColor = circleColor;
+}
+
+- (void)setCircleWidth:(CGFloat)circleWidth {
+    _circleWidth = circleWidth;
 }
 
 - (void)setCustomView:(UIView *)customView {
@@ -285,7 +309,7 @@
     [self addSubview:self.bgView];
     
     switch (model) {
-        case SSloadingModelActivityIndicator:{
+        case SSloadingModelActivityIndicator: {
             self.bgView.center = self.center;
             
             [self.bgView addSubview:self.indicatorView];
@@ -294,25 +318,25 @@
             [self.indicatorView startAnimating];
         }
             break;
-        case SSloadingModelActivityIndicatorAndText:{
-            CGFloat width = [self.loadingLab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.loadingLab.font,NSFontAttributeName, nil]].width + 20;
+        case SSloadingModelActivityIndicatorAndText: {
+            CGFloat width = [self.loadingLab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.loadingLab.font,NSFontAttributeName, nil]].width + ssscale(20);
             width = MAX(ssscale(100), width);
             
             self.bgView.frame = CGRectMake(0, 0, width, width);
             self.bgView.center = self.center;
             
             [self.bgView addSubview:self.indicatorView];
-            self.indicatorView.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - 15);
+            self.indicatorView.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - ssscale(15));
             
             [self.bgView addSubview:self.loadingLab];
             self.loadingLab.frame = CGRectMake(0, 0, width, ssscale(20));
-            self.loadingLab.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 + 25);
+            self.loadingLab.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 + ssscale(25));
             
             [self.indicatorView startAnimating];
         }
             break;
-        case SSloadingModelText:{
-            CGFloat width = [self.loadingLab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.loadingLab.font,NSFontAttributeName, nil]].width + 20;
+        case SSloadingModelText: {
+            CGFloat width = [self.loadingLab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.loadingLab.font,NSFontAttributeName, nil]].width + ssscale(20);
             width = MAX(ssscale(80), width);
             
             self.bgView.frame = CGRectMake(0, 0, width, width);
@@ -322,7 +346,75 @@
             self.loadingLab.frame = CGRectMake(0, 0, width, width);
         }
             break;
-        case SSloadingModelCustomize:{
+        case SSloadingModelImgCircle: {
+            self.bgView.center = self.center;
+            
+            [self.bgView addSubview:self.circleImgV];
+            self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2);
+            
+            if (!self.timer) {
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(runCircle) userInfo:nil repeats:YES];;
+//                [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+//                [[NSRunLoop currentRunLoop] run];
+            }
+        }
+            break;
+        case SSloadingModelImgCircleAndText: {
+            CGFloat width = [self.loadingLab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.loadingLab.font,NSFontAttributeName, nil]].width + ssscale(20);
+            width = MAX(ssscale(100), width);
+            
+            self.bgView.frame = CGRectMake(0, 0, width, width);
+            self.bgView.center = self.center;
+            
+            [self.bgView addSubview:self.circleImgV];
+            self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - ssscale(15));
+            
+            [self.bgView addSubview:self.loadingLab];
+            self.loadingLab.frame = CGRectMake(0, 0, width, ssscale(20));
+            self.loadingLab.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 + ssscale(25));
+            
+            if (!self.timer) {
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(runCircle) userInfo:nil repeats:YES];;
+//                [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+//                [[NSRunLoop currentRunLoop] run];
+            }
+        }
+                break;
+        case SSloadingModelPathCircle: {
+            self.bgView.center = self.center;
+            
+            [self.bgView addSubview:self.circleImgV];
+            self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2);
+            
+            if (!self.timer) {
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(runCircle) userInfo:nil repeats:YES];;
+//                [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+//                [[NSRunLoop currentRunLoop] run];
+            }
+        }
+            break;
+        case SSloadingModelPathCircleAndText: {
+            CGFloat width = [self.loadingLab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.loadingLab.font,NSFontAttributeName, nil]].width + ssscale(20);
+            width = MAX(ssscale(100), width);
+            
+            self.bgView.frame = CGRectMake(0, 0, width, width);
+            self.bgView.center = self.center;
+            
+            [self.bgView addSubview:self.circleImgV];
+            self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - ssscale(15));
+            
+            [self.bgView addSubview:self.loadingLab];
+            self.loadingLab.frame = CGRectMake(0, 0, width, ssscale(20));
+            self.loadingLab.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 + ssscale(25));
+            
+            if (!self.timer) {
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(runCircle) userInfo:nil repeats:YES];;
+                [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+//                [[NSRunLoop currentRunLoop] run];
+            }
+        }
+            break;
+        case SSloadingModelCustomize: {
             if (self.customView) {
                 CGRect frame = CGRectMake(0, 0, self.customView.frame.size.width, self.customView.frame.size.height);
                 self.bgView.frame = frame;
@@ -339,7 +431,7 @@
 }
 
 - (void)SSshowLoadingSSHUD {
-    [self SSshowLoadingSSHUD:1];
+    [self SSshowLoadingSSHUD:6];
 }
 
 - (void)SSshowLoadingSSHUD:(SSloadingModel)model {
@@ -347,22 +439,109 @@
     [self setSubWithModel:model];
 }
 
-- (void)SShiddenLoadingSSHUD {
+- (void)SSdismissLoadingSSHUD {
     if (_model == SSloadingModelActivityIndicator || _model == SSloadingModelActivityIndicatorAndText) {
         [self.indicatorView stopAnimating];
+    }
+    if (_model == SSloadingModelImgCircle || _model == SSloadingModelImgCircleAndText || _model == SSloadingModelPathCircle || _model == SSloadingModelPathCircleAndText) {
+        if (self.timer) {
+            [self.timer invalidate];
+            self.timer = nil;
+        }
     }
     [self removeFromSuperview];
 }
 
-- (void)SShiddenAllLoading {
+- (void)SSdismissAllLoading {
     for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
         if (view.tag == 10010101) {
             SSshowContentView* showView = (SSshowContentView*)view;
             if (showView.model == SSloadingModelActivityIndicator || showView.model == SSloadingModelActivityIndicatorAndText) {
                 [self.indicatorView stopAnimating];
             }
+            if (showView.model == SSloadingModelImgCircle || showView.model == SSloadingModelImgCircleAndText) {
+                if (self.timer) {
+                    [self.timer invalidate];
+                    self.timer = nil;
+                }
+            }
             [view removeFromSuperview];
         }
+    }
+}
+
+///计时器Timer的方法
+- (void)runCircle {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.circleImgV.transform = CGAffineTransformRotate(self.circleImgV.transform, 0.0006);
+    });
+}
+
+///画圆环图片
+- (UIImage*)drawCircleWithRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor*)color {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(2*radius, 2*radius),NO,[UIScreen mainScreen].scale);  //开始画线
+    //生成圆环上部分
+    UIImage *upperImage = [self drawgradientCircleWithRadius:radius width:width color:color upper:YES];
+    //生成圆环下部分
+    UIImage *image = [self drawgradientCircleWithRadius:radius width:width color:color upper:NO];
+    //合并成一个圆环
+    [upperImage drawInRect:CGRectMake(0, 0, radius*2, radius)];
+    [image drawInRect:CGRectMake(0, radius, radius*2, radius)];
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
+- (UIImage*)drawgradientCircleWithRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor*)color upper:(BOOL)upper {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(2*radius, radius),NO,[UIScreen mainScreen].scale);  //开始画线
+    //获取上下文
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    CGContextSetLineWidth(context, width);
+    //绘制半圆环
+    if (upper) {
+//        CGContextAddArc(context, radius, radius, radius-width*0.5, M_PI, 2*M_PI, 0);
+        CGContextAddArc(context, radius, radius, radius-width*0.5, M_PI, 2*M_PI, 0);
+    }else{
+        CGContextAddArc(context, radius, 0, radius-width*0.5, 0, M_PI, 0);
+    }
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    NSMutableArray *colorArray = [NSMutableArray array];
+    [colorArray addObject:(id)[color colorWithAlphaComponent:0].CGColor];
+    [colorArray addObject:(id)[color colorWithAlphaComponent:0.5].CGColor];
+    [colorArray addObject:(id)[color colorWithAlphaComponent:1].CGColor];
+    
+    //null标识渐变色均匀分布
+    CGGradientRef gradientRef = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colorArray, NULL);
+    // 释放色彩空间
+    CGColorSpaceRelease(colorSpace);
+    CGContextReplacePathWithStrokedPath(context);
+    CGContextClip(context);
+    // 4. 用渐变色填充
+    //圆环是逆时针分布，所以上半部分圆环渐变色从-2*radius到28radius
+    //下半部分圆环从2*radius到-2radius
+    if (upper) {
+        CGContextDrawLinearGradient(context, gradientRef, CGPointMake(-radius*2, radius), CGPointMake(radius*2, radius), 0);
+    }else{
+        CGContextDrawLinearGradient(context, gradientRef, CGPointMake(radius*2, radius), CGPointMake(-radius*2, radius), 0);
+    }
+    // 释放渐变色
+    CGGradientRelease(gradientRef);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    //拉伸当前图像
+    CGContextRestoreGState(context);
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
+- (BOOL)isEmptyStr:(id _Nullable)obj {
+    if ([obj isKindOfClass:[NSString class]]) {
+        if (![obj length] || obj == nil || obj == NULL || [obj isKindOfClass:[NSNull class]] || [[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 || [obj isEqualToString:@"(null)"] || [obj stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0) {
+            return YES;
+        }
+        return NO;
+    }else {
+        return YES;
     }
 }
 

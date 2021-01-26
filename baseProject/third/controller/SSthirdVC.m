@@ -38,13 +38,15 @@
 }
 
 - (void)clickBtn {
-//    if ([SSwindowView isShowCustomView]) {
-//        [SSwindowView dismissCustomView];
-//    }else {
-//        [SSwindowView showView:self.lab contentMode:UIViewContentModeRight];
-//    }
     SSshowContentView* show = [[SSshowContentView alloc] init];
-    [show SSshowMsg:@"qwer"];
+    show.backGroundColor = [UIColor whiteColor];
+//    show.circleColor = [UIColor greenColor];
+    [show SSshowLoadingSSHUD];
+    
+//    [NSThread sleepForTimeInterval:3];
+//    [show SShiddenLoadingSSHUD];
+//    [show SShiddenAllLoading];;
+    
 }
 
 /*
