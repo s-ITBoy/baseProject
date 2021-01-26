@@ -1,8 +1,8 @@
 //
-//  SSshowContentView.h
-//  ddz
+//  SStipsOrHUD.h
+//  SSshowHUDdemo
 //
-//  Created by F S on 2017/12/11.
+//  Created by F S on 2017/11/26.
 //  Copyright © 2017 F S. All rights reserved.
 //
 
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, SSloadingModel) {
 NS_ASSUME_NONNULL_BEGIN
 
 ///提示消息文字view
-@interface SSshowContentView : UIView
+@interface SStipsOrHUD : UIView
 
 /////tip的text
 //@property (nonatomic,retain,readwrite)NSString* msg;

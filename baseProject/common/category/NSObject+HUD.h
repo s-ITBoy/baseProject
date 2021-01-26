@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (HUD)<MBProgressHUDDelegate>
 
-#pragma mark --------- 自定义 SSshowContentView -------------
+#pragma mark --------- 自定义 SSshowMsg -------------
 - (void)SSshowCustomWithMsg:(NSString*)msg;
 
 - (void)SSshowCustomWithMsg:(NSString*)msg dismissBlock:(void (^)(void))disBlock;

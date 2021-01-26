@@ -1,14 +1,14 @@
 //
-//  SSshowContentView.m
-//  ddz
+//  SStipsOrHUD.m
+//  SSshowHUDdemo
 //
-//  Created by F S on 2017/12/11.
+//  Created by F S on 2017/11/26.
 //  Copyright © 2017 F S. All rights reserved.
 //
 
-#import "SSshowContentView.h"
+#import "SStipsOrHUD.h"
 
-@interface SSshowContentView () {
+@interface SStipsOrHUD () {
     UILabel* _label;
 }
 @property(nonatomic,assign) SSloadingModel model;
@@ -19,9 +19,11 @@
 @property(nonatomic,strong) UILabel* loadingLab;
 @property(nonatomic,strong) UIImageView* circleImgV;
 @property(nonatomic,strong) NSTimer* timer;
+
 @end
 
-@implementation SSshowContentView
+@implementation SStipsOrHUD
+
 #pragma mark ------- 懒加载 ----------
 - (UIView *)bgView {
     if (!_bgView) {
@@ -431,7 +433,7 @@
 }
 
 - (void)SSshowLoadingSSHUD {
-    [self SSshowLoadingSSHUD:6];
+    [self SSshowLoadingSSHUD:0];
 }
 
 - (void)SSshowLoadingSSHUD:(SSloadingModel)model {
@@ -455,7 +457,7 @@
 - (void)SSdismissAllLoading {
     for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
         if (view.tag == 10010101) {
-            SSshowContentView* showView = (SSshowContentView*)view;
+            SStipsOrHUD* showView = (SStipsOrHUD*)view;
             if (showView.model == SSloadingModelActivityIndicator || showView.model == SSloadingModelActivityIndicatorAndText) {
                 [self.indicatorView stopAnimating];
             }
