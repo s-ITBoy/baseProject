@@ -27,20 +27,21 @@ typedef NS_ENUM(NSInteger, SSloadingModel) {
 NS_ASSUME_NONNULL_BEGIN
 
 ///提示消息文字view
-@interface SStipsOrHUD : UIView
+@interface SStipsAndHUD : UIView
+///y轴方向偏移量。默认为0（居屏幕中间）正数：往下偏移；负数：往上偏移
+@property(nonatomic,assign) CGFloat offset_YY;
 
-/////tip的text
-//@property (nonatomic,retain,readwrite)NSString* msg;
+
 ///msg显示时的背景色
-@property (nonatomic,retain,readwrite)UIColor* backGroundColor;
+@property (nonatomic,strong)UIColor* backGroundColor;
 ///消息的字体颜色
-@property (nonatomic,retain,readwrite)UIColor* msgColor;
+@property (nonatomic,strong)UIColor* msgColor;
 ///字体
-@property (nonatomic,retain,readwrite)UIFont* font;
+@property (nonatomic,strong)UIFont* font;
 ///渐变时间
-@property (nonatomic,assign,readwrite)CGFloat duration;
+@property (nonatomic,assign)CGFloat duration;
 ///显示多长时间后隐藏
-@property (nonatomic,assign,readwrite)CGFloat delay;
+@property (nonatomic,assign)CGFloat delay;
 
 
 #pragma mark -------- 提示语 界面点击效果不被遮挡 提示语出现时仍可点击-----------

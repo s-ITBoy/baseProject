@@ -6,9 +6,13 @@
 //  Copyright © 2017 F S. All rights reserved.
 //
 
-#import "SStipsOrHUD.h"
+#import "SStipsAndHUD.h"
+#import <objc/runtime.h>
 
-@interface SStipsOrHUD () {
+#define Scale  [[UIScreen mainScreen] bounds].size.width/375
+#define ssscale(x)   x*Scale
+
+@interface SStipsAndHUD () {
     UILabel* _label;
 }
 @property(nonatomic,assign) SSloadingModel model;
@@ -22,7 +26,7 @@
 
 @end
 
-@implementation SStipsOrHUD
+@implementation SStipsAndHUD
 
 #pragma mark ------- 懒加载 ----------
 - (UIView *)bgView {
@@ -74,6 +78,7 @@
         _backGroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         _font = [UIFont systemFontOfSize:12];
         _msgColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.8];
+        _offset_YY = 0;
         _duration = 0.5;
         _delay = 0.5;
     }
@@ -85,6 +90,7 @@
         _backGroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         _font = [UIFont systemFontOfSize:12];
         _msgColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.8];
+        _offset_YY = 0;
         _duration = 0.5;
         _delay = 0.5;
     }
@@ -124,7 +130,8 @@
                 self.frame = CGRectMake(0, 0, size.width+10, size.height+10);
                 lab.frame = CGRectMake(0, 0, size.width+10, size.height+10);
             }
-        self.center = [UIApplication sharedApplication].keyWindow.center;
+//        self.center = [UIApplication sharedApplication].keyWindow.center;
+        self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2 + _offset_YY);
     }else {
         lab.alpha = 0;
         self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
@@ -140,7 +147,8 @@
 //            self.frame = CGRectMake(0, 0, size.width+10, size.height+10);
             lab.frame = CGRectMake(0, 0, size.width+10, size.height+10);
         }
-        lab.center = self.center;
+//        lab.center = self.center;
+        lab.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
     }
 }
 
@@ -312,8 +320,8 @@
     
     switch (model) {
         case SSloadingModelActivityIndicator: {
-            self.bgView.center = self.center;
-            
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             [self.bgView addSubview:self.indicatorView];
             self.indicatorView.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2);
             
@@ -325,7 +333,8 @@
             width = MAX(ssscale(100), width);
             
             self.bgView.frame = CGRectMake(0, 0, width, width);
-            self.bgView.center = self.center;
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             
             [self.bgView addSubview:self.indicatorView];
             self.indicatorView.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - ssscale(15));
@@ -342,14 +351,16 @@
             width = MAX(ssscale(80), width);
             
             self.bgView.frame = CGRectMake(0, 0, width, width);
-            self.bgView.center = self.center;
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             
             [self.bgView addSubview:self.loadingLab];
             self.loadingLab.frame = CGRectMake(0, 0, width, width);
         }
             break;
         case SSloadingModelImgCircle: {
-            self.bgView.center = self.center;
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             
             [self.bgView addSubview:self.circleImgV];
             self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2);
@@ -366,7 +377,8 @@
             width = MAX(ssscale(100), width);
             
             self.bgView.frame = CGRectMake(0, 0, width, width);
-            self.bgView.center = self.center;
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             
             [self.bgView addSubview:self.circleImgV];
             self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - ssscale(15));
@@ -383,7 +395,8 @@
         }
                 break;
         case SSloadingModelPathCircle: {
-            self.bgView.center = self.center;
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             
             [self.bgView addSubview:self.circleImgV];
             self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2);
@@ -400,7 +413,8 @@
             width = MAX(ssscale(100), width);
             
             self.bgView.frame = CGRectMake(0, 0, width, width);
-            self.bgView.center = self.center;
+//            self.bgView.center = self.center;
+            self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
             
             [self.bgView addSubview:self.circleImgV];
             self.circleImgV.center = CGPointMake(self.bgView.bounds.size.width/2, self.bgView.bounds.size.height/2 - ssscale(15));
@@ -420,7 +434,8 @@
             if (self.customView) {
                 CGRect frame = CGRectMake(0, 0, self.customView.frame.size.width, self.customView.frame.size.height);
                 self.bgView.frame = frame;
-                self.bgView.center = self.center;
+//                self.bgView.center = self.center;
+                self.bgView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2 + _offset_YY);
                 
                 [self.bgView addSubview:self.customView];
             }
@@ -457,7 +472,7 @@
 - (void)SSdismissAllLoading {
     for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
         if (view.tag == 10010101) {
-            SStipsOrHUD* showView = (SStipsOrHUD*)view;
+            SStipsAndHUD* showView = (SStipsAndHUD*)view;
             if (showView.model == SSloadingModelActivityIndicator || showView.model == SSloadingModelActivityIndicatorAndText) {
                 [self.indicatorView stopAnimating];
             }
@@ -556,3 +571,4 @@
 */
 
 @end
+

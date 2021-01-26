@@ -46,7 +46,7 @@
 		475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299B824CAD3E5008FD18B /* SSboxCodeView.m */; };
 		475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BB24CAD3EF008FD18B /* SSuislider.m */; };
 		475299C024CAD3F6008FD18B /* SSwaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */; };
-		47584DC625BFAFBA002B3676 /* SStipsOrHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47584DC425BFAFBA002B3676 /* SStipsOrHUD.m */; };
+		47584DD425BFF2AF002B3676 /* SStipsAndHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47584DD225BFF2AF002B3676 /* SStipsAndHUD.m */; };
 		475C40392595BA9B00364CB1 /* SSmarqueeV.m in Sources */ = {isa = PBXBuildFile; fileRef = 475C40372595BA9B00364CB1 /* SSmarqueeV.m */; };
 		4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768EAFD23A081ED006440D5 /* SSbaseVC.m */; };
 		4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 4794CEF0244801A2002751EA /* SSgoldAnimationImgV.m */; };
@@ -179,8 +179,8 @@
 		475299BC24CAD3EF008FD18B /* SSuislider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSuislider.h; sourceTree = "<group>"; };
 		475299BE24CAD3F6008FD18B /* SSwaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSwaterWaveView.m; sourceTree = "<group>"; };
 		475299BF24CAD3F6008FD18B /* SSwaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSwaterWaveView.h; sourceTree = "<group>"; };
-		47584DC425BFAFBA002B3676 /* SStipsOrHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SStipsOrHUD.m; sourceTree = "<group>"; };
-		47584DC525BFAFBA002B3676 /* SStipsOrHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStipsOrHUD.h; sourceTree = "<group>"; };
+		47584DD225BFF2AF002B3676 /* SStipsAndHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SStipsAndHUD.m; sourceTree = "<group>"; };
+		47584DD325BFF2AF002B3676 /* SStipsAndHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStipsAndHUD.h; sourceTree = "<group>"; };
 		475C40372595BA9B00364CB1 /* SSmarqueeV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSmarqueeV.m; sourceTree = "<group>"; };
 		475C40382595BA9B00364CB1 /* SSmarqueeV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSmarqueeV.h; sourceTree = "<group>"; };
 		4768EAFC23A081ED006440D5 /* SSbaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSbaseVC.h; sourceTree = "<group>"; };
@@ -833,8 +833,8 @@
 			children = (
 				475299B524CAD3AD008FD18B /* SSautoTableV.h */,
 				475299B624CAD3AD008FD18B /* SSautoTableV.m */,
-				47584DC525BFAFBA002B3676 /* SStipsOrHUD.h */,
-				47584DC425BFAFBA002B3676 /* SStipsOrHUD.m */,
+				47584DD325BFF2AF002B3676 /* SStipsAndHUD.h */,
+				47584DD225BFF2AF002B3676 /* SStipsAndHUD.m */,
 				47FB13FD23CD722C00072C1D /* SSwindowView.h */,
 				47FB13F823CD722C00072C1D /* SSwindowView.m */,
 				4799C5E62580D1FA0094CA0B /* SSbadgeBtn.h */,
@@ -1135,7 +1135,6 @@
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
 				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,
-				47584DC625BFAFBA002B3676 /* SStipsOrHUD.m in Sources */,
 				4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
@@ -1151,6 +1150,7 @@
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,
 				2CC5B61B235FFC1900998FDF /* NSData+SS.m in Sources */,
 				475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */,
+				47584DD425BFF2AF002B3676 /* SStipsAndHUD.m in Sources */,
 				2CC5B60C235FF2B900998FDF /* UIColor+SS.m in Sources */,
 				4768EAFE23A081ED006440D5 /* SSbaseVC.m in Sources */,
 			);

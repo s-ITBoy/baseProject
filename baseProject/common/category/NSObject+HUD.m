@@ -9,7 +9,7 @@
 #import "NSObject+HUD.h"
 #import "AppDelegate.h"
 #import <objc/runtime.h>
-#import "SStipsOrHUD.h"
+#import "SStipsAndHUD.h"
 
 #define KEY_OBJECT_HUD @"UIViewController.HBHUD"
 #define KEY_HUD @"dismissblock"
@@ -20,12 +20,12 @@ static char OperationKey;
 
 #pragma mark --------- 自定义 SSshowMsg -------------
 - (void)SSshowCustomWithMsg:(NSString*)msg {
-    SStipsOrHUD* show = [[SStipsOrHUD alloc] init];
-    [show SSshowCustomWithMsg:msg];
+    SStipsAndHUD* show = [[SStipsAndHUD alloc] init];
+    [show SSshowMsg:msg];
 }
 
 - (void)SSshowCustomWithMsg:(NSString*)msg dismissBlock:(void (^)(void))disBlock {
-    SStipsOrHUD* show = [[SStipsOrHUD alloc] init];
+    SStipsAndHUD* show = [[SStipsAndHUD alloc] init];
     [show SSshowMsg:msg FinishBlock:disBlock];
 }
 

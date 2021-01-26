@@ -8,7 +8,7 @@
 
 #import "SSthirdVC.h"
 #import "SSwindowView.h"
-#import "SStipsOrHUD.h"
+#import "SStipsAndHUD.h"
 
 @interface SSthirdVC ()
 @property(nonatomic,strong) UILabel* lab;
@@ -38,10 +38,10 @@
 }
 
 - (void)clickBtn {
-    SStipsOrHUD* show = [[SStipsOrHUD alloc] init];
+    SStipsAndHUD* show = [[SStipsAndHUD alloc] init];
     show.backGroundColor = [UIColor whiteColor];
 //    show.circleColor = [UIColor greenColor];
-    [show SSshowLoadingSSHUD];
+    [show SSshowLoadingSSHUD:4];
     
 }
 
