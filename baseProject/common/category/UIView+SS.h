@@ -72,6 +72,7 @@
 - (void)SSsetColor:(UIColor*)color1 and:(UIColor*)color2 and:(CGPoint)start and:(CGPoint)end;
 
 - (void)SSremoveAllSubViews;
+
 #pragma mark ------------ 动画效果 ------------
 ///适用于点击选中放大/缩小的动画
 - (void)SStransformAnimate:(CGFloat)scaleX and:(CGFloat)scaleY Interval:(CGFloat)interval;

@@ -41,19 +41,6 @@
     
 }
 
-- (void)setIsSetImgOnRight:(BOOL)isSetImgOnRight {
-    _isSetImgOnRight = isSetImgOnRight;
-    if (isSetImgOnRight) {
-        self.imageEdgeInsets = UIEdgeInsetsMake(0,self.titleLabel.bounds.size.width, 0, -self.titleLabel.bounds.size.width);
-        self.titleEdgeInsets = UIEdgeInsetsMake(0, -self.imageView.bounds.size.width, 0, self.imageView.bounds.size.width);
-    }
-}
-
-- (CGRect)contentRectForBounds:(CGRect)bounds {
-    return bounds;
-}
-
-
 - (void)setImgNameStr:(NSString *)imgNameStr {
     _imgNameStr = imgNameStr;
     if (self.buttonType == UIButtonTypeSystem) {
@@ -82,6 +69,14 @@
         self.badgeLabel.frame = CGRectMake(self.width-width/2, ssscale(-5), width, ssscale(14));
     }
     self.badgeLabel.hidden = NO;
+}
+
+- (void)setIsSetImgOnRight:(BOOL)isSetImgOnRight {
+    _isSetImgOnRight = isSetImgOnRight;
+    if (isSetImgOnRight) {
+        self.imageEdgeInsets = UIEdgeInsetsMake(0,self.titleLabel.bounds.size.width, 0, -self.titleLabel.bounds.size.width);
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, -self.imageView.bounds.size.width, 0, self.imageView.bounds.size.width);
+    }
 }
 
 

@@ -59,11 +59,11 @@
     home.tabBarItem = item1;
 //    //
     SSsecondVC* second = [[SSsecondVC alloc] init];
-    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"赚钱" image:[self imageRenderOriginalWithName:@"admit"] selectedImage:[self imageRenderOriginalWithName:@"admit_selected"]];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"分类" image:[self imageRenderOriginalWithName:@"admit"] selectedImage:[self imageRenderOriginalWithName:@"admit_selected"]];
     second.tabBarItem = item2;
     //
     SSthirdVC* third = [[SSthirdVC alloc] init];
-    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"个人" image:[self imageRenderOriginalWithName:@"activity"] selectedImage:[self imageRenderOriginalWithName:@"activity_selected"]];
+    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"购物车" image:[self imageRenderOriginalWithName:@"activity"] selectedImage:[self imageRenderOriginalWithName:@"activity_selected"]];
     third.tabBarItem = item3;
 
     SSforthVC* mine = [SSforthVC new];

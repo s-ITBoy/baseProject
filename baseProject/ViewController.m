@@ -106,11 +106,11 @@
 }
 
 ///分区背景色
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     view.tintColor = [UIColor redColor];
 }
 ///蛋疼：ios11后更改section颜色必须加上这个方法
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return nil;
 }
 
