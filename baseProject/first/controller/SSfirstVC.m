@@ -9,9 +9,6 @@
 #import "SSfirstVC.h"
 #import "ViewController.h"
 
-#import "SSbadgeBtn.h"
-#import "SSimgTextBadgeBtn.h"
-
 @interface SSfirstVC ()
 @property(nonatomic,strong) UILabel* valueLab;
 @end
@@ -34,11 +31,6 @@
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     
-    SSimgTextBadgeBtn* ssbtn = [[SSimgTextBadgeBtn alloc] initWithFrame:CGRectMake(btn.XX, btn.maxYY+20, btn.width, 20)];
-    ssbtn.imgNameStr = @"activity_selected";
-    [ssbtn setTitle:@"你好" forState:UIControlStateNormal];
-    [ssbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.view addSubview:ssbtn];
     
 }
 
