@@ -35,7 +35,7 @@
             fmt = @"yyyy/MM/dd HH:mm:ss";
             break;
         case SSDateFormatterStyle_3:
-            fmt = @"yyyyMMddHHmmss";
+            fmt = @"dd/MM/yyyy";
             break;
         case SSDateFormatterStyle_4:
             fmt = @"yyyy-MM-dd";
