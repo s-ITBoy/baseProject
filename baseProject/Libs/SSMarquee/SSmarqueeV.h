@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-///跑马灯视图view
+///跑马灯视图view(支持四个方向)
 @interface SSmarqueeV : UIView
 @property(nonatomic,weak) id<SSmarqueeDelegate> delegate;
 ///计时器 时间间隔 默认 2.0s

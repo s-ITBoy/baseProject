@@ -12,6 +12,7 @@
 +(UIFont*)SSfontWith:(CGFloat)size{
     return [UIFont SSsystemFont:size];
 }
+
 +(UIFont*)SSfont23{
     return [UIFont SSsystemFont:23];
 }

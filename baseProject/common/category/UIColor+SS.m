@@ -29,33 +29,10 @@
 + (UIColor*)SSredColor{
     return [UIColor SScolorWithR:255 G:190 B:0];
 }
-//+ (UIColor*)SSredColor{
-//    return [UIColor SScolorWithR:233 G:59 B:61];
-//}
-
-
-///金额数的字体颜色
-+ (UIColor*)SSmoneyColor{
-    return [UIColor SScolorWithHexString:@"#856020"];;
-}
 
 ///自定义蓝色
 + (UIColor*)SSBlueColor{
     return [UIColor SScolorWithR:0 G:112 B:201];
-}
-
-///table的分区背景色
-+ (UIColor*)SSsectionColor{
-    return [UIColor SScolorWithR:244 G:244 B:244];
-}
-
-///borderColor(浅灰)
-+ (UIColor*)SSborderColor{
-    return [UIColor SScolorWithR:178 G:178 B:178];
-}
-///分割线颜色
-+ (UIColor*)SSseparatorColor{
-    return [UIColor SScolorWithR:237 G:237 B:237];
 }
 
 + (UIColor*)SScolorInteger:(NSInteger)integer {
@@ -70,6 +47,7 @@
 + (UIColor *) SScolorWithHexString: (NSString *)colorString {
     return [UIColor SScolorWithHexString:colorString andAlpha:1];
 }
+
 ///十六进制颜色带透明度值
 + (UIColor *) SScolorWithHexString: (NSString *)colorString andAlpha:(CGFloat)alpha {
     NSString *cString = [[colorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
@@ -116,10 +94,12 @@
 + (UIColor *) SScolorWithHex000000 {
     return [UIColor SScolorWithHexString:@"#000000" andAlpha:1];
 }
+
 ///深灰
 + (UIColor *) SScolorWithHex010101 {
     return [UIColor SScolorWithHexString:@"#010101" andAlpha:1];
 }
+
 ///浅灰
 + (UIColor *) SScolorWithHex999999 {
     return [UIColor SScolorWithHexString:@"#999999" andAlpha:1];
@@ -146,4 +126,30 @@
 + (UIColor*) SSshadowColor {
     return [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.1];
 }
+
+///table的分区背景色
++ (UIColor*)SSsectionColor{
+    return [UIColor SScolorWithR:244 G:244 B:244];
+}
+
+///borderColor(浅灰)
++ (UIColor*)SSborderColor{
+    return [UIColor SScolorWithR:178 G:178 B:178];
+}
+
+///分割线颜色
++ (UIColor*)SSseparatorColor{
+    return [UIColor SScolorWithR:237 G:237 B:237];
+}
+
+///金额数的字体颜色
++ (UIColor*)SSmoneyColor{
+    return [UIColor SScolorWithHexString:@"#856020"];;
+}
+
+///销售价格的颜色
++ (UIColor*)SSpriceColor {
+    return [UIColor SScolorWithHexString:@"#856050"];;
+}
+
 @end

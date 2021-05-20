@@ -25,55 +25,55 @@
     return help;
 }
 
-- (NSDateFormatter *)fmtterForStyle:(BPDateFormatterStyle)style{
+- (NSDateFormatter *)fmtterForStyle:(SSDateFormatterStyle)style{
     NSString *fmt = nil;
     switch (style) {
-        case BPDateFormatterStyleDefault:
+        case SSDateFormatterStyleDefault:
             fmt = @"yyyy-MM-dd HH:mm:ss";
             break;
-        case BPDateFormatterStyle_2:
+        case SSDateFormatterStyle_2:
             fmt = @"yyyy/MM/dd HH:mm:ss";
             break;
-        case BPDateFormatterStyle_3:
+        case SSDateFormatterStyle_3:
             fmt = @"yyyyMMddHHmmss";
             break;
-        case BPDateFormatterStyle_4:
+        case SSDateFormatterStyle_4:
             fmt = @"yyyy-MM-dd";
             break;
-        case BPDateFormatterStyle_5:
+        case SSDateFormatterStyle_5:
             fmt = @"yyyy年MM月dd日";
             break;
-        case BPDateFormatterStyle_6:
+        case SSDateFormatterStyle_6:
             fmt = @"yyyy/MM/dd HH:mm";
             break;
-        case BPDateFormatterStyle_7:
+        case SSDateFormatterStyle_7:
             fmt = @"HH:mm:ss";
             break;
-        case BPDateFormatterStyle_8:
+        case SSDateFormatterStyle_8:
             fmt = @"mm:ss";
             break;
-        case BPDateFormatterStyle_9:
+        case SSDateFormatterStyle_9:
             fmt = @"ss";
             break;
-        case BPDateFormatterStyle_10:
+        case SSDateFormatterStyle_10:
             fmt = @"yyyy/MM/dd";
             break;
-        case BPDateFormatterStyle_11:
+        case SSDateFormatterStyle_11:
             fmt = @"MM月dd日";
             break;
-        case BPDateFormatterStyle_12:
+        case SSDateFormatterStyle_12:
             fmt = @"yyyyMMdd_HHmmss";
             break;
-        case  BPDateFormatterStyle_13:
+        case  SSDateFormatterStyle_13:
             fmt = @"HHmmss";
             break;
-        case BPDateFormatterStyle_14:
+        case SSDateFormatterStyle_14:
             fmt = @"yyyy.MM.dd HH:mm:ss";
             break;
-        case BPDateFormatterStyle_15:
+        case SSDateFormatterStyle_15:
             fmt = @"MM-dd";
             break;
-        case BPDateFormatterStyle_16:
+        case SSDateFormatterStyle_16:
             fmt = @"yyyyMMdd";
             break;
         default:
@@ -90,7 +90,7 @@
 }
 
 ///将时间戳转换成指定时间格式的字符串(当时间戳为13位时需除以1000)
-+ (NSString*)stringFromeTimeInterval:(NSString*)timeStamp with:(BPDateFormatterStyle)type{
++ (NSString*)stringFromeTimeInterval:(NSString*)timeStamp with:(SSDateFormatterStyle)type{
     NSTimeInterval timeInterval = [timeStamp doubleValue];
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     //    NSDate* d = [NSDate dateWithTimeIntervalSinceReferenceDate:timeInterval];
@@ -100,14 +100,14 @@
 }
 
 ///将指定时间格式的时间字符串转成date
-+ (NSDate*)dateFromeTimeStr:(NSString*)timeStr with:(BPDateFormatterStyle)type{
++ (NSDate*)dateFromeTimeStr:(NSString*)timeStr with:(SSDateFormatterStyle)type{
     NSDateFormatter* formatter = [[SShelper shareHelp] fmtterForStyle:type];
     NSDate *datestr = [formatter dateFromString:timeStr];
     return datestr;
 }
 
 ///将指定时间格式的时间字符串转成时间戳
-+ (NSString*)timeintervalStringFromeTimeString:(NSString*)timeStr with:(BPDateFormatterStyle)type{
++ (NSString*)timeintervalStringFromeTimeString:(NSString*)timeStr with:(SSDateFormatterStyle)type{
     NSDateFormatter* formatter = [[SShelper shareHelp] fmtterForStyle:type];
     NSDate *datestr = [formatter dateFromString:timeStr];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datestr timeIntervalSince1970]];
@@ -115,7 +115,7 @@
 }
 
 ///将指定时间格式的时间字符串转成NSTimeInterval
-+ (NSTimeInterval)timeintervalFromeTimeString:(NSString*)timeStr with:(BPDateFormatterStyle)type{
++ (NSTimeInterval)timeintervalFromeTimeString:(NSString*)timeStr with:(SSDateFormatterStyle)type{
     NSDateFormatter* formatter = [[SShelper shareHelp] fmtterForStyle:type];
     NSDate *datestr = [formatter dateFromString:timeStr];
     //    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datestr timeIntervalSince1970]*1000];
@@ -848,7 +848,7 @@ NSString* SSformatDate(NSInteger timespace){
         }else if(gap >= 3600*24*2 && gap < 3600*24*3 ){
             return  @"前天";
         }else{
-            return [SShelper stringFromeTimeInterval:[NSString stringWithFormat:@"%ld",(long)timespace] with:(BPDateFormatterStyle_4)];
+            return [SShelper stringFromeTimeInterval:[NSString stringWithFormat:@"%ld",(long)timespace] with:(SSDateFormatterStyle_4)];
             //            return [[NSDate dateWithTimeIntervalSince1970:timespace] toString:DATE_FORMATTER];
         }
     }

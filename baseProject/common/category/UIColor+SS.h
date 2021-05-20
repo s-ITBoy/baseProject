@@ -17,25 +17,16 @@
 + (UIColor*)SSsubTitleColor136;
 
 + (UIColor*)SScolor71;
-+ (UIColor*)SScolor110;
 
-///金额数的字体颜色
-+ (UIColor*)SSmoneyColor;
++ (UIColor*)SScolor110;
 
 ///自定义蓝色
 + (UIColor*)SSBlueColor;
 
-///table的分区背景色
-+ (UIColor*)SSsectionColor;
+
 
 ///主要的红色
 + (UIColor*)SSredColor;
-
-///borderColor(浅灰)
-+ (UIColor*)SSborderColor;
-
-///分割线颜色
-+ (UIColor*)SSseparatorColor;
 
 
 ///十六进制颜色
@@ -59,4 +50,14 @@
 + (UIColor *) SSbtncolorHex;
 ///shadow边缘阴影颜色
 + (UIColor*) SSshadowColor;
+///borderColor(浅灰)
++ (UIColor*)SSborderColor;
+///分割线颜色
++ (UIColor*)SSseparatorColor;
+///table的分区背景色
++ (UIColor*)SSsectionColor;
+///金额数的字体颜色
++ (UIColor*)SSmoneyColor;
+///销售价格的颜色
++ (UIColor*)SSpriceColor;
 @end

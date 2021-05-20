@@ -31,7 +31,7 @@
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    NSLog(@"time = \n %@",[SShelper stringFromeTimeInterval:@"6548365849" with:SSDateFormatterStyle_2]);
 }
 
 - (void)clickBtn {

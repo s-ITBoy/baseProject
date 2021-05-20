@@ -10,39 +10,39 @@
 #import <UIKit/UIKit.h>
 
 /// 日期格式化类型
-typedef NS_ENUM(NSUInteger, BPDateFormatterStyle){
+typedef NS_ENUM(NSUInteger, SSDateFormatterStyle){
     /// yyyy-MM-dd HH:mm:ss
-    BPDateFormatterStyleDefault = 1,
+    SSDateFormatterStyleDefault = 1,
     /// yyyy/MM/dd HH:mm:ss
-    BPDateFormatterStyle_2,
+    SSDateFormatterStyle_2,
     /// yyyyMMddHHmmss
-    BPDateFormatterStyle_3,
+    SSDateFormatterStyle_3,
     ///  yyyy-MM-dd
-    BPDateFormatterStyle_4,
+    SSDateFormatterStyle_4,
     /// yyyy年MM月dd日
-    BPDateFormatterStyle_5,
+    SSDateFormatterStyle_5,
     ///  yyyy/MM/dd HH:mm
-    BPDateFormatterStyle_6,
+    SSDateFormatterStyle_6,
     ///  HH:mm:ss
-    BPDateFormatterStyle_7,
+    SSDateFormatterStyle_7,
     ///  mm:ss
-    BPDateFormatterStyle_8,
+    SSDateFormatterStyle_8,
     ///  ss
-    BPDateFormatterStyle_9,
+    SSDateFormatterStyle_9,
     /// yyyy/MM/dd
-    BPDateFormatterStyle_10,
+    SSDateFormatterStyle_10,
     /// MM月dd日
-    BPDateFormatterStyle_11,
+    SSDateFormatterStyle_11,
     /// yyyyMMdd_HHmmss
-    BPDateFormatterStyle_12,
+    SSDateFormatterStyle_12,
     /// HHmmss
-    BPDateFormatterStyle_13,
+    SSDateFormatterStyle_13,
     /// yyyy.MM.dd HH:mm:ss
-    BPDateFormatterStyle_14,
+    SSDateFormatterStyle_14,
     /// MM-dd
-    BPDateFormatterStyle_15,
+    SSDateFormatterStyle_15,
     /// yyyyMMdd
-    BPDateFormatterStyle_16,
+    SSDateFormatterStyle_16,
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -50,13 +50,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SShelper : NSObject
 
 ///将时间戳转换成指定时间格式的字符串(当时间戳为13位时需除以1000)
-+ (NSString*_Nullable)stringFromeTimeInterval:(NSString*_Nullable)timeStamp with:(BPDateFormatterStyle)type;
++ (NSString*_Nullable)stringFromeTimeInterval:(NSString*_Nullable)timeStamp with:(SSDateFormatterStyle)type;
 ///将指定时间格式的时间字符串转成date
-+ (NSDate*_Nullable)dateFromeTimeStr:(NSString*_Nullable)timeStr with:(BPDateFormatterStyle)type;
++ (NSDate*_Nullable)dateFromeTimeStr:(NSString*_Nullable)timeStr with:(SSDateFormatterStyle)type;
 ///将指定时间格式的时间字符串转成时间戳
-+ (NSString*_Nullable)timeintervalStringFromeTimeString:(NSString*_Nullable)timeStr with:(BPDateFormatterStyle)type;
++ (NSString*_Nullable)timeintervalStringFromeTimeString:(NSString*_Nullable)timeStr with:(SSDateFormatterStyle)type;
 ///将指定时间格式的时间字符串转成NSTimeInterval
-+ (NSTimeInterval)timeintervalFromeTimeString:(NSString*_Nullable)timeStr with:(BPDateFormatterStyle)type;
++ (NSTimeInterval)timeintervalFromeTimeString:(NSString*_Nullable)timeStr with:(SSDateFormatterStyle)type;
 ///获取当前时间的时间戳
 + (NSTimeInterval)getCurrentTimeInterval;
 ///获取当前时间的时间戳字符串
