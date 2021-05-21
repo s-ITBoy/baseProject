@@ -15,7 +15,7 @@
 @end
 @implementation SSboxCodeView
 #pragma mark --- 懒加载
-- (NSMutableArray *)boxes{
+- (NSMutableArray *)boxes {
     if (!_boxes) {
         _boxes = [NSMutableArray array];
     }
@@ -66,12 +66,12 @@
 }
 
 #pragma mark 文本框内容改变
-- (void)txchange:(UITextField *)tx{
+- (void)txchange:(UITextField *)tx {
     NSString *password = tx.text;
     [self textChange:password];
 }
 
--(void)textChange:(NSString*)password{
+-(void)textChange:(NSString*)password {
     for (int i = 0; i < self.boxes.count; i++){
         UITextField *pwdtx = [self.boxes objectAtIndex:i];
         pwdtx.text = @"";

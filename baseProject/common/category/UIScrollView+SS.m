@@ -1,15 +1,15 @@
 //
-//  UIScrollView+SScategory.m
+//  UIScrollView+SS.m
 //  leeMail
 //
 //  Created by F S on 2017/7/10.
 //  Copyright © 2017 F S. All rights reserved.
 //
 
-#import "UIScrollView+SScategory.h"
+#import "UIScrollView+SS.h"
+#import <MJRefresh.h>
 
-
-@implementation UIScrollView (SScategory)
+@implementation UIScrollView (SS)
 
 - (void)SS_endRefresh{
     if (self.mj_header.isRefreshing) {

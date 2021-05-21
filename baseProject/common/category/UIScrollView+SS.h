@@ -1,5 +1,5 @@
 //
-//  UIScrollView+SScategory.h
+//  UIScrollView+SS.h
 //  leeMail
 //
 //  Created by F S on 2017/7/10.
@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MJRefresh.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIScrollView (SScategory)
+@interface UIScrollView (SS)
 
 - (void)SS_endRefresh;
 - (void)SS_addRefreshHeaderWithBlock:(void (^)(void))reFreshBlock;
