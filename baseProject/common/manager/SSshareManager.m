@@ -21,7 +21,7 @@
 @implementation SSshareManager
 
 static SSshareManager* manager = nil;
-+ (instancetype)sharemanager{
++ (instancetype)sharemanager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[SSshareManager alloc] init];
@@ -29,7 +29,7 @@ static SSshareManager* manager = nil;
     return manager;
 }
 
-- (void)SSsharecontent:(SSshareModel*)model and:(void(^) (BOOL isSuccess, NSString* msg))callBackBlock{
+- (void)SSsharecontent:(SSshareModel*)model and:(void(^) (BOOL isSuccess, NSString* msg))callBackBlock {
     self.CallBackBlock = callBackBlock;
 //    [self shareToWhere:model.shareToWhere and:model];
 }
@@ -104,8 +104,8 @@ static SSshareManager* manager = nil;
  具体调整点为：分享接口调用后，不再返回用户是否分享完成事件，即原先的cancel事件和success事件将统一为success事件。
  请开发者尽快做好调整。
  */
-//-(void) onResp:(BaseResp*)resp{
-//    if([resp isKindOfClass:[SendMessageToWXResp class]]){
+//-(void) onResp:(BaseResp*)resp {
+//    if([resp isKindOfClass:[SendMessageToWXResp class]]) {
 //        SSLog(@"---------resp.errCode = %d ---------",resp.errCode);
 //
 //        switch (resp.errCode) {

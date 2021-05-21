@@ -11,12 +11,30 @@
 #import <objc/runtime.h>
 #import "SStipsAndHUD.h"
 
-#define KEY_OBJECT_HUD @"UIViewController.HBHUD"
-#define KEY_HUD @"dismissblock"
+#define KEY_OBJECT_HUD  @"UIViewController.HBHUD"
+#define KEY_HUD         @"dismissblock"
 
 @implementation NSObject (HUD)
 
 static char OperationKey;
+
+static char SSHUD;
+
+- (void)setSSHUD:(SStipsAndHUD*)hud {
+    NSMutableDictionary *sshud = (NSMutableDictionary*)objc_getAssociatedObject(self, &SSHUD);
+    if(sshud == nil){
+        sshud = [[NSMutableDictionary alloc] init];
+        objc_setAssociatedObject(self, &SSHUD, sshud, OBJC_ASSOCIATION_RETAIN);
+    }
+    [sshud setObject:hud forKey:KEY_HUD];
+}
+
+- (SStipsAndHUD*)SStipsAndHUD {
+    NSMutableDictionary *sshud = (NSMutableDictionary*)objc_getAssociatedObject(self, &SSHUD);
+    if(sshud == nil) return nil;
+    SStipsAndHUD* hud = [sshud objectForKey:KEY_HUD];
+    return hud;
+}
 
 #pragma mark --------- 自定义 SSshowMsg -------------
 - (void)SSshowCustomWithMsg:(NSString*)msg {
@@ -29,13 +47,30 @@ static char OperationKey;
     [show SSshowMsg:msg FinishBlock:disBlock];
 }
 
+#pragma mark --------- 自定义 HUD（网络请求时的加载菊花） -----------
+- (void)SSpresentLoading {
+    SStipsAndHUD* hud = [[SStipsAndHUD alloc] init];
+    [self setSSHUD:hud];
+    [hud SSshowLoadingSSHUD];
+}
+
+- (void)SSdimissLoading {
+    SStipsAndHUD* hud = [self SStipsAndHUD];
+    [hud SSdismissLoadingSSHUD];
+}
+
+- (void)SSdimissAllLoading {
+    SStipsAndHUD* hud = [[SStipsAndHUD alloc] init];
+    [hud SSdismissAllLoadingSSHUD];
+}
+
 
 #pragma mark --------- HUD -------------
--(void)presentMessageTips:(NSString *)message{
+-(void)presentMessageTips:(NSString *)message {
     [self presentMessageTips_:message];
 }
 
--(void)presentMessageTips_:(NSString *)message{
+-(void)presentMessageTips_:(NSString *)message {
     UIView * superview = [self SuperView];
     if(!superview) return;
     
@@ -55,7 +90,7 @@ static char OperationKey;
     [hud hideAnimated:YES afterDelay:0.5];
 }
 
--(void)presentMessageTips:(NSString *)message dismisblock:(void (^)(void))dismissblock{
+-(void)presentMessageTips:(NSString *)message dismisblock:(void (^)(void))dismissblock {
     [self presentMessageTips_:message dismisblock:dismissblock];
 }
 
@@ -98,7 +133,7 @@ static char OperationKey;
 
 
 
-- (void)presentMessageTips_:(NSString *)message duration:(CGFloat)duration dismisblock:(void (^)(void))dismissblock{
+- (void)presentMessageTips_:(NSString *)message duration:(CGFloat)duration dismisblock:(void (^)(void))dismissblock {
     UIView * superview = [self SuperView];
     if(!superview) return;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
@@ -127,7 +162,7 @@ static char OperationKey;
     return HUD;
 }
 
--(void)presentLoadinghud{
+-(void)presentLoadinghud {
     UIView * superview = [self SuperView];
     if(!superview) return ;
 //    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:superview animated:false];
@@ -179,7 +214,7 @@ static char OperationKey;
     }
 }
 
--(void)setHUD:(MBProgressHUD *)HUD{
+-(void)setHUD:(MBProgressHUD *)HUD {
     NSMutableDictionary *opreations = (NSMutableDictionary*)objc_getAssociatedObject(self, &OperationKey);
     if(opreations == nil){
         opreations = [[NSMutableDictionary alloc] init];
@@ -188,14 +223,14 @@ static char OperationKey;
     [opreations setObject:HUD forKey:KEY_HUD];
 }
 
--(MBProgressHUD *)HUD{
+-(MBProgressHUD *)HUD {
     NSMutableDictionary *opreations = (NSMutableDictionary*)objc_getAssociatedObject(self, &OperationKey);
     if(opreations == nil) return nil;
     MBProgressHUD * aHUD = [opreations objectForKey:KEY_HUD];
     return aHUD;
 }
 
--(UIView *)SuperView{
+-(UIView *)SuperView {
     UIView * superview = nil;
     if ([[self class] isSubclassOfClass:[UINavigationController class]]) {
         UINavigationController * ctr = (UINavigationController *)self;

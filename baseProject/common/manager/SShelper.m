@@ -16,7 +16,7 @@
     NSMutableDictionary *_fmtters;
 }
 
-+ (instancetype)shareHelp{
++ (instancetype)shareHelp {
     static SShelper* help = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -25,7 +25,7 @@
     return help;
 }
 
-- (NSDateFormatter *)fmtterForStyle:(SSDateFormatterStyle)style{
+- (NSDateFormatter *)fmtterForStyle:(SSDateFormatterStyle)style {
     NSString *fmt = nil;
     switch (style) {
         case SSDateFormatterStyleDefault:
@@ -90,7 +90,7 @@
 }
 
 ///将时间戳转换成指定时间格式的字符串(当时间戳为13位时需除以1000)
-+ (NSString*)stringFromeTimeInterval:(NSString*)timeStamp with:(SSDateFormatterStyle)type{
++ (NSString*)stringFromeTimeInterval:(NSString*)timeStamp with:(SSDateFormatterStyle)type {
     NSTimeInterval timeInterval = [timeStamp doubleValue];
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     //    NSDate* d = [NSDate dateWithTimeIntervalSinceReferenceDate:timeInterval];
@@ -100,14 +100,14 @@
 }
 
 ///将指定时间格式的时间字符串转成date
-+ (NSDate*)dateFromeTimeStr:(NSString*)timeStr with:(SSDateFormatterStyle)type{
++ (NSDate*)dateFromeTimeStr:(NSString*)timeStr with:(SSDateFormatterStyle)type {
     NSDateFormatter* formatter = [[SShelper shareHelp] fmtterForStyle:type];
     NSDate *datestr = [formatter dateFromString:timeStr];
     return datestr;
 }
 
 ///将指定时间格式的时间字符串转成时间戳
-+ (NSString*)timeintervalStringFromeTimeString:(NSString*)timeStr with:(SSDateFormatterStyle)type{
++ (NSString*)timeintervalStringFromeTimeString:(NSString*)timeStr with:(SSDateFormatterStyle)type {
     NSDateFormatter* formatter = [[SShelper shareHelp] fmtterForStyle:type];
     NSDate *datestr = [formatter dateFromString:timeStr];
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datestr timeIntervalSince1970]];
@@ -115,7 +115,7 @@
 }
 
 ///将指定时间格式的时间字符串转成NSTimeInterval
-+ (NSTimeInterval)timeintervalFromeTimeString:(NSString*)timeStr with:(SSDateFormatterStyle)type{
++ (NSTimeInterval)timeintervalFromeTimeString:(NSString*)timeStr with:(SSDateFormatterStyle)type {
     NSDateFormatter* formatter = [[SShelper shareHelp] fmtterForStyle:type];
     NSDate *datestr = [formatter dateFromString:timeStr];
     //    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datestr timeIntervalSince1970]*1000];
@@ -142,7 +142,7 @@
 
 #pragma mark ----------- Create View ----------------
 ///Label
-+(UILabel*)SSlabel:(UIFont*)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*)textColor backgroundColor:(UIColor*)bgcolor{
++ (UILabel*)SSlabel:(UIFont*)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*)textColor backgroundColor:(UIColor*)bgcolor {
     UILabel* label = [UILabel new];
     label.backgroundColor = bgcolor ? bgcolor : [UIColor clearColor];
     label.textAlignment = alignment;
@@ -152,14 +152,14 @@
 }
 
 ///创建线条
-+(UIView*)SSline:(UIColor* _Nullable)bgColor{
++ (UIView*)SSline:(UIColor* _Nullable)bgColor {
     UIView* line = [UIView new];
     line.backgroundColor = bgColor ? bgColor : [UIColor clearColor];
     return line;
 }
 
 ///创建按钮（简单属性）
-+(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font {
++ (UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font {
     UIButton* button = [UIButton buttonWithType:type];
     [button setTitle:title forState:UIControlStateNormal];
     if (titleColor) {
@@ -172,7 +172,7 @@
 }
 
 ///创建按钮（简单属性带有背景色）
-+(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor {
++ (UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgColor:(UIColor* _Nullable)bgColor {
     UIButton* button = [UIButton buttonWithType:type];
     [button setTitle:title forState:UIControlStateNormal];
     if (titleColor) {
@@ -188,7 +188,7 @@
 }
 
 ///创建按钮（简单属性带有背景图）
-+(UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgImgStr:(NSString* _Nullable)imgStr {
++ (UIButton*)SSbutton:(UIButtonType)type title:(NSString* _Nullable)title titleColor:(UIColor* _Nullable)titleColor font:(UIFont*)font bgImgStr:(NSString* _Nullable)imgStr {
     UIButton* button = [UIButton buttonWithType:type];
     [button setTitle:title forState:UIControlStateNormal];
     if (titleColor) {
@@ -223,7 +223,7 @@
 }
 
 ///创建UITextField
-+(UITextField*)SStextField:(NSString*)placeHolder andTextColor:(UIColor*)textColor andFont:(UIFont*)font{
++ (UITextField*)SStextField:(NSString*)placeHolder andTextColor:(UIColor*)textColor andFont:(UIFont*)font {
     UITextField* textF = [[UITextField alloc] init];
     textF.placeholder = placeHolder;
     textF.textColor = textColor;
@@ -279,7 +279,7 @@
 }
 
 ///截取指定视图的指定区域，传入需要截取的view
-+ (UIImage*)SSscreenShot:(UIView *)view{
++ (UIImage*)SSscreenShot:(UIView *)view {
     UIImage *imageRet = [[UIImage alloc]init];
     UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -300,7 +300,7 @@
  @param obj 对象
  @return 是否为空标识
  */
-+(BOOL)isObjNil:(id _Nullable )obj{
++ (BOOL)isObjNil:(id _Nullable )obj {
     if (!obj) {
         return YES;
     }
@@ -392,13 +392,13 @@
 }
 
 ///获取当前屏幕显示的viewcontroller
-+ (UIViewController *)getCurrentVC{
++ (UIViewController *)getCurrentVC {
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     return currentVC;
 }
 
-+ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC{
++ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC {
     UIViewController *currentVC;
     if ([rootVC presentedViewController]) {
         // 视图是被presented出来的
@@ -467,15 +467,15 @@
 }
 
 ///进入搜索界面
-+ (void)SSintoSearchVC:(UIViewController*)viewController{
++ (void)SSintoSearchVC:(UIViewController*)viewController {
     SSsearchBaseVC* search = [[SSsearchBaseVC alloc] init];
     search.hidesBottomBarWhenPushed = YES;
     [viewController.navigationController pushViewController:search animated:NO];
 }
 
 ///全屏展示图片
-+ (void)SSshowImages:(NSArray*)images index:(NSInteger)index currentVC:(UIViewController*)currentVC{
-    if(images.count < 1){
++ (void)SSshowImages:(NSArray*)images index:(NSInteger)index currentVC:(UIViewController*)currentVC {
+    if(images.count < 1) {
         return;
     }
 //    NSMutableArray *photos = [NSMutableArray new];
@@ -500,13 +500,13 @@
 }
 
 ///融云初始化/刷新指定用户数据
-//+ (void)refreshRongCloud:(NSString*)uid and:(NSString*)name and:(NSString*)imageUrl{
+//+ (void)refreshRongCloud:(NSString*)uid and:(NSString*)name and:(NSString*)imageUrl {
 //    RCUserInfo* userinfo = [[RCUserInfo alloc] initWithUserId:uid name:name portrait:imageUrl];
 //    [[RCIM sharedRCIM] refreshUserInfoCache:userinfo withUserId:uid];
 //}
 
 
-//+ (void)toSchemeUrl:(NSURL *)url{
+//+ (void)toSchemeUrl:(NSURL *)url {
 //
 //    NSDictionary *parameter = [NSString dictionaryWithUrlString:url.absoluteString];
 //    UIViewController *vc = [self getCurrentVC];
@@ -578,7 +578,7 @@
     return [numPredicate evaluateWithObject:Str];
 }
 ///身份证号YES：有效； NO：无效
-+ (BOOL)isValidIdenditifyCard:(NSString*)cardStr{
++ (BOOL)isValidIdenditifyCard:(NSString*)cardStr {
     if ([SShelper isObjNil:cardStr]) {
         return NO;
     }
@@ -587,7 +587,7 @@
     return [identityCardPredicate evaluateWithObject:cardStr];
 }
 ///邮箱YES：有效； NO：无效
-+ (BOOL)isValidEmail:(NSString *)email{
++ (BOOL)isValidEmail:(NSString *)email {
     if ([SShelper isObjNil:email]) {
         return NO;
     }
@@ -691,17 +691,17 @@
 
 #pragma mark ------------- 当前应用qpp信息 --------
 ///当前app名称
-+ (NSString*)ss_appName{
++ (NSString*)ss_appName {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
 }
 ///当前app版本号（1.0.1）
-+ (NSString*)ss_versionForApp{
++ (NSString*)ss_versionForApp {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 }
 
 #pragma mark ------------- 当前设备信息 -------------
 ///系统版本号
-+ (NSString*)ss_getVersion{
++ (NSString*)ss_getVersion {
     return [[UIDevice currentDevice] systemVersion];
 }
 ///设备型号
@@ -830,7 +830,7 @@
 
 
 
-NSString* SSformatDate(NSInteger timespace){
+NSString* SSformatDate(NSInteger timespace) {
     timespace = timespace /1000.0f;
     NSInteger current = [[NSDate date] timeIntervalSince1970];
     NSInteger gap = current - timespace;
@@ -854,7 +854,7 @@ NSString* SSformatDate(NSInteger timespace){
     }
 }
 ///金额格式
-NSString* SSformatMoney(id money){
+NSString* SSformatMoney(id money) {
     double price = [money doubleValue];
     return [NSString stringWithFormat:@"%.2f",price];
 }

@@ -18,6 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)SSshowCustomWithMsg:(NSString*)msg dismissBlock:(void (^)(void))disBlock;
 
+#pragma mark --------- 自定义 HUD（网络请求时的加载菊花） -----------
+- (void)SSpresentLoading;
+
+- (void)SSdimissLoading;
+
+- (void)SSdimissAllLoading;
+
 
 #pragma mark --------- HUD ------------- 
 -(void)presentMessageTips:(NSString *)message;

@@ -469,7 +469,7 @@
     [self removeFromSuperview];
 }
 
-- (void)SSdismissAllLoading {
+- (void)SSdismissAllLoadingSSHUD {
     for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
         if (view.tag == 10010101) {
             SStipsAndHUD* showView = (SStipsAndHUD*)view;
