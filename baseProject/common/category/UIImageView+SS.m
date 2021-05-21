@@ -2,13 +2,20 @@
 //  UIImageView+SS.m
 //  baseProject
 //
-//  Created by apple on 2021/5/21.
-//  Copyright © 2021 FL S. All rights reserved.
+//  Created by FL S on 2017/10/23.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import "UIImageView+SS.h"
 
 @implementation UIImageView (SS)
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

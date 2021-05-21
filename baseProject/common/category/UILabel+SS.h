@@ -2,8 +2,8 @@
 //  UILabel+SS.h
 //  baseProject
 //
-//  Created by apple on 2021/5/21.
-//  Copyright © 2021 FL S. All rights reserved.
+//  Created by FL S on 2017/10/23.
+//  Copyright © 2017 FL S. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
