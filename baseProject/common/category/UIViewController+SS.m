@@ -16,19 +16,7 @@
     if (!classStr) {
         return;
     }
-    Class cla = NSClassFromString(classStr);
-    id vc = [[cla alloc] init];
-    
-    //KVC
-    if (dic.allKeys.count > 0) {
-        //方式一：
-//        for (NSString* key in dic.allKeys) {
-//            [vc setValue:dic[key] forKeyPath:key];
-//        }
-        //方式二：
-        [vc setValuesForKeysWithDictionary:dic];
-        
-    }
+    id vc = [self getVCfromStr:classStr andProperty:dic];
     
     if ([vc isKindOfClass:[UIViewController class]]) {
         [self.navigationController pushViewController:vc animated:YES];
@@ -40,6 +28,14 @@
     if (!classStr) {
         return;
     }
+    id vc = [self getVCfromStr:classStr andProperty:dic];
+    
+    if ([vc isKindOfClass:[UIViewController class]]) {
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+}
+
+- (id)getVCfromStr:(NSString*_Nullable)classStr andProperty:(NSDictionary*_Nullable)dic {
     Class cla = NSClassFromString(classStr);
     id vc = [[cla alloc] init];
     
@@ -53,10 +49,7 @@
         [vc setValuesForKeysWithDictionary:dic];
         
     }
-    
-    if ([vc isKindOfClass:[UIViewController class]]) {
-        [self presentViewController:vc animated:YES completion:nil];
-    }
+    return vc;
 }
 
 ///KVC
