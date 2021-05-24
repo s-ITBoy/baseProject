@@ -7,7 +7,6 @@
 //
 
 #import "SSfirstVC.h"
-#import "ViewController.h"
 
 @interface SSfirstVC ()
 @property(nonatomic,strong) UILabel* valueLab;
@@ -37,7 +36,7 @@
 }
 
 - (void)clickBtn {
-    
+    [self SS_pushVCWithClassStr:@"ViewController" withPropertyDic:nil];
 }
 
 /*

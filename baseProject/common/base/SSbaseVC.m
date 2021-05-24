@@ -14,7 +14,7 @@
 
 @implementation SSbaseVC
 #pragma mark -------------- 懒加载 ------------
--(UITableView *)tableView{
+-(UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusBarHeight + NaviBarHeight, ScreenWidth, ScreenHeight - statusBarHeight - NaviBarHeight - TabBarHeight) style:(UITableViewStylePlain)];
         ///ios11以后 解决上拉加载后屏幕自动滚动偏移问题 需加上下面三行代码
@@ -61,7 +61,7 @@
     
     return _tableView;
 }
-- (UIView *)statusBarView{
+- (UIView *)statusBarView {
     if (!_statusBarView) {
         _statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, statusBarHeight)];
         _statusBarView.backgroundColor = [UIColor whiteColor];
@@ -69,14 +69,14 @@
     return _statusBarView;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 
 
 // 作用：拦截手势触发
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
     if(self.navigationController.childViewControllers.count == 1){
         return NO;
@@ -104,7 +104,7 @@
     //    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"tabbarLine.png"]];
 }
 
-- (void)isShowNavigationLine:(BOOL)isShow{
+- (void)isShowNavigationLine:(BOOL)isShow {
     if (isShow) {
         [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]] forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[self imageWithColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]]];
@@ -128,7 +128,7 @@
     //        }
 }
 
-- (void)setBackBarButtonItem:(UIColor*)color{
+- (void)setBackBarButtonItem:(UIColor*)color {
     //    if (IS_IOS_10) {
     UIButton* backBtn = [UIButton buttonWithType:0];
     [backBtn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
@@ -153,7 +153,7 @@
     //    }
 }
 
-- (void)backBtn{
+- (void)backBtn {
     if (_backBlock) {       //有block执行block返回事件
         _backBlock(self);
     }else{
@@ -161,7 +161,7 @@
     }
 }
 
-- (UIImage *)imageWithColor:(UIColor *)color{
+- (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, ScreenWidth, 1.0f);
     // 开启位图上下文
     UIGraphicsBeginImageContext(rect.size);
@@ -174,7 +174,7 @@
     return image;
 }
 
-- (void)dealloc{
+- (void)dealloc {
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     [self.tableView removeFromSuperview];

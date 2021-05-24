@@ -47,8 +47,9 @@
 //        }
         //方式二：
         [vc setValuesForKeysWithDictionary:dic];
-        
     }
+    [vc setValue:@(YES) forKeyPath:@"hidesBottomBarWhenPushed"];
+    
     return vc;
 }
 
