@@ -13,9 +13,11 @@
 #ifdef __OBJC__
 //#import <UIKit/UIKit.h>
 //#import <Foundation/Foundation.h>
+
 #pragma mark --------- 头文件 ----------
 #import "httprequest.h"
 #import "baseProject.h"
+
 #pragma mark --------- 分类 -----------
 #import "UIColor+SS.h"
 #import "UIFont+SS.h"
@@ -29,7 +31,9 @@
 #import "UIView+SS.h"
 #import <UIView+MJExtension.h>
 #import "UIScrollView+SS.h"
+#import "UIViewController+SS.h"
 #import "NSObject+HUD.h"
+
 #pragma mark ---------- 管理类 ------------
 #import "SShelper.h"
 #import "SShttprequest.h"

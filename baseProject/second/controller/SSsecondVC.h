@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SSsecondVC : SSbaseVC
-
+@property(nonatomic,copy) NSString* name;
 @end
 
 NS_ASSUME_NONNULL_END

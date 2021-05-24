@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param color 文字颜色
  @param font 文字字号
  @param imageName 图片名
- @param isfront 图片是否在前面
+ @param isfront 图片是否在前面 YES:前面；NO：后面
  @param rect 图片的
  */
 + (NSMutableAttributedString*)SSattri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect;
