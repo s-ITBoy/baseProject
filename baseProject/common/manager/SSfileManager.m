@@ -18,6 +18,8 @@ static SSfileManager* fileManager = nil;
     });
     return fileManager;
 }
+
+#pragma mark ------------- 路径 ---------------
 ///沙盒中documents路径
 - (NSString*)SSdocumentsPath {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -38,6 +40,7 @@ static SSfileManager* fileManager = nil;
     return NSTemporaryDirectory();
 }
 
+#pragma mark ----------- 清楚缓存信息 --------------
 ///删除登录用户信息
 - (void)SSclearNSuserDefault {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:token];
@@ -76,6 +79,8 @@ static SSfileManager* fileManager = nil;
 //        } while ([[NSFileManager defaultManager] fileExistsAtPath:[[self SScachesPath] stringByAppendingPathComponent:fileP]]);
 //    }
 }
+
+#pragma mark --------- 计算文件大小 -------------
 
 - (unsigned long long)SSfileSizeForDocument {
     unsigned long long size = 0;
