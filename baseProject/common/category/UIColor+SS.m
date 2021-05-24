@@ -152,4 +152,21 @@
     return [UIColor SScolorWithHexString:@"#856050"];;
 }
 
+
+///ios13以后的适配系统深色模式的动态颜色方法
++ (UIColor*)SSdynamic:(UIColor*)lightColor dark:(UIColor*_Nullable)darkColor {
+    if (@available(iOS 13.0, *)) {
+        UIColor* color = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+                return lightColor;
+            } else {
+                return darkColor ? darkColor : lightColor;
+            }
+        }];
+        return color;
+    } else {
+        return lightColor;
+    }
+}
+
 @end

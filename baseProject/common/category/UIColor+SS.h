@@ -60,4 +60,8 @@
 + (UIColor*)SSmoneyColor;
 ///销售价格的颜色
 + (UIColor*)SSpriceColor;
+
+///ios13以后的适配系统深色模式的动态颜色方法
++ (UIColor*)SSdynamic:(UIColor*)lightColor dark:(UIColor*_Nullable)darkColor;
+
 @end
