@@ -12,33 +12,26 @@
 
 
 #pragma  -- 服务器地址
-// 本地服   http://192.168.10.61
-// 测试服   http://beta.api.valentina-yz.com
-// 正式服   http://api.antcong.com
+// 本地服
+// 测试服
+// 正式服
 
 #ifdef DEBUG
 //#define ServerHost @"http://api.valentina-yz.com"
 #define ServerHost @"http://beta.ddsc.api.valentina-yz.com"
-//#define ServerHost @"https://api.cikarcia.com"
-//#define ServerHost @"http://192.168.10.119:6010"
-//#define ServerHost @"http://109.shopping.valentina-yz.com"
 #define shareHost @"http://109.shopping.valentina-yz.com"
-//#define ServerHost @"http://192.168.10.61/ws_project/ws_app_php/entry/index.php"
-//#define shareHost @"http://192.168.10.61/ws_project/ws_app_php/entry"
+
 
 #else
 
 #define ServerHost @"http://api.valentina-yz.com"
 //#define ServerHost @"http://beta.ddsc.api.valentina-yz.com"
-//#define ServerHost @"http://192.168.10.119:6010"
 #define shareHost @"http://109.shopping.valentina-yz.com"
-//#define ServerHost @"http://192.168.10.61/ws_project/ws_app_php/entry/index.php"
-//#define shareHost @"http://192.168.10.61/ws_project/ws_app_php/entry"
 
 #endif
 
 
-///正式环境的
+#pragma mark --------- 第三方的配置信息 ------------
 #define Weichat_key   @"ASDADS21ads1a11asd132a1sd32ASSAD"
 #define Weichat_Secret @"eb4e3c9056026698988f8efa60000ed7"
 #define Weichat_appid @"wx6f95c0f38a8d05b6"

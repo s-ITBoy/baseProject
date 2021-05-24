@@ -14,7 +14,7 @@
 
 @implementation SSbaseNavigationC
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
 }
@@ -27,7 +27,7 @@
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} forState:UIControlStateNormal];
 }
 
-- (UIViewController *)childViewControllerForStatusBarStyle{
+- (UIViewController *)childViewControllerForStatusBarStyle {
     return self.topViewController;
 }
 
