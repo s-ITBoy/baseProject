@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <AFNetworkReachabilityManager.h>
+#import "SSlanguageManager.h"
 
 @interface AppDelegate ()
 
@@ -40,7 +41,7 @@
 
 - (SStabbarController *)tabbarController {
     if (!_tabbarController) {
-        _tabbarController = [SStabbarController new];
+        _tabbarController = [[SStabbarController alloc] init];
     }
     return _tabbarController;
 }
@@ -143,6 +144,13 @@
 ///关闭网络状态的监听
 - (void)stopNetworkStatus {
     [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+}
+
+///切换设置语言
+- (void)setAppLanguage:(NSString*)language {
+    [SSlanguageManager SSsetLanguage:language];
+    [[NSUserDefaults standardUserDefaults] setObject:language forKey:@"appLanguage"];
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[SStabbarController alloc] init];
 }
 
 

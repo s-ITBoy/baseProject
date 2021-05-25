@@ -23,5 +23,8 @@
 
 - (void)showRootVC;
 
+///切换设置语言
+- (void)setAppLanguage:(NSString*)language;
+
 @end
 

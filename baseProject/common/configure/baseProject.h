@@ -43,6 +43,7 @@
 #pragma --------------方法-------------------
 #define RGB(a, b, c)     [UIColor colorWithRed:(a / 255.0f) green:(b / 255.0f) blue:(c / 255.0f) alpha:1.0f]
 #define RGBA(a, b, c, d) [UIColor colorWithRed:(a / 255.0f) green:(b / 255.0f) blue:(c / 255.0f) alpha:d]
+#define SSlocalStr(key, comment)  NSLocalizedString(key, comment)
 
 
 #ifdef DEBUG

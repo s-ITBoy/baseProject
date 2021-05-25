@@ -8,6 +8,7 @@
 
 #import "SSfirstVC.h"
 #import "SSfileManager.h"
+#import "AppDelegate.h"
 
 @interface SSfirstVC ()
 @property(nonatomic,strong) UILabel* valueLab;
@@ -26,7 +27,7 @@
     self.navigationItem.title = @"首页";
     
     UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 88, 100, 50)];
-    [btn setTitle:@"按钮" forState:UIControlStateNormal];
+    [btn setTitle:SSlocalStr(@"home", nil) forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor greenColor]];
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -36,7 +37,7 @@
 }
 
 - (void)clickBtn {
-    [self SS_pushVCWithClassStr:@"ViewController" withPropertyDic:nil];
+    [APPDELEGATE setAppLanguage:@"en"];
 }
 
 /*

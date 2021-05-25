@@ -37,6 +37,8 @@
 		2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5B61D235FFD2F00998FDF /* NSString+SS.m */; };
 		2CC5B624236005E700998FDF /* UIView+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5B623236005E700998FDF /* UIView+SS.m */; };
 		2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5B6292360085F00998FDF /* UIImage+SS.m */; };
+		2CCE0CB4265D282F00A54606 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CCE0CB6265D282F00A54606 /* Localizable.strings */; };
+		2CCE0CD2265D302600A54606 /* SSlanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE0CD1265D302600A54606 /* SSlanguageManager.m */; };
 		47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5923D044C100C5114D /* SSfirstVC.m */; };
 		47204E5E23D044D400C5114D /* SSsecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E5C23D044D400C5114D /* SSsecondVC.m */; };
 		47204E6123D044E000C5114D /* SSthirdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 47204E6023D044E000C5114D /* SSthirdVC.m */; };
@@ -166,6 +168,12 @@
 		2CC5B623236005E700998FDF /* UIView+SS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SS.m"; sourceTree = "<group>"; };
 		2CC5B6282360085F00998FDF /* UIImage+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+SS.h"; sourceTree = "<group>"; };
 		2CC5B6292360085F00998FDF /* UIImage+SS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SS.m"; sourceTree = "<group>"; };
+		2CCE0CB5265D282F00A54606 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2CCE0CBA265D288200A54606 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		2CCE0CBB265D288300A54606 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2CCE0CBC265D288300A54606 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2CCE0CD0265D302600A54606 /* SSlanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSlanguageManager.h; sourceTree = "<group>"; };
+		2CCE0CD1265D302600A54606 /* SSlanguageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSlanguageManager.m; sourceTree = "<group>"; };
 		40A0BB9154E2F9693DAF4D60 /* Pods_baseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47204E5923D044C100C5114D /* SSfirstVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSfirstVC.m; sourceTree = "<group>"; };
 		47204E5A23D044C100C5114D /* SSfirstVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSfirstVC.h; sourceTree = "<group>"; };
@@ -481,6 +489,7 @@
 				2CC2ED2F22E5E92200A6431A /* AppDelegate.m */,
 				2CC2ED3122E5E92200A6431A /* ViewController.h */,
 				2CC2ED3222E5E92200A6431A /* ViewController.m */,
+				2CCE0CB6265D282F00A54606 /* Localizable.strings */,
 				2CC2ED3422E5E92200A6431A /* Main.storyboard */,
 				2CC2ED3722E5E92200A6431A /* Assets.xcassets */,
 				2CC2ED3922E5E92200A6431A /* LaunchScreen.storyboard */,
@@ -531,6 +540,8 @@
 				473AC3BE259B0F5F00F9BD01 /* SSencryptDecrypt.m */,
 				4743415D24850F37008F7FBE /* SSfileManager.h */,
 				4743415E24850F37008F7FBE /* SSfileManager.m */,
+				2CCE0CD0265D302600A54606 /* SSlanguageManager.h */,
+				2CCE0CD1265D302600A54606 /* SSlanguageManager.m */,
 				47FB13A523CD69CF00072C1D /* SSshareManager.h */,
 				47FB13A323CD69CF00072C1D /* SSshareManager.m */,
 				47AA79A524F8ABCA00E6CB23 /* SSpayManager.h */,
@@ -992,6 +1003,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 2CC2ED2222E5E92100A6431A;
 			productRefGroup = 2CC2ED2C22E5E92100A6431A /* Products */;
@@ -1011,6 +1023,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC2ED3B22E5E92200A6431A /* LaunchScreen.storyboard in Resources */,
+				2CCE0CB4265D282F00A54606 /* Localizable.strings in Resources */,
 				2CC2ED3822E5E92200A6431A /* Assets.xcassets in Resources */,
 				47B173DF25B5301C00343853 /* README.md in Resources */,
 				47B173E025B5301C00343853 /* LICENSE.txt in Resources */,
@@ -1128,6 +1141,7 @@
 				2CC5B618235FF83200998FDF /* NSDictionary+SS.m in Sources */,
 				47FB141523CD724700072C1D /* SSJSObject.m in Sources */,
 				47F75AA5258DA08A00756E1C /* SSsheetActionV.m in Sources */,
+				2CCE0CD2265D302600A54606 /* SSlanguageManager.m in Sources */,
 				2CC5B615235FF68300998FDF /* NSArray+SS.m in Sources */,
 				47518D33258DE087008BD917 /* SSRACmanager.m in Sources */,
 				47FB141223CD724700072C1D /* SStabbarController.m in Sources */,
@@ -1228,6 +1242,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2CC2ED3522E5E92200A6431A /* Base */,
+				2CCE0CBA265D288200A54606 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1236,8 +1251,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				2CC2ED3A22E5E92200A6431A /* Base */,
+				2CCE0CBB265D288300A54606 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2CCE0CB6265D282F00A54606 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CCE0CB5265D282F00A54606 /* en */,
+				2CCE0CBC265D288300A54606 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1247,6 +1272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1306,6 +1332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
