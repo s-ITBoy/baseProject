@@ -38,7 +38,7 @@
 @property(nonatomic,assign) CGPoint origin;
 @property(nonatomic,assign) CGSize size;
 
-@property (nonatomic, readwrite,strong) NSString *identifier;
+@property (nonatomic, readwrite,strong) NSString * _Nonnull  identifier;
 
 ///获取当前view的所属的控制器VC
 - (UIViewController*_Nullable)SSgetVC;
@@ -58,21 +58,21 @@
 
 #pragma mark ------------ 设置上，下，左，右 的边缘线条 ---------------
 ///设置顶部边缘线条。bottom：表示线条的高度
-- (void)SSaddTopInsetLine:(UIEdgeInsets)topInset andlineColor:(UIColor*)color;
+- (void)SSaddTopInsetLine:(UIEdgeInsets)topInset andlineColor:(UIColor*_Nullable)color;
 ///设置左侧边缘线条。right：表示线条的宽度
-- (void)SSaddLeftInsetLine:(UIEdgeInsets)leftInset andlineColor:(UIColor*)color;
+- (void)SSaddLeftInsetLine:(UIEdgeInsets)leftInset andlineColor:(UIColor*_Nullable)color;
 ///设置底部边缘线条。top：表示线条的高度
-- (void)SSaddBottomInsetLine:(UIEdgeInsets)bottomInset andlineColor:(UIColor*)color;
+- (void)SSaddBottomInsetLine:(UIEdgeInsets)bottomInset andlineColor:(UIColor*_Nullable)color;
 ///设置右侧边缘线条。left：表示线条的宽度
-- (void)SSaddRightInsetLine:(UIEdgeInsets)rightInset andlineColor:(UIColor*)color;
+- (void)SSaddRightInsetLine:(UIEdgeInsets)rightInset andlineColor:(UIColor*_Nullable)color;
 
 #pragma mark -------------  设置视图的layer层的圆角，线宽及颜色等 -----------
 ///设置圆角半径lineWidth==0时，表示不设置线宽
-- (void)SSsetlayerOfViewRadius:(CGFloat)cornerRadius andLineWidth:(CGFloat)lineWidth andLineCorlor:(UIColor*)lineColor;
+- (void)SSsetlayerOfViewRadius:(CGFloat)cornerRadius andLineWidth:(CGFloat)lineWidth andLineCorlor:(UIColor*_Nullable)lineColor;
 ///设置边缘阴影
-- (void)SSsetLayshadowwithRadiu:(CGFloat)radiu andShadowOffset:(CGSize)size andShadowCorlor:(UIColor*)shadowColor;
+- (void)SSsetLayshadowwithRadiu:(CGFloat)radiu andShadowOffset:(CGSize)size andShadowCorlor:(UIColor*_Nullable)shadowColor;
 ///颜色渐变
-- (void)SSsetColor:(UIColor*)color1 and:(UIColor*)color2 and:(CGPoint)start and:(CGPoint)end;
+- (void)SSsetColor:(UIColor*_Nonnull)color1 and:(UIColor*_Nonnull)color2 and:(CGPoint)start and:(CGPoint)end;
 
 - (void)SSremoveAllSubViews;
 

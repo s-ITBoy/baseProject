@@ -9,8 +9,8 @@
 #import "SStipsAndHUD.h"
 #import <objc/runtime.h>
 
-#define Scale  [[UIScreen mainScreen] bounds].size.width/375
-#define ssscale(x)   x*Scale
+//#define Scale  [[UIScreen mainScreen] bounds].size.width/375
+//#define ssscale(x)   x*Scale
 
 @interface SStipsAndHUD () {
     UILabel* _label;

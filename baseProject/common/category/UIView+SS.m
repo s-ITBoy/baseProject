@@ -43,21 +43,21 @@
     return self.frame.origin.y + self.frame.size.height;
 }
 
--(void)setWidth:(CGFloat)width{
+-(void)setWidth:(CGFloat)width {
     CGRect rect = self.frame;
     rect.size.width = width;
     self.frame = rect;
 }
-- (CGFloat)width{
+- (CGFloat)width {
     return self.frame.size.width;
 }
 
-- (void)setHeight:(CGFloat)height{
+- (void)setHeight:(CGFloat)height {
     CGRect rect = self.frame;
     rect.size.height = height;
     self.frame = rect;
 }
--(CGFloat)height{
+-(CGFloat)height {
     return self.frame.size.height;
 }
 
@@ -81,87 +81,68 @@
 
 
 
-- (CGFloat) top
-{
-    return self.frame.origin.y;
-}
 
-- (void) setTop: (CGFloat) newtop
-{
+- (void) setTop: (CGFloat) newtop {
     CGRect newframe = self.frame;
     newframe.origin.y = newtop;
     self.frame = newframe;
 }
-
-- (CGFloat) left
-{
-    return self.frame.origin.x;
+- (CGFloat) top {
+    return self.frame.origin.y;
 }
 
-- (void) setLeft: (CGFloat) newleft
-{
+- (void) setLeft: (CGFloat) newleft {
     CGRect newframe = self.frame;
     newframe.origin.x = newleft;
     self.frame = newframe;
 }
-
-- (CGFloat) bottom
-{
-    return self.frame.origin.y + self.frame.size.height;
+- (CGFloat) left {
+    return self.frame.origin.x;
 }
 
-- (void) setBottom: (CGFloat) newbottom
-{
+- (void) setBottom: (CGFloat) newbottom {
     CGRect newframe = self.frame;
     newframe.origin.y = newbottom - self.frame.size.height;
     self.frame = newframe;
 }
-
-- (CGFloat) right
-{
-    return self.frame.origin.x + self.frame.size.width;
+- (CGFloat) bottom {
+    return self.frame.origin.y + self.frame.size.height;
 }
 
-- (void) setRight: (CGFloat) newright
-{
+- (void) setRight: (CGFloat) newright {
     CGFloat delta = newright - (self.frame.origin.x + self.frame.size.width);
     CGRect newframe = self.frame;
     newframe.origin.x += delta ;
     self.frame = newframe;
 }
-
-- (CGPoint) origin
-{
-    return self.frame.origin;
+- (CGFloat) right {
+    return self.frame.origin.x + self.frame.size.width;
 }
 
-- (void) setOrigin: (CGPoint) aPoint
-{
+- (void) setOrigin: (CGPoint) aPoint {
     CGRect newframe = self.frame;
     newframe.origin = aPoint;
     self.frame = newframe;
 }
-
-
-// Retrieve and set the size
-- (CGSize) size
-{
-    return self.frame.size;
+- (CGPoint) origin {
+    return self.frame.origin;
 }
 
-- (void) setSize: (CGSize) aSize
-{
+- (void) setSize: (CGSize) aSize {
     CGRect newframe = self.frame;
     newframe.size = aSize;
     self.frame = newframe;
 }
+- (CGSize) size {
+    return self.frame.size;
+}
 
 //设置唯一标识 类似tag  jjl
-- (void)setIdentifier:(NSString *)identifier{
+- (void)setIdentifier:(NSString *)identifier {
     objc_setAssociatedObject(self, BTN_MODAL_KEY, identifier, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (NSString *)identifier{
+- (NSString *)identifier {
     NSString *modal = objc_getAssociatedObject(self, BTN_MODAL_KEY);
     return modal;
 }
