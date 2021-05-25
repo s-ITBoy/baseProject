@@ -31,34 +31,7 @@
         _tableView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
         _tableView.tableFooterView = [UIView new];
         [self.view addSubview:_tableView];
-        
-        //        //1 使用框架UI样式，直接调用
-        //
-        //        NSMutableArray *images = [NSMutableArray new];
-        //        for (int i = 1; i <= 12; i++) {
-        //            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"houziloading_0000%0.2d",i]];
-        //            [images addObject:image];
-        //        }
-        //        self.tableView.ly_emptyView = [LYEmptyView emptyViewWithImageArray:images
-        //                                                                titleStr:@"努力加载中..."
-        //                                                               detailStr:@""];
-        //
-        
-        //        UIImageView *loadView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        //        loadView.animationImages = images;
-        //        loadView.animationDuration = 0.04*images.count;
-        //
-        //        [loadView startAnimating];
-        //
-        //        self.tableView.ly_emptyView = [LYEmptyView emptyViewWithCustomView:loadView];
-        
-        //emptyView内容上的点击事件监听
-        //        __weak typeof(self)weakSelf = self;
-        //        [self.tableView.ly_emptyView setTapContentViewBlock:^(){
-        ////            [weakSelf requestData];
-        //        }];
     }
-    
     return _tableView;
 }
 - (UIView *)statusBarView {
@@ -99,9 +72,6 @@
     [self setBackBarButtonItem:[UIColor lightGrayColor]];
     
     [self isShowNavigationLine:NO];
-    // bg.png为自己ps出来的想要的背景颜色。
-    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"tabbarLine.png"] forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
-    //    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"tabbarLine.png"]];
 }
 
 - (void)isShowNavigationLine:(BOOL)isShow {
@@ -111,27 +81,13 @@
     }else{
         [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[UIColor whiteColor]] forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[self imageWithColor:[UIColor whiteColor]]];
-        //        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"tabbarLine.png"] forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
-        //        [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"tabbarLine.png"]];
     }
-    //    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    //    for (UIView *subView in navigationBar.subviews) {
-    //            for (UIView *hairline in subView.subviews) {
-    //                if ([hairline isKindOfClass:[UIImageView class]] && hairline.height <= 1.0) {
-    ////                    UIImageView *lineImage = (UIImageView *)hairline;
-    ////                    lineImage.height = 5;
-    ////                    lineImage.image = [UIImage new];
-    //                    hairline.backgroundColor = [UIColor colorWithRGBHex:0xdddddd];
-    //                    hairline.hidden = isHiden;
-    //                }
-    //            }
-    //        }
 }
 
 - (void)setBackBarButtonItem:(UIColor*)color {
     //    if (IS_IOS_10) {
     UIButton* backBtn = [UIButton buttonWithType:0];
-    [backBtn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"navi_back"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtn) forControlEvents:UIControlEventTouchUpInside];
     //        backBtn.frame = CGRectMake(0, 0, 11, 21);
     //    [backBtn setBackgroundColor:[UIColor redColor]];

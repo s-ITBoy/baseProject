@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setBackBarButtonItem:(UIColor*)color;
 
 - (void)backBtn; //让子类可以重写此方法
-///是否显示n导航下划线 YED:显示； NO：不显示
+///是否显示导航下划线 YED:显示； NO：不显示
 - (void)isShowNavigationLine:(BOOL)isShow;
 
 @end

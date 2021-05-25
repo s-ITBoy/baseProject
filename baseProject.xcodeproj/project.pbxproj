@@ -13,6 +13,8 @@
 		18A661D426579D4B001B39DE /* UIImageView+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661D326579D4B001B39DE /* UIImageView+SS.m */; };
 		18A661D726579D64001B39DE /* UITextField+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661D626579D64001B39DE /* UITextField+SS.m */; };
 		18A661DA265B4213001B39DE /* UIViewController+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661D9265B4213001B39DE /* UIViewController+SS.m */; };
+		18A661E2265CEBC4001B39DE /* SScustomInputV.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661E1265CEBC4001B39DE /* SScustomInputV.m */; };
+		18A661E5265CEBDA001B39DE /* UMloginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661E4265CEBDA001B39DE /* UMloginVC.m */; };
 		2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C48A111239E2AF2001C92F1 /* SShelper.m */; };
 		2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */; };
 		2CC0F2E5256A841400C51F43 /* SSuserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F2E4256A841400C51F43 /* SSuserModel.m */; };
@@ -114,6 +116,10 @@
 		18A661D626579D64001B39DE /* UITextField+SS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+SS.m"; sourceTree = "<group>"; };
 		18A661D8265B4213001B39DE /* UIViewController+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SS.h"; sourceTree = "<group>"; };
 		18A661D9265B4213001B39DE /* UIViewController+SS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SS.m"; sourceTree = "<group>"; };
+		18A661E0265CEBC4001B39DE /* SScustomInputV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SScustomInputV.h; sourceTree = "<group>"; };
+		18A661E1265CEBC4001B39DE /* SScustomInputV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SScustomInputV.m; sourceTree = "<group>"; };
+		18A661E3265CEBDA001B39DE /* UMloginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMloginVC.h; sourceTree = "<group>"; };
+		18A661E4265CEBDA001B39DE /* UMloginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMloginVC.m; sourceTree = "<group>"; };
 		2C48A110239E2AF2001C92F1 /* SShelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SShelper.h; sourceTree = "<group>"; };
 		2C48A111239E2AF2001C92F1 /* SShelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SShelper.m; sourceTree = "<group>"; };
 		2C6B4BC3255C1D310084A44C /* SScaculatorMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SScaculatorMaker.h; sourceTree = "<group>"; };
@@ -358,6 +364,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18A661DE265CEB82001B39DE /* view */ = {
+			isa = PBXGroup;
+			children = (
+				18A661E0265CEBC4001B39DE /* SScustomInputV.h */,
+				18A661E1265CEBC4001B39DE /* SScustomInputV.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		18A661DF265CEB8C001B39DE /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				18A661E3265CEBDA001B39DE /* UMloginVC.h */,
+				18A661E4265CEBDA001B39DE /* UMloginVC.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
 		2C6B4BC2255C1CFD0084A44C /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,25 +429,11 @@
 		2CC0F2DF256A832500C51F43 /* loginRegister */ = {
 			isa = PBXGroup;
 			children = (
+				18A661DF265CEB8C001B39DE /* controller */,
+				18A661DE265CEB82001B39DE /* view */,
 				2CC0F2E2256A834800C51F43 /* model */,
-				2CC0F2E1256A834200C51F43 /* view */,
-				2CC0F2E0256A833800C51F43 /* viewcontroller */,
 			);
 			path = loginRegister;
-			sourceTree = "<group>";
-		};
-		2CC0F2E0256A833800C51F43 /* viewcontroller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = viewcontroller;
-			sourceTree = "<group>";
-		};
-		2CC0F2E1256A834200C51F43 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		2CC0F2E2256A834800C51F43 /* model */ = {
@@ -1154,6 +1164,7 @@
 				2CC0F2EB256A8A4000C51F43 /* SSforthVC.m in Sources */,
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
+				18A661E2265CEBC4001B39DE /* SScustomInputV.m in Sources */,
 				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,
 				4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
@@ -1172,6 +1183,7 @@
 				2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */,
 				2CC5B61B235FFC1900998FDF /* NSData+SS.m in Sources */,
 				18A661D126579D2B001B39DE /* UILabel+SS.m in Sources */,
+				18A661E5265CEBDA001B39DE /* UMloginVC.m in Sources */,
 				475299BD24CAD3EF008FD18B /* SSuislider.m in Sources */,
 				18A661DA265B4213001B39DE /* UIViewController+SS.m in Sources */,
 				47584DD425BFF2AF002B3676 /* SStipsAndHUD.m in Sources */,

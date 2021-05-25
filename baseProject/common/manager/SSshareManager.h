@@ -37,7 +37,7 @@
 ///右侧//logo图标名
 //@property(nonatomic,strong) NSString* _Nullable logo;
 
-///0：微信好友； 1：微信朋友圈； 2：微博； 3：qq
+///0：微信好友； 1：微信朋友圈； 2：微博； 3：qq; ...
 @property(nonatomic,assign) NSInteger shareToWhere;
 
 @end
