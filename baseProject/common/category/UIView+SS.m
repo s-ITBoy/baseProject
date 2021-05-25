@@ -166,6 +166,19 @@
     return modal;
 }
 
+
+///获取当前view的所属的控制器VC
+- (UIViewController*_Nullable)SSgetVC {
+    UIResponder *responder = self;
+        //循环获取下一个响应者,直到响应者是一个UIViewController类的一个对象为止,然后返回该对象.
+        while ((responder = [responder nextResponder])) {
+            if ([responder isKindOfClass:[UIViewController class]]) {
+                return (UIViewController *)responder;
+            }
+        }
+        return nil;
+}
+
 #pragma mark ----------- style -----------------------
 /**
  通过贝塞尔曲线添加圆角

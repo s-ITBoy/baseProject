@@ -40,6 +40,9 @@
 
 @property (nonatomic, readwrite,strong) NSString *identifier;
 
+///获取当前view的所属的控制器VC
+- (UIViewController*_Nullable)SSgetVC;
+
 #pragma mark ----------- style -----------------------
 /**
  通过贝塞尔曲线添加圆角
