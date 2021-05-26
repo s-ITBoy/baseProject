@@ -37,5 +37,11 @@
 - (NSString *)ss_imageToBase64String:(CGFloat)scale;
 ///图片转成data
 - (NSData*)ss_imageToData;
+
+///生成二维码图片
++ (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size;
+///截取指定视图的指定区域，传入需要截取的view
++ (UIImage*)SSscreenShot:(UIView *)view;
+
 @end
 

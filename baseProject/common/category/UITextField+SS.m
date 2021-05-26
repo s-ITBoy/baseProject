@@ -10,4 +10,13 @@
 
 @implementation UITextField (SS)
 
+///创建UITextField
++ (UITextField*)SStextField:(NSString*)placeHolder andTextColor:(UIColor*)textColor andFont:(UIFont*)font {
+    UITextField* textF = [[UITextField alloc] init];
+    textF.placeholder = placeHolder;
+    textF.textColor = textColor;
+    textF.font = font;
+    return textF;
+}
+
 @end

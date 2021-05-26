@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (SS)
 
+///创建UITextField
++ (UITextField*)SStextField:(NSString*)placeHolder andTextColor:(UIColor*)textColor andFont:(UIFont*)font;
+
 @end
 
 NS_ASSUME_NONNULL_END

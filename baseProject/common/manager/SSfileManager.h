@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-///本地数据,文件管理类
+///本地数据、文件管理类
 @interface SSfileManager : NSObject
 
 + (instancetype)shareManager;

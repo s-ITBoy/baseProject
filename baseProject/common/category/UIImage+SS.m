@@ -161,4 +161,56 @@
     
     return data;
 }
+
+///生成二维码图片
++ (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size {
+    //创建过滤器
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    //过滤器恢复默认
+    [filter setDefaults];
+    //给过滤器添加数据<字符串长度893>
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    [filter setValue:data forKey:@"inputMessage"];
+    //获取二维码过滤器生成二维码
+    CIImage *image = [filter outputImage];
+    UIImage *img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
+    return img;
+}
++ (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size {
+    CGRect extent = CGRectIntegral(image.extent);
+    CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
+    
+    //创建bitmap
+    size_t width = CGRectGetWidth(extent)*scale;
+    size_t height = CGRectGetHeight(extent)*scale;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
+    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    
+    //保存图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    CGContextRelease(bitmapRef);
+    CGImageRelease(bitmapImage);
+    return [UIImage imageWithCGImage:scaledImage];
+}
+
+///截取指定视图的指定区域，传入需要截取的view
++ (UIImage*)SSscreenShot:(UIView *)view {
+    UIImage *imageRet = [[UIImage alloc]init];
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    imageRet = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRef sourceImageRef = [imageRet CGImage];
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, CGRectMake(0, imageRet.size.height - statusBarHeight - 44, imageRet.size.width, statusBarHeight+44));
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    return newImage;
+    //    return imageRet;
+}
+
 @end

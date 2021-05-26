@@ -10,7 +10,7 @@
 
 @implementation UIViewController (SS)
 
-#pragma mark --------- 跳转 ----------
+#pragma mark --------- 跳转VC ----------
 //push
 - (void)SS_pushVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)dic {
     if (!classStr) {
