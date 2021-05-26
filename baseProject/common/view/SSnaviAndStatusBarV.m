@@ -12,9 +12,10 @@
 @interface SSnaviAndStatusBarV ()<UITextFieldDelegate>
 ///导航标题
 @property(nonatomic,strong) UILabel* titleLab;
-
 @property(nonatomic,strong) SSbadgeBtn* leftBtn;
 @property(nonatomic,strong) SSbadgeBtn* rightBtn;
+
+@property(nonatomic,assign) SSnaviType type;
 
 @end
 @implementation SSnaviAndStatusBarV

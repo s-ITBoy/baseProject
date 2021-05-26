@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, SSnaviType) {
+    SSnaviTypeShowDefault,
+    SSnaviTypeShowLeftBack,
+    SSnaviTypeShowLeftAndRight,
+    
+};
+
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^SSNaviBtnsBLock)(NSInteger index);
 
