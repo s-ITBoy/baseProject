@@ -2,8 +2,8 @@
 //  SSRACmanager.m
 //  baseProject
 //
-//  Created by F S on 2020/12/19.
-//  Copyright © 2020 FL S. All rights reserved.
+//  Created by F S on 2018/12/19.
+//  Copyright © 2018 FL S. All rights reserved.
 //
 
 #import "SSRACmanager.h"
