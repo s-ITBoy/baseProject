@@ -9,14 +9,14 @@
 #import "SSTableView.h"
 #import <objc/runtime.h>
 
-#pragma mark - 数据处理配置
+#pragma mark ----- 数据处理配置 -------
 ///model默认去匹配的cell高度属性名 若不存在则动态生成cellHRunTime的属性名
-static NSString *const CELLH = @"cellH";
+static NSString *const CELLH = @"cellHight";
 ///cell会自动赋值包含“model”的属性
 static NSString *const DATAMODEL = @"model";
 ///model与cell的index属性，存储当前model与cell所属的indexPath
 static NSString *const INDEX = @"indexPath";
-///若ZXBaseTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
+///若SSTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
 static CGFloat const CELLDEFAULTH = 44;
 
 @interface SSTaGetProName : NSObject
@@ -91,34 +91,34 @@ static CGFloat const CELLDEFAULTH = 44;
 @end
 
 @interface NSObject (SSTableV)
-@property (nonatomic, strong) NSNumber *cellHight;
+@property (nonatomic, strong) NSNumber *cellHeight;
 ///获取tableView中当前cell/model对应的indexPath
-@property(strong, nonatomic)NSIndexPath *zx_indexPathInTableView;
+@property(strong, nonatomic)NSIndexPath *ss_indexPathInTableView;
 ///获取tableView中当前headerView/footerView/cell/model对应的section
-@property(assign, nonatomic)NSUInteger zx_sectionInTableView;
+@property(assign, nonatomic)NSUInteger ss_sectionInTableView;
 
 @end
 @implementation NSObject (SSTableV)
 
-- (void)setCellHight:(NSNumber *)cellHight {
-    objc_setAssociatedObject(self, @"cellHight",cellHight, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setCellHeight:(NSNumber *)cellHeight {
+    objc_setAssociatedObject(self, @"cellHeight",cellHeight, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (NSNumber *)cellHight {
-    return objc_getAssociatedObject(self, @"cellHight");
-}
-
-- (void)setZx_indexPathInTableView:(NSIndexPath *)zx_indexPathInTableView {
-    objc_setAssociatedObject(self, @"zx_indexPathInTableView", zx_indexPathInTableView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (NSIndexPath *)zx_indexPathInTableView {
-    return objc_getAssociatedObject(self, @"zx_indexPathInTableView");
+- (NSNumber *)cellHeight {
+    return objc_getAssociatedObject(self, @"cellHeight");
 }
 
-- (void)setZx_sectionInTableView:(NSUInteger)zx_sectionInTableView {
-    objc_setAssociatedObject(self, @"zx_sectionInTableView", [NSNumber numberWithInteger:zx_sectionInTableView], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setSs_indexPathInTableView:(NSIndexPath *)ss_indexPathInTableView {
+    objc_setAssociatedObject(self, @"ss_indexPathInTableView", ss_indexPathInTableView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (NSUInteger)zx_sectionInTableView {
-    return [objc_getAssociatedObject(self, @"zx_sectionInTableView") unsignedIntegerValue];
+- (NSIndexPath *)ss_indexPathInTableView {
+    return objc_getAssociatedObject(self, @"ss_indexPathInTableView");
+}
+
+- (void)setSs_sectionInTableView:(NSUInteger)ss_sectionInTableView {
+    objc_setAssociatedObject(self, @"ss_sectionInTableView", [NSNumber numberWithInteger:ss_sectionInTableView], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (NSUInteger)ss_sectionInTableView {
+    return [objc_getAssociatedObject(self, @"ss_sectionInTableView") unsignedIntegerValue];
 }
 
 
@@ -258,16 +258,16 @@ static CGFloat const CELLDEFAULTH = 44;
         if (model) {
             [model ss_safeSetValue:indexPath forKey:INDEX];
             [cell ss_safeSetValue:indexPath forKey:INDEX];
-            [cell setValue:indexPath forKey:@"zx_indexPathInTableView"];
-            [model setValue:indexPath forKey:@"zx_indexPathInTableView"];
-            [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
-            [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
+            [cell setValue:indexPath forKey:@"ss_indexPathInTableView"];
+            [model setValue:indexPath forKey:@"ss_indexPathInTableView"];
+            [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
+            [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
             CGFloat cellH = ((UITableViewCell *)cell).frame.size.height;
             if (cellH && ![[model ss_safeValueForKey:INDEX] floatValue]) {
                 if([model respondsToSelector:NSSelectorFromString(CELLH)]){
                     [model ss_safeSetValue:[NSNumber numberWithFloat:cellH] forKey:CELLH];
                 }else{
-                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"zx_cellHRunTime"];
+                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"cellHeight"];
                 }
             }
             if (!self.ss_fixCellBlockAfterAutoSetModel) {
@@ -346,7 +346,7 @@ static CGFloat const CELLDEFAULTH = 44;
                 if(cellH) {
                     return cellH;
                 }else {
-                    return [[model valueForKey:@"zx_cellHRunTime"] floatValue];
+                    return [[model valueForKey:@"cellHeight"] floatValue];
                 }
             }else {
                 return CELLDEFAULTH;
@@ -416,6 +416,38 @@ static CGFloat const CELLDEFAULTH = 44;
     }
     return nil;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+        return [self.ssDelegate tableView:tableView heightForHeaderInSection:section];
+    }else {
+        if (self.ss_setHeaderClassInSection) {
+            
+        }
+    }
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:heightForFooterInSection:)]) {
+        return [self.ssDelegate tableView:tableView heightForFooterInSection:section];
+    }else {
+        if (self.ss_setFooterClassInSection) {
+            
+        }
+    }
+    return 0;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+    
+}
+
+
 
 - (UIView*)getHeadViewOrFootViewInSection:(NSInteger)section isHeadView:(BOOL)isHeadView {
     UIView* view = nil;

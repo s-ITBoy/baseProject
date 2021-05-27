@@ -27,9 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray<NSString *> * (^ss_setSectionIndexTitlesForTableView)(UITableView *tableView);
 ///设置索引对应的section
 @property (nonatomic, copy) NSInteger (^ss_setSectionForSectionIndex)(NSString *title,NSInteger index);
-///根据HeaderView类名设置HeaderView，写了此方法则zx_setHeaderViewInSection无效，无需实现zx_setHeaderHInSection，自动计算高度，若设置了，则zx_headerClassName无效
+///根据HeaderView类名设置HeaderView，写了此方法则ss_setHeaderViewInSection无效，无需实现ss_setHeaderHInSection，自动计算高度，若设置了，则ss_headerClassName无效
 @property (nonatomic, copy) Class (^ss_setHeaderClassInSection)(NSInteger section);
-///根据FooterView类名设置FooterView，写了此方法则zx_setFooterViewInSection无效，无需实现zx_setFooterHInSection，自动计算高度，若设置了，则zx_footerClassName无效
+///根据FooterView类名设置FooterView，写了此方法则ss_setFooterViewInSection无效，无需实现ss_setFooterHInSection，自动计算高度，若设置了，则ss_footerClassName无效
 @property (nonatomic, copy) Class (^ss_setFooterClassInSection)(NSInteger section);
 
 ///控制获取cell回调在获取model之后，默认为NO
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^ss_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
 
 
-#pragma mark -------- 代理事件相关 ---------
+#pragma mark -------- 事件相关 -----------
 ///选中某一行，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_didSelectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);
 ///取消选中某一行，把id改成对应类名即可无需强制转换
@@ -52,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^ss_willDisplayCell)(NSIndexPath *indexPath,id cell);
 ///cell已经展示，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_didEndDisplayingCell)(NSIndexPath *indexPath,id cell);
+
 
 ///tableView的DataSource 设置为当前控制器即可重写对应数据源方法
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> ssDataSource;
