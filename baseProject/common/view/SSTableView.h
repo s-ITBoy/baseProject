@@ -46,13 +46,18 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -------- 数据获取 -----------
 ///获取对应行的cell，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_getCellAtIndexPath)(NSIndexPath *indexPath,id cell,id model);
-
+///获取对应section的headerView，把id改成对应类名即可无需强制转换，secArr为对应section的model数组
+@property (nonatomic, copy) void (^ss_getHeaderViewInSection)(NSUInteger section,id headerView,NSMutableArray *secArr);
+///获取对应section的footerView，把id改成对应类名即可无需强制转换，secArr为对应section的model数组
+@property (nonatomic, copy) void (^ss_getFooterViewInSection)(NSUInteger section,id footerView,NSMutableArray *secArr);
 
 #pragma mark -------- 事件相关 -----------
 ///选中某一行，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_didSelectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);
 ///取消选中某一行，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_didDeselectedAtIndexPath)(NSIndexPath *indexPath,id model,id cell);
+///滑动编辑
+@property (nonatomic, copy) NSArray<UITableViewRowAction *>* (^ss_editActionsForRowAtIndexPath)(NSIndexPath *indexPath);
 ///cell将要展示，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_willDisplayCell)(NSIndexPath *indexPath,id cell);
 ///cell已经展示，把id改成对应类名即可无需强制转换
@@ -65,7 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^ss_willDisplayFooterView)(NSInteger section,id footerView);
 ///footerView已经展示完毕，把id改成对应类名即可无需强制转换
 @property (nonatomic, copy) void (^ss_didEndDisplayingFooterView)(NSInteger section,id footerView);
-
 ///scrollView滚动事件
 @property (nonatomic, copy) void (^ss_scrollViewDidScroll)(UIScrollView *scrollView);
 ///scrollView缩放事件

@@ -16,6 +16,8 @@ static NSString *const CELLH = @"cellHight";
 static NSString *const DATAMODEL = @"model";
 ///model与cell的index属性，存储当前model与cell所属的indexPath
 static NSString *const INDEX = @"indexPath";
+///headerView与footerView的section属性，存储当前headerView与footerView所属的section
+static NSString *const SECTION = @"section";
 ///若SSTableView无法自动获取cell高度（zxdata有值即可），且用户未自定义高度，则使用默认高度
 static CGFloat const CELLDEFAULTH = 44;
 
@@ -178,6 +180,9 @@ static CGFloat const CELLDEFAULTH = 44;
     
     self.delegate = self;
     self.dataSource = self;
+    
+    self.ss_fixCellBlockAfterAutoSetModel = NO;
+    self.ss_autoDeselectWhenSelected = YES;
 }
 
 - (void)setSsDatas:(NSMutableArray *)ssDatas {
@@ -185,32 +190,11 @@ static CGFloat const CELLDEFAULTH = 44;
     [self reloadData];
 }
 
--(BOOL)isMultiDatas{
+- (BOOL)isMultiDatas {
     return self.ssDatas.count && [[self.ssDatas objectAtIndex:0] isKindOfClass:[NSArray class]];
 }
 
--(instancetype)getModelAtIndexPath:(NSIndexPath *)indexPath{
-    id model = nil;;
-    if([self isMultiDatas]){
-        if(indexPath.section < self.ssDatas.count){
-            NSArray *sectionArr = self.ssDatas[indexPath.section];
-            if(indexPath.row < sectionArr.count){
-                model = sectionArr[indexPath.row];
-            }else{
-                NSAssert(NO, [NSString stringWithFormat:@"数据源异常，请检查数据源！"]);
-            }
-        }else{
-            NSAssert(NO, [NSString stringWithFormat:@"数据源异常，请检查数据源！"]);
-        }
-    }else{
-        if(indexPath.row < self.ssDatas.count){
-            model = self.ssDatas[indexPath.row];
-        }else{
-            NSAssert(NO, [NSString stringWithFormat:@"数据源异常，请检查数据源！"]);
-        }
-    }
-    return model;
-}
+
 
 #pragma mark ------------ UITableView ---------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -399,22 +383,52 @@ static CGFloat const CELLDEFAULTH = 44;
     }
 }
 
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if ([self.ssDelegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
-        return [self.ssDelegate tableView:tableView viewForHeaderInSection:section];
-    }else {
-        return [self getHeadViewOrFootViewInSection:section isHeadView:YES];
+//滑动编辑
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.ss_editActionsForRowAtIndexPath) {
+        return self.ss_editActionsForRowAtIndexPath(indexPath);
     }
     return nil;
 }
 
-- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if ([self.ssDelegate respondsToSelector:@selector(tableView:viewForFooterInSection:)]) {
-        return [self.ssDelegate tableView:tableView viewForFooterInSection:section];
-    }else {
-        return [self getHeadViewOrFootViewInSection:section isHeadView:NO];
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.ss_editActionsForRowAtIndexPath) {
+        NSArray *rowActionsArr = self.ss_editActionsForRowAtIndexPath(indexPath);
+        if(rowActionsArr && ![rowActionsArr isKindOfClass:[NSNull class]] && rowActionsArr.count){
+            return YES;
+        }
     }
-    return nil;
+    return NO;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView* headView = nil;
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
+        headView = [self.ssDelegate tableView:tableView viewForHeaderInSection:section];
+    }else {
+        headView = [self getHeadViewOrFootViewInSection:section isHeadView:YES];
+    }
+    NSMutableArray* secArr = self.ssDatas.count ? [self isMultiDatas] ? self.ssDatas[section] :self.ssDatas : nil;
+    !self.ss_getHeaderViewInSection ? : self.ss_getHeaderViewInSection(section,headView,secArr);
+    [headView ss_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
+    [headView setValue:[NSNumber numberWithInteger:section] forKey:@"ss_sectionInTableView"];
+    
+    return secArr.count ? headView : nil;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView* footView = nil;
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:viewForFooterInSection:)]) {
+        footView = [self.ssDelegate tableView:tableView viewForFooterInSection:section];
+    }else {
+        footView = [self getHeadViewOrFootViewInSection:section isHeadView:NO];
+    }
+    NSMutableArray* secArr = self.ssDatas.count ? [self isMultiDatas] ? self.ssDatas[section] :self.ssDatas : nil;
+    !self.ss_getFooterViewInSection ? : self.ss_getFooterViewInSection(section,footView,secArr);
+    [footView ss_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
+    [footView setValue:[NSNumber numberWithInteger:section] forKey:@"ss_sectionInTableView"];
+    
+    return secArr.count ? footView : nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -557,8 +571,31 @@ static CGFloat const CELLDEFAULTH = 44;
     }
 }
 
+#pragma mark ------- 偶去对应indexPath的数据model --------
+- (instancetype)getModelAtIndexPath:(NSIndexPath *)indexPath {
+    id model = nil;;
+    if ([self isMultiDatas]) {
+        if (indexPath.section < self.ssDatas.count) {
+            NSArray *sectionArr = self.ssDatas[indexPath.section];
+            if (indexPath.row < sectionArr.count) {
+                model = sectionArr[indexPath.row];
+            }else {
+                NSAssert(NO, [NSString stringWithFormat:@"数据源异常，请检查数据源！"]);
+            }
+        }else {
+            NSAssert(NO, [NSString stringWithFormat:@"数据源异常，请检查数据源！"]);
+        }
+    }else {
+        if (indexPath.row < self.ssDatas.count) {
+            model = self.ssDatas[indexPath.row];
+        }else {
+            NSAssert(NO, [NSString stringWithFormat:@"数据源异常，请检查数据源！"]);
+        }
+    }
+    return model;
+}
 
-
+#pragma mark ----------- 根据section获取对应的headVeiw/footView -------------
 - (UIView*)getHeadViewOrFootViewInSection:(NSInteger)section isHeadView:(BOOL)isHeadView {
     UIView* view = nil;
     Class viewClass = [self getHeadClassOrFootViewInSection:section isHeadView:isHeadView];
