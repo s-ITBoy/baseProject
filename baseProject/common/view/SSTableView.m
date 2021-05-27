@@ -149,14 +149,14 @@ static CGFloat const CELLDEFAULTH = 44;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self = [super initWithFrame:frame style:style]) {
-        
+        [self setSStableView];
     }
     return self;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        
+        [self setSStableView];
     }
     return self;
 }
@@ -422,10 +422,24 @@ static CGFloat const CELLDEFAULTH = 44;
         return [self.ssDelegate tableView:tableView heightForHeaderInSection:section];
     }else {
         if (self.ss_setHeaderClassInSection) {
-            
+            if (self.ss_setHeaderHeightInSection) {
+                if (section < self.ssDatas.count || section == 0) {
+                    return self.ss_setHeaderHeightInSection(section);
+                }
+            }else {
+                if (section < self.ssDatas.count || section == 0) {
+                    UIView *headerView = [self getHeadViewOrFootViewInSection:section isHeadView:YES];
+                    return headerView.frame.size.height;
+                }
+            }
+            return CGFLOAT_MIN;
+        }else {
+            if (self.ss_setHeaderHeightInSection) {
+                return self.ss_setHeaderHeightInSection(section);
+            }
+            return CGFLOAT_MIN;
         }
     }
-    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -433,18 +447,114 @@ static CGFloat const CELLDEFAULTH = 44;
         return [self.ssDelegate tableView:tableView heightForFooterInSection:section];
     }else {
         if (self.ss_setFooterClassInSection) {
-            
+            if (self.ss_setFooterHeightInSection) {
+                if (section < self.ssDatas.count || section == 0) {
+                    return self.ss_setFooterHeightInSection(section);
+                }
+            }else {
+                if (section < self.ssDatas.count || section == 0) {
+                    UIView *footView = [self getHeadViewOrFootViewInSection:section isHeadView:NO];
+                    return footView.frame.size.height;
+                }
+            }
+            return CGFLOAT_MIN;
+        }else {
+            if (self.ss_setFooterHeightInSection) {
+                return self.ss_setFooterHeightInSection(section);
+            }
+            return CGFLOAT_MIN;
         }
     }
-    return 0;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:willDisplayHeaderView:forSection:)]) {
+        [self.ssDelegate tableView:tableView willDisplayHeaderView:view forSection:section];
+    }else {
+        if (self.ss_willDisplayHeaderView) {
+            self.ss_willDisplayHeaderView(section, view);
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section{
+    if([self.ssDelegate respondsToSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)]){
+        [self.ssDelegate tableView:tableView didEndDisplayingHeaderView:view forSection:section];
+    }else{
+        !self.ss_didEndDisplayingHeaderView ? : self.ss_didEndDisplayingHeaderView(section,view);
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:willDisplayFooterView:forSection:)]) {
+        [self.ssDelegate tableView:tableView willDisplayFooterView:view forSection:section];
+    }else {
+        if (self.ss_willDisplayFooterView) {
+            self.ss_willDisplayFooterView(section, view);
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section{
+    if([self.ssDelegate respondsToSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)]){
+        [self.ssDelegate tableView:tableView didEndDisplayingFooterView:view forSection:section];
+    }else{
+        !self.ss_didEndDisplayingFooterView ? : self.ss_didEndDisplayingFooterView(section,view);
+    }
+}
+
+#pragma mark ------ UIScrollView ---------
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    //滚动事件
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [self.ssDelegate scrollViewDidScroll:scrollView];
+    }else {
+        if (self.ss_scrollViewDidScroll) {
+            self.ss_scrollViewDidScroll(scrollView);
+        }
+    }
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    //缩放事件
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidZoom:)]) {
+        [self.ssDelegate scrollViewDidZoom:scrollView];
+    }else {
+        !self.ss_scrollViewDidZoom ? : self.ss_scrollViewDidZoom(scrollView);
+    }
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    //滚动到顶部
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidScrollToTop:)]) {
+        [self.ssDelegate scrollViewDidScrollToTop:scrollView];
+    }else {
+        if (self.ss_scrollViewDidScrollToTop) {
+            self.ss_scrollViewDidScrollToTop(scrollView);
+        }
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    //开始拖拽
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
+        [self.ssDelegate scrollViewWillBeginDragging:scrollView];
+    }else {
+        if (self.ss_scrollViewWillBeginDragging) {
+            self.ss_scrollViewWillBeginDragging(scrollView);
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    //结束拖拽
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+        [self.ssDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }else {
+        if (self.ss_scrollViewDidEndDragging) {
+            self.ss_scrollViewDidEndDragging(scrollView, decelerate);
+        }
+    }
 }
 
 
