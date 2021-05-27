@@ -92,16 +92,35 @@ static CGFloat const CELLDEFAULTH = 44;
 
 @interface NSObject (SSTableV)
 @property (nonatomic, strong) NSNumber *cellHight;
+///获取tableView中当前cell/model对应的indexPath
+@property(strong, nonatomic)NSIndexPath *zx_indexPathInTableView;
+///获取tableView中当前headerView/footerView/cell/model对应的section
+@property(assign, nonatomic)NSUInteger zx_sectionInTableView;
+
 @end
 @implementation NSObject (SSTableV)
 
 - (void)setCellHight:(NSNumber *)cellHight {
     objc_setAssociatedObject(self, @"cellHight",cellHight, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
 - (NSNumber *)cellHight {
     return objc_getAssociatedObject(self, @"cellHight");
 }
+
+- (void)setZx_indexPathInTableView:(NSIndexPath *)zx_indexPathInTableView {
+    objc_setAssociatedObject(self, @"zx_indexPathInTableView", zx_indexPathInTableView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (NSIndexPath *)zx_indexPathInTableView {
+    return objc_getAssociatedObject(self, @"zx_indexPathInTableView");
+}
+
+- (void)setZx_sectionInTableView:(NSUInteger)zx_sectionInTableView {
+    objc_setAssociatedObject(self, @"zx_sectionInTableView", [NSNumber numberWithInteger:zx_sectionInTableView], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (NSUInteger)zx_sectionInTableView {
+    return [objc_getAssociatedObject(self, @"zx_sectionInTableView") unsignedIntegerValue];
+}
+
 
 
 -(id)ss_safeValueForKey:(NSString *)key {
@@ -239,14 +258,20 @@ static CGFloat const CELLDEFAULTH = 44;
         if (model) {
             [model ss_safeSetValue:indexPath forKey:INDEX];
             [cell ss_safeSetValue:indexPath forKey:INDEX];
+            [cell setValue:indexPath forKey:@"zx_indexPathInTableView"];
+            [model setValue:indexPath forKey:@"zx_indexPathInTableView"];
+            [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
+            [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"zx_sectionInTableView"];
             CGFloat cellH = ((UITableViewCell *)cell).frame.size.height;
             if (cellH && ![[model ss_safeValueForKey:INDEX] floatValue]) {
-                NSMutableArray *modelProNames = [SSTaGetProName ss_getRecursionPropertyNames:model];
-                if([modelProNames containsObject:CELLH]){
+                if([model respondsToSelector:NSSelectorFromString(CELLH)]){
                     [model ss_safeSetValue:[NSNumber numberWithFloat:cellH] forKey:CELLH];
                 }else{
-                    [model setCellHight:[NSNumber numberWithFloat:cellH]];
+                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"zx_cellHRunTime"];
                 }
+            }
+            if (!self.ss_fixCellBlockAfterAutoSetModel) {
+                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
             }
             NSArray *cellProNames = [SSTaGetProName ss_getRecursionPropertyNames:cell];
             BOOL cellContainsModel = NO;
@@ -257,17 +282,104 @@ static CGFloat const CELLDEFAULTH = 44;
                     break;
                 }
             }
+        }else {
+            if (!self.ss_fixCellBlockAfterAutoSetModel) {
+                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
+            }
         }
-        
-        !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
+        if (self.ss_fixCellBlockAfterAutoSetModel) {
+            !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
+        }
         
         return cell;
     }
     return nil;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([self.ssDataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)]) {
+        return [self.ssDataSource tableView:tableView titleForHeaderInSection:section];
+    }else {
+        if (self.ss_setTitleForHeaderInSection) {
+            return self.ss_setTitleForHeaderInSection(section);
+        }
+    }
+    return nil;
+}
+
+- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if ([self.ssDataSource respondsToSelector:@selector(sectionIndexTitlesForTableView:)]) {
+        return [self.ssDataSource sectionIndexTitlesForTableView:tableView];
+    }else {
+        if (self.ss_setSectionIndexTitlesForTableView) {
+            return self.ss_setSectionIndexTitlesForTableView(tableView);
+        }
+    }
+    return nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    if ([self.ssDataSource respondsToSelector:@selector(tableView:sectionForSectionIndexTitle:atIndex:)]) {
+        return [self.ssDataSource tableView:tableView sectionForSectionIndexTitle:title atIndex:index];
+    }else {
+        if (self.ss_setSectionForSectionIndex) {
+            return self.ss_setSectionForSectionIndex(title,index);
+        }
+    }
+    return 0;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:estimatedHeightForRowAtIndexPath:)]) {
+        return UITableViewAutomaticDimension;
+    }
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
+        return [self.ssDelegate tableView:tableView heightForRowAtIndexPath:indexPath];
+    }else {
+        if (self.ss_setCellHeightAtIndexPath) {
+            return self.ss_setCellHeightAtIndexPath(indexPath);
+        }else {
+            id model = [self getModelAtIndexPath:indexPath];
+            if(model) {
+                CGFloat cellH = [[model ss_safeValueForKey:CELLH] floatValue];
+                if(cellH) {
+                    return cellH;
+                }else {
+                    return [[model valueForKey:@"zx_cellHRunTime"] floatValue];
+                }
+            }else {
+                return CELLDEFAULTH;
+            }
+        }
+    }
+    return CELLDEFAULTH;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)]) {
+        [self.ssDelegate tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    }else {
+        if (self.ss_willDisplayCell) {
+            self.ss_willDisplayCell(indexPath, cell);
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)]) {
+        [self.ssDelegate tableView:tableView didEndDisplayingCell:cell forRowAtIndexPath:indexPath];
+    }else {
+        if (self.ss_didEndDisplayingCell) {
+            self.ss_didEndDisplayingCell(indexPath, cell);
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.ss_autoDeselectWhenSelected) {
+        [self deselectRowAtIndexPath:indexPath animated:YES];
+    }
     if([self.ssDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]){
         [self.ssDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }else {
@@ -287,7 +399,46 @@ static CGFloat const CELLDEFAULTH = 44;
     }
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
+        return [self.ssDelegate tableView:tableView viewForHeaderInSection:section];
+    }else {
+        return [self getHeadViewOrFootViewInSection:section isHeadView:YES];
+    }
+    return nil;
+}
 
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:viewForFooterInSection:)]) {
+        return [self.ssDelegate tableView:tableView viewForFooterInSection:section];
+    }else {
+        return [self getHeadViewOrFootViewInSection:section isHeadView:NO];
+    }
+    return nil;
+}
+
+- (UIView*)getHeadViewOrFootViewInSection:(NSInteger)section isHeadView:(BOOL)isHeadView {
+    UIView* view = nil;
+    Class viewClass = [self getHeadClassOrFootViewInSection:section isHeadView:isHeadView];
+    if (!viewClass) {
+        return nil;
+    }
+    view = [[viewClass alloc] init];
+    return view;
+}
+
+- (Class)getHeadClassOrFootViewInSection:(NSInteger)section isHeadView:(BOOL)isHeadView {
+    if (isHeadView) {
+        if (self.ss_setHeaderClassInSection) {
+            return self.ss_setHeaderClassInSection(section);
+        }
+    }else {
+        if (self.ss_setFooterClassInSection) {
+            return self.ss_setFooterClassInSection(section);
+        }
+    }
+    return nil;
+}
 
 - (void)dealloc {
     self.delegate = nil;
