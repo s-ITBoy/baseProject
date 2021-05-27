@@ -50,8 +50,7 @@
 
 // 作用：拦截手势触发
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    
-    if(self.navigationController.childViewControllers.count == 1){
+    if (self.navigationController.childViewControllers.count == 1) {
         return NO;
     }
     return YES;

@@ -9,9 +9,8 @@
 #import "SSfirstVC.h"
 #import "SSfileManager.h"
 #import "AppDelegate.h"
-#import "SSmarqueeV.h"
 
-@interface SSfirstVC ()<SSmarqueeDelegate>
+@interface SSfirstVC ()
 @property(nonatomic,strong) UILabel* valueLab;
 @end
 

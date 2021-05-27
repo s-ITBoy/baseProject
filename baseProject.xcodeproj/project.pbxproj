@@ -1394,7 +1394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XXM5KPVP2;
+				DEVELOPMENT_TEAM = B3H6MSC2FH;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = baseProject/common/configure/PrefixHeader.pch;
 				INFOPLIST_FILE = baseProject/Info.plist;
@@ -1419,7 +1419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XXM5KPVP2;
+				DEVELOPMENT_TEAM = B3H6MSC2FH;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = baseProject/common/configure/PrefixHeader.pch;
 				INFOPLIST_FILE = baseProject/Info.plist;
