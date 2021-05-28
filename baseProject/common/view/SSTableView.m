@@ -236,7 +236,9 @@ static CGFloat const CELLDEFAULTH = 44;
         if (self.ss_setNumberOfRowsInSection) {
             return self.ss_setNumberOfRowsInSection(section);
         }
-        return [self isMultiDatas] ? [[self.ssDatas SSarrayAtIndex:section] count] : self.ssDatas.count;
+        
+        return [self isMultiDatas] ? [[self arrAtindex:section frome:self.ssDatas] count] : self.ssDatas.count;
+//        return [self isMultiDatas] ? [[self.ssDatas SSarrayAtIndex:section] count] : self.ssDatas.count;
     }
 }
 
@@ -640,7 +642,13 @@ static CGFloat const CELLDEFAULTH = 44;
     return nil;
 }
 
-
+- (NSArray*)arrAtindex:(NSInteger)index frome:(NSArray*)array {
+    id object = [array objectAtIndex:index];
+    if ([object isKindOfClass:[NSArray class]]) {
+        return object;
+    }
+    return @[];
+}
 
 
 - (void)dealloc {
