@@ -183,6 +183,7 @@ static CGFloat const CELLDEFAULTH = 44;
     
     self.ss_fixCellBlockAfterAutoSetModel = NO;
     self.ss_autoDeselectWhenSelected = YES;
+//    self.ss_isAdaptiveCellHeight = YES;
 }
 
 #pragma mark -------- set -----------

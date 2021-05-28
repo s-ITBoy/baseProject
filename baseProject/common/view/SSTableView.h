@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-///自定义强大的tableView，实现低耦合、高聚合
+///自定义强大的tableView，实现低耦合、高聚合（自动动态的给对应的cell做模型数据赋值，模型数据参数命名必须包含”model“字符串）
 @interface SSTableView : UITableView
 #pragma mark -------- 数据设置 -------------
 @property(nonatomic,strong) NSMutableArray* ssDatas;

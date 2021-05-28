@@ -23,11 +23,13 @@
 @interface sstestCell_1 : UITableViewCell
 @property(nonatomic,strong) UILabel* testLab;
 @property(nonatomic,copy) sstestModel* model;
+//@property(nonatomic,copy) NSString* modelStr;
+
 @end
 @implementation sstestCell_1
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.testLab = [UILabel SSlabel:[UIFont SSfontWith:58] textColor:[UIColor SStitleColor51] backgroundColor:nil];
+        self.testLab = [UILabel SSlabel:[UIFont SSfontWith:30] textColor:[UIColor SStitleColor51] backgroundColor:nil];
         self.testLab.numberOfLines = 0;
         [self addSubview:self.testLab];
         [self.testLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,6 +44,17 @@
     _model = model;
     self.testLab.text = model.name;
 }
+
+//- (void)setModelStr:(NSString *)modelStr {
+//    _modelStr = modelStr;
+//    self.testLab.text = modelStr;
+//}
+//
+//- (void)setModelDic:(NSDictionary *)modelDic {
+//    _modelDic = modelDic;
+//    self.testLab.text = [modelDic SSstringForDicKey:@"name"];;
+//}
+
 
 @end
 
@@ -67,9 +80,12 @@
         return [sstestCell_1 class];
     };
     self.stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
-        cell.testLab.text = @"qwer";
+//        cell.testLab.text = @"qwer";
     };
-    self.stableV.rowHeight = UITableViewAutomaticDimension;
+//    self.stableV.ss_setCellHeightAtIndexPath = ^CGFloat(NSIndexPath * _Nonnull indexPath) {
+//        return 150;
+//    };
+    self.stableV.ss_isAdaptiveCellHeight = YES;
     [self getdata];
 }
 
@@ -96,6 +112,10 @@
             sstestModel* model = [[sstestModel alloc] init];
             model.name = [NSString stringWithFormat:@"数字_%ld",i];
             [arr addObject:model];
+            
+//            NSMutableDictionary* dic = [NSMutableDictionary dictionary];
+//            dic[@"name"] = [NSString stringWithFormat:@"数字_%ld",i];
+//            [arr addObject:dic];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             self.stableV.ssDatas = [arr mutableCopy];
