@@ -11,7 +11,7 @@
 
 #pragma mark ----- 数据处理配置 -------
 ///model默认去匹配的cell高度属性名 若不存在则动态生成cellHRunTime的属性名
-static NSString *const CELLH = @"cellHight";
+static NSString *const CELLH = @"cellH";
 ///cell会自动赋值包含“model”的属性
 static NSString *const DATAMODEL = @"model";
 ///model与cell的index属性，存储当前model与cell所属的indexPath
@@ -93,7 +93,7 @@ static CGFloat const CELLDEFAULTH = 44;
 @end
 
 @interface NSObject (SSTableV)
-@property (nonatomic, strong) NSNumber *cellHeight;
+//@property (nonatomic, strong) NSNumber *ss_cellHRunTime;
 ///获取tableView中当前cell/model对应的indexPath
 @property(strong, nonatomic)NSIndexPath *ss_indexPathInTableView;
 ///获取tableView中当前headerView/footerView/cell/model对应的section
@@ -102,11 +102,11 @@ static CGFloat const CELLDEFAULTH = 44;
 @end
 @implementation NSObject (SSTableV)
 
-- (void)setCellHeight:(NSNumber *)cellHeight {
-    objc_setAssociatedObject(self, @"cellHeight",cellHeight, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setSs_cellHRunTime:(NSNumber *)ss_cellHRunTime {
+    objc_setAssociatedObject(self, @"ss_cellHRunTime",ss_cellHRunTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (NSNumber *)cellHeight {
-    return objc_getAssociatedObject(self, @"cellHeight");
+- (NSNumber *)ss_cellHRunTime {
+    return objc_getAssociatedObject(self, @"ss_cellHRunTime");
 }
 
 - (void)setSs_indexPathInTableView:(NSIndexPath *)ss_indexPathInTableView {
@@ -185,6 +185,11 @@ static CGFloat const CELLDEFAULTH = 44;
     self.ss_autoDeselectWhenSelected = YES;
 }
 
+#pragma mark -------- set -----------
+- (void)ss_setCell:(UITableViewCell*)cell {
+    
+}
+
 - (void)setSsDatas:(NSMutableArray *)ssDatas {
     _ssDatas = ssDatas;
     [self reloadData];
@@ -194,7 +199,22 @@ static CGFloat const CELLDEFAULTH = 44;
     return self.ssDatas.count && [[self.ssDatas objectAtIndex:0] isKindOfClass:[NSArray class]];
 }
 
+- (void)setSs_isAdaptiveCellHeight:(BOOL)ss_isAdaptiveCellHeight {
+    ss_isAdaptiveCellHeight = ss_isAdaptiveCellHeight;
+    if (ss_isAdaptiveCellHeight) {
+        self.estimatedRowHeight = 10;
+        self.ss_setCellHeightAtIndexPath = ^CGFloat(NSIndexPath * _Nonnull indexPath) {
+            return UITableViewAutomaticDimension;
+        };
+    }
+}
 
+- (void)setSs_RowHeight:(CGFloat)ss_RowHeight {
+    _ss_RowHeight = ss_RowHeight;
+    self.ss_setCellHeightAtIndexPath = ^CGFloat(NSIndexPath * _Nonnull indexPath) {
+        return ss_RowHeight;
+    };
+}
 
 #pragma mark ------------ UITableView ---------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -240,8 +260,8 @@ static CGFloat const CELLDEFAULTH = 44;
             }
         }
         if (model) {
-            [model ss_safeSetValue:indexPath forKey:INDEX];
             [cell ss_safeSetValue:indexPath forKey:INDEX];
+            [model ss_safeSetValue:indexPath forKey:INDEX];
             [cell setValue:indexPath forKey:@"ss_indexPathInTableView"];
             [model setValue:indexPath forKey:@"ss_indexPathInTableView"];
             [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
@@ -251,7 +271,7 @@ static CGFloat const CELLDEFAULTH = 44;
                 if([model respondsToSelector:NSSelectorFromString(CELLH)]){
                     [model ss_safeSetValue:[NSNumber numberWithFloat:cellH] forKey:CELLH];
                 }else{
-                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"cellHeight"];
+                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
                 }
             }
             if (!self.ss_fixCellBlockAfterAutoSetModel) {
@@ -274,7 +294,7 @@ static CGFloat const CELLDEFAULTH = 44;
         if (self.ss_fixCellBlockAfterAutoSetModel) {
             !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
         }
-        
+        [self ss_setCell:cell];
         return cell;
     }
     return nil;
@@ -330,14 +350,14 @@ static CGFloat const CELLDEFAULTH = 44;
                 if(cellH) {
                     return cellH;
                 }else {
-                    return [[model valueForKey:@"cellHeight"] floatValue];
+                    return [[model valueForKey:@"ss_cellHRunTime"] floatValue];
                 }
             }else {
                 return CELLDEFAULTH;
             }
         }
+        
     }
-    return CELLDEFAULTH;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -571,7 +591,7 @@ static CGFloat const CELLDEFAULTH = 44;
     }
 }
 
-#pragma mark ------- 偶去对应indexPath的数据model --------
+#pragma mark ------- 获取对应indexPath的数据model --------
 - (instancetype)getModelAtIndexPath:(NSIndexPath *)indexPath {
     id model = nil;;
     if ([self isMultiDatas]) {
@@ -618,6 +638,9 @@ static CGFloat const CELLDEFAULTH = 44;
     }
     return nil;
 }
+
+
+
 
 - (void)dealloc {
     self.delegate = nil;

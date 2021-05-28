@@ -41,6 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL ss_fixCellBlockAfterAutoSetModel;
 ///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
 @property(nonatomic, assign)BOOL ss_autoDeselectWhenSelected;
+///是否自适应行高，非必须，若设置了则无需其它的行高设置（比如ss_setCellHeightAtIndexPath等）
+@property(nonatomic,assign) BOOL ss_isAdaptiveCellHeight;
+///行高，用于固定值得cell，若设置了，则无需其它的行高设置
+@property(nonatomic) CGFloat ss_RowHeight;
 
 
 #pragma mark -------- 数据获取 -----------

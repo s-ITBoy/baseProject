@@ -27,6 +27,9 @@
 #import "NSData+SS.h"
 #import "UIControl+SS.h"
 #import "UIButton+SS.h"
+#import "UILabel+SS.h"
+#import "UIImageView+SS.h"
+#import "UITextField+SS.h"
 #import "UIImage+SS.h"
 #import "UIView+SS.h"
 #import <UIView+MJExtension.h>
