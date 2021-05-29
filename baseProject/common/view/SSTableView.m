@@ -26,17 +26,17 @@ static CGFloat const CELLDEFAULTH = 44;
 @end
 
 @interface SSTaGetProName ()
-@property(nonatomic,strong) NSMutableDictionary* proCacheMapper;
+@property(nonatomic, strong) NSMutableDictionary* proCacheMapper;
 @end
 
 @implementation SSTaGetProName
 
 + (instancetype)shareInstance {
-    static SSTaGetProName* s_instance_dj_singleton = nil ;
-    if (s_instance_dj_singleton == nil) {
-        s_instance_dj_singleton = [[self alloc] init];
+    static SSTaGetProName* ssInstance = nil ;
+    if (ssInstance == nil) {
+        ssInstance = [[self alloc] init];
     }
-    return (SSTaGetProName*)s_instance_dj_singleton;
+    return ssInstance;
 }
 
 + (NSMutableArray *)ss_getPropertyNames:(id)obj {
@@ -278,7 +278,7 @@ static CGFloat const CELLDEFAULTH = 44;
                 }
             }
             if (!self.ss_fixCellBlockAfterAutoSetModel) {
-                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
+                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
             }
             NSArray *cellProNames = [SSTaGetProName ss_getRecursionPropertyNames:cell];
             BOOL cellContainsModel = NO;
@@ -291,11 +291,11 @@ static CGFloat const CELLDEFAULTH = 44;
             }
         }else {
             if (!self.ss_fixCellBlockAfterAutoSetModel) {
-                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
+                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
             }
         }
         if (self.ss_fixCellBlockAfterAutoSetModel) {
-            !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath,cell,model);
+            !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
         }
         [self ss_setCell:cell];
         return cell;
@@ -330,7 +330,7 @@ static CGFloat const CELLDEFAULTH = 44;
         return [self.ssDataSource tableView:tableView sectionForSectionIndexTitle:title atIndex:index];
     }else {
         if (self.ss_setSectionForSectionIndex) {
-            return self.ss_setSectionForSectionIndex(title,index);
+            return self.ss_setSectionForSectionIndex(title, index);
         }
     }
     return 0;
@@ -392,7 +392,7 @@ static CGFloat const CELLDEFAULTH = 44;
     }else {
         id model = [self getModelAtIndexPath:indexPath];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        !self.ss_didSelectedAtIndexPath ? : self.ss_didSelectedAtIndexPath(indexPath,model,cell);
+        !self.ss_didSelectedAtIndexPath ? : self.ss_didSelectedAtIndexPath(indexPath, model, cell);
     }
 }
 
@@ -402,7 +402,7 @@ static CGFloat const CELLDEFAULTH = 44;
     }else {
         id model = [self getModelAtIndexPath:indexPath];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        !self.ss_didDeselectedAtIndexPath ? : self.ss_didDeselectedAtIndexPath(indexPath,model,cell);
+        !self.ss_didDeselectedAtIndexPath ? : self.ss_didDeselectedAtIndexPath(indexPath, model, cell);
     }
 }
 
@@ -518,7 +518,7 @@ static CGFloat const CELLDEFAULTH = 44;
     if([self.ssDelegate respondsToSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)]){
         [self.ssDelegate tableView:tableView didEndDisplayingHeaderView:view forSection:section];
     }else{
-        !self.ss_didEndDisplayingHeaderView ? : self.ss_didEndDisplayingHeaderView(section,view);
+        !self.ss_didEndDisplayingHeaderView ? : self.ss_didEndDisplayingHeaderView(section, view);
     }
 }
 
@@ -536,7 +536,7 @@ static CGFloat const CELLDEFAULTH = 44;
     if([self.ssDelegate respondsToSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)]){
         [self.ssDelegate tableView:tableView didEndDisplayingFooterView:view forSection:section];
     }else{
-        !self.ss_didEndDisplayingFooterView ? : self.ss_didEndDisplayingFooterView(section,view);
+        !self.ss_didEndDisplayingFooterView ? : self.ss_didEndDisplayingFooterView(section, view);
     }
 }
 

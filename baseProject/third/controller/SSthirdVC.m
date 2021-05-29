@@ -22,8 +22,9 @@
 
 @interface sstestCell_1 : UITableViewCell
 @property(nonatomic,strong) UILabel* testLab;
-@property(nonatomic,copy) sstestModel* model;
+//@property(nonatomic,copy) sstestModel* model;
 //@property(nonatomic,copy) NSString* modelStr;
+@property(nonatomic,strong) NSDictionary* dicModel;
 
 @end
 @implementation sstestCell_1
@@ -40,20 +41,24 @@
     return self;
 }
 
-- (void)setModel:(sstestModel *)model {
-    _model = model;
-    self.testLab.text = model.name;
-}
+//- (void)setModel:(sstestModel *)model {
+//    _model = model;
+//    self.testLab.text = model.name;
+//}
 
 //- (void)setModelStr:(NSString *)modelStr {
 //    _modelStr = modelStr;
 //    self.testLab.text = modelStr;
-//}
+////}
 //
 //- (void)setModelDic:(NSDictionary *)modelDic {
 //    _modelDic = modelDic;
-//    self.testLab.text = [modelDic SSstringForDicKey:@"name"];;
+//    self.testLab.text = [modelDic SSstringForDicKey:@"name"];
 //}
+- (void)setDicModel:(NSDictionary *)dicModel {
+    _dicModel = dicModel;
+    self.testLab.text = [dicModel SSstringForDicKey:@"name"];
+}
 
 
 @end
@@ -109,13 +114,13 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray* arr = [NSMutableArray array];
         for (NSUInteger i = 0;i < 10;i++) {
-            sstestModel* model = [[sstestModel alloc] init];
-            model.name = [NSString stringWithFormat:@"数字_%ld",i];
-            [arr addObject:model];
+//            sstestModel* model = [[sstestModel alloc] init];
+//            model.name = [NSString stringWithFormat:@"数字_%ld",i];
+//            [arr addObject:model];
             
-//            NSMutableDictionary* dic = [NSMutableDictionary dictionary];
-//            dic[@"name"] = [NSString stringWithFormat:@"数字_%ld",i];
-//            [arr addObject:dic];
+            NSMutableDictionary* dic = [NSMutableDictionary dictionary];
+            dic[@"name"] = [NSString stringWithFormat:@"数字_%ld",i];
+            [arr addObject:dic];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             self.stableV.ssDatas = [arr mutableCopy];
