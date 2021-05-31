@@ -40,14 +40,14 @@ static CGFloat const CELLDEFAULTH = 44;
 }
 
 + (NSMutableArray *)ss_getPropertyNames:(id)obj {
-    NSMutableDictionary *cacheMapper = [SSTaGetProName shareInstance].proCacheMapper;
-    NSString *objCls = NSStringFromClass([obj class]);
+    NSMutableDictionary* cacheMapper = [SSTaGetProName shareInstance].proCacheMapper;
+    NSString* objCls = NSStringFromClass([obj class]);
     if ([cacheMapper.allKeys containsObject:objCls]) {
         return [cacheMapper[objCls] mutableCopy];
     }
-    NSMutableArray *propertyNamesArr = [NSMutableArray array];
+    NSMutableArray* propertyNamesArr = [NSMutableArray array];
     u_int count;
-    objc_property_t *properties  = class_copyPropertyList([obj class],&count);
+    objc_property_t* properties  = class_copyPropertyList([obj class],&count);
     for (NSUInteger i = 0;i < count;i++) {
         const char *propertyNameChar = property_getName(properties[i]);
         NSString *propertyNameStr = [NSString stringWithUTF8String: propertyNameChar];
@@ -59,17 +59,17 @@ static CGFloat const CELLDEFAULTH = 44;
 }
 
 + (NSMutableArray *)ss_getRecursionPropertyNames:(id)obj {
-    NSMutableArray *propertyNamesArr = [self ss_getPropertyNames:obj];
+    NSMutableArray* propertyNamesArr = [self ss_getPropertyNames:obj];
     if ([self isSysClass:obj]) return propertyNamesArr;
     Class class = [obj superclass];
     while (true) {
         if (![self isSysClass:[class new]]) {
-            NSMutableArray *superclassproArr = [self ss_getPropertyNames:class];
+            NSMutableArray* superclassproArr = [self ss_getPropertyNames:class];
             [propertyNamesArr addObjectsFromArray:superclassproArr];
         }else {
             break;
         }
-        NSObject *obj = [class new];
+        NSObject* obj = [class new];
         class = obj.superclass;
     }
     return propertyNamesArr;
@@ -95,7 +95,7 @@ static CGFloat const CELLDEFAULTH = 44;
 @interface NSObject (SSTableV)
 //@property (nonatomic, strong) NSNumber *ss_cellHRunTime;
 ///获取tableView中当前cell/model对应的indexPath
-@property(strong, nonatomic)NSIndexPath *ss_indexPathInTableView;
+@property(strong, nonatomic)NSIndexPath* ss_indexPathInTableView;
 ///获取tableView中当前headerView/footerView/cell/model对应的section
 @property(assign, nonatomic)NSUInteger ss_sectionInTableView;
 
@@ -253,7 +253,7 @@ static CGFloat const CELLDEFAULTH = 44;
             cellClass = self.ss_setCellClassAtIndexPath(indexPath);
             className = NSStringFromClass(cellClass);
         }
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:className];
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:className];
         if (!cell) {
             if (cellClass) {
                 cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:className];
@@ -280,7 +280,7 @@ static CGFloat const CELLDEFAULTH = 44;
             if (!self.ss_fixCellBlockAfterAutoSetModel) {
                 !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
             }
-            NSArray *cellProNames = [SSTaGetProName ss_getRecursionPropertyNames:cell];
+            NSArray* cellProNames = [SSTaGetProName ss_getRecursionPropertyNames:cell];
             BOOL cellContainsModel = NO;
             for (NSString *proStr in cellProNames) {
                 if([proStr.uppercaseString containsString:DATAMODEL.uppercaseString]){
@@ -391,7 +391,7 @@ static CGFloat const CELLDEFAULTH = 44;
         [self.ssDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }else {
         id model = [self getModelAtIndexPath:indexPath];
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         !self.ss_didSelectedAtIndexPath ? : self.ss_didSelectedAtIndexPath(indexPath, model, cell);
     }
 }
@@ -401,7 +401,7 @@ static CGFloat const CELLDEFAULTH = 44;
         [self.ssDelegate tableView:tableView didDeselectRowAtIndexPath:indexPath];
     }else {
         id model = [self getModelAtIndexPath:indexPath];
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         !self.ss_didDeselectedAtIndexPath ? : self.ss_didDeselectedAtIndexPath(indexPath, model, cell);
     }
 }
@@ -465,7 +465,7 @@ static CGFloat const CELLDEFAULTH = 44;
                 }
             }else {
                 if (section < self.ssDatas.count || section == 0) {
-                    UIView *headerView = [self getHeadViewOrFootViewInSection:section isHeadView:YES];
+                    UIView* headerView = [self getHeadViewOrFootViewInSection:section isHeadView:YES];
                     return headerView.frame.size.height;
                 }
             }
