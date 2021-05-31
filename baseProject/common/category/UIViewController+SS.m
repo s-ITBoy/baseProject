@@ -12,23 +12,24 @@
 
 #pragma mark --------- 跳转VC ----------
 //push
-- (void)SS_pushVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)dic {
+- (void)SS_pushVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)propertyDic {
     if (!classStr) {
         return;
     }
-    id vc = [self getVCfromStr:classStr andProperty:dic];
+    id vc = [self getVCfromStr:classStr andProperty:propertyDic];
     
     if ([vc isKindOfClass:[UIViewController class]]) {
+        [[vc valueForKeyPath:@"hidesBottomBarWhenPushed"] intValue] != 0 ? : [vc setValue:@(YES) forKeyPath:@"hidesBottomBarWhenPushed"];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 //present
-- (void)SS_presentVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)dic {
+- (void)SS_presentVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)propertyDic {
     if (!classStr) {
         return;
     }
-    id vc = [self getVCfromStr:classStr andProperty:dic];
+    id vc = [self getVCfromStr:classStr andProperty:propertyDic];
     
     if ([vc isKindOfClass:[UIViewController class]]) {
         [self presentViewController:vc animated:YES completion:nil];
@@ -48,7 +49,6 @@
         //方式二：
         [vc setValuesForKeysWithDictionary:dic];
     }
-    [vc setValue:@(YES) forKeyPath:@"hidesBottomBarWhenPushed"];
     
     return vc;
 }

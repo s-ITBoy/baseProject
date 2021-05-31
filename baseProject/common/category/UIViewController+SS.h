@@ -14,10 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark --------- 跳转VC ----------
 //push
-- (void)SS_pushVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)dic;
+- (void)SS_pushVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)propertyDic;
 
 //present
-- (void)SS_presentVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)dic;
+- (void)SS_presentVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)propertyDic;
 
 @end
 

@@ -37,7 +37,8 @@
 }
 
 - (void)clickBtn {
-    [APPDELEGATE setAppLanguage:@"en"];
+//    self.hidesBottomBarWhenPushed = YES;
+    [self SS_pushVCWithClassStr:@"SSthirdVC" withPropertyDic:nil];
 }
 
 /*
