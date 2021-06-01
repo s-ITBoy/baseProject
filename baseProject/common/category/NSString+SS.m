@@ -24,6 +24,7 @@
     return rect.size;
 }
 
+#pragma mark --------- 对string做特性处理，并返回NSMutableAttributedString --------
 ///设置不同的颜色
 - (NSMutableAttributedString*)ss_attriWithRange:(NSRange)range1 color:(UIColor*)color1 range:(NSRange)range2 color:(UIColor*)color2 {
     NSMutableAttributedString* attriStri = [[NSMutableAttributedString alloc] initWithString:self];
@@ -61,8 +62,18 @@
     
     return attriStri;
 }
+///给字符串添加下划线
+- (NSMutableAttributedString*)SS_addLine {
+    return [self SS_addLineWithRange:NSMakeRange(0, self.length)];
+}
+///给字符串中指定位置添加下划线
+- (NSMutableAttributedString*)SS_addLineWithRange:(NSRange)range {
+    NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:self];
+    [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
+    return str;
+}
 
-
+#pragma mark --------- 对string做格式处理 -----------
 ///将url地址中所带的参数转换为字典 格式k1=v1&k2=v2
 - (NSDictionary*)ss_dicFromStr {
     NSArray* compents = [self componentsSeparatedByString:@"&"];

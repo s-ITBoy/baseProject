@@ -15,20 +15,24 @@
 - (CGSize)ss_sizewithFont:(UIFont *)font;
 ///计算多行文字的size，font:字体
 - (CGSize)ss_boundingRectwithSize:(CGSize)size withFont:(UIFont *)font;
+#pragma mark --------- 对string做特性处理，并返回NSMutableAttributedString --------
 ///设置不同的颜色
 - (NSMutableAttributedString*)ss_attriWithRange:(NSRange)range1 color:(UIColor*)color1 range:(NSRange)range2 color:(UIColor*)color2;
 ///设置不同的字号
 - (NSMutableAttributedString*)ss_attriWithRange:(NSRange)range1 font:(UIFont*)font1 range:(NSRange)range2 font:(UIFont*)font2;
 ///设置不同的字号及颜色带有字号及颜色
 - (NSMutableAttributedString*)ss_strAttriWithRange:(NSRange)range andFont:(CGFloat)font1 withColor:(UIColor*)color1 andRange:(NSRange)secondRange andFont:(CGFloat)font2 with:(UIColor*)color2;
+///给字符串添加下划线
+- (NSMutableAttributedString*)SS_addLine;
+///给字符串中指定位置添加下划线
+- (NSMutableAttributedString*)SS_addLineWithRange:(NSRange)range;
 
-
+#pragma mark --------- 对string做格式处理 -----------
 ///字符串转字典
 - (NSDictionary*)ss_dicFromStr;
 
 ///字符串转数组;str:字符串中的分割符（比如：, - 等等）
 - (NSArray*)ss_arrFromStrByStr:(NSString*)str;
-
 
 ///格式化金额字符串，小数点前每三位之间加,
 - (NSString*)ss_moneyStr;
