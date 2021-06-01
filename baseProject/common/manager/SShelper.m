@@ -232,8 +232,8 @@
 }
 
 ///创建imageView
-+ (UIImageView *)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName {
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:frame];
++ (UIImageView*)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName {
+    UIImageView* imgView = [[UIImageView alloc] initWithFrame:frame];
     if (![SShelper isObjNil:imgName]) {
         imgView.image = [UIImage imageNamed:imgName];
     }
@@ -245,18 +245,18 @@
 ///生成二维码
 + (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size {
     //创建过滤器
-    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    CIFilter* filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     //过滤器恢复默认
     [filter setDefaults];
     //给过滤器添加数据<字符串长度893>
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     [filter setValue:data forKey:@"inputMessage"];
     //获取二维码过滤器生成二维码
-    CIImage *image = [filter outputImage];
-    UIImage *img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
+    CIImage* image = [filter outputImage];
+    UIImage* img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
     return img;
 }
-+ (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size {
++ (UIImage*)createNonInterpolatedUIImageFromCIImage:(CIImage*)image WithSize:(CGFloat)size {
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
     
@@ -279,8 +279,8 @@
 }
 
 ///截取指定视图的指定区域，传入需要截取的view
-+ (UIImage*)SSscreenShot:(UIView *)view {
-    UIImage *imageRet = [[UIImage alloc]init];
++ (UIImage*)SSscreenShot:(UIView*)view {
+    UIImage* imageRet = [[UIImage alloc]init];
     UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     imageRet = UIGraphicsGetImageFromCurrentImageContext();
@@ -288,7 +288,7 @@
     
     CGImageRef sourceImageRef = [imageRet CGImage];
     CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, CGRectMake(0, imageRet.size.height - statusBarHeight - 44, imageRet.size.width, statusBarHeight+44));
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    UIImage* newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
     return newImage;
     //    return imageRet;
 }
@@ -332,7 +332,7 @@
     if ([self isObjNil:str]) {
         return;
     }
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = str;
 //    [self presentMessageTips:@"复制成功！"];
 }
@@ -346,7 +346,7 @@
 }
 ///打开/跳转URL
 + (void)SSopenURL:(NSString*)urlStr {
-    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURL* url = [NSURL URLWithString:urlStr];
     if([[UIApplication sharedApplication] canOpenURL:url]){
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
@@ -373,15 +373,15 @@
  @param rect 图片的
  */
 + (NSMutableAttributedString*)SSattri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect {
-    NSMutableAttributedString *attri =  [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableAttributedString* attri =  [[NSMutableAttributedString alloc] initWithString:str];
     [attri addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, attri.length)];
     [attri addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attri.length)];
     
-    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+    NSTextAttachment* attch = [[NSTextAttachment alloc] init];
     attch.image = [UIImage imageNamed:imageName];
 //    attch.bounds = CGRectMake(0, -10, ssscale(36), ssscale(29));
     attch.bounds = rect;
-    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+    NSAttributedString* string = [NSAttributedString attributedStringWithAttachment:attch];
     [attri insertAttributedString:string atIndex:isfront ? 0 : attri.length];
     return attri;
 }
@@ -392,14 +392,14 @@
 }
 
 ///获取当前屏幕显示的viewcontroller
-+ (UIViewController *)getCurrentVC {
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
++ (UIViewController*)getCurrentVC {
+    UIViewController* rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController* currentVC = [self getCurrentVCFrom:rootViewController];
     return currentVC;
 }
 
-+ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC {
-    UIViewController *currentVC;
++ (UIViewController*)getCurrentVCFrom:(UIViewController*)rootVC {
+    UIViewController* currentVC;
     if ([rootVC presentedViewController]) {
         // 视图是被presented出来的
         rootVC = [rootVC presentedViewController];
@@ -419,7 +419,7 @@
 
 ///根据dic自动生成model属性
 + (void)SSautoPropertyWith:(NSDictionary*)dic {
-    NSMutableString *proprety = [[NSMutableString alloc] init];
+    NSMutableString* proprety = [[NSMutableString alloc] init];
     //遍历数组 生成声明属性的代码，例如 @property (nonatomic, copy) NSString str
     [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         NSString *str;
@@ -447,9 +447,9 @@
 
 #pragma mark ----------  弹框或跳转界面 ------------
 ///AlertActionSheet
-+ (void)SSshowActionSheet:(NSArray<UIAlertAction *> *)actions tips:(NSString *)tips message:(NSString *)message target:(UIViewController *)target {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:tips message:message preferredStyle:UIAlertControllerStyleActionSheet];
-    for (UIAlertAction *action in actions) {
++ (void)SSshowActionSheet:(NSArray<UIAlertAction*>*)actions tips:(NSString*)tips message:(NSString*)message target:(UIViewController*)target {
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:tips message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    for (UIAlertAction* action in actions) {
         [alertController addAction:action];
     }
 #pragma mark 解决弹出界面卡顿问题
@@ -582,21 +582,21 @@
     if ([SShelper isObjNil:cardStr]) {
         return NO;
     }
-    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
-    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
+    NSString* regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+    NSPredicate* identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
     return [identityCardPredicate evaluateWithObject:cardStr];
 }
 ///邮箱YES：有效； NO：无效
-+ (BOOL)isValidEmail:(NSString *)email {
++ (BOOL)isValidEmail:(NSString*)email {
     if ([SShelper isObjNil:email]) {
         return NO;
     }
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    NSString* emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate* emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:email];
 }
 ///手机号码YES：有效； NO：无效
-+ (BOOL)isValidPhoneeNumber:(NSString *)mobileNum{
++ (BOOL)isValidPhoneeNumber:(NSString*)mobileNum {
     if ([SShelper isObjNil:mobileNum]) {
         return NO;
     }
@@ -606,33 +606,33 @@
      * 联通：130,131,132,152,155,156,185,186
      * 电信：133,1349,153,180,189
      */
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    NSString* MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
     /**
      10         * 中国移动：China Mobile
      11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
      12         */
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    NSString* CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
     /**
      15         * 中国联通：China Unicom
      16         * 130,131,132,152,155,156,185,186
      17         */
-    NSString * CU = @"^1(3[0-2]|5[256]|6[0-9]|8[56])\\d{8}$";
+    NSString* CU = @"^1(3[0-2]|5[256]|6[0-9]|8[56])\\d{8}$";
     /**
      20         * 中国电信：China Telecom
      21         * 133,1349,153,180,189
      22         */
     //    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
-    NSString * CT = @"^1((33|53|8[0-9]|9[9])[0-9]|349)\\d{7}$";
+    NSString* CT = @"^1((33|53|8[0-9]|9[9])[0-9]|349)\\d{7}$";
     /**
      25         * 大陆地区固话及小灵通
      26         * 区号：010,020,021,022,023,024,025,027,028,029
      27         * 号码：七位或八位
      28         */
     // NSString * PHS = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    NSPredicate* regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate* regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate* regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate* regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
     if (([regextestmobile evaluateWithObject:mobileNum] == YES)
         || ([regextestcm evaluateWithObject:mobileNum] == YES)
         || ([regextestct evaluateWithObject:mobileNum] == YES)
@@ -643,7 +643,7 @@
     }
 }
 ///金额格式YES：有效； NO：无效
-+ (BOOL)isValidMoney:(NSString*)moneySr{
++ (BOOL)isValidMoney:(NSString*)moneySr {
     //需求：
     ///位数可控（限定9位）
     ///小数点后两位
@@ -653,12 +653,12 @@
         return NO;
     }else{
         NSString *stringRegex = @"(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,8}(([.]\\d{0,2})?)))?";//一般格式 d{0,8} 控制位数
-        NSPredicate *money = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
+        NSPredicate* money = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
         return [money evaluateWithObject:moneySr];
     }
 }
 ///银行卡号YES：有效； NO：无效
-+ (BOOL)isValidBankCard:(NSString *)cardNumber{
++ (BOOL)isValidBankCard:(NSString *)cardNumber {
     if ([SShelper isObjNil:cardNumber]) {
         return NO;
     }
@@ -705,11 +705,11 @@
     return [[UIDevice currentDevice] systemVersion];
 }
 ///设备型号
-+ (NSString *)ss_getIphoneType {
++ (NSString*)ss_getIphoneType {
     //需要导入头文件：#import <sys/utsname.h>
     struct utsname systemInfo;
     uname(&systemInfo);
-    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
+    NSString* platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
     //    SSLog(@"----------- platform = %@",platform);
     ///iphone
     if ([platform isEqualToString:@"iPhone1,1"]) return @"iPhone 2G";

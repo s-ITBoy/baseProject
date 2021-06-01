@@ -24,23 +24,23 @@
 
 
 ///字符串转字典
-- (NSDictionary *)ss_dicFromStr;
+- (NSDictionary*)ss_dicFromStr;
 
 ///字符串转数组;str:字符串中的分割符（比如：, - 等等）
 - (NSArray*)ss_arrFromStrByStr:(NSString*)str;
 
 
 ///格式化金额字符串，小数点前每三位之间加,
-- (NSString *)ss_moneyStr;
+- (NSString*)ss_moneyStr;
 
 ///格式化银行卡号 四位空格
-- (NSString *)ss_bankCodeStr;
+- (NSString*)ss_bankCodeStr;
 
 ///格式化金额字符串，不足万的显示原值，反之处理成以万为单位
-- (NSString *)ss_amountStr;
+- (NSString*)ss_amountStr;
 
 ///去除字符串中的html标签
-- (NSString *)ss_stringByTrimmingHTMLCharacters;
+- (NSString*)ss_stringByTrimmingHTMLCharacters;
 
 /**
  *  生成助记字符串
@@ -55,15 +55,15 @@
 #pragma mark ----------- MD5加密 ----------------
 
 ///MD5加密
-- (NSString *)ss_MD5String;
+- (NSString*)ss_MD5String;
 
 #pragma mark ----------- base58加密 ---------------
 ///sha1加密
 - (NSString*)ss_sha1;
 // base58加密， 传入加密前的字符串
-- (NSString *)SS_base58Encode;
+- (NSString*)SS_base58Encode;
 // base58解密， 传入加密后的字符串
-- (NSString *)SS_base58Decode;
+- (NSString*)SS_base58Decode;
 
 #pragma mark ----------- SHA加密 ---------------
 - (NSString*)SS_sha256Str;

@@ -64,16 +64,16 @@
 
 
 ///将url地址中所带的参数转换为字典 格式k1=v1&k2=v2
-- (NSDictionary *)ss_dicFromStr {
-    NSArray *compents = [self componentsSeparatedByString:@"&"];
+- (NSDictionary*)ss_dicFromStr {
+    NSArray* compents = [self componentsSeparatedByString:@"&"];
     if (!compents.count) {
         return [NSDictionary dictionary];
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     for (id obj in compents) {
         if ([obj isKindOfClass:[NSString class]] && [(NSString *)obj containsString:@"="]) {
-            NSString *str = (NSString *)obj;
-            NSArray *strs = [str componentsSeparatedByString:@"="];
+            NSString* str = (NSString*)obj;
+            NSArray* strs = [str componentsSeparatedByString:@"="];
             //            NSString *value = [[strs objectAtArrayIndex:1] empty] ? @"" : [strs objectAtArrayIndex:1];
             [params setObject:[strs SSobjectAtArrayIndex:1] forKey:[strs SSobjectAtArrayIndex:0]];
         }
@@ -89,16 +89,16 @@
 
 
 ///格式化金额字符串，小数点前每三位之间加,
-- (NSString *)ss_moneyStr {
+- (NSString*)ss_moneyStr {
     if ([self empty]) {
         return @"0";
     }
-    NSArray *range = [[self ss_numStr] componentsSeparatedByString:@"."];
-    NSString *str = range[0];
-    NSMutableArray *nums = [NSMutableArray arrayWithCapacity:0];
+    NSArray* range = [[self ss_numStr] componentsSeparatedByString:@"."];
+    NSString* str = range[0];
+    NSMutableArray* nums = [NSMutableArray arrayWithCapacity:0];
     int j = 0;
     for (NSInteger i = str.length - 1; i >= 0 ; i--) {
-        NSString *s = [str substringWithRange:NSMakeRange(i, 1)];
+        NSString* s = [str substringWithRange:NSMakeRange(i, 1)];
         j++;
         [nums insertObject:s atIndex:0];
         if (j == 3  && i > 0) {
@@ -107,7 +107,7 @@
         }
     }
     
-    NSString *result = [nums componentsJoinedByString:@""];
+    NSString* result = [nums componentsJoinedByString:@""];
     if (range.count == 2) {
         result = [result stringByAppendingFormat:@".%@",range[1]];
     }
@@ -122,9 +122,9 @@
     if (self.length <=4) {
         return self;
     }
-    NSMutableArray *charaters = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray* charaters = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0; i < self.length; i++) {
-        NSString *charater = [self substringWithRange:NSMakeRange(i, 1)];
+        NSString* charater = [self substringWithRange:NSMakeRange(i, 1)];
         [charaters addObject:charater];
         if (i%4 == 3) {
             [charaters addObject:@" "];
@@ -134,7 +134,7 @@
 }
 
 ///格式化金额字符串，不足万的显示原值，反之处理成以万为单位
-- (NSString *)ss_amountStr {
+- (NSString*)ss_amountStr {
     if ([self empty]) {
         return @"0";
     }
@@ -147,28 +147,26 @@
 }
 
 ///去除字符串中的html标签
-- (NSString *)ss_stringByTrimmingHTMLCharacters {
+- (NSString*)ss_stringByTrimmingHTMLCharacters {
     if ([self empty]){
         return @"";
     }
     NSRange r;
-    NSString *s = [[self stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""] copy];
+    NSString* s = [[self stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""] copy];
     while ((r = [s rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
         s = [s stringByReplacingCharactersInRange:r withString:@""];
     return s;
 }
 
-
-///格式化数字字符串，保留两位小数，并去除末尾的0
--(NSString *)ss_numStr {
+-(NSString*)ss_numStr {
     
     if (!self || [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
         return self;
     }
     
-    NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter* format = [[NSNumberFormatter alloc] init];
 //    [format setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *num = [format numberFromString:self];
+    NSNumber* num = [format numberFromString:self];
 //    NSString *str = [NSString stringWithFormat:@"%0.2f",num.doubleValue];
 //    NSRange range = [str rangeOfString:@"."];
 //    if (range.location == !NSNotFound) {
@@ -227,21 +225,21 @@
 + (NSString*)SS_getMnemonicWordFromeHexStr:(NSString*)hexStr language:(NSString*)language {
     NSData* seedData = [hexStr SS_hexStrToData];
     //计算 sha256 哈希
-    NSMutableData *hash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
+    NSMutableData* hash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
     CC_SHA256(seedData.bytes, (int)seedData.length, hash.mutableBytes);
     
-    NSMutableArray *checkSumBits = [NSMutableArray arrayWithArray:[[NSData dataWithData:hash] SS_toBitArray]];
-    NSMutableArray *seedBits = [NSMutableArray arrayWithArray:[seedData SS_toBitArray]];
+    NSMutableArray* checkSumBits = [NSMutableArray arrayWithArray:[[NSData dataWithData:hash] SS_toBitArray]];
+    NSMutableArray* seedBits = [NSMutableArray arrayWithArray:[seedData SS_toBitArray]];
     
     for(int i = 0 ; i < (int)seedBits.count / 32 ; i++) {
         [seedBits addObject:checkSumBits[i]];
     }
     
-    NSString *path = [NSString stringWithFormat:@"%@/%@.txt",[[NSBundle mainBundle] bundlePath], language];
-    NSString *fileText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-    NSArray *lines = [fileText componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSString* path = [NSString stringWithFormat:@"%@/%@.txt",[[NSBundle mainBundle] bundlePath], language];
+    NSString* fileText = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    NSArray* lines = [fileText componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
-    NSMutableArray *words = [NSMutableArray arrayWithCapacity:(int)seedBits.count / 11];
+    NSMutableArray* words = [NSMutableArray arrayWithCapacity:(int)seedBits.count / 11];
     
     for(int i = 0 ; i < (int)seedBits.count / 11 ; i++) {
         NSUInteger wordNumber = strtol([[[seedBits subarrayWithRange:NSMakeRange(i * 11, 11)] componentsJoinedByString:@""] UTF8String], NULL, 2);
@@ -254,10 +252,10 @@
 
 
 - (NSData*)SS_hexStrToData {
-    const char *chars = [self UTF8String];
+    const char* chars = [self UTF8String];
     int i = 0, len = (int)self.length;
     
-    NSMutableData *data = [NSMutableData dataWithCapacity:len/2.0];
+    NSMutableData* data = [NSMutableData dataWithCapacity:len/2.0];
     char byteChars[3] = {'\0','\0','\0'};
     unsigned long wholeByte;
     
@@ -274,8 +272,8 @@
 #pragma mark ----------- MD5加密 ----------------
 
 ///MD5加密
-- (NSString *)ss_MD5String {
-    const char *cstr = [self UTF8String];
+- (NSString*)ss_MD5String {
+    const char* cstr = [self UTF8String];
     unsigned char result[16];
     CC_MD5(cstr, (unsigned int)strlen(cstr), result);
     return [[NSString stringWithFormat:
@@ -291,27 +289,27 @@
 
 #define base58codeStr @"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
-- (NSMutableDictionary *)base58codeMuDic {
+- (NSMutableDictionary*)base58codeMuDic {
     NSMutableDictionary* dic = [NSMutableDictionary dictionary];
         for(int i = 0; i< [base58codeStr length]; i++) {
-            NSString *temp = [base58codeStr substringWithRange:NSMakeRange(i,1)];
+            NSString* temp = [base58codeStr substringWithRange:NSMakeRange(i,1)];
             [dic addEntriesFromDictionary:@{ temp: @(i) }];
         }
     return dic;
 }
 
 // base58加密， 传入加密后的字符串
-- (NSString *)SS_base58Encode {
+- (NSString*)SS_base58Encode {
     if (self.length == 0) {
         return @"";
     }
-    NSArray *byteArr = [self UTF8ArrayWithString:self]; // aa真棒66 ==> [97, 97, 231, 156, 159, 230, 163, 146, 54, 54]
+    NSArray* byteArr = [self UTF8ArrayWithString:self]; // aa真棒66 ==> [97, 97, 231, 156, 159, 230, 163, 146, 54, 54]
     if (byteArr.count <= 0) {
         return @"";
     }
     
     int BASE = 58;
-    NSMutableArray *digits = [@[@(0)] mutableCopy];
+    NSMutableArray* digits = [@[@(0)] mutableCopy];
     
     for (int i = 0; i < byteArr.count; i++) {
         for (int j = 0; j < digits.count; j++) {
@@ -338,9 +336,9 @@
     }
 //    NSLog(@"%@", digits); // aa真棒66 ==> [20, 23, 57, 15, 5, 18, 32, 28, 53, 35, 49, 18, 27, 5]
     // 最后，反序取ALPHABET_MAP，再拼起来
-    NSString *result = @"";
+    NSString* result = @"";
     for (NSInteger k = digits.count - 1; k >= 0 ; k --) {
-        NSString *value = [base58codeStr substringWithRange:NSMakeRange([digits[k] intValue],1)];;
+        NSString* value = [base58codeStr substringWithRange:NSMakeRange([digits[k] intValue],1)];;
         result = [result stringByAppendingString:value];
     }
 //    NSLog(@"加密后 == %@", result); // aa真棒66 ==> 6UKrcvVZK6GzQM
@@ -348,20 +346,20 @@
 }
 
 // 将字符串转utf8格式的字节数组（英文和数字直接返回的acsii码，中文转%xx之后打断当成16进制转10进制）
-- (NSArray *)UTF8ArrayWithString:(NSString *)str {
+- (NSArray*)UTF8ArrayWithString:(NSString*)str {
     
     // NSString *tempaaa = [str stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
     // NSLog(@"看看== %@", tempaaa); // aa真棒66 ==> aa%E7%9C%9F%E6%A3%9266
-    NSMutableArray *resultArr = [NSMutableArray array];
+    NSMutableArray* resultArr = [NSMutableArray array];
     for (int i = 0; i < [str length]; i++) {
-        NSString *temp = [str substringWithRange:NSMakeRange(i,1)];
-        NSString *charact = [temp stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
+        NSString* temp = [str substringWithRange:NSMakeRange(i,1)];
+        NSString* charact = [temp stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
         if (charact.length == 1) {
             // 未转换的字符，换为ASCII码
             [resultArr addObject:@([charact characterAtIndex:0])];
         } else {
             // 转换成%XX形式的字符, 拿到XX 16进制转为10进制
-            NSArray *bytes = [charact componentsSeparatedByString:@"%"];
+            NSArray* bytes = [charact componentsSeparatedByString:@"%"];
             for (int l = 1; l < bytes.count; l++) {
                 [resultArr addObject:@(strtoul([bytes[l] UTF8String], 0, 16))]; // 16转为10
             }
@@ -372,14 +370,14 @@
 }
 
 // base58解密， 传入加密后的字符串
-- (NSString *)SS_base58Decode {
+- (NSString*)SS_base58Decode {
     if (self.length == 0) {
         return @"";
     }
     int BASE = 58;
     NSMutableArray *bytes = [@[@(0)] mutableCopy];
     for (int i = 0; i < [self length]; i++) {
-        NSString *ch = [self substringWithRange:NSMakeRange(i,1)];
+        NSString* ch = [self substringWithRange:NSMakeRange(i,1)];
         // 判断ch是不是ALPHABET当中的字符
         if (![self containsString:ch]) {
             //NSLog(@"异常了 - base58不包含字符: %@", ch);
@@ -408,18 +406,18 @@
     bytes = [[[bytes reverseObjectEnumerator] allObjects] mutableCopy];
 //    NSLog(@"解密byte数组 == %@", bytes); // 6UKrcvVZK6GzQM ==> [97, 97, 231, 156, 159, 230, 163, 146, 54, 54]
     
-    NSString *result = [self byteToString:bytes]; // 6UKrcvVZK6GzQM ==> aa真棒66
+    NSString* result = [self byteToString:bytes]; // 6UKrcvVZK6GzQM ==> aa真棒66
     return result;
 }
 
 // 将字节数组解密成字符串
-- (NSString *)byteToString:(NSArray *)arr {
-    NSString *str = @"";
+- (NSString*)byteToString:(NSArray *)arr {
+    NSString* str = @"";
     for (int i = 0; i < arr.count; i++) {
         // 数组中每个数字转为二进制, 再匹配出开头为1的直到0的字符
         // eg:123-->"1111011"-->{0:"1111",groups: undefined, index: 0, input: "1111011"}
-        NSString *hex2Str = [self hex10ToHex2: [arr[i] intValue]]; // 转为二进制
-        NSString *v = [self get1To0End:hex2Str]; // 取开头为1的直到0的字符
+        NSString* hex2Str = [self hex10ToHex2: [arr[i] intValue]]; // 转为二进制
+        NSString* v = [self get1To0End:hex2Str]; // 取开头为1的直到0的字符
         if (v.length > 0 && hex2Str.length == 8) {
             int bytesLen = (int)v.length;
             NSString *store = [hex2Str substringFromIndex:(7 - bytesLen)];
@@ -441,10 +439,10 @@
 }
 
 // 取出开头为1的直到0的字符, 1111011 -> 1111
-- (NSString *)get1To0End:(NSString *)string {
-    NSString *str = @"";
+- (NSString*)get1To0End:(NSString *)string {
+    NSString* str = @"";
     for (int i = 0; i < string.length; i++) {
-        NSString *ch = [string substringWithRange:NSMakeRange(i, 1)];
+        NSString* ch = [string substringWithRange:NSMakeRange(i, 1)];
         if ([ch isEqualToString:@"0"]) {
             break;
         } else {
@@ -455,8 +453,8 @@
 }
 
 // 十进制转为二进制
-- (NSString *)hex10ToHex2:(int)hexInt {
-    NSString *string = [NSString string];
+- (NSString*)hex10ToHex2:(int)hexInt {
+    NSString* string = [NSString string];
     for (int i = 0; i <= 100; i++) {
         // 从后面算起。关键在取余
         int hex = hexInt % 2; // 每次的余数得到最后一位
@@ -476,9 +474,9 @@
 
 ///sha1加密
 - (NSString*)ss_sha1 {
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
+    const char* cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
 
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    NSData* data = [NSData dataWithBytes:cstr length:self.length];
     //使用对应的CC_SHA1,CC_SHA256,CC_SHA384,CC_SHA512的长度分别是20,32,48,64
     uint8_t digest[CC_SHA1_DIGEST_LENGTH];
     //使用对应的CC_SHA256,CC_SHA384,CC_SHA512
@@ -492,8 +490,8 @@
 }
 
 - (NSString*)SS_sha256Str {
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    const char* cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData* data = [NSData dataWithBytes:cstr length:self.length];
     
     uint8_t digest[CC_SHA256_DIGEST_LENGTH];
     
@@ -508,8 +506,8 @@
 }
 
 - (NSString*)SS_sha512Str {
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
+    const char* cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData* data = [NSData dataWithBytes:cstr length:self.length];
     
     uint8_t digest[CC_SHA512_DIGEST_LENGTH];
     

@@ -20,11 +20,11 @@
 
 - (id)SSobjectForDictKey:(id)key;
 
-- (NSString *)SSdictionryToJSONString;
+- (NSString*)SSdictionryToJSONString;
 
-- (NSData *)SStransferToData;
+- (NSData*)SStransferToData;
 
-- (NSDictionary *)SSdeleteEmptyValue;
+- (NSDictionary*)SSdeleteEmptyValue;
 
 @end
 

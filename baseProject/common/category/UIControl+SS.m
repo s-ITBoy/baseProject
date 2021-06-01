@@ -38,6 +38,14 @@ static char leftNameKey;
     return CGRectContainsPoint(rect, point) ? self : nil;
 }
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    CGRect rect = [self enlargedRect];
+    if (CGRectEqualToRect(rect, self.bounds)) {
+            return [super pointInside:point withEvent:event];
+        }
+        return CGRectContainsPoint(rect, point) ? YES : NO;
+}
+
 -(CGRect)enlargedRect{
     NSNumber* topEdge = objc_getAssociatedObject(self, &topNameKey);
     NSNumber* rightEdge = objc_getAssociatedObject(self, &rightNameKey);

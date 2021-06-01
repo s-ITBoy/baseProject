@@ -13,10 +13,10 @@
 
 @implementation NSData (SS)
 
-+ (NSData *)SSdataWithBase64EncodedStr:(NSString *)str {
++ (NSData*)SSdataWithBase64EncodedStr:(NSString*)str {
     if (![str length]) return nil;
     
-    NSData *decoded = nil;
+    NSData* decoded = nil;
     
 #if /*__MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_9 ||*/ __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     NSLog(@"%d",__IPHONE_OS_VERSION_MIN_REQUIRED);
@@ -32,10 +32,10 @@
     return [decoded length]? decoded: nil;
 }
 
-- (NSString *)SSbase64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth {
+- (NSString*)SSbase64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth {
     if (![self length]) return nil;
     
-    NSString *encoded = nil;
+    NSString* encoded = nil;
     
 #if __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_9 || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     if (![NSData instancesRespondToSelector:@selector(base64EncodedStringWithOptions:)]) {
@@ -66,7 +66,7 @@
     }
     
     wrapWidth = (wrapWidth / 4) * 4;
-    NSMutableString *result = [NSMutableString string];
+    NSMutableString* result = [NSMutableString string];
     for (NSUInteger i = 0; i < [encoded length]; i+= wrapWidth) {
         if (i + wrapWidth >= [encoded length]) {
             [result appendString:[encoded substringFromIndex:i]];
@@ -79,19 +79,19 @@
     return result;
 }
 
-- (NSString *)SSbase64EncodedStr {
+- (NSString*)SSbase64EncodedStr {
     return [self SSbase64EncodedStringWithWrapWidth:0];
 }
 
 ///转成16进制字符串
 - (NSString*)SS_hexStr {
-    const unsigned char *dataBuffer = (const unsigned char *)[self bytes];
+    const unsigned char* dataBuffer = (const unsigned char *)[self bytes];
     //如果buffer不存在
     if(!dataBuffer) {
         return [NSString string];
     }
     NSUInteger dataLength = [self length];
-    NSMutableString *hexString = [NSMutableString stringWithCapacity:(dataLength * 2)];
+    NSMutableString* hexString = [NSMutableString stringWithCapacity:(dataLength * 2)];
     
     for(int i = 0 ; i < dataLength ; ++i) {
         [hexString appendString:[NSString stringWithFormat:@"%02lx",(unsigned long)dataBuffer[i]]];
@@ -102,11 +102,11 @@
 
 ///转成比特数组
 - (NSArray*)SS_toBitArray {
-    NSMutableArray *bitArray = [NSMutableArray arrayWithCapacity:(int)self.length * 8];
-    NSString *hexStr = [self SS_hexStr];
+    NSMutableArray* bitArray = [NSMutableArray arrayWithCapacity:(int)self.length * 8];
+    NSString* hexStr = [self SS_hexStr];
     
     for(NSUInteger i = 0 ; i < [hexStr length] ; i++) {
-        NSString *bin = [self SS_hexToBinary:[hexStr characterAtIndex:i]];
+        NSString* bin = [self SS_hexToBinary:[hexStr characterAtIndex:i]];
         
         for(NSUInteger j = 0 ; j < bin.length ; j++) {
             [bitArray addObject:@([[NSString stringWithFormat:@"%C",[bin characterAtIndex:j]] intValue])];
@@ -116,7 +116,7 @@
     return [NSArray arrayWithArray:bitArray];
 }
 
-- (NSString *)SS_hexToBinary:(unichar)value {
+- (NSString* )SS_hexToBinary:(unichar)value {
     switch (value) {
         case '0': return @"0000";
         case '1': return @"0001";

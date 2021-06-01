@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark --------- HUD ------------- 
--(void)presentMessageTips:(NSString *)message;
+-(void)presentMessageTips:(NSString*)message;
 
-- (void)presentMessageTips:(NSString *)message dismisblock:(void(^)(void))dismissblock;
+- (void)presentMessageTips:(NSString*)message dismisblock:(void(^)(void))dismissblock;
 
-- (void)presentMessageTips_:(NSString *)message duration:(CGFloat)duration dismisblock:(void(^)(void))dismissblock;
+- (void)presentMessageTips_:(NSString*)message duration:(CGFloat)duration dismisblock:(void(^)(void))dismissblock;
 
--(MBProgressHUD *)presentLoadingTips:(NSString *)message;
+-(MBProgressHUD*)presentLoadingTips:(NSString*)message;
 
 -(void)presentLoadinghud;
 

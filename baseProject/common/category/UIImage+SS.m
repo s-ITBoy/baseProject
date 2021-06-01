@@ -10,7 +10,7 @@
 
 @implementation UIImage (SS)
 ///给图片添加透明度
-+ (UIImage *)SSimageByApplyingAlpha:(CGFloat)alpha  image:(UIImage*)image{
++ (UIImage*)SSimageByApplyingAlpha:(CGFloat)alpha  image:(UIImage*)image{
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -21,7 +21,7 @@
     CGContextSetAlpha(ctx, alpha);
     CGContextDrawImage(ctx, area, image.CGImage);
     
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;
@@ -33,7 +33,7 @@
  *  @param rect  CGRect rect 要截取的区域
  *  @return UIImage
  */
-+ (UIImage *)SSimageFromImage:(UIImage *)image inRect:(CGRect)rect{
++ (UIImage*)SSimageFromImage:(UIImage*)image inRect:(CGRect)rect{
     //把像 素rect 转化为 点rect（如无转化则按原图像素取部分图片）
     //    CGFloat scale = [UIScreen mainScreen].scale;
     //    CGFloat x= rect.origin.x*scale,y=rect.origin.y*scale,w=rect.size.width*scale,h=rect.size.height*scale;
@@ -41,11 +41,11 @@
     //截取部分图片并生成新图片
     CGImageRef sourceImageRef = [image CGImage];
     CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, rect);
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    UIImage* newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
     return newImage;
 }
 /// 压缩图片尺寸 size:压缩的尺寸
-- (UIImage *)SSimageScaleWithSize:(CGSize)size {
+- (UIImage*)SSimageScaleWithSize:(CGSize)size {
     // Create a graphics image context
     UIGraphicsBeginImageContext(size);
     // Tell the old image to draw in this new context, with the desired
@@ -62,8 +62,8 @@
 
 //图片压缩到指定大小
 - (UIImage*)SSimageByScalingAndCroppingForSize:(CGSize)targetSize {
-    UIImage *sourceImage = self;
-    UIImage *newImage = nil;
+    UIImage* sourceImage = self;
+    UIImage* newImage = nil;
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
@@ -138,22 +138,22 @@
 
 
 ///显示图片本身的样子（而不是根据tintcolor显示图片颜色）
-+ (UIImage *)ss_imageRenderOriginalWithName:(NSString *)name {
-    UIImage *image = [self imageNamed:name];
++ (UIImage*)ss_imageRenderOriginalWithName:(NSString*)name {
+    UIImage* image = [self imageNamed:name];
     if (IS_IOS_VERSION >= 7.0) {
         image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
     return image;
 }
 ///图片转成base64格式
-- (NSString *)ss_imageToBase64String:(CGFloat)scale {
-    NSData *imgData = UIImageJPEGRepresentation(self, scale);
-    NSString *base64String = [imgData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+- (NSString*)ss_imageToBase64String:(CGFloat)scale {
+    NSData* imgData = UIImageJPEGRepresentation(self, scale);
+    NSString* base64String = [imgData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return [base64String stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 ///图片转成data
 - (NSData*)ss_imageToData{
-    NSData *data = UIImageJPEGRepresentation(self, 0.3f);
+    NSData* data = UIImageJPEGRepresentation(self, 0.3f);
     if(!data){
         data = UIImagePNGRepresentation(self);
         
@@ -165,18 +165,18 @@
 ///生成二维码图片
 + (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size {
     //创建过滤器
-    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    CIFilter* filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     //过滤器恢复默认
     [filter setDefaults];
     //给过滤器添加数据<字符串长度893>
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     [filter setValue:data forKey:@"inputMessage"];
     //获取二维码过滤器生成二维码
-    CIImage *image = [filter outputImage];
-    UIImage *img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
+    CIImage* image = [filter outputImage];
+    UIImage* img = [self createNonInterpolatedUIImageFromCIImage:image WithSize:size];
     return img;
 }
-+ (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size {
++ (UIImage*)createNonInterpolatedUIImageFromCIImage:(CIImage*)image WithSize:(CGFloat)size {
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
     
@@ -185,7 +185,7 @@
     size_t height = CGRectGetHeight(extent)*scale;
     CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
     CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
-    CIContext *context = [CIContext contextWithOptions:nil];
+    CIContext* context = [CIContext contextWithOptions:nil];
     CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
     CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
     CGContextScaleCTM(bitmapRef, scale, scale);
@@ -199,8 +199,8 @@
 }
 
 ///截取指定视图的指定区域，传入需要截取的view
-+ (UIImage*)SSscreenShot:(UIView *)view {
-    UIImage *imageRet = [[UIImage alloc]init];
++ (UIImage*)SSscreenShot:(UIView*)view {
+    UIImage* imageRet = [[UIImage alloc]init];
     UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     imageRet = UIGraphicsGetImageFromCurrentImageContext();
@@ -208,7 +208,7 @@
     
     CGImageRef sourceImageRef = [imageRet CGImage];
     CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, CGRectMake(0, imageRet.size.height - statusBarHeight - 44, imageRet.size.width, statusBarHeight+44));
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    UIImage* newImage = [UIImage imageWithCGImage:newImageRef scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
     return newImage;
     //    return imageRet;
 }

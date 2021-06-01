@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param timerKey key
  *  @param title 结束后的显示标题
  */
-+ (void)SScancelTiming:(NSString *)timerKey andTitle:(NSString*)title;
++ (void)SScancelTiming:(NSString*)timerKey andTitle:(NSString*)title;
 
 @end
 

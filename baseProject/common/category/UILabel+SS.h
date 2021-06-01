@@ -18,6 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///创建Label
 +(UILabel*_Nonnull)SSlabel:(UIFont*_Nullable)font textAlignment:(NSTextAlignment)alignment textColor:(UIColor*_Nullable)textColor backgroundColor:(UIColor*_Nullable)bgcolor;
 
+
+#pragma mark --------- 创建特定的Lab -----------
+///字号16单行无背景色的Lab
++ (UILabel*)SSfont16OneLineLab;
+///字号16多行无背景色的Lab
++ (UILabel*)SSfont16LinesLab;
+
 @end
 
 NS_ASSUME_NONNULL_END

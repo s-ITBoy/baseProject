@@ -71,10 +71,10 @@ static char SSHUD;
 }
 
 -(void)presentMessageTips_:(NSString *)message {
-    UIView * superview = [self SuperView];
+    UIView* superview = [self SuperView];
     if(!superview) return;
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.userInteractionEnabled = NO;
     hud.label.text = message;
@@ -90,15 +90,15 @@ static char SSHUD;
     [hud hideAnimated:YES afterDelay:0.5];
 }
 
--(void)presentMessageTips:(NSString *)message dismisblock:(void (^)(void))dismissblock {
+-(void)presentMessageTips:(NSString*)message dismisblock:(void (^)(void))dismissblock {
     [self presentMessageTips_:message dismisblock:dismissblock];
 }
 
-- (void)presentMessageTips_:(NSString *)message dismisblock:(void(^)(void))dismissblock {
-    UIView * superview = [self SuperView];
+- (void)presentMessageTips_:(NSString*)message dismisblock:(void(^)(void))dismissblock {
+    UIView* superview = [self SuperView];
     if(!superview) return;
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.userInteractionEnabled = NO;
     hud.label.text = message;
@@ -133,10 +133,10 @@ static char SSHUD;
 
 
 
-- (void)presentMessageTips_:(NSString *)message duration:(CGFloat)duration dismisblock:(void (^)(void))dismissblock {
-    UIView * superview = [self SuperView];
+- (void)presentMessageTips_:(NSString*)message duration:(CGFloat)duration dismisblock:(void (^)(void))dismissblock {
+    UIView* superview = [self SuperView];
     if(!superview) return;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:superview animated:YES];
     hud.mode = MBProgressHUDModeText;
     hud.label.text = message;
     hud.margin = 10.f;
@@ -151,10 +151,10 @@ static char SSHUD;
     };
 }
 
--(MBProgressHUD *)presentLoadingTips:(NSString *)message {
-    UIView * superview = [self SuperView];
+-(MBProgressHUD*)presentLoadingTips:(NSString*)message {
+    UIView* superview = [self SuperView];
     if(!superview) return nil;
-    MBProgressHUD * HUD =  [MBProgressHUD showHUDAddedTo:superview animated:YES];//[[MBProgressHUD alloc] initWithView:superview];
+    MBProgressHUD* HUD =  [MBProgressHUD showHUDAddedTo:superview animated:YES];//[[MBProgressHUD alloc] initWithView:superview];
     HUD.mode = MBProgressHUDModeIndeterminate;//MBProgressHUDModeDeterminate;
     HUD.delegate = self;
     HUD.label.text = message;
@@ -163,7 +163,7 @@ static char SSHUD;
 }
 
 -(void)presentLoadinghud {
-    UIView * superview = [self SuperView];
+    UIView* superview = [self SuperView];
     if(!superview) return ;
 //    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:superview animated:false];
     [MBProgressHUD showHUDAddedTo:superview animated:false];
@@ -190,13 +190,13 @@ static char SSHUD;
 }
 
 -(void)dismissAllTips {
-    UIView * superview = [self SuperView];
+    UIView* superview = [self SuperView];
     if(!superview) return ;
     [MBProgressHUD hideHUDForView:superview animated:YES];
 }
 
 -(void)dismissTips {
-    MBProgressHUD * hud = [self HUD];
+    MBProgressHUD* hud = [self HUD];
     [hud hideAnimated:YES];
 }
 
@@ -205,7 +205,7 @@ static char SSHUD;
     sleep(1);
 }
 - (void)myProgressTask {    
-    MBProgressHUD * hud = [self HUD];
+    MBProgressHUD* hud = [self HUD];
     float progress = 0.0f;
     while (progress < 1.0f) {
         progress += 0.01f;
@@ -214,8 +214,8 @@ static char SSHUD;
     }
 }
 
--(void)setHUD:(MBProgressHUD *)HUD {
-    NSMutableDictionary *opreations = (NSMutableDictionary*)objc_getAssociatedObject(self, &OperationKey);
+-(void)setHUD:(MBProgressHUD*)HUD {
+    NSMutableDictionary* opreations = (NSMutableDictionary*)objc_getAssociatedObject(self, &OperationKey);
     if(opreations == nil){
         opreations = [[NSMutableDictionary alloc] init];
         objc_setAssociatedObject(self, &OperationKey, opreations, OBJC_ASSOCIATION_RETAIN);
@@ -223,21 +223,21 @@ static char SSHUD;
     [opreations setObject:HUD forKey:KEY_HUD];
 }
 
--(MBProgressHUD *)HUD {
-    NSMutableDictionary *opreations = (NSMutableDictionary*)objc_getAssociatedObject(self, &OperationKey);
+-(MBProgressHUD*)HUD {
+    NSMutableDictionary* opreations = (NSMutableDictionary*)objc_getAssociatedObject(self, &OperationKey);
     if(opreations == nil) return nil;
-    MBProgressHUD * aHUD = [opreations objectForKey:KEY_HUD];
+    MBProgressHUD* aHUD = [opreations objectForKey:KEY_HUD];
     return aHUD;
 }
 
--(UIView *)SuperView {
-    UIView * superview = nil;
+-(UIView*)SuperView {
+    UIView* superview = nil;
     if ([[self class] isSubclassOfClass:[UINavigationController class]]) {
-        UINavigationController * ctr = (UINavigationController *)self;
+        UINavigationController* ctr = (UINavigationController *)self;
         superview = ctr.view;
     }
     else if ([[self class] isSubclassOfClass:[UIViewController class]]) {
-        UIViewController * ctr = (UIViewController *)self;
+        UIViewController* ctr = (UIViewController *)self;
         superview = ctr.view;
     }
     else if ([[self class] isSubclassOfClass:[UIView class]]) {
@@ -246,12 +246,12 @@ static char SSHUD;
         superview = [UIApplication sharedApplication].keyWindow;
     }
     else if ([[self class] isSubclassOfClass:[UIWindow class]]) {
-        UIWindow * ctr = (UIWindow *)self;
+        UIWindow* ctr = (UIWindow*)self;
         superview = ctr;
         
     }
     else if ([[self class] isSubclassOfClass:[AppDelegate class]]) {
-        AppDelegate * ctr = (AppDelegate *)self;
+        AppDelegate* ctr = (AppDelegate*)self;
         superview = ctr.window;
     }else{
         superview = [UIApplication sharedApplication].keyWindow;

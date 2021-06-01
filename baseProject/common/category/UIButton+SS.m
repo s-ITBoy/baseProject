@@ -75,47 +75,26 @@
     return button;
 }
 
-
-#pragma ---------------扩大响应区域----------------
-static char topNameKey;
-static char rightNameKey;
-static char bottomNameKey;
-static char leftNameKey;
-
--(void)SSaddEnlargeEdge:(CGFloat) size{
-    objc_setAssociatedObject(self, &topNameKey, [NSNumber numberWithFloat:size], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(self, &rightNameKey, [NSNumber numberWithFloat:size], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(self, &bottomNameKey, [NSNumber numberWithFloat:size], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(self, &leftNameKey, [NSNumber numberWithFloat:size], OBJC_ASSOCIATION_COPY_NONATOMIC);
+#pragma mark ------- 创建特定的按钮 ----------
+///确认按钮
++ (UIButton*_Nonnull)SSokBtn {
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont SSCustomFont16];
+    [button setBackgroundColor:[UIColor SScolorWithHexString:@"#0A6DF7"]];
+//    [button setTitle:@"" forState:UIControlStateNormal];
+    
+    return button;
+}
+///登录/退出按钮
++ (UIButton*_Nonnull)SSloginQuitBtn {
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont SSfont14];
+    [button setBackgroundColor:[UIColor SScolorWithHexString:@"#0A6DF7"]];
+//    [button setTitle:@"" forState:UIControlStateNormal];
+    
+    return button;
 }
 
--(void)SSaddEnlargeEdgeWithTop:(CGFloat) top right:(CGFloat) right bottom:(CGFloat) bottom left:(CGFloat) left{
-    objc_setAssociatedObject(self, &topNameKey, [NSNumber numberWithFloat:top], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(self, &rightNameKey, [NSNumber numberWithFloat:right], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(self, &bottomNameKey, [NSNumber numberWithFloat:bottom], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    objc_setAssociatedObject(self, &leftNameKey, [NSNumber numberWithFloat:left], OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
--(UIView*)hitTest:(CGPoint) point withEvent:(UIEvent*) event{
-    CGRect rect = [self enlargedRect];
-    if (CGRectEqualToRect(rect, self.bounds)){
-        return [super hitTest:point withEvent:event];
-    }
-    return CGRectContainsPoint(rect, point) ? self : nil;
-}
-
--(CGRect)enlargedRect{
-    NSNumber* topEdge = objc_getAssociatedObject(self, &topNameKey);
-    NSNumber* rightEdge = objc_getAssociatedObject(self, &rightNameKey);
-    NSNumber* bottomEdge = objc_getAssociatedObject(self, &bottomNameKey);
-    NSNumber* leftEdge = objc_getAssociatedObject(self, &leftNameKey);
-    if (topEdge && rightEdge && bottomEdge && leftEdge){
-        return CGRectMake(self.bounds.origin.x - leftEdge.floatValue,
-                          self.bounds.origin.y - topEdge.floatValue,
-                          self.bounds.size.width + leftEdge.floatValue + rightEdge.floatValue,
-                          self.bounds.size.height + topEdge.floatValue + bottomEdge.floatValue);
-    }else{
-        return self.bounds;
-    }
-}
 @end

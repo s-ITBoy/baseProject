@@ -83,13 +83,13 @@ NS_ASSUME_NONNULL_BEGIN
 +(UITextField*_Nullable)SStextField:(NSString*_Nullable)placeHolder andTextColor:(UIColor*_Nullable)textColor andFont:(UIFont*_Nullable)font;
 
 ///创建imageView
-+ (UIImageView *)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName;
++ (UIImageView*)SSimgeView:(CGRect)frame imgName:(NSString* _Nullable)imgName;
 
 ///生成二维码
 + (UIImage*)SSgetQRcodeWithStr:(NSString*)str size:(CGFloat)size;
 
 ///截取指定视图的指定区域，传入需要截取的view和
-+ (UIImage*_Nullable)SSscreenShot:(UIView *_Nullable)view;
++ (UIImage*_Nullable)SSscreenShot:(UIView*_Nullable)view;
 
 #pragma mark ------ 小功能 -------
 /// 判断对象是否为空，包括nil 空字符串、空字典、空数组等; YES:空；NO：非空
@@ -113,13 +113,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSMutableAttributedString*)SSattri:(NSString*)str Color:(UIColor*)color Font:(UIFont*)font andImageName:(NSString*)imageName isFront:(BOOL)isfront andRect:(CGRect)rect;
 ///获取当前屏幕显示的viewcontroller
-+ (UIViewController *_Nullable)getCurrentVC;
++ (UIViewController*_Nullable)getCurrentVC;
 ///根据dic自动生成model属性
 + (void)SSautoPropertyWith:(NSDictionary*)dic;
 
 #pragma mark ----------  弹框或跳转界面 ------------
 ///AlertActionSheet
-+ (void)SSshowActionSheet:(NSArray<UIAlertAction *> *_Nullable)actions tips:(NSString *_Nullable)tips message:(NSString *_Nullable)message target:(UIViewController *_Nullable)target;
++ (void)SSshowActionSheet:(NSArray<UIAlertAction*>*_Nullable)actions tips:(NSString *_Nullable)tips message:(NSString*_Nullable)message target:(UIViewController *_Nullable)target;
 
 ///跳转到对应H5界面
 + (void)SSintoH5:(UIViewController*_Nullable)viewController urlStr:(NSString*_Nullable)urlString;
@@ -144,13 +144,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///身份证号YES：有效； NO：无效
 + (BOOL)isValidIdenditifyCard:(NSString*_Nullable)cardStr;
 //邮箱YES：有效； NO：无效
-+ (BOOL)isValidEmail:(NSString *_Nullable)email;
++ (BOOL)isValidEmail:(NSString*_Nullable)email;
 //手机号码YES：有效； NO：无效
-+ (BOOL)isValidPhoneeNumber:(NSString *_Nullable)mobileNum;
++ (BOOL)isValidPhoneeNumber:(NSString*_Nullable)mobileNum;
 ///金额格式YES：有效； NO：无效
 + (BOOL)isValidMoney:(NSString*_Nullable)moneySr;
 ///银行卡号YES：有效； NO：无效
-+(BOOL)isValidBankCard:(NSString *_Nullable)cardNumber;
++(BOOL)isValidBankCard:(NSString*_Nullable)cardNumber;
 
 ///当前app名称
 + (NSString*_Nullable)ss_appName;
@@ -161,7 +161,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///系统版本号
 + (NSString*_Nullable)ss_getVersion;
 ///设备型号
-+ (NSString *_Nullable)ss_getIphoneType;
++ (NSString*_Nullable)ss_getIphoneType;
 ///获取设备号(udid)
 + (NSString*)getDeviceNum;
 ///获取设备唯一广告标识符

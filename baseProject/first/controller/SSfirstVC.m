@@ -32,7 +32,7 @@
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     
-    NSLog(@"path = \n%@",[[SSfileManager shareManager] SScachesPath]);
+    NSLog(@"path = \n%@",[@"" ss_moneyStr]);
     
 }
 
