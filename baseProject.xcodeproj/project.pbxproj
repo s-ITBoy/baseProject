@@ -16,6 +16,7 @@
 		18A661E2265CEBC4001B39DE /* SScustomInputV.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661E1265CEBC4001B39DE /* SScustomInputV.m */; };
 		18A661E5265CEBDA001B39DE /* UMloginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661E4265CEBDA001B39DE /* UMloginVC.m */; };
 		18A661EA265E2AEA001B39DE /* SSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661E9265E2AEA001B39DE /* SSTableView.m */; };
+		18C864A52668BB1100B7B4FA /* SSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C864A42668BB1100B7B4FA /* SSCollectionView.m */; };
 		2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C48A111239E2AF2001C92F1 /* SShelper.m */; };
 		2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */; };
 		2CC0F2E5256A841400C51F43 /* SSuserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F2E4256A841400C51F43 /* SSuserModel.m */; };
@@ -125,6 +126,8 @@
 		18A661E4265CEBDA001B39DE /* UMloginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMloginVC.m; sourceTree = "<group>"; };
 		18A661E8265E2AEA001B39DE /* SSTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSTableView.h; sourceTree = "<group>"; };
 		18A661E9265E2AEA001B39DE /* SSTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSTableView.m; sourceTree = "<group>"; };
+		18C864A32668BB1100B7B4FA /* SSCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSCollectionView.h; sourceTree = "<group>"; };
+		18C864A42668BB1100B7B4FA /* SSCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSCollectionView.m; sourceTree = "<group>"; };
 		2C48A110239E2AF2001C92F1 /* SShelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SShelper.h; sourceTree = "<group>"; };
 		2C48A111239E2AF2001C92F1 /* SShelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SShelper.m; sourceTree = "<group>"; };
 		2C6B4BC3255C1D310084A44C /* SScaculatorMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SScaculatorMaker.h; sourceTree = "<group>"; };
@@ -879,6 +882,8 @@
 				475299B624CAD3AD008FD18B /* SSautoTableV.m */,
 				18A661E8265E2AEA001B39DE /* SSTableView.h */,
 				18A661E9265E2AEA001B39DE /* SSTableView.m */,
+				18C864A32668BB1100B7B4FA /* SSCollectionView.h */,
+				18C864A42668BB1100B7B4FA /* SSCollectionView.m */,
 				47584DD325BFF2AF002B3676 /* SStipsAndHUD.h */,
 				47584DD225BFF2AF002B3676 /* SStipsAndHUD.m */,
 				47FB13FD23CD722C00072C1D /* SSwindowView.h */,
@@ -1144,6 +1149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC5B618235FF83200998FDF /* NSDictionary+SS.m in Sources */,
+				18C864A52668BB1100B7B4FA /* SSCollectionView.m in Sources */,
 				47FB141523CD724700072C1D /* SSJSObject.m in Sources */,
 				47F75AA5258DA08A00756E1C /* SSsheetActionV.m in Sources */,
 				2CCE0CD2265D302600A54606 /* SSlanguageManager.m in Sources */,
