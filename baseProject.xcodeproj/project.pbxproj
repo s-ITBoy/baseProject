@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18706E812668C8E200597A30 /* SSrightCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18706E802668C8E200597A30 /* SSrightCollectCell.m */; };
 		18A661CB265799E4001B39DE /* UIScrollView+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661CA265799E4001B39DE /* UIScrollView+SS.m */; };
 		18A661CE26579B0E001B39DE /* UIControl+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661CD26579B0E001B39DE /* UIControl+SS.m */; };
 		18A661D126579D2B001B39DE /* UILabel+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661D026579D2B001B39DE /* UILabel+SS.m */; };
@@ -108,6 +109,8 @@
 
 /* Begin PBXFileReference section */
 		06175919FD4DCC8D039BBEE5 /* Pods_baseProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18706E7F2668C8E200597A30 /* SSrightCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSrightCollectCell.h; sourceTree = "<group>"; };
+		18706E802668C8E200597A30 /* SSrightCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSrightCollectCell.m; sourceTree = "<group>"; };
 		18A661C9265799E4001B39DE /* UIScrollView+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SS.h"; sourceTree = "<group>"; };
 		18A661CA265799E4001B39DE /* UIScrollView+SS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SS.m"; sourceTree = "<group>"; };
 		18A661CC26579B0E001B39DE /* UIControl+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+SS.h"; sourceTree = "<group>"; };
@@ -378,6 +381,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18706E7E2668C8D000597A30 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				18706E7F2668C8E200597A30 /* SSrightCollectCell.h */,
+				18706E802668C8E200597A30 /* SSrightCollectCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		18A661DE265CEB82001B39DE /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,8 +639,8 @@
 		47204E2623D0164B00C5114D /* third */ = {
 			isa = PBXGroup;
 			children = (
+				18706E7E2668C8D000597A30 /* view */,
 				47204E2723D0164B00C5114D /* controller */,
-				47204E2823D0164B00C5114D /* view */,
 			);
 			path = third;
 			sourceTree = "<group>";
@@ -640,13 +652,6 @@
 				47204E6023D044E000C5114D /* SSthirdVC.m */,
 			);
 			path = controller;
-			sourceTree = "<group>";
-		};
-		47204E2823D0164B00C5114D /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		47204E2923D0164B00C5114D /* first */ = {
@@ -1189,6 +1194,7 @@
 				2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */,
 				2CC0F2EB256A8A4000C51F43 /* SSforthVC.m in Sources */,
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
+				18706E812668C8E200597A30 /* SSrightCollectCell.m in Sources */,
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
 				18A661E2265CEBC4001B39DE /* SScustomInputV.m in Sources */,
 				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,

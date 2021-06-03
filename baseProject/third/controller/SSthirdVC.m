@@ -11,6 +11,7 @@
 #import "SStipsAndHUD.h"
 #import <Masonry.h>
 #import "SSTableView.h"
+#import "SSrightCollectCell.h"
 
 @interface sstestModel : NSObject
 @property(nonatomic,copy) NSString* name;
@@ -63,11 +64,39 @@
 
 @end
 
-@interface SSthirdVC ()
+@interface SSthirdVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) SSTableView* stableV;
+@property(nonatomic,strong) UICollectionView* rightcollectV;
+@property(nonatomic,strong) NSArray* rightArray;
 @end
 
 @implementation SSthirdVC
+#pragma mark ------ 懒加载 ----------
+- (UICollectionView *)rightcollectV{
+    if (!_rightcollectV) {
+        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 5;
+        flowLayout.minimumInteritemSpacing = 0;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, ssscale(10), 0, ssscale(10));
+        flowLayout.itemSize = CGSizeMake(ssscale(86.5), ssscale(87.5));
+//        flowLayout.itemSize = CGSizeMake((ScreenWidth-ScreenWidth*9/40)/3, 45);
+//        flowLayout.headerReferenceSize = CGSizeMake(ScreenWidth-ScreenWidth*0.7867, 55);
+        _rightcollectV = [[UICollectionView alloc] initWithFrame:CGRectMake(ScreenWidth*0.2133, 0, ScreenWidth*0.7867, ScreenHeight-statusBarHeight-NaviBarHeight-tabBarBottomH) collectionViewLayout:flowLayout];
+        
+        _rightcollectV.backgroundColor = [UIColor whiteColor];
+        _rightcollectV.delegate = self;
+        _rightcollectV.dataSource = self;
+        [_rightcollectV registerClass:[SSrightCollectCell class] forCellWithReuseIdentifier:NSStringFromClass([SSrightCollectCell class])];
+    }
+    return _rightcollectV;
+}
+- (NSArray *)rightArray{
+    if (!_rightArray) {
+//        _rightArray = [NSArray array];
+        _rightArray = @[@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装"];
+    }
+    return _rightArray;
+}
 - (SSTableView *)stableV {
     if (!_stableV) {
         _stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:UITableViewStylePlain];
@@ -78,20 +107,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self setSStable];
+    [self.view addSubview:self.rightcollectV];
+    [self.rightcollectV reloadData];
     
-    [self.view addSubview:self.stableV];
-//    self.stableV.isautoHeight = YES;
-    self.stableV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
-        return [sstestCell_1 class];
-    };
-    self.stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
-//        cell.testLab.text = @"qwer";
-    };
-//    self.stableV.ss_setCellHeightAtIndexPath = ^CGFloat(NSIndexPath * _Nonnull indexPath) {
-//        return 150;
-//    };
-    self.stableV.ss_isAdaptiveCellHeight = YES;
-    [self getdata];
 }
 
 - (void)testtipsHUD {
@@ -110,6 +129,19 @@
     
 }
 
+- (void)setSStable {
+    [self.view addSubview:self.stableV];
+//    self.stableV.isautoHeight = YES;
+    self.stableV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
+        return [sstestCell_1 class];
+    };
+    self.stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
+//        cell.testLab.text = @"qwer";
+    };
+    self.stableV.ss_isAdaptiveCellHeight = YES;
+    [self getdata];
+}
+
 - (void)getdata {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray* arr = [NSMutableArray array];
@@ -126,6 +158,36 @@
             self.stableV.ssDatas = [arr mutableCopy];
         });
     });
+}
+
+#pragma mark --- UICollectionViewDelegate DataSource
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.rightArray.count;
+}
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;{
+    SSrightCollectCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SSrightCollectCell class]) forIndexPath:indexPath];
+//    cell.dic = [self.rightArray SSdicAtIndex:indexPath.item];
+    
+    return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    [self.view endEditing:YES];
+//    self.searchTF.text = @"";
+//    SSsearchResultVC* search = [[SSsearchResultVC alloc] init];
+//    search.keyword = [[self.rightArray SSdicAtIndex:indexPath.item] SSstringForDicKey:@"opt_name"];
+//    search.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:search animated:YES];
+    
+//    SSnewSecondVC* new = [[SSnewSecondVC alloc] init];
+//    [self.navigationController pushViewController:new animated:YES];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)collectionViewLayout;
+    if (flowlayout.minimumLineSpacing < 6) {
+        return 5;
+    }
+    return 15;
 }
 
 /*
