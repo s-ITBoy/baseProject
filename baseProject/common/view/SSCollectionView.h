@@ -9,17 +9,43 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+///自定义强大的collectionView，实现低耦合、高聚合（自动动态的给对应的cell做模型数据赋值，模型数据参数命名必须包含”model“字符串）
 @interface SSCollectionView : UICollectionView
-
-@property(nonatomic,strong) NSMutableArray* ssDatas;
+#pragma mark -------- 数据设置 -------------
 ///声明cell的类
 @property(nonatomic,copy) Class (^ss_setCellClassAtIndexPath)(NSIndexPath* indexPath);
+///数据源，内部会根据数据源自动计算section及Item的数量
+@property(nonatomic,strong) NSMutableArray* ssDatas;
 ///设置section数量(非必须，若设置了，则内部自动设置section个数无效)
 @property(nonatomic,copy) NSInteger (^ss_setNumberOfSectionsInCollectionView)(UICollectionView* collectionView);
 ///设置对应section中row的数量(非必须，若设置了，则内部自动设置对应section中row的数量无效)
 @property(nonatomic,copy) NSInteger (^ss_setNumberOfItemsInSection)(NSUInteger section);
 
+#pragma mark -------- 数据获取 -----------
+///获取对应行的cell，把id改成对应类名即可无需强制转换
+@property(nonatomic,copy) void (^ss_getCellAtIndexPath)(NSIndexPath* indexPath, id cell, id model);
+
+#pragma mark -------- 事件相关 -----------
+///对应的cell是否可以高亮 非必须
+@property(nonatomic,copy) BOOL (^ss_shouldHighlightItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell高亮时响应此方法 非必须
+@property(nonatomic,copy) void (^ss_didHighlightItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell取消高亮响应此方法 非必须
+@property(nonatomic,copy) void (^ss_didUnhighlightItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell是否可以选择 非必须
+@property(nonatomic,copy) BOOL (^ss_shouldSelectItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell是否可以取消选择 非必须
+@property(nonatomic,copy) BOOL (^ss_shouldDeselectItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell已经点击选择 非必须
+@property(nonatomic,copy) void (^ss_didSelectItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell已经取消点击选择 非必须
+@property(nonatomic,copy) void (^ss_didDeselectItemAtIndexPath)(NSIndexPath* indexPath);
+///对应的cell将要展示，非必须，把id改成对应类名即可无需强制转换
+@property(nonatomic,copy) void (^ss_willDisplayCell)(NSIndexPath* indexPath, id cell);
+///对应的cell已经展示，非必须，把id改成对应类名即可无需强制转换
+@property(nonatomic,copy) void (^ss_didEndDisplayingCell)(NSIndexPath* indexPath, id cell);
+///
+@property(nonatomic,copy) void (^ss_willDisplaySupplementaryView)(NSIndexPath* indexPath, UICollectionReusableView* view, NSString* elementKind);
 
 ///UICollectionView的DataSource 设置为当前控制器即可重写对应数据源代理方法
 @property(nonatomic,weak,nullable) id<UICollectionViewDataSource> ssDataSource;

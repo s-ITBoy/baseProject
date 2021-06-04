@@ -12,6 +12,7 @@
 #import <Masonry.h>
 #import "SSTableView.h"
 #import "SSrightCollectCell.h"
+#import "SSCollectionView.h"
 
 @interface sstestModel : NSObject
 @property(nonatomic,copy) NSString* name;
@@ -64,14 +65,30 @@
 
 @end
 
-@interface SSthirdVC ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface SSthirdVC ()
+//<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) SSTableView* stableV;
 @property(nonatomic,strong) UICollectionView* rightcollectV;
 @property(nonatomic,strong) NSArray* rightArray;
+
+@property(nonatomic,strong) SSCollectionView* sscollctionV;
 @end
 
 @implementation SSthirdVC
 #pragma mark ------ 懒加载 ----------
+- (SSCollectionView *)sscollctionV {
+    if (!_sscollctionV) {
+        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 5;
+        flowLayout.minimumInteritemSpacing = 0;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, ssscale(10), 0, ssscale(10));
+        flowLayout.itemSize = CGSizeMake(ssscale(86.5), ssscale(87.5));
+//        flowLayout.itemSize = CGSizeMake((ScreenWidth-ScreenWidth*9/40)/3, 45);
+//        flowLayout.headerReferenceSize = CGSizeMake(ScreenWidth-ScreenWidth*0.7867, 55);
+        _sscollctionV = [[SSCollectionView alloc] initWithFrame:CGRectMake(ScreenWidth*0.2133, 0, ScreenWidth*0.7867, ScreenHeight-statusBarHeight-NaviBarHeight-tabBarBottomH) collectionViewLayout:flowLayout];
+    }
+    return _sscollctionV;
+}
 - (UICollectionView *)rightcollectV{
     if (!_rightcollectV) {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -84,8 +101,8 @@
         _rightcollectV = [[UICollectionView alloc] initWithFrame:CGRectMake(ScreenWidth*0.2133, 0, ScreenWidth*0.7867, ScreenHeight-statusBarHeight-NaviBarHeight-tabBarBottomH) collectionViewLayout:flowLayout];
         
         _rightcollectV.backgroundColor = [UIColor whiteColor];
-        _rightcollectV.delegate = self;
-        _rightcollectV.dataSource = self;
+//        _rightcollectV.delegate = self;
+//        _rightcollectV.dataSource = self;
         [_rightcollectV registerClass:[SSrightCollectCell class] forCellWithReuseIdentifier:NSStringFromClass([SSrightCollectCell class])];
     }
     return _rightcollectV;
@@ -108,9 +125,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self setSStable];
-    [self.view addSubview:self.rightcollectV];
-    [self.rightcollectV reloadData];
+//    [self.view addSubview:self.rightcollectV];
+//    [self.rightcollectV reloadData];
     
+    [self.view addSubview:self.sscollctionV];
+    self.sscollctionV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
+        return [SSrightCollectCell class];
+    };
+    self.sscollctionV.ssDatas = [@[@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装"] mutableCopy];
 }
 
 - (void)testtipsHUD {
@@ -160,35 +182,35 @@
     });
 }
 
-#pragma mark --- UICollectionViewDelegate DataSource
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.rightArray.count;
-}
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;{
-    SSrightCollectCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SSrightCollectCell class]) forIndexPath:indexPath];
-//    cell.dic = [self.rightArray SSdicAtIndex:indexPath.item];
-    
-    return cell;
-}
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self.view endEditing:YES];
-//    self.searchTF.text = @"";
-//    SSsearchResultVC* search = [[SSsearchResultVC alloc] init];
-//    search.keyword = [[self.rightArray SSdicAtIndex:indexPath.item] SSstringForDicKey:@"opt_name"];
-//    search.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:search animated:YES];
-    
-//    SSnewSecondVC* new = [[SSnewSecondVC alloc] init];
-//    [self.navigationController pushViewController:new animated:YES];
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)collectionViewLayout;
-    if (flowlayout.minimumLineSpacing < 6) {
-        return 5;
-    }
-    return 15;
-}
+//#pragma mark --- UICollectionViewDelegate DataSource
+//-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+//    return self.rightArray.count;
+//}
+//- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;{
+//    SSrightCollectCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SSrightCollectCell class]) forIndexPath:indexPath];
+////    cell.dic = [self.rightArray SSdicAtIndex:indexPath.item];
+//
+//    return cell;
+//}
+//-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+//    [self.view endEditing:YES];
+////    self.searchTF.text = @"";
+////    SSsearchResultVC* search = [[SSsearchResultVC alloc] init];
+////    search.keyword = [[self.rightArray SSdicAtIndex:indexPath.item] SSstringForDicKey:@"opt_name"];
+////    search.hidesBottomBarWhenPushed = YES;
+////    [self.navigationController pushViewController:search animated:YES];
+//
+////    SSnewSecondVC* new = [[SSnewSecondVC alloc] init];
+////    [self.navigationController pushViewController:new animated:YES];
+//}
+//
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+//    UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)collectionViewLayout;
+//    if (flowlayout.minimumLineSpacing < 6) {
+//        return 5;
+//    }
+//    return 15;
+//}
 
 /*
 #pragma mark - Navigation

@@ -60,6 +60,11 @@
     self.titleLabel.text = [dic SSstringForDicKey:@"opt_name"];
 }
 
+- (void)setStrModel:(NSString *)strModel {
+    _strModel = strModel;
+    self.titleLabel.text = strModel;
+}
+
 //- (void)setIsSelected:(BOOL)isSelected{
 //    _isSelected = isSelected;
 //    if (isSelected) {

@@ -12,9 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///自定义强大的tableView，实现低耦合、高聚合（自动动态的给对应的cell做模型数据赋值，模型数据参数命名必须包含”model“字符串）
 @interface SSTableView : UITableView
 #pragma mark -------- 数据设置 -------------
-@property(nonatomic,strong) NSMutableArray* ssDatas;
 ///声明cell的类
 @property(nonatomic,copy) Class (^ss_setCellClassAtIndexPath)(NSIndexPath* indexPath);
+///数据源，内部会根据数据源自动计算section及Item的数量
+@property(nonatomic,strong) NSMutableArray* ssDatas;
 ///设置section数量(非必须，若设置了，则内部自动设置section个数无效)
 @property(nonatomic,copy) NSInteger (^ss_setNumberOfSectionsInTableView)(UITableView* tableView);
 ///设置对应section中row的数量(非必须，若设置了，则内部自动设置对应section中row的数量无效)

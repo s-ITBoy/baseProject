@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SSrightCollectCell : UICollectionViewCell
 @property(nonatomic,assign) BOOL isSelected;
 @property(nonatomic,strong) NSDictionary* dic;
+@property(nonatomic,copy) NSString* strModel;
 @end
 
 NS_ASSUME_NONNULL_END
