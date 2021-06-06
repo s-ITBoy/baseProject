@@ -373,8 +373,10 @@ static NSString *const SECTION = @"section";
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView willDisplaySupplementaryView:view forElementKind:elementKind atIndexPath:indexPath];
     }
-    if (self.ss_willDisplaySupplementaryView) {
-        self.ss_willDisplaySupplementaryView(indexPath, view, elementKind);
+    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+        !self.ss_willDisplayHeaderViewInSection ? : self.ss_willDisplayHeaderViewInSection(indexPath, view, [self getModelAtIndexPath:indexPath]);
+    }else {
+        !self.ss_willDisplayFooterViewInSection ? : self.ss_willDisplayFooterViewInSection(indexPath, view, [self getModelAtIndexPath:indexPath]);
     }
 }
 

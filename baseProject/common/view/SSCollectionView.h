@@ -26,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UICollectionReusableView* (^ss_setFooterViewInSection)(NSInteger section);
 
 #pragma mark -------- 数据获取 -----------
-///获取对应行的cell，把id改成对应类名即可无需强制转换
+///获取对应行的cell，把id改成对应类名即可无需强制转换，非必须
 @property(nonatomic,copy) void (^ss_getCellAtIndexPath)(NSIndexPath* indexPath, id cell, id model);
-///获取对应section的headerView secArr为对应section的model数组
+///获取对应section的headerView secArr为对应section的model数组，非必须
 @property(nonatomic,copy) void (^ss_getHeaderViewInSection)(NSInteger section,id headerView,id model);
-///获取对应section的footerView secArr为对应section的model数组
+///获取对应section的footerView secArr为对应section的model数组，非必须
 @property(nonatomic,copy) void (^ss_getFooterViewInSection)(NSInteger section,id footerView,id model);
 
 #pragma mark -------- 事件相关 -----------
@@ -52,17 +52,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) void (^ss_willDisplayCell)(NSIndexPath* indexPath, id cell);
 ///对应的cell已经展示，非必须，把id改成对应类名即可无需强制转换
 @property(nonatomic,copy) void (^ss_didEndDisplayingCell)(NSIndexPath* indexPath, id cell);
-///对应的分区将要显示的view, 非必须 
-@property(nonatomic,copy) void (^ss_willDisplaySupplementaryView)(NSIndexPath* indexPath, UICollectionReusableView* view, NSString* elementKind);
-///scrollView滚动事件
+///对应的section的headView将要显示，非必须
+@property(nonatomic,copy) void (^ss_willDisplayHeaderViewInSection)(NSIndexPath* indexPath, UICollectionReusableView* headerView, id model);
+///对应的section的footView将要显示，非必须
+@property(nonatomic,copy) void (^ss_willDisplayFooterViewInSection)(NSIndexPath* indexPath, UICollectionReusableView* footView, id model);
+///scrollView滚动事件，非必须
 @property(nonatomic,copy) void (^ss_scrollViewDidScroll)(UIScrollView* scrollView);
-///scrollView缩放事件
+///scrollView缩放事件，非必须
 @property(nonatomic,copy) void (^ss_scrollViewDidZoom)(UIScrollView* scrollView);
-///scrollView滚动到顶部事件
+///scrollView滚动到顶部事件，非必须
 @property(nonatomic,copy) void (^ss_scrollViewDidScrollToTop)(UIScrollView* scrollView);
-///scrollView开始拖拽事件
+///scrollView开始拖拽事件，非必须
 @property(nonatomic,copy) void (^ss_scrollViewWillBeginDragging)(UIScrollView* scrollView);
-///scrollView结束拖拽事件
+///scrollView结束拖拽事件，非必须
 @property(nonatomic,copy) void (^ss_scrollViewDidEndDragging)(UIScrollView* scrollView, BOOL willDecelerate);
 
 
