@@ -242,6 +242,48 @@ static NSString *const SECTION = @"section";
     return cell;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        if ([self.ssDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+            return [self.ssDataSource collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
+        }
+        UICollectionReusableView* headView = nil;
+        Class headVewClass;
+        if (self.ss_setHeaderViewInSection) {
+            headView = self.ss_setHeaderViewInSection(indexPath.section);
+            headVewClass = [headView class];
+        }
+        if (![self.registerExistArr containsObject:NSStringFromClass(headVewClass)]) {
+            [self registerClass:headVewClass forSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(headVewClass)];
+            [self.registerExistArr addObject:NSStringFromClass(headVewClass)];
+        }
+        headView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(headVewClass) forIndexPath:indexPath];
+        !self.ss_getHeaderViewInSection ? : self.ss_getHeaderViewInSection(indexPath.section, headView, [self getModelAtIndexPath:indexPath]);
+        
+        return headView;
+        
+    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        if ([self.ssDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+            return [self.ssDataSource collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
+        }
+        UICollectionReusableView* footView = nil;
+        Class footVewClass;
+        if (self.ss_setFooterViewInSection) {
+            footView = self.ss_setFooterViewInSection(indexPath.section);
+            footVewClass = [footView class];
+        }
+        if (![self.registerExistArr containsObject:NSStringFromClass(footVewClass)]) {
+            [self registerClass:footVewClass forSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(footVewClass)];
+            [self.registerExistArr addObject:NSStringFromClass(footVewClass)];
+        }
+        footView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(footVewClass) forIndexPath:indexPath];
+        !self.ss_getFooterViewInSection ? : self.ss_getFooterViewInSection(indexPath.section, footView, [self getModelAtIndexPath:indexPath]);
+        return footView;
+    }
+    
+    return nil;
+}
+
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:shouldHighlightItemAtIndexPath:)]) {
@@ -333,6 +375,60 @@ static NSString *const SECTION = @"section";
     }
     if (self.ss_willDisplaySupplementaryView) {
         self.ss_willDisplaySupplementaryView(indexPath, view, elementKind);
+    }
+}
+
+#pragma mark ------ UIScrollView ---------
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    //滚动事件
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [self.ssDelegate scrollViewDidScroll:scrollView];
+    }else {
+        if (self.ss_scrollViewDidScroll) {
+            self.ss_scrollViewDidScroll(scrollView);
+        }
+    }
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    //缩放事件
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidZoom:)]) {
+        [self.ssDelegate scrollViewDidZoom:scrollView];
+    }else {
+        !self.ss_scrollViewDidZoom ? : self.ss_scrollViewDidZoom(scrollView);
+    }
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    //滚动到顶部
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidScrollToTop:)]) {
+        [self.ssDelegate scrollViewDidScrollToTop:scrollView];
+    }else {
+        if (self.ss_scrollViewDidScrollToTop) {
+            self.ss_scrollViewDidScrollToTop(scrollView);
+        }
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    //开始拖拽
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
+        [self.ssDelegate scrollViewWillBeginDragging:scrollView];
+    }else {
+        if (self.ss_scrollViewWillBeginDragging) {
+            self.ss_scrollViewWillBeginDragging(scrollView);
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    //结束拖拽
+    if ([self.ssDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+        [self.ssDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }else {
+        if (self.ss_scrollViewDidEndDragging) {
+            self.ss_scrollViewDidEndDragging(scrollView, decelerate);
+        }
     }
 }
 
