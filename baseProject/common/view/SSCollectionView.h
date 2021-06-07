@@ -25,6 +25,19 @@ NS_ASSUME_NONNULL_BEGIN
 ///设置对应section的FootView，非必须
 @property (nonatomic, copy) UICollectionReusableView* (^ss_setFooterViewInSection)(NSInteger section);
 
+///设置item的size，非必须，若设置了此参数，则flowlayout.itemSize的设置无效
+@property(nonatomic,copy) CGSize (^ss_sizeForItemAtIndexPath)(NSIndexPath* indexPath, UICollectionView* collectionView);
+///设置上下左右的内缩进，非必须，若设置了此参数，则flowlayout.sectionInset的设置无效
+@property(nonatomic,copy) UIEdgeInsets (^ss_insetForSectionAtIndex)(NSInteger section, UICollectionView* collectionView);
+///设置cell的行间距，非必须，若设置了此参数，则flowlayout.minimumLineSpacing的设置无效
+@property(nonatomic,copy) CGFloat (^ss_minimumLineSpacingForSectionAtIndex)(NSInteger section, UICollectionView* collectionView);
+///设置cell的列间距，非必须，若设置了此参数，则flowlayout.minimumInteritemSpacing的设置无效
+@property(nonatomic,copy) CGFloat (^ss_minimumInteritemSpacingForSectionAtIndex)(NSInteger section, UICollectionView* collectionView);
+///设置分区头视图的size，非必须，若设置了此参数，则flowlayout.headerReferenceSize的设置无效
+@property(nonatomic,copy) CGSize (^ss_referenceSizeForHeaderInSection)(NSInteger section, UICollectionView* collectionView);
+///设置分区尾试图的size，非必须, 若设置了此参数，则flowlayout.footerReferenceSize的设置无效
+@property(nonatomic,copy) CGSize (^ss_referenceSizeForFooterInSection)(NSInteger section, UICollectionView* collectionView);
+
 #pragma mark -------- 数据获取 -----------
 ///获取对应行的cell，把id改成对应类名即可无需强制转换，非必须
 @property(nonatomic,copy) void (^ss_getCellAtIndexPath)(NSIndexPath* indexPath, id cell, id model);

@@ -131,7 +131,7 @@ static NSString *const SECTION = @"section";
 
 @end
 
-@interface SSCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface SSCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) NSMutableArray* registerExistArr;
 @end
 @implementation SSCollectionView
@@ -380,6 +380,98 @@ static NSString *const SECTION = @"section";
     }
 }
 
+#pragma mark -------- UICollectionViewDelegateFlowLayout ---------
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.ss_sizeForItemAtIndexPath) {
+        return self.ss_sizeForItemAtIndexPath(indexPath, collectionView);
+    }
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+        return flowlayout.itemSize;
+    }
+    
+    return CGSizeZero;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (self.ss_insetForSectionAtIndex) {
+        return self.ss_insetForSectionAtIndex(section, collectionView);
+    }
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+        return flowlayout.sectionInset;
+    }
+    return UIEdgeInsetsZero;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    if (self.ss_minimumLineSpacingForSectionAtIndex) {
+        return self.ss_minimumLineSpacingForSectionAtIndex(section, collectionView);
+    }
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+        return flowlayout.minimumLineSpacing;
+    }
+    
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    if (self.ss_minimumInteritemSpacingForSectionAtIndex) {
+        return self.ss_minimumInteritemSpacingForSectionAtIndex(section, collectionView);
+    }
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+        return flowlayout.minimumInteritemSpacing;
+    }
+    
+    return 0;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    NSArray *secArr = [self isMultiDatas] ? self.ssDatas[section] : self.ssDatas;
+    if (secArr.count < 1) {
+        return CGSizeZero;
+    }
+    if([self.ssDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)] || self.ss_setHeaderViewInSection){
+        if(!self.ss_setHeaderViewInSection(section)){
+            return CGSizeZero;
+        }
+        if(self.ss_referenceSizeForHeaderInSection){
+            return self.ss_referenceSizeForHeaderInSection(section, collectionView);
+        }
+        UICollectionReusableView* headerView = [self getCollectionReusableViewInSection:section isHeader:YES];
+        return headerView.frame.size;
+    }
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+        return flowlayout.headerReferenceSize;
+    }
+    return CGSizeZero;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    NSArray *secArr = [self isMultiDatas] ? self.ssDatas[section] : self.ssDatas;
+    if (secArr.count < 1) {
+        return CGSizeZero;
+    }
+    if([self.ssDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)] || self.ss_setFooterViewInSection){
+        if(!self.ss_setFooterViewInSection(section)){
+            return CGSizeZero;
+        }
+        if(self.ss_referenceSizeForFooterInSection){
+            return self.ss_referenceSizeForFooterInSection(section, collectionView);
+        }
+        UICollectionReusableView* footView = [self getCollectionReusableViewInSection:section isHeader:NO];
+        return footView.frame.size;
+    }
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout* flowlayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+        return flowlayout.footerReferenceSize;
+    }
+    return CGSizeZero;
+}
+
 #pragma mark ------ UIScrollView ---------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //滚动事件
@@ -457,6 +549,21 @@ static NSString *const SECTION = @"section";
         }
     }
     return model;
+}
+
+///根据section获取对应的headerView / footerView
+-(UICollectionReusableView*)getCollectionReusableViewInSection:(NSUInteger)section isHeader:(BOOL)isHeader {
+    UICollectionReusableView* view = nil;
+    if (isHeader) {
+        if (self.ss_setHeaderViewInSection) {
+            view = self.ss_setHeaderViewInSection(section);
+        }
+    }else {
+        if (self.ss_setFooterViewInSection) {
+            view = self.ss_setFooterViewInSection(section);
+        }
+    }
+    return view;
 }
 
 //防止越界处理
