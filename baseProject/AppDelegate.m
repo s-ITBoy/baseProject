@@ -23,9 +23,7 @@
     [self showRoot];
     [self globalApperance];
     [self getNetworkStatus];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(userDidTakeScreenshotNotification:)
-                                                     name:UIApplicationUserDidTakeScreenshotNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(userDidTakeScreenshotNotification:) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
     
     return YES;
 }

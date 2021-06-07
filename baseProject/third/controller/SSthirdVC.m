@@ -80,8 +80,9 @@
     if (!_sscollctionV) {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 5;
-        flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, ssscale(10), 0, ssscale(10));
+//        flowLayout.minimumInteritemSpacing = 0;
+//        flowLayout.sectionInset = UIEdgeInsetsMake(0, ssscale(10), 0, ssscale(10));
+//        flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
         flowLayout.itemSize = CGSizeMake(ssscale(86.5), ssscale(87.5));
 //        flowLayout.itemSize = CGSizeMake((ScreenWidth-ScreenWidth*9/40)/3, 45);
 //        flowLayout.headerReferenceSize = CGSizeMake(ScreenWidth-ScreenWidth*0.7867, 55);
