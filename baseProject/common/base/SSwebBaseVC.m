@@ -176,12 +176,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)backBtn {
+- (void)ss_backBtn {
     if (self.wkWebView.canGoBack) {
         [self.wkWebView goBack];
         return;
     }
-    [super backBtn];
+    [super ss_backBtn];
 }
 
 /*

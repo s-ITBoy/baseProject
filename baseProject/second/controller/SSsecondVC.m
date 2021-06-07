@@ -20,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem.customView.hidden = YES;
+    
     self.nameTF = [[UITextField alloc] initWithFrame:CGRectMake(ssscale(50), ssscale(50), ScreenWidth-2*ssscale(50), ssscale(45))];
     self.nameTF.placeholder = @"请输入用户名!";
     self.nameTF.backgroundColor = [UIColor whiteColor];

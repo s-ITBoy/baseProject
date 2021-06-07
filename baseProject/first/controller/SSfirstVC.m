@@ -8,7 +8,7 @@
 
 #import "SSfirstVC.h"
 #import "SSfileManager.h"
-#import "AppDelegate.h"
+#import "SSnaviAndStatusBarV.h"
 
 @interface SSfirstVC ()
 @property(nonatomic,strong) UILabel* valueLab;
@@ -24,7 +24,15 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem.customView.hidden = YES;
     self.navigationItem.title = @"首页";
+    
+    SSnaviAndStatusBarV* navi = [[SSnaviAndStatusBarV alloc] init];
+    navi.frame = CGRectMake(0, 0, ScreenWidth, NAVIHEIGHT);
+    navi.type = SSnaviTypeShowSearch;
+    
+//    navi.titleStr = @"首页";
+    [self.view addSubview:navi];
     
     UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 88, 100, 50)];
     [btn setTitle:SSlocalStr(@"home", nil) forState:UIControlStateNormal];

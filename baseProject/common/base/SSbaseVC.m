@@ -68,12 +68,12 @@
     
     self.page = 1;
     self.pageSize = 10;
-    [self setBackBarButtonItem:[UIColor lightGrayColor]];
+    [self ss_setBackBarButtonItem:@"navi_back"];
     
-    [self isShowNavigationLine:NO];
+    [self ss_isShowNavigationLine:NO];
 }
 
-- (void)isShowNavigationLine:(BOOL)isShow {
+- (void)ss_isShowNavigationLine:(BOOL)isShow {
     if (isShow) {
         [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]] forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[self imageWithColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]]];
@@ -83,38 +83,50 @@
     }
 }
 
-- (void)setBackBarButtonItem:(UIColor*)color {
-    //    if (IS_IOS_10) {
+- (void)ss_setBackBarButtonItem:(NSString*)imgStr {
     UIButton* backBtn = [UIButton buttonWithType:0];
-    [backBtn setImage:[UIImage imageNamed:@"navi_back"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(backBtn) forControlEvents:UIControlEventTouchUpInside];
-    //        backBtn.frame = CGRectMake(0, 0, 11, 21);
-    //    [backBtn setBackgroundColor:[UIColor redColor]];
-    backBtn.frame =CGRectMake(0, 0, 65, 32);
-    //    backBtn.backgroundColor = [UIColor YQredColor];
+    [backBtn setImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(ss_backBtn) forControlEvents:UIControlEventTouchUpInside];
+    backBtn.frame =CGRectMake(0, 0, 65, 44);
     backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -27, 0, 27);
-//    [backBtn YQsetEnlargeEdgeWithTop:1 right:10 bottom:1 left:10];
-    //        [backBtn setContentEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
     UIBarButtonItem* back = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     back.title = @"";
-    //        back.image = [UIImage imageNamed:@"back"];
     self.navigationItem.leftBarButtonItem = back;
-    //    }else{
-    //        UIBarButtonItem* back = [[UIBarButtonItem alloc] init];
-    //        back.title = @"";
-    //        back.tintColor = color;
-    //
-    //        self.navigationItem.backBarButtonItem = back;
-    //    }
 }
 
-- (void)backBtn {
+- (void)ss_backBtn {
     if (_backBlock) {       //有block执行block返回事件
         _backBlock(self);
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+///使用自定义导航栏
+- (void)ss_initUseCustomNavi:(SSnaviType)naviType {
+    if (self.navigationController.navigationBar.hidden == NO) {
+        self.navigationController.navigationBar.hidden = YES;
+    }
+    self.statusAndNaviView = [[SSnaviAndStatusBarV alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NAVIHEIGHT)];
+    self.statusAndNaviView.type = naviType;
+    [self.view addSubview:self.statusAndNaviView];
+}
+
+///使用自定义SSTableView
+- (void)ss_initUseSSTableView {
+    [self ss_initUseSSTableView:UITableViewStylePlain];
+}
+
+- (void)ss_initUseSSTableView:(UITableViewStyle)tableViewStyle {
+    self.stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:tableViewStyle];
+    if (@available(iOS 11.0, *)) {
+        self.stableV.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    [self.view addSubview:self.stableV];
+}
+
 
 - (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, ScreenWidth, 1.0f);

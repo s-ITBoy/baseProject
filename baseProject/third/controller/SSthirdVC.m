@@ -67,7 +67,7 @@
 
 @interface SSthirdVC ()
 //<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property(nonatomic,strong) SSTableView* stableV;
+//@property(nonatomic,strong) SSTableView* stableV;
 @property(nonatomic,strong) UICollectionView* rightcollectV;
 @property(nonatomic,strong) NSArray* rightArray;
 
@@ -115,16 +115,18 @@
     }
     return _rightArray;
 }
-- (SSTableView *)stableV {
-    if (!_stableV) {
-        _stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:UITableViewStylePlain];
-        _stableV.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    }
-    return _stableV;
-}
+//- (SSTableView *)stableV {
+//    if (!_stableV) {
+//        _stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:UITableViewStylePlain];
+//        _stableV.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//    }
+//    return _stableV;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem.customView.hidden = YES;
+    
 //    [self setSStable];
 //    [self.view addSubview:self.rightcollectV];
 //    [self.rightcollectV reloadData];

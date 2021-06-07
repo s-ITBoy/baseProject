@@ -79,15 +79,14 @@ CGFloat heightForCell = 10;
 - (SSnaviAndStatusBarV *)naviView {
     if (!_naviView) {
         _naviView = [[SSnaviAndStatusBarV alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, statusBarHeight+NaviBarHeight)];
+        _naviView.type = SSnaviTypeShowSearch;
         _naviView.backgroundColor = [UIColor whiteColor];
         _naviView.leftbtnImgStr = @"navi_back";
-        _naviView.isHiddenSearchTFD = NO;
         [_naviView.searchTFD becomeFirstResponder];
 //        _naviView.searchPlaceHolder = SSlocalStr(@"category_head_placeH", nil);
 //        _naviView.searchLeftViewImgStr = @"search_left";
 //        _naviView.searchBorderColor = [UIColor SSthemeGreen];
         
-        _naviView.isHiddenrightBtn = NO;
         _naviView.rightBtnImgStr = @"navi_shopCar";
     }
     return _naviView;

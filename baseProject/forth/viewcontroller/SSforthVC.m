@@ -178,6 +178,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem.customView.hidden = YES;
+    
     [self setSub];
 }
 
