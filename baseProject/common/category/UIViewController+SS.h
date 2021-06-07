@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 //present
 - (void)SS_presentVCWithClassStr:(NSString*_Nullable)classStr withPropertyDic:(NSDictionary*_Nullable)propertyDic;
 
+#pragma mark --------- 跳转webView 把webView单独拿出来写 -------------
+
+
 @end
 
 NS_ASSUME_NONNULL_END
