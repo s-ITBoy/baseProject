@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1838BB55266F1827009351AA /* SSwebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1838BB54266F1827009351AA /* SSwebVC.m */; };
 		18706E812668C8E200597A30 /* SSrightCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18706E802668C8E200597A30 /* SSrightCollectCell.m */; };
 		18A661CB265799E4001B39DE /* UIScrollView+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661CA265799E4001B39DE /* UIScrollView+SS.m */; };
 		18A661CE26579B0E001B39DE /* UIControl+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661CD26579B0E001B39DE /* UIControl+SS.m */; };
@@ -109,6 +110,8 @@
 
 /* Begin PBXFileReference section */
 		06175919FD4DCC8D039BBEE5 /* Pods_baseProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1838BB53266F1827009351AA /* SSwebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSwebVC.h; sourceTree = "<group>"; };
+		1838BB54266F1827009351AA /* SSwebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSwebVC.m; sourceTree = "<group>"; };
 		18706E7F2668C8E200597A30 /* SSrightCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSrightCollectCell.h; sourceTree = "<group>"; };
 		18706E802668C8E200597A30 /* SSrightCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSrightCollectCell.m; sourceTree = "<group>"; };
 		18A661C9265799E4001B39DE /* UIScrollView+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SS.h"; sourceTree = "<group>"; };
@@ -668,6 +671,8 @@
 			children = (
 				47204E5A23D044C100C5114D /* SSfirstVC.h */,
 				47204E5923D044C100C5114D /* SSfirstVC.m */,
+				1838BB53266F1827009351AA /* SSwebVC.h */,
+				1838BB54266F1827009351AA /* SSwebVC.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1198,6 +1203,7 @@
 				475299B724CAD3AD008FD18B /* SSautoTableV.m in Sources */,
 				18A661E2265CEBC4001B39DE /* SScustomInputV.m in Sources */,
 				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,
+				1838BB55266F1827009351AA /* SSwebVC.m in Sources */,
 				4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,

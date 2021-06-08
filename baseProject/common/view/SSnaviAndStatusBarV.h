@@ -47,6 +47,10 @@ typedef void(^SSNaviBtnsBLock)(NSInteger index);
 
 ///左侧返回按钮图标，默认为黑色的图标
 @property(nonatomic,copy) NSString* leftbtnImgStr;
+///关闭webView的按钮的图标，适用于webView的VC，此参数仅在默认样式下有用
+@property(nonatomic,copy) NSString* closeWebBtnImgStr;
+///当为默认样式时，是否显示左侧按钮旁边的关闭按钮 默认NO：不显示
+@property(nonatomic,assign) BOOL isShowCloseBtn;
 
 ///当type = SSnaviTypeShowOnlyPicture时的，中间图标对应的字段
 @property(nonatomic,copy) NSString* centerImgStr;
@@ -54,7 +58,7 @@ typedef void(^SSNaviBtnsBLock)(NSInteger index);
 ///右侧按钮图标
 @property(nonatomic,copy) NSString* rightBtnImgStr;
 
-///0：左侧按钮；1：右侧按钮
+///0：左侧按钮；1：右侧按钮；2：紧挨着左侧按钮的关闭按钮，适用于webView的VC界面
 @property(nonatomic,copy) SSNaviBtnsBLock naviBlock;
 ///搜索Block
 @property(nonatomic,copy) void (^SSnaviSearchBlock) (NSString* text);

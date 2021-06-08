@@ -7,14 +7,17 @@
 //
 
 #import "SSwebBaseVC.h"
-#import <WebKit/WebKit.h>
+#import "SSnaviAndStatusBarV.h"
 
 @interface SSwebBaseVC ()<UIGestureRecognizerDelegate,WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler>
 @property(nonatomic,strong) WKWebView* wkWebView;
 @property(nonatomic,strong) UIProgressView* progress;
+
+@property(nonatomic,strong) SSnaviAndStatusBarV* customNavi;
 @end
 
 @implementation SSwebBaseVC
+#pragma mark ------ 懒加载 -----------
 - (WKWebView *)wkWebView {
     if (!_wkWebView) {
         _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT)];
@@ -28,43 +31,47 @@
     if (!_progress) {
         _progress = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ssscale(2))];
         _progress.backgroundColor = [UIColor whiteColor];
-        _progress.progressTintColor = [UIColor greenColor];
-        _progress.hidden = YES;
+        _progress.progressTintColor = [UIColor blueColor];
+//        _progress.hidden = YES;
     }
     return _progress;
 }
+- (SSnaviAndStatusBarV *)customNavi {
+    if (!_customNavi) {
+        _customNavi = [[SSnaviAndStatusBarV alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NAVIHEIGHT)];
+        _customNavi.backgroundColor = [UIColor whiteColor];
+        weakly(self);
+        _customNavi.naviBlock = ^(NSInteger index) {
+            [weakSelf naviCLick:index];
+        };
+    }
+    return _customNavi;
+}
 
 ///FIXME:----------
-//- (void)loadView {
-//    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-//    _wkWebView = [[WKWebView alloc] initWithFrame: [UIScreen mainScreen].bounds configuration:config];
-////    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIHEIGHT, ScreenWidth, ScreenHeight-NAVIHEIGHT) configuration:config];
-//    _wkWebView.allowsBackForwardNavigationGestures = YES;
-//    _wkWebView.UIDelegate = self;
-//    _wkWebView.navigationDelegate = self;
-////        [self addJS];
-//    self.view = _wkWebView;
-//}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.navigationController.navigationBar.hidden == YES) {
-        self.navigationController.navigationBar.hidden = NO;
-    }
+//    if (self.navigationController.navigationBar.hidden == YES) {
+//        self.navigationController.navigationBar.hidden = NO;
+//    }
     if ([SShelper isObjNil:self.wkWebView.title]) {
-        self.progress.hidden = NO;
+        self.progress.hidden = !self.isShowProgress;
         [self.wkWebView reload];
     }
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.isShowProgress = YES;
     [self.view addSubview:self.wkWebView];
     [self.view addSubview:self.progress];
     
     if (self.urlString && [self.urlString hasPrefix:@"http"]) {
         NSURL* url = [NSURL URLWithString:self.urlString];
         NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url];
+//        NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:60*60*24];
         [self.wkWebView loadRequest:request];
+        
     }
     [self.wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     if (IS_IOS_VERSION < 9.0) {
@@ -72,6 +79,11 @@
     }
 }
 
+- (void)addJS {
+//    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"lingqu"];
+}
+
+///KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     //网页title
     if ([keyPath isEqualToString:@"title"]) {
@@ -110,26 +122,29 @@
 #pragma mark WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    self.progress.hidden = NO;
-    SSLog(@"----------- start ---------");
-    SSLog(@"----------- URL = %@ ",webView.URL);
-    SSLog(@"----------- start ---------");
+    self.progress.hidden = !self.isShowProgress;
+    NSLog(@"------start----- URL = %@ ",webView.URL);
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     self.progress.hidden = YES;
-    self.navigationItem.title = webView.title;
+    if (self.isUseCustomNavi) {
+        self.customNavi.titleStr = webView.title;
+    }else {
+        self.navigationItem.title = webView.title;
+    }
+    if (self.ss_didfinishLoading) {
+        self.ss_didfinishLoading(webView, navigation);
+    }
     //加载完成后隐藏progressView
     //JS注入
-    SSLog(@"----------- finish ---------");
+    NSLog(@"----------- finish ---------");
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     self.progress.hidden = YES;
     //加载失败同样需要隐藏progressView
-    SSLog(@"----------- fail ---------");
-    SSLog(@"----------- fail url = %@",webView.URL);
-    SSLog(@"----------- fail ---------");
+    NSLog(@"----------- fail url = %@",webView.URL);
 //    [webView stopLoading];
     if ([error code] == NSURLErrorCancelled) {
        return;
@@ -141,15 +156,21 @@
 
 ///页面跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void(^)(WKNavigationActionPolicy))decisionHandler {
-//    NSString* url = [navigationAction.request.URL absoluteString];
-//    NSLog(@"-------- 跳转URL= %@",url);
-    
+    if (self.isUseCustomNavi) {
+        //当webView.canGoBackwe = YES时显示关闭按钮
+        self.customNavi.isShowCloseBtn = webView.canGoBack;
+    }
+    NSString* url = [navigationAction.request.URL absoluteString];
+    NSLog(@"-------- 跳转URL= %@",url);
+    if (self.ss_decidePolicyForNavigationAction) {
+        self.ss_decidePolicyForNavigationAction(webView, decisionHandler);
+    }
     //允许页面跳转
     decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macos(10.11), ios(9.0)) {
-    self.progress.hidden = NO;
+    self.progress.hidden = !self.isShowProgress;
     [webView reload];
 }
 
@@ -168,6 +189,50 @@
 //    }
 }
 
+#pragma mark ------ 参数设置 --------
+- (void)setIsUseCustomNavi:(BOOL)isUseCustomNavi {
+    _isUseCustomNavi = isUseCustomNavi;
+    self.navigationController.navigationBar.hidden = isUseCustomNavi;
+    if (isUseCustomNavi) {
+        [self.view addSubview:self.customNavi];
+        self.wkWebView.YY = -statusBarHeight;
+        self.wkWebView.height = ScreenHeight + statusBarHeight;
+    }else {
+        self.wkWebView.YY = 0;
+        self.wkWebView.height = ScreenHeight - NAVIHEIGHT;
+    }
+}
+
+- (void)setIsShowProgress:(BOOL)isShowProgress {
+    _isShowProgress = isShowProgress;
+    self.progress.hidden = !isShowProgress;
+}
+
+- (void)setProgressTintColor:(UIColor *)progressTintColor {
+    _progressTintColor = progressTintColor;
+    self.progress.progressTintColor = progressTintColor;
+}
+
+- (void)setProgressYY:(CGFloat)progressYY {
+    _progressYY = progressYY;
+    self.progress.YY = progressYY;
+}
+
+- (void)naviCLick:(NSInteger)index {
+    switch (index) {
+        case 0:
+            [self ss_backBtn];
+            break;
+        case 1:
+            break;
+        case 2:
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)back {
     if (self.wkWebView.canGoBack) {
         [self.wkWebView goBack];
@@ -182,6 +247,11 @@
         return;
     }
     [super ss_backBtn];
+}
+
+- (void)dealloc {
+    self.wkWebView.UIDelegate = nil;
+    self.wkWebView.navigationDelegate = nil;
 }
 
 /*

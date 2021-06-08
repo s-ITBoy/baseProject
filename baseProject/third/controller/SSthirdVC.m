@@ -155,15 +155,15 @@
 }
 
 - (void)setSStable {
-    [self.view addSubview:self.stableV];
+    [self.view addSubview:self.ss_stableV];
 //    self.stableV.isautoHeight = YES;
-    self.stableV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
+    self.ss_stableV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
         return [sstestCell_1 class];
     };
-    self.stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
+    self.ss_stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
 //        cell.testLab.text = @"qwer";
     };
-    self.stableV.ss_isAdaptiveCellHeight = YES;
+    self.ss_stableV.ss_isAdaptiveCellHeight = YES;
     [self getdata];
 }
 
@@ -180,7 +180,7 @@
             [arr addObject:dic];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.stableV.ssDatas = [arr mutableCopy];
+            self.ss_stableV.ssDatas = [arr mutableCopy];
         });
     });
 }

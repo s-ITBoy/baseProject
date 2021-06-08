@@ -13,8 +13,12 @@
 ///导航标题
 @property(nonatomic,strong) UILabel* titleLab;
 @property(nonatomic,strong) UIImageView* centerImgV;
+///左侧返回按钮
 @property(nonatomic,strong) SSbadgeBtn* leftBtn;
+///右侧按钮
 @property(nonatomic,strong) SSbadgeBtn* rightBtn;
+///关闭webView的按钮，适用于webView的VC
+@property(nonatomic,strong) SSbadgeBtn* closeWebBtn;
 
 @property(nonatomic,assign) SSnaviType naviType;
 
@@ -47,10 +51,14 @@
             self.leftBtn.frame = CGRectMake(0, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-44/2, 65, 44);
             self.leftBtn.imgNameStr = @"navi_back";
             self.leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 8);
+            self.closeWebBtn.frame = CGRectMake(self.leftBtn.maxXX, self.leftBtn.YY, self.leftBtn.height, self.leftBtn.height);
+            
             self.titleLab.frame = CGRectMake(90*Scale, statusBarHeight, ScreenWidth-2*90*Scale, self.frame.size.height-statusBarHeight);
+            
             self.rightBtn.frame = CGRectMake(self.frame.size.width-28-12, statusBarHeight+(self.frame.size.height-statusBarHeight)/2-28/2, 28, 28);
             
             [self addSubview:self.leftBtn];
+            [self addSubview:self.closeWebBtn];
             [self addSubview:self.titleLab];
             [self addSubview:self.rightBtn];
         }
@@ -92,7 +100,14 @@
     self.leftBtn.backgroundColor = [UIColor clearColor];
     [self.leftBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.titleLab = [SShelper SSlabel:[UIFont SSCustomBoldFont:15] textAlignment:NSTextAlignmentCenter textColor:[UIColor whiteColor] backgroundColor:nil];
+    self.closeWebBtn = [[SSbadgeBtn alloc] init];
+    self.closeWebBtn.imgNameStr = @"close";
+    self.closeWebBtn.tag = 2;
+    self.closeWebBtn.backgroundColor = [UIColor clearColor];
+    self.closeWebBtn.hidden = YES;
+    [self.closeWebBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.titleLab = [SShelper SSlabel:[UIFont SSCustomBoldFont:15] textAlignment:NSTextAlignmentCenter textColor:[UIColor blackColor] backgroundColor:nil];
     self.centerImgV = [[UIImageView alloc] init];
     self.centerImgV.contentMode = UIViewContentModeScaleAspectFit;
     
@@ -109,6 +124,7 @@
     [_searchTFD addTarget:self action:@selector(searchTFD:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
+#pragma mark ----- 参数设置 setter方法 -----
 - (void)setType:(SSnaviType)type {
     _type = type;
     self.naviType = type;
@@ -166,6 +182,16 @@
     self.leftBtn.imgNameStr = leftbtnImgStr;
 }
 
+- (void)setCloseWebBtnImgStr:(NSString *)closeWebBtnImgStr {
+    _closeWebBtnImgStr = closeWebBtnImgStr;
+    self.closeWebBtn.imgNameStr = closeWebBtnImgStr;
+}
+
+- (void)setIsShowCloseBtn:(BOOL)isShowCloseBtn {
+    _isShowCloseBtn = isShowCloseBtn;
+    self.closeWebBtn.hidden = !isShowCloseBtn;
+}
+
 - (void)setCenterImgStr:(NSString *)centerImgStr {
     _centerImgStr = centerImgStr;
     [self.centerImgV setImgName:centerImgStr];
@@ -174,8 +200,9 @@
 - (void)setRightBtnImgStr:(NSString *)rightBtnImgStr {
     _rightBtnImgStr = rightBtnImgStr;
     self.rightBtn.imgNameStr = rightBtnImgStr;
-//    [self.rightBtn setImage:[UIImage imageNamed:rightBtnImgStr] forState:UIControlStateNormal];
 }
+
+
 
 - (void)clickBtn:(UIButton*)button {
     if (self.naviBlock) {

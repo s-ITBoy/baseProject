@@ -7,6 +7,7 @@
 //
 
 #import "SSbaseVC.h"
+#import "SSTableView.h"
 
 @interface SSbaseVC ()<UIGestureRecognizerDelegate>
 
@@ -34,29 +35,12 @@
     }
     return _tableView;
 }
-- (UIView *)statusBarView {
-    if (!_statusBarView) {
-        _statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, statusBarHeight)];
-        _statusBarView.backgroundColor = [UIColor whiteColor];
-    }
-    return _statusBarView;
-}
 
+//FIXME: -------
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
-
-
-// 作用：拦截手势触发
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if (self.navigationController.childViewControllers.count == 1) {
-        return NO;
-    }
-    return YES;
-    
-}
-//FIXME: -------
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"self Class = %@",[self class]);
@@ -65,12 +49,25 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     self.view.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
-    
+    self.ss_isHiddenStatusBar = NO;
     self.page = 1;
     self.pageSize = 10;
     [self ss_setBackBarButtonItem:@"navi_back"];
-    
     [self ss_isShowNavigationLine:NO];
+}
+
+#pragma mark ---------UIGestureRecognizerDelegate  作用：拦截手势触发 -------
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.navigationController.childViewControllers.count == 1) {
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark --------- 方法 -------------
+- (void)setSs_isHiddenStatusBar:(BOOL)ss_isHiddenStatusBar {
+    _ss_isHiddenStatusBar = ss_isHiddenStatusBar;
+    [UIApplication sharedApplication].statusBarHidden = ss_isHiddenStatusBar;
 }
 
 - (void)ss_isShowNavigationLine:(BOOL)isShow {
@@ -107,9 +104,9 @@
     if (self.navigationController.navigationBar.hidden == NO) {
         self.navigationController.navigationBar.hidden = YES;
     }
-    self.statusAndNaviView = [[SSnaviAndStatusBarV alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NAVIHEIGHT)];
-    self.statusAndNaviView.type = naviType;
-    [self.view addSubview:self.statusAndNaviView];
+    self.ss_statusAndNaviView = [[SSnaviAndStatusBarV alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NAVIHEIGHT)];
+    self.ss_statusAndNaviView.type = naviType;
+    [self.view addSubview:self.ss_statusAndNaviView];
 }
 
 ///使用自定义SSTableView
@@ -118,13 +115,13 @@
 }
 
 - (void)ss_initUseSSTableView:(UITableViewStyle)tableViewStyle {
-    self.stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:tableViewStyle];
+    self.ss_stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:tableViewStyle];
     if (@available(iOS 11.0, *)) {
-        self.stableV.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.ss_stableV.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    [self.view addSubview:self.stableV];
+    [self.view addSubview:self.ss_stableV];
 }
 
 
@@ -145,6 +142,7 @@
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     [self.tableView removeFromSuperview];
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {

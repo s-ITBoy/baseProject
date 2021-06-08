@@ -8,19 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "SSnaviAndStatusBarV.h"
-#import "SSTableView.h"
+@class SSTableView;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SSbaseVC : UIViewController
-///填充顶部状态栏view
-@property(nonatomic,strong) UIView* statusBarView;
+
 ///自定义状态栏及导航栏View
-@property(nonatomic,strong) SSnaviAndStatusBarV* statusAndNaviView;
+@property(nonatomic,strong) SSnaviAndStatusBarV* ss_statusAndNaviView;
 ///自定义强大的tableView，实现低耦合、高聚合（自动动态的给对应的cell做模型数据赋值，模型数据参数命名必须包含”model“字符串）
-@property(nonatomic,strong) SSTableView* stableV;
+@property(nonatomic,strong) SSTableView* ss_stableV;
 ///不建议使用这种，废弃使用
 @property(nonatomic,strong) UITableView* tableView;
+///是否隐藏状态栏
+@property(nonatomic,assign) BOOL ss_isHiddenStatusBar;
 
 @property(nonatomic,assign) NSInteger page;
 @property(nonatomic,assign) NSInteger pageSize;

@@ -26,10 +26,12 @@
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem.customView.hidden = YES;
     self.navigationItem.title = @"首页";
-    
     SSnaviAndStatusBarV* navi = [[SSnaviAndStatusBarV alloc] init];
     navi.frame = CGRectMake(0, 0, ScreenWidth, NAVIHEIGHT);
-    navi.type = SSnaviTypeShowSearch;
+    navi.type = SSnaviTypeShowDefault;
+    navi.naviBlock = ^(NSInteger index) {
+        NSLog(@"----- index = %ld",index);
+    };
     
 //    navi.titleStr = @"首页";
     [self.view addSubview:navi];
@@ -46,7 +48,7 @@
 
 - (void)clickBtn {
 //    self.hidesBottomBarWhenPushed = YES;
-    [self SS_pushVCWithClassStr:@"SSthirdVC" withPropertyDic:nil];
+    [self SS_pushVCWithClassStr:@"SSwebVC" withPropertyDic:@{@"urlString":@"https://www.baidu.com"}];
 }
 
 /*
