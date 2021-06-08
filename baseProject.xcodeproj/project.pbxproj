@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1838BB55266F1827009351AA /* SSwebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1838BB54266F1827009351AA /* SSwebVC.m */; };
+		1838BB5B266F6692009351AA /* ssFirstModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1838BB5A266F6692009351AA /* ssFirstModel.m */; };
+		1838BB5E266F66D9009351AA /* SSfirstViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1838BB5D266F66D9009351AA /* SSfirstViewModel.m */; };
+		1838BB61266F66E9009351AA /* ssfirstView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1838BB60266F66E9009351AA /* ssfirstView.m */; };
 		18706E812668C8E200597A30 /* SSrightCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18706E802668C8E200597A30 /* SSrightCollectCell.m */; };
 		18A661CB265799E4001B39DE /* UIScrollView+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661CA265799E4001B39DE /* UIScrollView+SS.m */; };
 		18A661CE26579B0E001B39DE /* UIControl+SS.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A661CD26579B0E001B39DE /* UIControl+SS.m */; };
@@ -112,6 +115,12 @@
 		06175919FD4DCC8D039BBEE5 /* Pods_baseProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1838BB53266F1827009351AA /* SSwebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSwebVC.h; sourceTree = "<group>"; };
 		1838BB54266F1827009351AA /* SSwebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSwebVC.m; sourceTree = "<group>"; };
+		1838BB59266F6692009351AA /* ssFirstModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ssFirstModel.h; sourceTree = "<group>"; };
+		1838BB5A266F6692009351AA /* ssFirstModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ssFirstModel.m; sourceTree = "<group>"; };
+		1838BB5C266F66D9009351AA /* SSfirstViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSfirstViewModel.h; sourceTree = "<group>"; };
+		1838BB5D266F66D9009351AA /* SSfirstViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSfirstViewModel.m; sourceTree = "<group>"; };
+		1838BB5F266F66E9009351AA /* ssfirstView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ssfirstView.h; sourceTree = "<group>"; };
+		1838BB60266F66E9009351AA /* ssfirstView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ssfirstView.m; sourceTree = "<group>"; };
 		18706E7F2668C8E200597A30 /* SSrightCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSrightCollectCell.h; sourceTree = "<group>"; };
 		18706E802668C8E200597A30 /* SSrightCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSrightCollectCell.m; sourceTree = "<group>"; };
 		18A661C9265799E4001B39DE /* UIScrollView+SS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SS.h"; sourceTree = "<group>"; };
@@ -384,6 +393,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1838BB56266F661B009351AA /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1838BB5F266F66E9009351AA /* ssfirstView.h */,
+				1838BB60266F66E9009351AA /* ssfirstView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		1838BB57266F662B009351AA /* model */ = {
+			isa = PBXGroup;
+			children = (
+				1838BB59266F6692009351AA /* ssFirstModel.h */,
+				1838BB5A266F6692009351AA /* ssFirstModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		1838BB58266F6634009351AA /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1838BB5C266F66D9009351AA /* SSfirstViewModel.h */,
+				1838BB5D266F66D9009351AA /* SSfirstViewModel.m */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
 		18706E7E2668C8D000597A30 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,8 +696,10 @@
 		47204E2923D0164B00C5114D /* first */ = {
 			isa = PBXGroup;
 			children = (
+				1838BB58266F6634009351AA /* viewModel */,
+				1838BB57266F662B009351AA /* model */,
+				1838BB56266F661B009351AA /* view */,
 				47204E2A23D0164B00C5114D /* controller */,
-				47204E2B23D0164B00C5114D /* view */,
 			);
 			path = first;
 			sourceTree = "<group>";
@@ -675,13 +713,6 @@
 				1838BB54266F1827009351AA /* SSwebVC.m */,
 			);
 			path = controller;
-			sourceTree = "<group>";
-		};
-		47204E2B23D0164B00C5114D /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		47204E2C23D0164B00C5114D /* Libs */ = {
@@ -1168,12 +1199,14 @@
 				47FB141223CD724700072C1D /* SStabbarController.m in Sources */,
 				18A661CB265799E4001B39DE /* UIScrollView+SS.m in Sources */,
 				2CC2ED3322E5E92200A6431A /* ViewController.m in Sources */,
+				1838BB5B266F6692009351AA /* ssFirstModel.m in Sources */,
 				475299BA24CAD3E5008FD18B /* SSboxCodeView.m in Sources */,
 				47FB13A723CD69CF00072C1D /* SSshareManager.m in Sources */,
 				2CC2ED3E22E5E92200A6431A /* main.m in Sources */,
 				47FB141623CD724700072C1D /* SSbezierCurve.m in Sources */,
 				2CC0F2E5256A841400C51F43 /* SSuserModel.m in Sources */,
 				47FB13A623CD69CF00072C1D /* SShttprequest.m in Sources */,
+				1838BB5E266F66D9009351AA /* SSfirstViewModel.m in Sources */,
 				18A661EA265E2AEA001B39DE /* SSTableView.m in Sources */,
 				2CC0F2F1256A8C8500C51F43 /* SSballCell.m in Sources */,
 				473601252591E6700022F4C5 /* SStiming.m in Sources */,
@@ -1205,6 +1238,7 @@
 				2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */,
 				1838BB55266F1827009351AA /* SSwebVC.m in Sources */,
 				4799C5E92580D1FA0094CA0B /* SSnaviAndStatusBarV.m in Sources */,
+				1838BB61266F66E9009351AA /* ssfirstView.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
 				47F75A0E258C58F100756E1C /* SSimgTextBadgeBtn.m in Sources */,
