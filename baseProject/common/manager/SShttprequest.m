@@ -279,7 +279,38 @@
     return currentVC;
 }
 
-#pragma mark 数据结果处理
+- (void)cancelSessionDataTask:(NSString*)url {
+    if (self.httpSessionManager.dataTasks.count <= 0) {
+        return;
+    }
+    [self.httpSessionManager.dataTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString* urlStr = [NSString stringWithContentsOfURL:obj.currentRequest.URL encoding:NSUTF8StringEncoding error:nil];
+        if ([urlStr hasSuffix:url]) {
+            [obj cancel];
+            return;
+        }
+    }];
+}
+
+- (void)cancelAllSessionDataTask {
+    if (self.httpSessionManager.dataTasks.count <= 0) {
+        return;
+    }
+    ///方式一：
+//    for (NSURLSessionDataTask* dataTask in self.httpSessionManager.dataTasks) {
+//        if (dataTask.state == NSURLSessionTaskStateRunning || dataTask.state == NSURLSessionTaskStateSuspended) {
+//            [dataTask cancel];
+//        }
+//    }
+    ///方式二：（推荐使用）
+    [self.httpSessionManager.dataTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.state == NSURLSessionTaskStateRunning || obj.state == NSURLSessionTaskStateSuspended) {
+            [obj cancel];
+        }
+    }];
+}
+
+#pragma mark -------- 数据结果处理 ---------
 - (id) processDictionaryIsNSNull:(id)obj{
     const NSString *blank = @"";
     if ([obj isKindOfClass:[NSDictionary class]]) {
