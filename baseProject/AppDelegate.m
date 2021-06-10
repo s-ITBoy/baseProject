@@ -19,37 +19,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    [self showRoot];
+    ///全局设置
     [self globalApperance];
-    [self getNetworkStatus];
-    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(userDidTakeScreenshotNotification:) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
+    ///监听网络环境
+//    [self getNetworkStatus];
+    ///rootVC
+    [self showRoot];
     
     return YES;
 }
-
-
-// Home+Power键截屏后通知响应的方法
-- (void)userDidTakeScreenshotNotification:(NSNotification *)notification {
-    // 下面这张图与硬件截的图并不是同一张，这里再次使用代码截屏是为了获取用户截屏图片。
-    UIImage *image = [self imageWithScreenshot];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
-    
-    /*
-     如果APP对保密要求比较高，这里可以将图片编码后上传到服务器，这样有需要时也可以提供一个追查方法。
-     如果是自己的APP，再霸道一点的，这里监控到用户的截屏行为，应用直接强制退出登录并封号处理也是可以的。
-     */
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
-}
- 
-// 代码截屏
-- (UIImage *)imageWithScreenshot {
-    return [UIImage SSimageWithColor:[UIColor redColor]];
-}
-
 
 - (void)showRoot {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
