@@ -129,7 +129,7 @@
 //        [QQApiInterface handleOpenURL:url delegate:self];
 //    }
     
-//    if ([url.absoluteString rangeOfString:yiqiScheme].location != NSNotFound){  //驿起本地操作
+//    if ([url.absoluteString rangeOfString:yiqiScheme].location != NSNotFound){  //本地操作
 //
 //        [SShelper toSchemeUrl:url];
 //    }
