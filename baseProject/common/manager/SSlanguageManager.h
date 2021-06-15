@@ -2,8 +2,8 @@
 //  SSlanguageManager.h
 //  baseProject
 //
-//  Created by FL S on 2021/5/25.
-//  Copyright © 2021 FL S. All rights reserved.
+//  Created by FL S on 2018/5/25.
+//  Copyright © 2018 FL S. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
