@@ -42,22 +42,22 @@ static SSfileManager* fileManager = nil;
 
 #pragma mark ----------- 创建缓存文件夹/文件 -----------
 ///在caches路径下创建文件夹
-+ (void)SScreateDirectoryWithCachesPath:(NSString*)directoryPath {
++ (void)SScreateDirectoryInCachesWithPath:(NSString*)directoryPath {
     [[NSFileManager defaultManager] createDirectoryAtPath:[[self SScachesPath] stringByAppendingPathComponent:directoryPath] withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 ///在caches路径下创建文件
-+ (void)SScreateFileWithCachesPath:(NSString*)filePath {
++ (void)SScreateFileInCachesWithPath:(NSString*)filePath {
     [[NSFileManager defaultManager] createFileAtPath:[[self SScachesPath] stringByAppendingPathComponent:filePath] contents:nil attributes:nil];
 }
 
 ///在document路径下创建文件夹
-+ (void)SScreateDirectoryWithDocumentPath:(NSString*)directoryPath {
++ (void)SScreateDirectoryInDocumentWithPath:(NSString*)directoryPath {
     [[NSFileManager defaultManager] createDirectoryAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:directoryPath] withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 ///在document路径下创建文件
-+ (void)SScreateFileWithDocumentPath:(NSString*)filePath {
++ (void)SScreateFileInDocumentWithPath:(NSString*)filePath {
     [[NSFileManager defaultManager] createFileAtPath:[[self SScachesPath] stringByAppendingPathComponent:filePath] contents:nil attributes:nil];
 }
 
@@ -80,6 +80,7 @@ static SSfileManager* fileManager = nil;
         isSuccess = [textStr writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     }
 }
+
 ///将数组数据写入文件中
 + (void)SSwriteArrToFile:(NSArray*)arr filePath:(NSString*)filePath {
     if (arr.count <= 0) {
@@ -99,6 +100,7 @@ static SSfileManager* fileManager = nil;
     }
     
 }
+
 ///将字典数据写入文件中
 + (void)SSwirteDicToFile:(NSDictionary*)dic filePath:(NSString*)filePath {
     if (dic.allKeys.count <= 0) {
@@ -118,10 +120,15 @@ static SSfileManager* fileManager = nil;
     }
 }
 
+///将自定义数据写入文件
++ (void)SSwriteCustomToFile:(id)idData filePath:(NSString*)filePath {
+    
+}
+
 #pragma mark ----------- 清楚缓存信息 --------------
 ///删除登录用户信息
 + (void)SSclearNSuserDefault {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:token];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:token];
 }
 
 ///清空documents路径下的文件及文件夹
