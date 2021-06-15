@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -------- 数据设置 -------------
 ///声明cell的类
 @property(nonatomic,copy) Class (^ss_setCellClassAtIndexPath)(NSIndexPath* indexPath);
-///数据源，内部会根据数据源自动计算section及Item的数量
+///数据源，内部会根据数据源自动计算section及Item的数量，并依据此自动做数据模型赋值给cell
 @property(nonatomic,strong) NSMutableArray* ssDatas;
 ///设置section数量(非必须，若设置了，则内部自动设置section个数无效)
 @property(nonatomic,copy) NSInteger (^ss_setNumberOfSectionsInCollectionView)(UICollectionView* collectionView);
