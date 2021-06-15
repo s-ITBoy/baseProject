@@ -41,7 +41,7 @@
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickbtn) forControlEvents:UIControlEventTouchUpInside];
     
-    [[SSfileManager shareManager] SSclearCache];
+    [SSfileManager SSclearCache];
 }
 
 - (void)clickbtn {
