@@ -157,15 +157,29 @@ static const CGFloat SS_itemSpace = 10.0;
     for (int i=0; i<_itemsArr.count; i++) {
         NSInteger index = (i+_firstItemIndex) % _itemsArr.count;
         if (i == 0) {
-            if ([_delegate respondsToSelector:@selector(SScreateItemView:index:forMarquee:)]) {
-                [_delegate SScreateItemView:_itemsArr[index] index:_dataIndex forMarquee:self];
+            if ([_delegate respondsToSelector:@selector(SScreateView:index:forMarquee:)]) {
+                [_delegate SScreateView:_itemsArr[index] index:index forMarquee:self];
+            }else {
+                if ([_delegate respondsToSelector:@selector(SScreateItemView:index:forMarquee:)]) {
+                    UIView* subView = [_delegate SScreateItemView:_itemsArr[index] index:_dataIndex forMarquee:self];
+                    [subView setFrame:_itemsArr[index].bounds];
+                    [_itemsArr[index] addSubview:subView];
+                }
             }
+            
             _itemsArr[index].tag = _dataIndex;
         }else {
             [self nextDataIndex];
-            if ([_delegate respondsToSelector:@selector(SScreateItemView:index:forMarquee:)]) {
-                [_delegate SScreateItemView:_itemsArr[index] index:_dataIndex forMarquee:self];
+            if ([_delegate respondsToSelector:@selector(SScreateView:index:forMarquee:)]) {
+                [_delegate SScreateView:_itemsArr[index] index:index forMarquee:self];
+            }else {
+                if ([_delegate respondsToSelector:@selector(SScreateItemView:index:forMarquee:)]) {
+                    UIView* subView = [_delegate SScreateItemView:_itemsArr[index] index:_dataIndex forMarquee:self];
+                    [subView setFrame:_itemsArr[index].bounds];
+                    [_itemsArr[index] addSubview:subView];
+                }
             }
+            
             _itemsArr[index].tag = _dataIndex;
             
             if ([_delegate respondsToSelector:@selector(SSupdateItemView:index:forMarquee:)]) {
