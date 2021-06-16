@@ -42,7 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///将字典数据写入文件中
 + (void)SSwirteDicToFile:(NSDictionary*)dic filePath:(NSString*)filePath;
 ///将自定义数据写入文件
-+ (void)SSwriteCustomToFile:(id)idData filePath:(NSString*)filePath;
++ (void)SSwriteCustomToFile:(id)diModel filePath:(NSString*)filePath;
+///用归档的方式写入文件
+- (void)SSarchiver;
 
 #pragma mark ----------- 清楚缓存信息 --------------
 ///删除登录用户信息

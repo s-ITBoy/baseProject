@@ -16,6 +16,7 @@
 
 @interface sstestModel : NSObject
 @property(nonatomic,copy) NSString* name;
+@property(nonatomic,assign) CGFloat cellH;
 @end
 @implementation sstestModel
 
@@ -67,7 +68,7 @@
 
 @interface SSthirdVC ()
 //<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-//@property(nonatomic,strong) SSTableView* stableV;
+@property(nonatomic,strong) SSTableView* stableV;
 @property(nonatomic,strong) UICollectionView* rightcollectV;
 @property(nonatomic,strong) NSArray* rightArray;
 
@@ -115,27 +116,27 @@
     }
     return _rightArray;
 }
-//- (SSTableView *)stableV {
-//    if (!_stableV) {
-//        _stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:UITableViewStylePlain];
-//        _stableV.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    }
-//    return _stableV;
-//}
+- (SSTableView *)stableV {
+    if (!_stableV) {
+        _stableV = [[SSTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-NAVIHEIGHT-TabBarHeight) style:UITableViewStylePlain];
+        _stableV.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    return _stableV;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem.customView.hidden = YES;
     
-//    [self setSStable];
+    [self setSStable];
 //    [self.view addSubview:self.rightcollectV];
 //    [self.rightcollectV reloadData];
     
-    [self.view addSubview:self.sscollctionV];
-    self.sscollctionV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
-        return [SSrightCollectCell class];
-    };
-    self.sscollctionV.ssDatas = [@[@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装"] mutableCopy];
+//    [self.view addSubview:self.sscollctionV];
+//    self.sscollctionV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
+//        return [SSrightCollectCell class];
+//    };
+//    self.sscollctionV.ssDatas = [@[@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装",@"家装"] mutableCopy];
 }
 
 - (void)testtipsHUD {
@@ -155,28 +156,39 @@
 }
 
 - (void)setSStable {
-    [self.view addSubview:self.ss_stableV];
-//    self.stableV.isautoHeight = YES;
+    [self ss_initUseSSTableView];
     self.ss_stableV.ss_setCellClassAtIndexPath = ^Class _Nonnull(NSIndexPath * _Nonnull indexPath) {
         return [sstestCell_1 class];
     };
     self.ss_stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
 //        cell.testLab.text = @"qwer";
     };
-    self.ss_stableV.ss_isAdaptiveCellHeight = YES;
+    self.ss_stableV.ss_editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> * _Nonnull(NSIndexPath * _Nonnull indexPath) {
+        UITableViewRowAction *delAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//            [weakSelf.tableView.zxDatas removeObjectAtIndex:indexPath.row];
+//            [weakSelf.tableView reloadData];
+        }];
+        if(indexPath.row == 0){
+            return nil;
+        }
+        return @[delAction];
+    };
+//    self.ss_stableV.ss_isAdaptiveCellHeight = YES;
     [self getdata];
 }
 
 - (void)getdata {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray* arr = [NSMutableArray array];
-        for (NSUInteger i = 0;i < 10;i++) {
+        for (NSUInteger i = 0;i < 3;i++) {
 //            sstestModel* model = [[sstestModel alloc] init];
 //            model.name = [NSString stringWithFormat:@"数字_%ld",i];
+//            model.cellH = 90;
 //            [arr addObject:model];
             
             NSMutableDictionary* dic = [NSMutableDictionary dictionary];
             dic[@"name"] = [NSString stringWithFormat:@"数字_%ld",i];
+            dic[@"cellH"] = @(80);
             [arr addObject:dic];
         }
         dispatch_async(dispatch_get_main_queue(), ^{

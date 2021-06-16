@@ -139,6 +139,10 @@ static CGFloat const CELLDEFAULTH = 44;
 }
 
 -(BOOL)hasKey:(NSString *)key {
+    if ([self isKindOfClass:[NSDictionary class]]) {
+        NSDictionary* dic = (NSDictionary*)self;
+        return [dic.allKeys containsObject:key];
+    }
     return [self respondsToSelector:NSSelectorFromString(key)];
 }
 
@@ -272,7 +276,7 @@ static CGFloat const CELLDEFAULTH = 44;
             CGFloat cellH = ((UITableViewCell *)cell).frame.size.height;
             if (cellH && ![[model ss_safeValueForKey:INDEX] floatValue]) {
                 if([model respondsToSelector:NSSelectorFromString(CELLH)]){
-                    [model ss_safeSetValue:[NSNumber numberWithFloat:cellH] forKey:CELLH];
+                    [model ss_safeSetValue:[model ss_safeValueForKey:CELLH] forKey:CELLH];
                 }else{
                     [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
                 }
@@ -431,7 +435,7 @@ static CGFloat const CELLDEFAULTH = 44;
     }else {
         headView = [self getHeadViewOrFootViewInSection:section isHeadView:YES];
     }
-    NSMutableArray* secArr = self.ssDatas.count ? [self isMultiDatas] ? self.ssDatas[section] :self.ssDatas : nil;
+    NSMutableArray* secArr = self.ssDatas.count ? [self isMultiDatas] ? self.ssDatas[section] : self.ssDatas : nil;
     !self.ss_getHeaderViewInSection ? : self.ss_getHeaderViewInSection(section,headView,secArr);
     [headView ss_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
     [headView setValue:[NSNumber numberWithInteger:section] forKey:@"ss_sectionInTableView"];
@@ -446,7 +450,7 @@ static CGFloat const CELLDEFAULTH = 44;
     }else {
         footView = [self getHeadViewOrFootViewInSection:section isHeadView:NO];
     }
-    NSMutableArray* secArr = self.ssDatas.count ? [self isMultiDatas] ? self.ssDatas[section] :self.ssDatas : nil;
+    NSMutableArray* secArr = self.ssDatas.count ? [self isMultiDatas] ? self.ssDatas[section] : self.ssDatas : nil;
     !self.ss_getFooterViewInSection ? : self.ss_getFooterViewInSection(section,footView,secArr);
     [footView ss_safeSetValue:[NSNumber numberWithInteger:section] forKey:SECTION];
     [footView setValue:[NSNumber numberWithInteger:section] forKey:@"ss_sectionInTableView"];
@@ -466,7 +470,7 @@ static CGFloat const CELLDEFAULTH = 44;
             }else {
                 if (section < self.ssDatas.count || section == 0) {
                     UIView* headerView = [self getHeadViewOrFootViewInSection:section isHeadView:YES];
-                    return headerView.frame.size.height;
+                    return headerView ? headerView.frame.size.height : CGFLOAT_MIN;
                 }
             }
             return CGFLOAT_MIN;
@@ -491,7 +495,7 @@ static CGFloat const CELLDEFAULTH = 44;
             }else {
                 if (section < self.ssDatas.count || section == 0) {
                     UIView *footView = [self getHeadViewOrFootViewInSection:section isHeadView:NO];
-                    return footView.frame.size.height;
+                    return footView ? footView.frame.size.height : CGFLOAT_MIN;
                 }
             }
             return CGFLOAT_MIN;

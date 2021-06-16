@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) NSArray<NSString*>* (^ss_setSectionIndexTitlesForTableView)(UITableView* tableView);
 ///设置索引对应的section
 @property(nonatomic,copy) NSInteger (^ss_setSectionForSectionIndex)(NSString* title, NSInteger index);
-///根据HeaderView类名设置HeaderView，无需实现ss_setHeaderHeightInSection，自动计算高度
+///根据HeaderView类名设置HeaderView
 @property(nonatomic,copy) Class (^ss_setHeaderClassInSection)(NSInteger section);
-///根据FooterView类名设置FooterView，无需实现ss_setFooterHeightInSection，自动计算高度
+///根据FooterView类名设置FooterView
 @property(nonatomic,copy) Class (^ss_setFooterClassInSection)(NSInteger section);
 ///设置HeaderView高度，非必须，若设置了则自动设置的HeaderView高度无效
 @property(nonatomic,copy) CGFloat (^ss_setHeaderHeightInSection)(NSInteger section);

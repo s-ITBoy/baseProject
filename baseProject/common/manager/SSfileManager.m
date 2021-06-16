@@ -121,7 +121,12 @@ static SSfileManager* fileManager = nil;
 }
 
 ///将自定义数据写入文件
-+ (void)SSwriteCustomToFile:(id)idData filePath:(NSString*)filePath {
++ (void)SSwriteCustomToFile:(id)diModel filePath:(NSString*)filePath {
+    
+}
+
+///用归档的方式写入文件
+- (void)SSarchiver {
     
 }
 
