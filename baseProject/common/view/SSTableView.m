@@ -185,7 +185,6 @@ static CGFloat const CELLDEFAULTH = 44;
     self.delegate = self;
     self.dataSource = self;
     
-    self.ss_fixCellBlockAfterAutoSetModel = NO;
     self.ss_autoDeselectWhenSelected = YES;
 //    self.ss_isAdaptiveCellHeight = YES;
 }
@@ -205,7 +204,7 @@ static CGFloat const CELLDEFAULTH = 44;
 }
 
 - (void)setSs_isAdaptiveCellHeight:(BOOL)ss_isAdaptiveCellHeight {
-    ss_isAdaptiveCellHeight = ss_isAdaptiveCellHeight;
+    _ss_isAdaptiveCellHeight = ss_isAdaptiveCellHeight;
     if (ss_isAdaptiveCellHeight) {
         self.estimatedRowHeight = 10;
         self.ss_setCellHeightAtIndexPath = ^CGFloat(NSIndexPath * _Nonnull indexPath) {
@@ -267,40 +266,34 @@ static CGFloat const CELLDEFAULTH = 44;
             }
         }
         if (model) {
-            [cell ss_safeSetValue:indexPath forKey:INDEX];
-            [model ss_safeSetValue:indexPath forKey:INDEX];
-            [cell setValue:indexPath forKey:@"ss_indexPathInTableView"];
-            [model setValue:indexPath forKey:@"ss_indexPathInTableView"];
-            [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
-            [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
-            CGFloat cellH = ((UITableViewCell *)cell).frame.size.height;
-            if (cellH && ![[model ss_safeValueForKey:INDEX] floatValue]) {
-                if([model respondsToSelector:NSSelectorFromString(CELLH)]){
-                    [model ss_safeSetValue:[model ss_safeValueForKey:CELLH] forKey:CELLH];
-                }else{
-                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
-                }
-            }
-            if (!self.ss_fixCellBlockAfterAutoSetModel) {
-                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
+//            [cell ss_safeSetValue:indexPath forKey:INDEX];
+//            [model ss_safeSetValue:indexPath forKey:INDEX];
+//            [cell setValue:indexPath forKey:@"ss_indexPathInTableView"];
+//            [model setValue:indexPath forKey:@"ss_indexPathInTableView"];
+//            [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
+//            [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInTableView"];
+            CGFloat cellH = cell.frame.size.height;
+//            if (cellH && ![[model ss_safeValueForKey:INDEX] floatValue]) {
+//                if([model respondsToSelector:NSSelectorFromString(CELLH)]){
+//                    [model ss_safeSetValue:[model ss_safeValueForKey:CELLH] forKey:CELLH];
+//                }else{
+//                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
+//                }
+//            }
+            if ([model hasKey:CELLH]) {
+                [model ss_safeSetValue:[model ss_safeValueForKey:CELLH] forKey:CELLH];
+            }else {
+                [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
             }
             NSArray* cellProNames = [SSTaGetProName ss_getRecursionPropertyNames:cell];
-            BOOL cellContainsModel = NO;
             for (NSString *proStr in cellProNames) {
                 if([proStr.uppercaseString containsString:DATAMODEL.uppercaseString]){
                     [cell ss_safeSetValue:model forKey:proStr];
-                    cellContainsModel = YES;
                     break;
                 }
             }
-        }else {
-            if (!self.ss_fixCellBlockAfterAutoSetModel) {
-                !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
-            }
         }
-        if (self.ss_fixCellBlockAfterAutoSetModel) {
-            !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
-        }
+        !self.ss_getCellAtIndexPath ? : self.ss_getCellAtIndexPath(indexPath, cell, model);
         [self ss_setCell:cell];
         return cell;
     }
@@ -353,17 +346,16 @@ static CGFloat const CELLDEFAULTH = 44;
         }else {
             id model = [self getModelAtIndexPath:indexPath];
             if(model) {
-                CGFloat cellH = [[model ss_safeValueForKey:CELLH] floatValue];
-                if(cellH) {
-                    return cellH;
-                }else {
-                    return [[model valueForKey:@"ss_cellHRunTime"] floatValue];
-                }
-            }else {
-                return CELLDEFAULTH;
+                return [model hasKey:CELLH] ? [[model ss_safeValueForKey:CELLH] floatValue] : [[model valueForKey:@"ss_cellHRunTime"] floatValue];
+//                if(cellH) {
+//                    return cellH;
+//                }else {
+//                    NSLog(@"----- cellH = %.2f",[[model valueForKey:@"ss_cellHRunTime"] floatValue]);
+//                    return [[model valueForKey:@"ss_cellHRunTime"] floatValue];
+//                }
             }
+            return CELLDEFAULTH;
         }
-        
     }
 }
 
@@ -412,6 +404,9 @@ static CGFloat const CELLDEFAULTH = 44;
 
 //滑动编辑
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.ssDelegate respondsToSelector:@selector(tableView:editActionsForRowAtIndexPath:)]) {
+        return [self.ssDelegate tableView:tableView editActionsForRowAtIndexPath:indexPath];
+    }
     if (self.ss_editActionsForRowAtIndexPath) {
         return self.ss_editActionsForRowAtIndexPath(indexPath);
     }
@@ -419,6 +414,12 @@ static CGFloat const CELLDEFAULTH = 44;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.ssDataSource respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)]) {
+        return [self.ssDataSource tableView:tableView canEditRowAtIndexPath:indexPath];
+    }
+    if (self.ss_canEditRowAtIndexPath) {
+        return self.ss_canEditRowAtIndexPath(indexPath, [self getModelAtIndexPath:indexPath]);
+    }
     if (self.ss_editActionsForRowAtIndexPath) {
         NSArray *rowActionsArr = self.ss_editActionsForRowAtIndexPath(indexPath);
         if(rowActionsArr && ![rowActionsArr isKindOfClass:[NSNull class]] && rowActionsArr.count){

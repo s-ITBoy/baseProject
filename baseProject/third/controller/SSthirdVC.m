@@ -52,11 +52,6 @@
 //- (void)setModelStr:(NSString *)modelStr {
 //    _modelStr = modelStr;
 //    self.testLab.text = modelStr;
-////}
-//
-//- (void)setModelDic:(NSDictionary *)modelDic {
-//    _modelDic = modelDic;
-//    self.testLab.text = [modelDic SSstringForDicKey:@"name"];
 //}
 - (void)setDicModel:(NSDictionary *)dicModel {
     _dicModel = dicModel;
@@ -161,7 +156,7 @@
         return [sstestCell_1 class];
     };
     self.ss_stableV.ss_willDisplayCell = ^(NSIndexPath * _Nonnull indexPath, sstestCell_1*  _Nonnull cell) {
-//        cell.testLab.text = @"qwer";
+        
     };
     self.ss_stableV.ss_editActionsForRowAtIndexPath = ^NSArray<UITableViewRowAction *> * _Nonnull(NSIndexPath * _Nonnull indexPath) {
         UITableViewRowAction *delAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -173,7 +168,8 @@
         }
         return @[delAction];
     };
-//    self.ss_stableV.ss_isAdaptiveCellHeight = YES;
+
+    self.ss_stableV.ss_isAdaptiveCellHeight = YES;
     [self getdata];
 }
 
@@ -188,7 +184,7 @@
             
             NSMutableDictionary* dic = [NSMutableDictionary dictionary];
             dic[@"name"] = [NSString stringWithFormat:@"数字_%ld",i];
-            dic[@"cellH"] = @(80);
+//            dic[@"cellH"] = @(80);
             [arr addObject:dic];
         }
         dispatch_async(dispatch_get_main_queue(), ^{

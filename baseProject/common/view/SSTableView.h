@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -------- 数据设置 -------------
 ///声明cell的类
 @property(nonatomic,copy) Class (^ss_setCellClassAtIndexPath)(NSIndexPath* indexPath);
-///数据源，内部会根据数据源自动计算section及Item的数量，并依据此自动做数据模型赋值给cell
+///数据源，内部会根据数据源自动计算section及Item的数量，并依据此自动做数据模型赋值给cell,且根据模型数据中的cellH字段，自动设置行高，若无此字段，则自动cell的行高为cell.frame.size.height
 @property(nonatomic,strong) NSMutableArray* ssDatas;
 ///设置section数量(非必须，若设置了，则内部自动设置section个数无效)
 @property(nonatomic,copy) NSInteger (^ss_setNumberOfSectionsInTableView)(UITableView* tableView);
@@ -37,8 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///设置FooterView高度，非必须，若设置了则自动设置的FooterView高度无效
 @property(nonatomic,copy) CGFloat (^ss_setFooterHeightInSection)(NSInteger section);
 
-///控制获取cell回调在获取model之后，默认为NO
-@property(nonatomic,assign) BOOL ss_fixCellBlockAfterAutoSetModel;
 ///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES
 @property(nonatomic,assign) BOOL ss_autoDeselectWhenSelected;
 ///是否自适应行高，非必须，若设置了则无需其它的行高设置（比如ss_setCellHeightAtIndexPath等）
@@ -60,8 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) void (^ss_didSelectedAtIndexPath)(NSIndexPath* indexPath, id model, id cell);
 ///取消选中某一行，把id改成对应类名即可无需强制转换
 @property(nonatomic,copy) void (^ss_didDeselectedAtIndexPath)(NSIndexPath* indexPath, id model, id cell);
-///滑动编辑
+///滑动编辑(例如：侧滑删除等)
 @property(nonatomic,copy) NSArray<UITableViewRowAction*>* (^ss_editActionsForRowAtIndexPath)(NSIndexPath* indexPath);
+///是否可编辑 非必须，当实现了滑动编辑ss_editActionsForRowAtIndexPath 则全部cell可编辑；也可设置此参数针对性的设置是否可编辑
+@property(nonatomic,copy) BOOL (^ss_canEditRowAtIndexPath)(NSIndexPath* indexPath, id model);
 ///cell将要展示，把id改成对应类名即可无需强制转换
 @property(nonatomic,copy) void (^ss_willDisplayCell)(NSIndexPath* indexPath, id cell);
 ///cell已经展示，把id改成对应类名即可无需强制转换
