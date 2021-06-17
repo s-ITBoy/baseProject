@@ -112,14 +112,14 @@ static NSString *const SECTION = @"section";
 }
 
 
--(id)ss_safeValueForKey:(NSString *)key {
+-(id)safeValueForKey:(NSString *)key {
     if ([self hasKey:key]) {
         return [self valueForKey:key];
     }
     return nil;
 }
 
--(void)ss_safeSetValue:(id)value forKey:(NSString *)key {
+-(void)safeSetValue:(id)value forKey:(NSString *)key {
     if([self hasKey:key]) {
         [self setValue:value forKey:key];
     }
@@ -183,6 +183,7 @@ static NSString *const SECTION = @"section";
 }
 
 #pragma mark ---------- UICollectionView -----------
+///设置section数量
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     if ([self.ssDataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) {
         return [self.ssDataSource numberOfSectionsInCollectionView:collectionView];
@@ -192,7 +193,7 @@ static NSString *const SECTION = @"section";
     }
     return [self isMultiDatas] ? self.ssDatas.count : 1;
 }
-
+///设置items数量
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if ([self.ssDataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]) {
         return [self.ssDataSource collectionView:collectionView numberOfItemsInSection:section];
@@ -202,7 +203,7 @@ static NSString *const SECTION = @"section";
     }
     return [self isMultiDatas] ? [[self arrAtindex:section frome:self.ssDatas] count] : self.ssDatas.count;
 }
-
+///设置cell
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDataSource respondsToSelector:@selector(collectionView:cellForItemAtIndexPath:)]) {
         return [self.ssDataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
@@ -220,19 +221,17 @@ static NSString *const SECTION = @"section";
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:className forIndexPath:indexPath];
     id model = [self getModelAtIndexPath:indexPath];
     if (model) {
-        [cell ss_safeSetValue:indexPath forKey:INDEX];
-        [model ss_safeSetValue:indexPath forKey:INDEX];
+        [cell safeSetValue:indexPath forKey:INDEX];
+        [model safeSetValue:indexPath forKey:INDEX];
         [cell setValue:indexPath forKey:@"ss_indexPathInCollectionView"];
         [model setValue:indexPath forKey:@"ss_indexPathInCollectionView"];
         [cell setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInCollectionView"];
         [model setValue:[NSNumber numberWithInteger:indexPath.section] forKey:@"ss_sectionInCollectionView"];
         
         NSArray* cellProNames = [SSCoGetProName ss_getRecursionPropertyNames:cell];
-        BOOL cellContainsModel = NO;
         for (NSString *proStr in cellProNames) {
             if([proStr.uppercaseString containsString:DATAMODEL.uppercaseString]){
-                [cell ss_safeSetValue:model forKey:proStr];
-                cellContainsModel = YES;
+                [cell safeSetValue:model forKey:proStr];
                 break;
             }
         }
@@ -241,7 +240,7 @@ static NSString *const SECTION = @"section";
     
     return cell;
 }
-
+///设置分区头/尾 视图
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         if ([self.ssDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
@@ -284,7 +283,7 @@ static NSString *const SECTION = @"section";
     return nil;
 }
 
-
+///是否高亮
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:shouldHighlightItemAtIndexPath:)]) {
         return [self.ssDelegate collectionView:collectionView shouldHighlightItemAtIndexPath:indexPath];
@@ -294,7 +293,7 @@ static NSString *const SECTION = @"section";
     }
     return YES;
 }
-
+///已经高亮
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:didHighlightItemAtIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView didHighlightItemAtIndexPath:indexPath];
@@ -303,7 +302,7 @@ static NSString *const SECTION = @"section";
         self.ss_didHighlightItemAtIndexPath(indexPath);
     }
 }
-
+///已经取消高亮
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:didUnhighlightItemAtIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView didUnhighlightItemAtIndexPath:indexPath];
@@ -312,7 +311,7 @@ static NSString *const SECTION = @"section";
         self.ss_didUnhighlightItemAtIndexPath(indexPath);
     }
 }
-
+///是否可以点击选中
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:shouldSelectItemAtIndexPath:)]) {
         return [self.ssDelegate collectionView:collectionView shouldSelectItemAtIndexPath:indexPath];
@@ -322,7 +321,7 @@ static NSString *const SECTION = @"section";
     }
     return YES;
 }
-
+///是否可以取消选中
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:shouldDeselectItemAtIndexPath:)]) {
         return [self.ssDelegate collectionView:collectionView shouldDeselectItemAtIndexPath:indexPath];
@@ -332,7 +331,7 @@ static NSString *const SECTION = @"section";
     }
     return YES;
 }
-
+///已经点击
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView didSelectItemAtIndexPath:indexPath];
@@ -341,7 +340,7 @@ static NSString *const SECTION = @"section";
         self.ss_didSelectItemAtIndexPath(indexPath);
     }
 }
-
+///取消点击
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:didDeselectItemAtIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView didDeselectItemAtIndexPath:indexPath];
@@ -350,7 +349,7 @@ static NSString *const SECTION = @"section";
         self.ss_didDeselectItemAtIndexPath(indexPath);
     }
 }
-
+///cell将要展示
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:willDisplayCell:forItemAtIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
@@ -359,7 +358,7 @@ static NSString *const SECTION = @"section";
         self.ss_willDisplayCell(indexPath, cell);
     }
 }
-
+///cell已经展示
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:didEndDisplayingCell:forItemAtIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView didEndDisplayingCell:cell forItemAtIndexPath:indexPath];
@@ -368,7 +367,7 @@ static NSString *const SECTION = @"section";
         self.ss_didEndDisplayingCell(indexPath, cell);
     }
 }
-
+///将要展示分区头/尾 视图
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
     if ([self.ssDelegate respondsToSelector:@selector(collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:)]) {
         [self.ssDelegate collectionView:collectionView willDisplaySupplementaryView:view forElementKind:elementKind atIndexPath:indexPath];
@@ -381,6 +380,7 @@ static NSString *const SECTION = @"section";
 }
 
 #pragma mark -------- UICollectionViewDelegateFlowLayout ---------
+///item的size大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.ss_sizeForItemAtIndexPath) {
         return self.ss_sizeForItemAtIndexPath(indexPath, collectionView);
@@ -392,7 +392,7 @@ static NSString *const SECTION = @"section";
     
     return CGSizeZero;
 }
-
+///缩进
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (self.ss_insetForSectionAtIndex) {
         return self.ss_insetForSectionAtIndex(section, collectionView);
@@ -403,7 +403,7 @@ static NSString *const SECTION = @"section";
     }
     return UIEdgeInsetsZero;
 }
-
+///最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     if (self.ss_minimumLineSpacingForSectionAtIndex) {
         return self.ss_minimumLineSpacingForSectionAtIndex(section, collectionView);
@@ -415,7 +415,7 @@ static NSString *const SECTION = @"section";
     
     return 0;
 }
-
+///最小列间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     if (self.ss_minimumInteritemSpacingForSectionAtIndex) {
         return self.ss_minimumInteritemSpacingForSectionAtIndex(section, collectionView);
@@ -427,7 +427,7 @@ static NSString *const SECTION = @"section";
     
     return 0;
 }
-
+///分区头视图 的size大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     NSArray *secArr = [self isMultiDatas] ? self.ssDatas[section] : self.ssDatas;
     if (secArr.count < 1) {
@@ -449,7 +449,7 @@ static NSString *const SECTION = @"section";
     }
     return CGSizeZero;
 }
-
+///分区尾视图 的size大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     NSArray *secArr = [self isMultiDatas] ? self.ssDatas[section] : self.ssDatas;
     if (secArr.count < 1) {

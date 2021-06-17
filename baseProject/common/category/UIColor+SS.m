@@ -44,12 +44,12 @@
 }
 
 ///十六进制颜色
-+ (UIColor *) SScolorWithHexString: (NSString *)colorString {
++ (UIColor*) SScolorWithHexString: (NSString *)colorString {
     return [UIColor SScolorWithHexString:colorString andAlpha:1];
 }
 
 ///十六进制颜色带透明度值
-+ (UIColor *) SScolorWithHexString: (NSString *)colorString andAlpha:(CGFloat)alpha {
++ (UIColor*) SScolorWithHexString: (NSString *)colorString andAlpha:(CGFloat)alpha {
     NSString *cString = [[colorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
     
     // String should be 6 or 8 characters
@@ -91,34 +91,34 @@
 }
 
 ///黑色
-+ (UIColor *) SScolorWithHex000000 {
++ (UIColor*) SScolorWithHex000000 {
     return [UIColor SScolorWithHexString:@"#000000" andAlpha:1];
 }
 
 ///深灰
-+ (UIColor *) SScolorWithHex010101 {
++ (UIColor*) SScolorWithHex010101 {
     return [UIColor SScolorWithHexString:@"#010101" andAlpha:1];
 }
 
 ///浅灰
-+ (UIColor *) SScolorWithHex999999 {
++ (UIColor*) SScolorWithHex999999 {
     return [UIColor SScolorWithHexString:@"#999999" andAlpha:1];
 }
 
-+ (UIColor *) SScolorWithHex666666 {
++ (UIColor*) SScolorWithHex666666 {
     return [UIColor SScolorWithHexString:@"#666666" andAlpha:1];
 }
 
-+ (UIColor *) SScolorWithHex333333 {
++ (UIColor*) SScolorWithHex333333 {
     return [UIColor SScolorWithHexString:@"#333333" andAlpha:1];
 }
 
-+ (UIColor *) SScolorWithHexCCCCCC {
++ (UIColor*) SScolorWithHexCCCCCC {
     return [UIColor SScolorWithHexString:@"#CCCCCC" andAlpha:1];
 }
 
 ///完成/确定按钮背景色
-+ (UIColor *) SSbtncolorHex {
++ (UIColor*) SSbtncolorHex {
     return [UIColor SScolorWithHexString:@"#C2AB82" andAlpha:1];
 }
 

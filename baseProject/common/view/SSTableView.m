@@ -126,19 +126,19 @@ static CGFloat const CELLDEFAULTH = 44;
 
 
 -(id)ss_safeValueForKey:(NSString *)key {
-    if ([self hasKey:key]) {
+    if ([self ss_hasKey:key]) {
         return [self valueForKey:key];
     }
     return nil;
 }
 
 -(void)ss_safeSetValue:(id)value forKey:(NSString *)key {
-    if([self hasKey:key]) {
+    if([self ss_hasKey:key]) {
         [self setValue:value forKey:key];
     }
 }
 
--(BOOL)hasKey:(NSString *)key {
+-(BOOL)ss_hasKey:(NSString *)key {
     if ([self isKindOfClass:[NSDictionary class]]) {
         NSDictionary* dic = (NSDictionary*)self;
         return [dic.allKeys containsObject:key];
@@ -280,7 +280,7 @@ static CGFloat const CELLDEFAULTH = 44;
 //                    [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
 //                }
 //            }
-            if ([model hasKey:CELLH]) {
+            if ([model ss_hasKey:CELLH]) {
                 [model ss_safeSetValue:[model ss_safeValueForKey:CELLH] forKey:CELLH];
             }else {
                 [model setValue:[NSNumber numberWithFloat:cellH] forKey:@"ss_cellHRunTime"];
@@ -346,7 +346,7 @@ static CGFloat const CELLDEFAULTH = 44;
         }else {
             id model = [self getModelAtIndexPath:indexPath];
             if(model) {
-                return [model hasKey:CELLH] ? [[model ss_safeValueForKey:CELLH] floatValue] : [[model valueForKey:@"ss_cellHRunTime"] floatValue];
+                return [model ss_hasKey:CELLH] ? [[model ss_safeValueForKey:CELLH] floatValue] : [[model valueForKey:@"ss_cellHRunTime"] floatValue];
 //                if(cellH) {
 //                    return cellH;
 //                }else {

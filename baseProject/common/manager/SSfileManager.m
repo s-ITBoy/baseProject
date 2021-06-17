@@ -130,6 +130,18 @@ static SSfileManager* fileManager = nil;
     
 }
 
+#pragma mark ----------- 从文件中读取数据 -------------
+
++ (id)SSgetDataFromCachesfile:(NSString*)filePath {
+    
+    return nil;
+}
+
++ (id)SSgetDataFromDocumentFile:(NSString*)filePath {
+    
+    return nil;
+}
+
 #pragma mark ----------- 清楚缓存信息 --------------
 ///删除登录用户信息
 + (void)SSclearNSuserDefault {

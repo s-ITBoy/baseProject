@@ -62,7 +62,7 @@
 @end
 
 @interface SSthirdVC ()
-//<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+///<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong) SSTableView* stableV;
 @property(nonatomic,strong) UICollectionView* rightcollectV;
 @property(nonatomic,strong) NSArray* rightArray;

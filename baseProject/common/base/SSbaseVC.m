@@ -142,7 +142,9 @@
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     [self.tableView removeFromSuperview];
+    [self.ss_stableV removeFromSuperview];
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    
 }
 
 - (void)didReceiveMemoryWarning {

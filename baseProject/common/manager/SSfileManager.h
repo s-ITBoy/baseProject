@@ -46,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///用归档的方式写入文件
 - (void)SSarchiver;
 
+#pragma mark ----------- 从文件中读取数据 -------------
+
++ (id)SSgetDataFromCachesfile:(NSString*)filePath;
+
++ (id)SSgetDataFromDocumentFile:(NSString*)filePath;
+
 #pragma mark ----------- 清楚缓存信息 --------------
 ///删除登录用户信息
 + (void)SSclearNSuserDefault;
