@@ -71,7 +71,9 @@
 //}
 
 - (void)httpRequest:(NSDictionary *)parameters urlString:(NSString *)urlString method:(HttpRequestMethod)method  showLoading:(BOOL)showLoading showFailure:(BOOL)show resultHandler:(void(^)(BOOL isOK, id responseOnject))handler {
-//    SSLog(@"------ params = \n%@",[parameters SSdictionryToJSONString]);
+    if (![urlString hasPrefix:@"http"]) {
+        urlString = [ServerHost stringByAppendingString:urlString];
+    }
     if (showLoading) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self presentLoadinghud];
@@ -83,11 +85,11 @@
         tokenStr = @"";
     }else {
         tokenStr = [NSString stringWithFormat:@"Bearer %@",tokenStr];
-        SSLog(@"------ token = \n%@",tokenStr);
     }
-    if (tokenStr.length) {
-        [self.httpSessionManager.requestSerializer setValue:tokenStr forHTTPHeaderField:@"authorization"];
-    }
+//    if (tokenStr.length) {
+//        [self.httpSessionManager.requestSerializer setValue:tokenStr forHTTPHeaderField:@"authorization"];
+//    }
+    !tokenStr.length ? : [self.httpSessionManager.requestSerializer setValue:tokenStr forHTTPHeaderField:@"authorization"];
     
     switch (method) {
         case HttpRequestMethodGet:
@@ -221,7 +223,9 @@
 
 ///上传图片（获取图片对应的path值）
 - (void)uploadPhoto:(NSDictionary *)parameters urlString:(NSString *)urlString pictureData:(NSData*)pictureData name:(NSString *)name handler:(void(^)(id responseOnject))handler failtureHandler:(void(^)(id  error))failtureHandler {
-    
+    if (![urlString hasPrefix:@"http"]) {
+        urlString = [ServerHost stringByAppendingString:urlString];
+    }
 //    NSString* tokenStr = [[NSUserDefaults standardUserDefaults] objectForKey:token];
 //    if ([SShelper isObjNil:tokenStr]) {
 //        tokenStr = @"";

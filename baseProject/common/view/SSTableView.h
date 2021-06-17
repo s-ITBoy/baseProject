@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) void (^ss_didDeselectedAtIndexPath)(NSIndexPath* indexPath, id model, id cell);
 ///滑动编辑(例如：侧滑删除等)
 @property(nonatomic,copy) NSArray<UITableViewRowAction*>* (^ss_editActionsForRowAtIndexPath)(NSIndexPath* indexPath);
-///是否可编辑 非必须，当实现了滑动编辑ss_editActionsForRowAtIndexPath 则全部cell可编辑；也可设置此参数针对性的设置是否可编辑
+///是否可编辑 非必须，当实现了滑动编辑ss_editActionsForRowAtIndexPath 则全部cell可编辑；也可设置此参数针对性的设置cell是否可编辑
 @property(nonatomic,copy) BOOL (^ss_canEditRowAtIndexPath)(NSIndexPath* indexPath, id model);
 ///cell将要展示，把id改成对应类名即可无需强制转换
 @property(nonatomic,copy) void (^ss_willDisplayCell)(NSIndexPath* indexPath, id cell);

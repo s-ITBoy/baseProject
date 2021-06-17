@@ -52,7 +52,7 @@
     return self;
 }
 
-#pragma mark 配置参数
+#pragma mark ------ 配置参数 --------
 - (void)ConfigParams {
     if (!_waveWidth) {
         _waveWidth = self.bounds.size.width;
@@ -74,7 +74,7 @@
     }
 }
 
-#pragma mark 加载layer ，绑定runloop 帧刷新
+#pragma mark --------- 加载layer ，绑定runloop 帧刷新 ----------
 - (void)startWave {
     [self.layer addSublayer:self.shapeLayer1];
     if (_waveCount == 2) {
@@ -83,7 +83,7 @@
     [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 
-#pragma mark - 帧动画
+#pragma mark ------- 帧动画 ----------
 - (void)getCurrentWave {
     _waveOffsetX += _waveSpeed;
     
@@ -98,7 +98,7 @@
     }
 }
 
-#pragma mark - 路径
+#pragma mark -------- 路径 ---------
 - (void)changeFirstWaveLayerPath {
     CGMutablePathRef path = CGPathCreateMutable();
     CGFloat y = _wavePointY;
@@ -135,7 +135,7 @@
     CGPathRelease(path);
 }
 
-#pragma mark - Getter
+#pragma mark ---------- 懒加载 ----------
 - (CAGradientLayer *)gradientLayer1 {
     if (!_gradientLayer1) {
         _gradientLayer1 = [CAGradientLayer layer];
