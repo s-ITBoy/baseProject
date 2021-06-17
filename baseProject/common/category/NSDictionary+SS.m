@@ -160,7 +160,7 @@
     return jsonString;
 }
 
-- (NSData *)SStransferToData {
+- (NSData*)SSdicToData {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
     return data;
 }

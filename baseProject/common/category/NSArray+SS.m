@@ -75,7 +75,7 @@
 }
 
 ///将数组元素序列化成NSData
-- (NSData *)SStransferToData {
+- (NSData*)SSarrayToData {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
     return data;
 }

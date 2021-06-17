@@ -22,7 +22,7 @@
 
 - (NSString*)SSdictionryToJSONString;
 
-- (NSData*)SStransferToData;
+- (NSData*)SSdicToData;
 
 - (NSDictionary*)SSdeleteEmptyValue;
 

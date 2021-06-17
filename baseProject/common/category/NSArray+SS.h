@@ -19,8 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)SSstringAtIndex:(NSInteger)index;
 
 - (id)SSobjectAtArrayIndex:(NSUInteger)index;
+
 ///将数组元素序列化成NSData
-- (NSData *)SStransferToData;
+- (NSData*)SSarrayToData;
 ///数组转JSON字符串
 - (NSString*)SSarrayToJSONString;
 ///数组转字符串; seperatorStr:表示分割符
