@@ -202,7 +202,7 @@ static SSfileManager* fileManager = nil;
 + (NSDictionary*)SSgetDicFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition; {
     return [NSDictionary dictionaryWithContentsOfFile:[self positionPath:filePosition file:fileName]];
 }
-
+///用解档的方式读取数据
 + (id)SSunarchiverFromfile:(NSString*)fileName position:(SSfilePosition)filePosition; {
     return [NSKeyedUnarchiver unarchiveObjectWithFile:[self positionPath:filePosition file:fileName]];
 }

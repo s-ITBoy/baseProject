@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray*)SSgetArrFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition;
 ///读取NSDictionary数据
 + (NSDictionary*)SSgetDicFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition;
-///读取数据
+///用解档的方式读取数据
 + (id)SSunarchiverFromfile:(NSString*)fileName position:(SSfilePosition)filePosition;
 
 #pragma mark ----------- 清楚缓存信息 --------------
