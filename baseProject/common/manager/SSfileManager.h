@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, SSfilePosition) {
+    SSfilePositionCaches     = 0,
+    SSfilePositionDocument,
+    SSfilePositionLibrary,
+    SSfilePositionTmp,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 ///本地数据、文件管理类
 @interface SSfileManager : NSObject
@@ -23,34 +30,40 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)SScachesPath;
 ///沙盒中temp路径
 + (NSString*)SStempPath;
+///沙盒根目录
++ (NSString*)SShomePath;
 
 #pragma mark ----------- 创建缓存文件夹/文件 -----------
-///在caches路径下创建文件夹
-+ (void)SScreateDirectoryInCachesWithPath:(NSString*)directoryPath;
-///在caches路径下创建文件
-+ (void)SScreateFileInCachesWithPath:(NSString*)filePath;
-///在document路径下创建文件夹
-+ (void)SScreateDirectoryInDocumentWithPath:(NSString*)directoryPath;
-///在document路径下创建文件
-+ (void)SScreateFileInDocumentWithPath:(NSString*)filePath;
+///创建文件夹
++ (void)SScreateDirectory:(NSString*)directoryName position:(SSfilePosition)filePosition;
+///创建文件
++ (void)SScreateFile:(NSString*)fileName position:(SSfilePosition)filePosition;
 
 #pragma mark ----------- 写入数据到文件中 -------------
+///将NSdata数据写入文件中
++ (void)SSwriteData:(NSData*)data fileName:(NSString*)fileName position:(SSfilePosition)filePosition;
 ///将文本数据写入文件中
-+ (void)SSwriteStrToFile:(NSString*)textStr filePath:(NSString*)filePath;
++ (void)SSwriteStr:(NSString*)textStr fileName:(NSString*)fileName position:(SSfilePosition)filePosition;
 ///将数组数据写入文件中
-+ (void)SSwriteArrToFile:(NSArray*)arr filePath:(NSString*)filePath;
++ (void)SSwriteArr:(NSArray*)arr fileName:(NSString*)fileName position:(SSfilePosition)filePosition;
 ///将字典数据写入文件中
-+ (void)SSwirteDicToFile:(NSDictionary*)dic filePath:(NSString*)filePath;
++ (void)SSwriteDic:(NSDictionary*)dic fileName:(NSString*)fileName position:(SSfilePosition)filePosition;
 ///将自定义数据写入文件
-+ (void)SSwriteCustomToFile:(id)diModel filePath:(NSString*)filePath;
-///用归档的方式写入文件
-- (void)SSarchiver;
++ (void)SSwriteCustom:(id)customModel fileName:(NSString*)fileName position:(SSfilePosition)filePosition;
+///用归档的方式将数据写入文件
++ (void)SSarchiver:(id)idData fileName:(NSString*)fileName position:(SSfilePosition)filePosition;
 
 #pragma mark ----------- 从文件中读取数据 -------------
-
-+ (id)SSgetDataFromCachesfile:(NSString*)filePath;
-
-+ (id)SSgetDataFromDocumentFile:(NSString*)filePath;
+///读取NSdata数据
++ (NSData*)SSgetDataFromfile:(NSString*)fileName position:(SSfilePosition)filePosition;
+///读取NSString数据
++ (NSString*)SSgetStrFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition;
+///读取NSarray数据
++ (NSArray*)SSgetArrFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition;
+///读取NSDictionary数据
++ (NSDictionary*)SSgetDicFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition;
+///读取数据
++ (id)SSunarchiverFromfile:(NSString*)fileName position:(SSfilePosition)filePosition;
 
 #pragma mark ----------- 清楚缓存信息 --------------
 ///删除登录用户信息

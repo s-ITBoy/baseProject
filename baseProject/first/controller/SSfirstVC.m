@@ -41,9 +41,15 @@
     [btn setBackgroundColor:[UIColor greenColor]];
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSLog(@"path = \n%@",[@"" ss_moneyStr]);
-    
+    [SSfileManager SSclearCache];
+    NSLog(@"path = \n%@",[SSfileManager SSdocumentsPath]);
+    NSDictionary* dic = @{@"qwer":@"1234",@"name":@"Jim"};
+    NSArray* arr = @[@"1234",@"2345"];
+    [SSfileManager SSwriteStr:@"qwerqwer1111111" fileName:@"zxcd" position:SSfilePositionCaches];
+    [SSfileManager SSwriteArr:arr fileName:@"asdf" position:SSfilePositionCaches];
+    [SSfileManager SSarchiver:dic fileName:@"zaq" position:SSfilePositionCaches];
+    NSLog(@" --- data.ssize = %ld",[SSfileManager SSgetDataFromfile:@"zaq" position:SSfilePositionCaches].length);
+    NSLog(@" --- dic = \n%@",[SSfileManager SSunarchiverFromfile:@"zaq" position:SSfilePositionCaches]);
 }
 
 - (void)clickBtn {

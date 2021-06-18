@@ -40,106 +40,171 @@ static SSfileManager* fileManager = nil;
     return NSTemporaryDirectory();
 }
 
+///沙盒根目录
++ (NSString*)SShomePath {
+    return NSHomeDirectory();
+}
+
++ (NSString*)positionPath:(SSfilePosition)filePosition file:(NSString*)fileName {
+    switch (filePosition) {
+        case SSfilePositionCaches:
+            return [[self SScachesPath] stringByAppendingPathComponent:fileName];
+            break;
+        case SSfilePositionDocument:
+            return [[self SSdocumentsPath] stringByAppendingPathComponent:fileName];
+            break;
+        case SSfilePositionLibrary:
+            return [[self SSlibraryPath] stringByAppendingPathComponent:fileName];
+            break;
+        case SSfilePositionTmp:
+            return [[self SStempPath] stringByAppendingPathComponent:fileName];
+            break;
+            
+        default:
+            break;
+    }
+    return [self SShomePath];
+}
+
 #pragma mark ----------- 创建缓存文件夹/文件 -----------
-///在caches路径下创建文件夹
-+ (void)SScreateDirectoryInCachesWithPath:(NSString*)directoryPath {
-    [[NSFileManager defaultManager] createDirectoryAtPath:[[self SScachesPath] stringByAppendingPathComponent:directoryPath] withIntermediateDirectories:YES attributes:nil error:nil];
+///创建文件夹
++ (void)SScreateDirectory:(NSString*)directoryName position:(SSfilePosition)filePosition {
+    [[NSFileManager defaultManager] createDirectoryAtPath:[self positionPath:filePosition file:directoryName] withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
-///在caches路径下创建文件
-+ (void)SScreateFileInCachesWithPath:(NSString*)filePath {
-    [[NSFileManager defaultManager] createFileAtPath:[[self SScachesPath] stringByAppendingPathComponent:filePath] contents:nil attributes:nil];
-}
-
-///在document路径下创建文件夹
-+ (void)SScreateDirectoryInDocumentWithPath:(NSString*)directoryPath {
-    [[NSFileManager defaultManager] createDirectoryAtPath:[[self SSdocumentsPath] stringByAppendingPathComponent:directoryPath] withIntermediateDirectories:YES attributes:nil error:nil];
-}
-
-///在document路径下创建文件
-+ (void)SScreateFileInDocumentWithPath:(NSString*)filePath {
-    [[NSFileManager defaultManager] createFileAtPath:[[self SScachesPath] stringByAppendingPathComponent:filePath] contents:nil attributes:nil];
+///创建文件
++ (void)SScreateFile:(NSString*)fileName position:(SSfilePosition)filePosition {
+    [[NSFileManager defaultManager] createFileAtPath:[self positionPath:filePosition file:fileName] contents:nil attributes:nil];
 }
 
 #pragma mark ----------- 写入数据到文件中 -------------
+///将NSdata数据写入文件中
++ (void)SSwriteData:(NSData*)data fileName:(NSString*)fileName position:(SSfilePosition)filePosition {
+    if (!data) {
+        return;
+    }
+    if (!fileName) {
+        return;
+    }
+    BOOL isSuccess = [data writeToFile:[self positionPath:filePosition file:fileName] atomically:YES];
+    //方式一：
+    if (isSuccess) {
+        SSLog(@"写入成功");
+    }else {
+        SSLog(@"写入失败");
+    }
+    //方式二：
+//    while (isSuccess == NO) {
+//        isSuccess = [data writeToFile:[self positionPath:filePosition file:fileName] atomically:YES];
+//    }
+    
+}
 ///将文本数据写入文件中
-+ (void)SSwriteStrToFile:(NSString*)textStr filePath:(NSString*)filePath {
++ (void)SSwriteStr:(NSString*)textStr fileName:(NSString*)fileName position:(SSfilePosition)filePosition {
     if (!textStr) {
         return;
     }
-    if (!filePath) {
+    if (!fileName) {
         return;
     }
-    BOOL isSuccess = [textStr writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    BOOL isSuccess = [textStr writeToFile:[self positionPath:filePosition file:fileName] atomically:YES encoding:NSUTF8StringEncoding error:nil];
     //方式一：
     if (isSuccess) {
         SSLog(@"写入成功");
+    }else {
+        SSLog(@"写入失败");
     }
     //方式二：
-    while (isSuccess == NO) {
-        isSuccess = [textStr writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    }
+//    while (isSuccess == NO) {
+//        isSuccess = [textStr writeToFile:[self positionPath:filePosition file:fileName] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//    }
 }
 
 ///将数组数据写入文件中
-+ (void)SSwriteArrToFile:(NSArray*)arr filePath:(NSString*)filePath {
++ (void)SSwriteArr:(NSArray*)arr fileName:(NSString*)fileName position:(SSfilePosition)filePosition {
     if (arr.count <= 0) {
         return;
     }
-    if (!filePath) {
+    if (!fileName) {
         return;
     }
-    BOOL isSuccess = [arr writeToFile:filePath atomically:YES];
+    BOOL isSuccess = [arr writeToFile:[self positionPath:filePosition file:fileName] atomically:YES];
     //方式一：
     if (isSuccess) {
         SSLog(@"写入成功");
+    }else {
+        SSLog(@"写入失败");
     }
-    //方式二：
-    while (isSuccess == NO) {
-        isSuccess = [arr writeToFile:filePath atomically:YES];
-    }
+//    //方式二：
+//    while (isSuccess == NO) {
+//        isSuccess = [arr writeToFile:[self positionPath:filePosition file:fileName] atomically:YES];
+//    }
     
 }
 
 ///将字典数据写入文件中
-+ (void)SSwirteDicToFile:(NSDictionary*)dic filePath:(NSString*)filePath {
++ (void)SSwriteDic:(NSDictionary*)dic fileName:(NSString*)fileName position:(SSfilePosition)filePosition {
     if (dic.allKeys.count <= 0) {
         return;
     }
-    if (!filePath) {
+    if (!fileName) {
         return;
     }
-    BOOL isSuccess = [dic writeToFile:filePath atomically:YES];
+    BOOL isSuccess = [dic writeToFile:[self positionPath:filePosition file:fileName] atomically:YES];
     //方式一：
     if (isSuccess) {
         SSLog(@"写入成功");
+    }else {
+        SSLog(@"写入失败");
     }
     //方式二：
     while (isSuccess == NO) {
-        isSuccess = [dic writeToFile:filePath atomically:YES];
+        isSuccess = [dic writeToFile:[self positionPath:filePosition file:fileName] atomically:YES];
     }
 }
 
 ///将自定义数据写入文件
-+ (void)SSwriteCustomToFile:(id)diModel filePath:(NSString*)filePath {
-    
++ (void)SSwriteCustom:(id)customModel fileName:(NSString*)fileName position:(SSfilePosition)filePosition {
+    if (!customModel) {
+        return;
+    }
+    if (!fileName) {
+        return;
+    }
+    [NSKeyedArchiver archiveRootObject:customModel toFile:[self positionPath:filePosition file:fileName]];
 }
 
-///用归档的方式写入文件
-- (void)SSarchiver {
-    
+///用归档的方式将数据写入文件
++ (void)SSarchiver:(id)idData fileName:(NSString*)fileName position:(SSfilePosition)filePositionr {
+    if (!idData) {
+        return;
+    }
+    if (!fileName) {
+        return;
+    }
+    [NSKeyedArchiver archiveRootObject:idData toFile:[self positionPath:filePositionr file:fileName]];
 }
 
 #pragma mark ----------- 从文件中读取数据 -------------
-
-+ (id)SSgetDataFromCachesfile:(NSString*)filePath {
-    
-    return nil;
+///读取NSdata数据
++ (NSData*)SSgetDataFromfile:(NSString*)fileName position:(SSfilePosition)filePosition; {
+    return [[NSData alloc] initWithContentsOfFile:[self positionPath:filePosition file:fileName]];
+}
+///读取NSString数据
++ (NSString*)SSgetStrFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition {
+    return [NSString stringWithContentsOfFile:[self positionPath:filePosition file:fileName] encoding:NSUTF8StringEncoding error:nil];
+}
+///读取NSArray数据
++ (NSArray*)SSgetArrFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition {
+    return [NSArray arrayWithContentsOfFile:[self positionPath:filePosition file:fileName]];
+}
+///读取NSDictionary数据
++ (NSDictionary*)SSgetDicFromeFile:(NSString*)fileName position:(SSfilePosition)filePosition; {
+    return [NSDictionary dictionaryWithContentsOfFile:[self positionPath:filePosition file:fileName]];
 }
 
-+ (id)SSgetDataFromDocumentFile:(NSString*)filePath {
-    
-    return nil;
++ (id)SSunarchiverFromfile:(NSString*)fileName position:(SSfilePosition)filePosition; {
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self positionPath:filePosition file:fileName]];
 }
 
 #pragma mark ----------- 清楚缓存信息 --------------
