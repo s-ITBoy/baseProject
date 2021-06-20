@@ -24,6 +24,8 @@
 		18C864A52668BB1100B7B4FA /* SSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C864A42668BB1100B7B4FA /* SSCollectionView.m */; };
 		2C48A112239E2AF2001C92F1 /* SShelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C48A111239E2AF2001C92F1 /* SShelper.m */; };
 		2C6B4BC5255C1D310084A44C /* SScaculatorMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */; };
+		2C89C667267F8AE70068C701 /* MJRefreshCustomGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89C663267F8AE70068C701 /* MJRefreshCustomGifFooter.m */; };
+		2C89C668267F8AE70068C701 /* MjRefreshCustomGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89C664267F8AE70068C701 /* MjRefreshCustomGifHeader.m */; };
 		2CC0F2E5256A841400C51F43 /* SSuserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F2E4256A841400C51F43 /* SSuserModel.m */; };
 		2CC0F2EB256A8A4000C51F43 /* SSforthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F2EA256A8A4000C51F43 /* SSforthVC.m */; };
 		2CC0F2F1256A8C8500C51F43 /* SSballCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F2F0256A8C8500C51F43 /* SSballCell.m */; };
@@ -147,6 +149,10 @@
 		2C48A111239E2AF2001C92F1 /* SShelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SShelper.m; sourceTree = "<group>"; };
 		2C6B4BC3255C1D310084A44C /* SScaculatorMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SScaculatorMaker.h; sourceTree = "<group>"; };
 		2C6B4BC4255C1D310084A44C /* SScaculatorMaker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SScaculatorMaker.m; sourceTree = "<group>"; };
+		2C89C663267F8AE70068C701 /* MJRefreshCustomGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshCustomGifFooter.m; sourceTree = "<group>"; };
+		2C89C664267F8AE70068C701 /* MjRefreshCustomGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MjRefreshCustomGifHeader.m; sourceTree = "<group>"; };
+		2C89C665267F8AE70068C701 /* MJRefreshCustomGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshCustomGifFooter.h; sourceTree = "<group>"; };
+		2C89C666267F8AE70068C701 /* MjRefreshCustomGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MjRefreshCustomGifHeader.h; sourceTree = "<group>"; };
 		2CC0F2E3256A841400C51F43 /* SSuserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSuserModel.h; sourceTree = "<group>"; };
 		2CC0F2E4256A841400C51F43 /* SSuserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSuserModel.m; sourceTree = "<group>"; };
 		2CC0F2E9256A8A4000C51F43 /* SSforthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSforthVC.h; sourceTree = "<group>"; };
@@ -577,6 +583,10 @@
 		2CC5B5CA235FE7E300998FDF /* common */ = {
 			isa = PBXGroup;
 			children = (
+				2C89C665267F8AE70068C701 /* MJRefreshCustomGifFooter.h */,
+				2C89C663267F8AE70068C701 /* MJRefreshCustomGifFooter.m */,
+				2C89C666267F8AE70068C701 /* MjRefreshCustomGifHeader.h */,
+				2C89C664267F8AE70068C701 /* MjRefreshCustomGifHeader.m */,
 				47FB13F323CD722C00072C1D /* view */,
 				4768EAFB23A081A4006440D5 /* base */,
 				2CC5B5FA235FED8100998FDF /* category */,
@@ -1230,6 +1240,7 @@
 				4794CEF1244801A2002751EA /* SSgoldAnimationImgV.m in Sources */,
 				47AA79A424F7B73800E6CB23 /* SSwebBaseVC.m in Sources */,
 				2CC5B62A2360085F00998FDF /* UIImage+SS.m in Sources */,
+				2C89C667267F8AE70068C701 /* MJRefreshCustomGifFooter.m in Sources */,
 				2CC0F2EB256A8A4000C51F43 /* SSforthVC.m in Sources */,
 				47204E5B23D044C100C5114D /* SSfirstVC.m in Sources */,
 				18706E812668C8E200597A30 /* SSrightCollectCell.m in Sources */,
@@ -1241,6 +1252,7 @@
 				1838BB61266F66E9009351AA /* ssfirstView.m in Sources */,
 				2CC5B61E235FFD2F00998FDF /* NSString+SS.m in Sources */,
 				2CC5B612235FF4AC00998FDF /* UIButton+SS.m in Sources */,
+				2C89C668267F8AE70068C701 /* MjRefreshCustomGifHeader.m in Sources */,
 				47F75A0E258C58F100756E1C /* SSimgTextBadgeBtn.m in Sources */,
 				18A661D726579D64001B39DE /* UITextField+SS.m in Sources */,
 				473601472591F0310022F4C5 /* HcdDateTimePickerView.m in Sources */,
