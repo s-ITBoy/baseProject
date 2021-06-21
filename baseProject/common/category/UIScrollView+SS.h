@@ -8,16 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, SSrefreshType) {
+    ///默认样式
+    SSrefreshTypeDefault   = 0,
+    ///自定义样式
+    SSrefreshTypecustom,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIScrollView (SS)
 
-- (void)SS_endRefresh;
 - (void)SS_addRefreshHeaderWithBlock:(void (^)(void))reFreshBlock;
 - (void)SS_addRefreshFooterWithBlock:(void (^)(void))reFreshBlock;
 - (void)SS_beginRefreshing;
-- (void)SS_footerBeginRefresh;
+- (void)SS_endRefresh;
 - (BOOL)SS_headerIsRefreshing;
+- (void)SS_footerBeginRefresh;
+
+- (void)SS_addRefresh:(SSrefreshType)type HeaderWithBlock:(void(^)(void))reFreshBlock;
+- (void)SS_addRefresh:(SSrefreshType)type FooterWithBlock:(void(^)(void))reFreshBlock;
 
 @end
 
