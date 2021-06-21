@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy) Class (^ss_setHeaderClassInSection)(NSInteger section);
 ///根据FooterView类名设置FooterView
 @property(nonatomic,copy) Class (^ss_setFooterClassInSection)(NSInteger section);
-///设置HeaderView高度，非必须，若设置了则自动设置的HeaderView高度无效
+///设置HeaderView高度，非必须，若设置了则自动设置的HeaderView高度无效(内部做了自动取HeaderView.frame.size.height作为它的高度)
 @property(nonatomic,copy) CGFloat (^ss_setHeaderHeightInSection)(NSInteger section);
-///设置FooterView高度，非必须，若设置了则自动设置的FooterView高度无效
+///设置FooterView高度，非必须，若设置了则自动设置的FooterView高度无效(内部做了自动取FooterView.frame.size.height作为它的高度)
 @property(nonatomic,copy) CGFloat (^ss_setFooterHeightInSection)(NSInteger section);
 
 ///当选中cell的时候是否自动调用tableView的deselectRowAtIndexPath，默认为YES

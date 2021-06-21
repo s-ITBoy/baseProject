@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)SS_headerIsRefreshing;
 - (void)SS_footerBeginRefresh;
 
+#pragma mark -------- 以待后效 便于扩展 -----------
+
 - (void)SS_addRefresh:(SSrefreshType)type HeaderWithBlock:(void(^)(void))reFreshBlock;
 - (void)SS_addRefresh:(SSrefreshType)type FooterWithBlock:(void(^)(void))reFreshBlock;
 
