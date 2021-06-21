@@ -38,8 +38,8 @@ static const char ssbundle = 0;
 
 @implementation SSlanguageManager
 
-/*
- 挡在app内设置切换语言时，需在didFinishLaunchingWithOptions方法中添加如下代码：
+/**
+ 当在app内设置切换语言时，需在didFinishLaunchingWithOptions方法中添加如下代码：
  if ([[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"] isEqualToString:@""]) {
      [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]];
  }
