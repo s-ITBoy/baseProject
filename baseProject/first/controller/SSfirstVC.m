@@ -41,7 +41,10 @@
     [btn setBackgroundColor:[UIColor greenColor]];
     [self.view addSubview:btn];
     [btn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
-    [SSfileManager SSclearCache];
+    
+    
+    
+    
 }
 
 - (void)clickBtn {
